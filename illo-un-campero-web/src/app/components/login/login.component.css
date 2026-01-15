@@ -1,0 +1,116 @@
+.login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía más limpia */
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 400px;
+    text-align: center; /* ESTO CENTRA EL LOGO Y LOS TÍTULOS */
+}
+
+.logo {
+    width: 100px; /* Tamaño un poco más ajustado */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px; /* CENTRA LA IMAGEN HORIZONTALMENTE */
+    object-fit: contain;
+}
+
+/* Estilos para los textos de la cabecera */
+h1 {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.login-box p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left; /* Mantiene las etiquetas y inputs alineados a la izquierda por legibilidad */
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px; /* Bordes un poco más curvos como en la imagen */
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #FF8C00;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 140, 0, 0.1);
+}
+
+.input-error {
+    border-color: #dc3545;
+}
+
+.error-text {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #e67e00;
+    transform: translateY(-1px); /* Efecto sutil al pasar el ratón */
+}
+
+.footer-text {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #444;
+    text-align: center; /* Centra el "No tienes cuenta? Regístrate" */
+}
+
+.link {
+    color: #FF8C00;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

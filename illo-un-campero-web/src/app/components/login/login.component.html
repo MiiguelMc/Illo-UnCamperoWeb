@@ -1,0 +1,36 @@
+<div class="login-screen">
+    <div class="login-box">
+        <div class="header-login">
+            <img src="logo.png" alt="Logo" class="logo">
+            <h1>¡Hola de nuevo!</h1>
+            <p>Entra para pedir tu campero favorito</p>
+        </div>
+
+        <form (submit)="onLogin()">
+            <!-- CAMPO EMAIL -->
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" [(ngModel)]="email" name="email" [class.input-error]="emailError"
+                    placeholder="correo@ejemplo.com">
+                <!-- Mensaje de error email -->
+                <span class="error-text" *ngIf="emailError">{{ emailError }}</span>
+            </div>
+
+            <!-- CAMPO CONTRASEÑA -->
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" [(ngModel)]="password" name="password" [class.input-error]="passwordError"
+                    placeholder="********">
+                <!-- Mensaje de error contraseña -->
+                <span class="error-text" *ngIf="passwordError">{{ passwordError }}</span>
+            </div>
+
+            <button type="submit" class="btn-login">Iniciar Sesión</button>
+
+            <p class="footer-text">
+                ¿No tienes cuenta?
+                <span class="link" routerLink="/registro">Regístrate</span>
+            </p>
+        </form>
+    </div>
+</div>

@@ -1,16 +1,27 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
+
+// Importaciones de Firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore'; 
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCuFeD7nPAxbG2rVQVHp2tKGhyCQt2ZFlQ",
+  authDomain: "illo-uncampero.firebaseapp.com",
+  projectId: "illo-uncampero",
+  storageBucket: "illo-uncampero.firebasestorage.app",
+  messagingSenderId: "478864200524",
+  appId: "1:478864200524:web:7ac0cc4c432d085f9d35e9"
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideFirebaseApp(() => initializeApp({ projectId: "illo-uncampero", appId: "1:478864200524:web:7ac0cc4c432d085f9d35e9", storageBucket: "illo-uncampero.firebasestorage.app", apiKey: "AIzaSyCuFeD7nPAxbG2rVQVHp2tKGhyCQt2ZFlQ", authDomain: "illo-uncampero.firebaseapp.com", messagingSenderId: "478864200524" })), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage())
+    provideRouter(routes),
+    // Configuración de proveedores de Firebase
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()) // Ahora Firestore está activo para guardar datos
   ]
 };
