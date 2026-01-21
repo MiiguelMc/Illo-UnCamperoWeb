@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Footer } from "../footer/footer";
+import { Header } from "../header/header";
 
 @Component({
   selector: 'app-restaurantes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Footer, Header],
   templateUrl: './restaurantes.html',
   styleUrls: ['./restaurantes.css']
 })

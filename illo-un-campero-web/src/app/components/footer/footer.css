@@ -1,0 +1,30 @@
+.footer { background: var(--gris-claro); padding: 50px 0 0; color: var(--azul-oscuro); }
+.footer-grid { 
+  display: grid; 
+  grid-template-columns: 1.2fr 1.5fr 1fr 1fr; 
+  gap: 40px; 
+  padding-bottom: 40px;
+}
+
+.footer-col h3 { font-size: 16px; font-weight: bold; margin-bottom: 20px; }
+.footer-col ul { list-style: none; padding: 0; line-height: 2.5; font-size: 14px; }
+.footer-col ul li { cursor: pointer; border-bottom: 1px solid transparent; width: fit-content; }
+.footer-col ul li:hover { border-bottom: 1px solid var(--azul-oscuro); }
+
+.subscribe-box {
+  display: flex; background: #ddd; border-radius: 30px; overflow: hidden; margin-bottom: 10px;
+}
+.subscribe-box input { 
+  border: none; background: transparent; padding: 12px 20px; flex: 1; outline: none; 
+}
+.subscribe-box button {
+  background: var(--naranja-illo); color: white; border: none; padding: 0 25px;
+  font-weight: bold; cursor: pointer;
+}
+
+.footer-logo { height: 50px; margin-bottom: 20px; }
+.app-buttons img { height: 40px; margin-right: 10px; cursor: pointer; }
+.company-text { font-size: 11px; margin-top: 15px; color: #666; }
+
+.bottom-bar { background: var(--azul-oscuro); height: 40px; width: 100%; }
+.underline { text-decoration: underline; cursor: pointer; }
