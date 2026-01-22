@@ -1,0 +1,68 @@
+.split-bar { display: flex; height: 50px; color: white; font-weight: bold; position: relative; }
+
+.user-info { 
+  flex: 1; background: #F39200; display: flex; align-items: center; 
+  padding-left: 20px; gap: 10px; cursor: pointer; position: relative;
+}
+
+.cart-info { 
+  flex: 1; background: #008445; display: flex; align-items: center; 
+  justify-content: flex-end; padding-right: 20px; gap: 10px; cursor: pointer;
+}
+
+/* Estilo Menú Desplegable */
+.dropdown-menu {
+  position: absolute; top: 50px; left: 0; background: white; 
+  color: #333; width: 200px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  border-radius: 0 0 10px 10px; z-index: 100;
+}
+.dropdown-menu ul { list-style: none; padding: 0; margin: 0; }
+.dropdown-menu li { padding: 12px 20px; border-bottom: 1px solid #eee; }
+.dropdown-menu li:hover { background: #f5f5f5; }
+.logout { color: red; font-weight: bold; }
+
+.split-bar {
+  display: flex;
+  height: 50px;
+  width: 100%;
+}
+
+.user-section {
+  flex: 1;
+  background-color: #F39200; /* Naranja Illo */
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  cursor: pointer;
+  position: relative;
+  font-weight: bold;
+}
+
+.cart-section {
+  flex: 1;
+  background-color: #008445; /* Verde Illo */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* El menú desplegable que sale al pulsar el nombre */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background: white;
+  color: #333;
+  width: 200px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+.dropdown-menu ul { list-style: none; padding: 0; margin: 0; }
+.dropdown-menu li { padding: 10px 20px; border-bottom: 1px solid #eee; }
+.dropdown-menu li:hover { background: #f5f5f5; }

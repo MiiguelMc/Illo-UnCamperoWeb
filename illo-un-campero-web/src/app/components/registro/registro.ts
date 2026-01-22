@@ -69,11 +69,24 @@ export class RegistroComponent {
     if (hayErrores) return;
 
     // 2. Si todo es válido, procedemos al registro en Firebase
-    try {
-      await this.authService.register(this.usuario);
-      alert('¡Cuenta creada con éxito! Bienvenido a Illo Un Campero.');
-      this.router.navigate(['/restaurantes']);
-    } catch (error: any) {
+   // 2. Si todo es válido, procedemos al registro en Firebase
+   try {
+    // Pasamos los valores reales de nuestro objeto 'usuario'
+    await this.authService.register(
+      this.usuario.email, 
+      this.usuario.password, 
+      {
+        nombre: this.usuario.nombre,
+        apellidos: this.usuario.apellidos,
+        telefono: this.usuario.telefono
+      }
+    );
+    
+    // Si llega aquí, es que ha ido bien
+    this.router.navigate(['/restaurantes']);
+
+  } catch (error: any) {
+    // ... resto de tu catch ...
       if (error.code === 'auth/email-already-in-use') {
         this.errores.email = 'Este correo ya está registrado.';
       } else {

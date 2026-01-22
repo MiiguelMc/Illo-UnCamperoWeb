@@ -1,54 +1,32 @@
-<<<<<<< HEAD
-// import { Component, signal } from '@angular/core';
-// import { RouterOutlet } from '@angular/router';
-
-=======
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router'; // IMPORTANTE: Hay que importar esto
+import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
->>>>>>> main
 
-//@Component({
-  //selector: 'app-root',
-  //imports: [RouterOutlet],
-  //templateUrl: './app.html',
-  //styleUrl: './app.css'
-//})
-//export class App {
-  //protected readonly title = signal('illo-un-campero-web');
-//}
-import { Component, inject } from '@angular/core';
-import { Firestore, doc, docData } from '@angular/fire/firestore';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Observable } from 'rxjs';
+// IMPORTACIÓN DE TUS COMPONENTES
+// Asegúrate de que los archivos existan en estas rutas
+import { Header } from './components/header-login/header'; 
+import { HeaderUserComponent } from './components/header-user/header-user';
+import { Footer } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-<<<<<<< HEAD
-  imports: [AsyncPipe, NgIf],
+  imports: [
+    CommonModule,        // Necesario para que funcione el pipe | async en el HTML
+    RouterOutlet,        // Necesario para que funcionen las rutas (login, registro...)
+    Header,              // Componente del header de invitado
+    HeaderUserComponent, // Componente del header de usuario logueado
+    Footer               // Componente del footer
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-// CAMBIA ESTO: De AppComponent a App
-export class App { 
-  private firestore = inject(Firestore);
-  campero$: Observable<any>;
-
-  constructor() {
-    const ref = doc(this.firestore, 'carta/campero_pollo');
-    this.campero$ = docData(ref);
-  }
+export class AppComponent {
+  // Usamos inject para traer el servicio de autenticación
+  private authService = inject(AuthService);
+  
+  // Esta variable user$ es la que "escucha" a Firebase.
+  // En el app.html, el pipe | async se suscribirá automáticamente.
+  user$ = this.authService.user$; 
 }
-=======
-  imports: [CommonModule, RouterOutlet], // AÑADE RouterOutlet AQUÍ
-  template: `
-    <!-- Aquí puedes poner tu Navbar más adelante -->
-    <router-outlet></router-outlet>
-  `
-})
-export class AppComponent { // La llamamos AppComponent (con "Component" al final)
-  public auth = inject(AuthService);
-}
->>>>>>> main

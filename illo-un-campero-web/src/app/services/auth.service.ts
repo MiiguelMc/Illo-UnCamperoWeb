@@ -1,47 +1,65 @@
 import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, firstValueFrom, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+// Importamos todo lo necesario de @angular/fire/auth
 import { 
   Auth, 
+  authState, 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
-  signOut, 
-  user 
+  signOut 
 } from '@angular/fire/auth';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Usuario } from '../../model/usuario.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private auth = inject(Auth);
-  private firestore = inject(Firestore);
+  private auth = inject(Auth); 
+  private http = inject(HttpClient);
 
-  // Observable para saber si el usuario está logueado en la App
-  user$ = user(this.auth);
+  private API_URL = "https://illo-uncamperobackend.onrender.com/api/usuarios";
 
-  // INICIO DE SESIÓN
-  login(email: string, pass: string) {
+  // 1. FLUJO REACTIVO PARA EL HEADER (Esto es lo que hace que cambie solo)
+  user$: Observable<Usuario | null> = authState(this.auth).pipe(
+    switchMap(fbUser => {
+      if (fbUser) {
+        // Si hay alguien en Firebase, pedimos los datos reales a SpringBoot
+        return this.http.get<Usuario>(`${this.API_URL}/${fbUser.uid}`);
+      } else {
+        // Si no hay nadie, devolvemos null
+        return of(null);
+      }
+    })
+  );
+
+  // 2. FUNCIÓN DE LOGIN
+  async login(email: string, pass: string) {
+    // Firebase se encarga de validar email/password
     return signInWithEmailAndPassword(this.auth, email, pass);
   }
 
-  // REGISTRO COMPLETO (Auth + Firestore)
-  async register(datos: any) {
-    // 1. Crea el usuario en Authentication
-    const credenciales = await createUserWithEmailAndPassword(this.auth, datos.email, datos.password);
+  // 3. FUNCIÓN DE REGISTRO (La que te daba error)
+  async register(email: string, pass: string, datosExtra: any) {
+    // A. Creamos el usuario en Firebase Authentication
+    const credential = await createUserWithEmailAndPassword(this.auth, email, pass);
     
-    // 2. Guarda los datos en la tabla 'usuarios' de Firestore usando el UID
-    const userRef = doc(this.firestore, `usuarios/${credenciales.user.uid}`);
+    // B. Preparamos el paquete para mandárselo a SpringBoot
+    const body = {
+      uid: credential.user.uid,
+      email: email,
+      ...datosExtra // Aquí van nombre, apellidos y teléfono
+    };
+
+    // C. Mandamos los datos al backend de tu colega
+    // IMPORTANTE: Asegúrate de que su endpoint sea /api/usuarios/registro
+    await firstValueFrom(this.http.post(`${this.API_URL}/registro`, body));
     
-    return setDoc(userRef, {
-      nombre: datos.nombre,
-      apellidos: datos.apellidos,
-      email: datos.email,
-      telefono: datos.telefono,
-      rol: 'cliente',
-      contrasena: datos.password // Se guarda en la tabla según tu imagen
-    });
+    return credential;
   }
 
-  // CERRAR SESIÓN
+  // 4. CERRAR SESIÓN
   logout() {
     return signOut(this.auth);
   }

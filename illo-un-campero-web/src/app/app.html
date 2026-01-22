@@ -1,14 +1,12 @@
-<div style="text-align: center; margin-top: 100px; font-family: 'Segoe UI', sans-serif;">
-  <h1 style="color: #333;">Illo un Campero <small>(Modo Profesional)</small></h1>
-  
-  <div *ngIf="campero$ | async as campero; else cargando">
-    <p style="color: #4CAF50; font-weight: bold; font-size: 1.2rem;">
-      Conexión Segura Establecida ✅
-    </p>
-    <p>Producto recuperado: <strong>{{ campero.nombre }}</strong></p>
-  </div>
+<!-- DECIDIMOS EL HEADER CON LA NUEVA SINTAXIS @if -->
+@if (user$ | async) {
+  <app-header-user></app-header-user>
+} @else {
+  <app-header></app-header>
+}
 
-  <ng-template #cargando>
-    <p>Conectando con el nodo seguro de Firebase...</p>
-  </ng-template>
-</div>
+<main class="content-wrapper">
+  <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>
