@@ -1,0 +1,48 @@
+<app-header></app-header>
+
+<main class="content">
+    <!-- HERO BANNER -->
+    <section class="hero-section">
+        <div class="hero-text">
+            <h2>Cena con tu colegas,</h2>
+            <h2 class="highlight">cena divertida</h2>
+            <div class="promo-input">
+                <input type="text" placeholder="Código promocional">
+                <button>Buscar</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="assets/girl-pizza.png" alt="Promo Pizza"> <!-- Necesitas esta imagen -->
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories-nav">
+        <button class="cat-item active">Hamburguesas</button>
+        <button class="cat-item">Patatas</button>
+        <button class="cat-item">Ensalada</button>
+        <button class="cat-item">Bebidas</button>
+        <button class="cat-item">Pizzas</button>
+    </section>
+
+    <!-- MENU SECTION: BURGERS -->
+    <section class="menu-group">
+        <h3>Burgers</h3>
+        <div class="product-grid">
+            <!-- Card de ejemplo (esto se repetirá con un *ngFor) -->
+            <div class="food-card" *ngFor="let burger of burgers">
+                <div class="card-info">
+                    <h4>{{burger.name}}</h4>
+                    <p>{{burger.description}}</p>
+                    <span class="price">GBP {{burger.price}}</span>
+                </div>
+                <div class="card-image">
+                    <img [src]="burger.image" alt="Burger">
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<app-footer></app-footer>

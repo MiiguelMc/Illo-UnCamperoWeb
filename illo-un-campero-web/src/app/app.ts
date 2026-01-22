@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 // import { Component, signal } from '@angular/core';
 // import { RouterOutlet } from '@angular/router';
 
+=======
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router'; // IMPORTANTE: Hay que importar esto
+import { AuthService } from './services/auth.service';
+>>>>>>> main
 
 //@Component({
   //selector: 'app-root',
@@ -19,6 +26,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
+<<<<<<< HEAD
   imports: [AsyncPipe, NgIf],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -33,3 +41,14 @@ export class App {
     this.campero$ = docData(ref);
   }
 }
+=======
+  imports: [CommonModule, RouterOutlet], // AÑADE RouterOutlet AQUÍ
+  template: `
+    <!-- Aquí puedes poner tu Navbar más adelante -->
+    <router-outlet></router-outlet>
+  `
+})
+export class AppComponent { // La llamamos AppComponent (con "Component" al final)
+  public auth = inject(AuthService);
+}
+>>>>>>> main

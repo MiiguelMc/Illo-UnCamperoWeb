@@ -1,0 +1,105 @@
+/* Contenedor principal */
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Hero Banner */
+.hero-section {
+    background-color: #0A0E21; /* El azul oscuro de tu diseño */
+    color: white;
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.highlight { color: #F39200; } /* Naranja Illo */
+
+/* Categorías */
+.categories-nav {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.cat-item {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.cat-item.active {
+    background: #0A0E21;
+    color: white;
+}
+
+/* Grid de Productos */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+/* Card de Comida estilo Uber Eats */
+.food-card {
+    border: 1px solid #eee;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.food-card:hover {
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.card-info {
+    flex: 1;
+    padding-right: 15px;
+}
+
+.card-info h4 { margin: 0 0 10px 0; font-size: 1.1em; }
+.card-info p { color: #666; font-size: 0.9em; margin-bottom: 15px; }
+.price { font-weight: bold; color: #000; }
+
+.card-image {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Botón Añadir (+) */
+.add-btn {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: white;
+    border: 1px solid #ddd;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
