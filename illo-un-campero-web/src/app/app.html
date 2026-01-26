@@ -1,8 +1,12 @@
-<!-- DECIDIMOS EL HEADER CON LA NUEVA SINTAXIS @if -->
-@if (user$ | async) {
-  <app-header-user></app-header-user>
+@if (authInitialized) {
+  @if (user$ | async; as user) {
+    <app-header-user></app-header-user>
+  } @else {
+    <app-header></app-header>
+  }
 } @else {
-  <app-header></app-header>
+  <!-- Aquí podrías poner un spinner de carga o nada -->
+  <div class="loading-bar"></div>
 }
 
 <main class="content-wrapper">

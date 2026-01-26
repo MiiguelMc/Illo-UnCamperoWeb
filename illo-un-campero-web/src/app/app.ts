@@ -22,11 +22,17 @@ import { Footer } from './components/footer/footer';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+// app.component.ts
 export class AppComponent {
-  // Usamos inject para traer el servicio de autenticación
   private authService = inject(AuthService);
+  user$ = this.authService.user$;
   
-  // Esta variable user$ es la que "escucha" a Firebase.
-  // En el app.html, el pipe | async se suscribirá automáticamente.
-  user$ = this.authService.user$; 
+  // Opcional: Para evitar parpadeos visuales
+  authInitialized = false;
+
+  constructor() {
+    this.user$.subscribe(() => {
+      this.authInitialized = true;
+    });
+  }
 }

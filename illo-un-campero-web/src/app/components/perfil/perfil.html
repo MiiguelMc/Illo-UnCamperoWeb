@@ -1,0 +1,29 @@
+<div class="perfil-container">
+    <h1>Configuración de mi Perfil</h1>
+    
+    <form [formGroup]="profileForm" (ngSubmit)="guardarCambios()">
+      <div class="section">
+        <h3>Datos Personales</h3>
+        <label>Nombre</label>
+        <input formControlName="nombre" type="text">
+        
+        <label>Email (No editable)</label>
+        <input formControlName="email" type="email">
+  
+        <label>Teléfono</label>
+        <input formControlName="telefono" type="text">
+      </div>
+  
+      <button type="submit" [disabled]="profileForm.invalid">Guardar Cambios</button>
+    </form>
+  
+    <div class="section security">
+      <h3>Seguridad</h3>
+      <button class="btn-secondary" (click)="cambiarPass()">Cambiar Contraseña</button>
+    </div>
+  
+    @if (mensaje) {
+      <p class="success-msg">{{ mensaje }}</p>
+    }
+  </div>
+

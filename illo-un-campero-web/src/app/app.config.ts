@@ -5,7 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 // Importaciones de Firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getAuth, provideAuth, initializeAuth, browserLocalPersistence  } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore'; 
 
 const firebaseConfig = {
@@ -21,9 +21,14 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    // Configuración de proveedores de Firebase
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()) // Ahora Firestore está activo para guardar datos
+    // Configuramos Auth para que use explícitamente la persistencia local
+    provideAuth(() => {
+      const auth = getAuth();
+      // Esto asegura que la sesión se guarde en el navegador
+      auth.setPersistence(browserLocalPersistence);
+      return auth;
+    }),
+    provideFirestore(() => getFirestore())
   ]
 };

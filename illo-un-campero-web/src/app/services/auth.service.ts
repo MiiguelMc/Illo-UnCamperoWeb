@@ -1,12 +1,14 @@
 import { Injectable, inject } from '@angular/core';
+import { updatePassword, getAuth } from '@angular/fire/auth'; // Añade esto a tus imports
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // Añadido HttpHeaders
-import { firstValueFrom, Observable, of, from } from 'rxjs'; // Añadido from
-import { switchMap, tap, catchError } from 'rxjs/operators';
+import { Observable, firstValueFrom, from, of } from 'rxjs'; // Añadido from
+import { switchMap, catchError } from 'rxjs/operators';
 import { 
   Auth, 
   authState, 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
+  sendPasswordResetEmail,
   signOut 
 } from '@angular/fire/auth';
 import { Usuario } from '../../model/usuario.model';
@@ -21,10 +23,10 @@ export class AuthService {
   private API_URL = "https://illo-uncamperobackend.onrender.com/api/usuarios";
 
   // 1. FLUJO REACTIVO CON TOKEN DE SEGURIDAD
-  user$: Observable<Usuario | null> = authState(this.auth).pipe(
+  user$ = authState(this.auth).pipe(
     switchMap(async (fbUser) => {
       if (fbUser) {
-        // A. Obtenemos el Token (la llave) de Firebase
+        // Si hay usuario en Firebase (recuperado de la persistencia local)
         const token = await fbUser.getIdToken();
         return { fbUser, token };
       }
@@ -33,29 +35,20 @@ export class AuthService {
     switchMap(data => {
       if (data) {
         const { fbUser, token } = data;
-        
-        // B. Creamos la cabecera con el Token para el Backend
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${token}`
         });
-
-        console.log("🔥 Enviando Token al Backend para UID:", fbUser.uid);
-
+  
         return this.http.get<Usuario>(`${this.API_URL}/${fbUser.uid}`, { headers }).pipe(
-          tap(usuarioDB => console.log("✅ Datos recibidos con seguridad:", usuarioDB)),
           catchError(error => {
-            console.error("❌ Error en SpringBoot (403/404/500):", error);
-            // Seguimos devolviendo un usuario de prueba si falla, para que veas el header
-            return of({ 
-              uid: fbUser.uid, 
-              nombre: 'Usuario (Error DB)', 
-              email: fbUser.email || '' 
-            } as Usuario);
+            console.error("Error recuperando datos del backend:", error);
+            // Si el backend falla pero Firebase tiene sesión, devolvemos un objeto básico
+            // para que el header-user se mantenga visible
+            return of({ uid: fbUser.uid, nombre: fbUser.displayName || 'Usuario', email: fbUser.email || '' } as Usuario);
           })
         );
-      } else {
-        return of(null);
       }
+      return of(null);
     })
   );
 
@@ -87,4 +80,43 @@ export class AuthService {
   logout() {
     return signOut(this.auth);
   }
+
+  // Actualizar datos en la Base de Datos (Spring Boot)
+  updateUserData(uid: string, datos: any): Observable<Usuario> {
+    // 1. Obtenemos el usuario actual de Firebase
+    const user = this.auth.currentUser;
+  
+    if (!user) {
+      throw new Error("No hay usuario autenticado");
+    }
+  
+    // 2. Convertimos la Promesa del token en un Observable y usamos switchMap
+    return from(user.getIdToken()).pipe(
+      switchMap(token => {
+        // 3. Creamos la cabecera con el Token (igual que hicimos en el GET)
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        });
+  
+        console.log("✈️ Enviando actualización al backend con Token...");
+        
+        // 4. Enviamos el PUT con las cabeceras
+        return this.http.put<Usuario>(`${this.API_URL}/${uid}`, datos, { headers });
+      })
+    );
+  }
+
+  // Cambiar contraseña en Firebase
+  async updatePassword(newPass: string) {
+    const user = this.auth.currentUser;
+    if (user) {
+      return updatePassword(user, newPass);
+    }
+    throw new Error("No hay usuario autenticado");
+  }
+
+  sendPasswordReset(email: string) {
+    return sendPasswordResetEmail(this.auth, email);
+  }
+
 }
