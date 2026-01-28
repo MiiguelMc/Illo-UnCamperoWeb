@@ -93,19 +93,24 @@ export class AuthService {
     // 2. Convertimos la Promesa del token en un Observable y usamos switchMap
     return from(user.getIdToken()).pipe(
       switchMap(token => {
-        // 3. Creamos la cabecera con el Token (igual que hicimos en el GET)
+        // 3. Creamos la cabecera con el Token
         const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json' // Aseguramos que el backend sepa que va un JSON
         });
   
-        console.log("✈️ Enviando actualización al backend con Token...");
+        // IMPORTANTE: Metemos el uid dentro del objeto que enviamos al backend
+        // para que el @RequestBody de Java lo reciba completo.
+        const datosCompletos = { ...datos, uid: uid };
+  
+        console.log("✈️ Enviando actualización al backend a: " + `${this.API_URL}/actualizar`);
         
-        // 4. Enviamos el PUT con las cabeceras
-        return this.http.put<Usuario>(`${this.API_URL}/${uid}`, datos, { headers });
+        // 4. Enviamos el PUT. 
+        // NOTA: He quitado el ${uid} de la URL porque tu backend no lo pide por URL (@PathVariable)
+        return this.http.put<Usuario>(`${this.API_URL}/actualizar`, datosCompletos, { headers });
       })
     );
   }
-
   // Cambiar contraseña en Firebase
   async updatePassword(newPass: string) {
     const user = this.auth.currentUser;

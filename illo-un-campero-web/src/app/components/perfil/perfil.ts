@@ -22,7 +22,7 @@ export class PerfilComponent implements OnInit {
   constructor() {
     this.profileForm = this.fb.group({
       nombre: ['', Validators.required],
-      email: [{ value: '', disabled: true }], // El email no se edita
+      email: [{ value: '', disabled: false }], // El email no se edita
       telefono: [''],
       direccion: ['']
     });

@@ -1,36 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Footer } from "../footer/footer";
-import { Header } from "../header-login/header";
+import { ProductoService } from '../../services/producto.service';
+import { Producto } from '../../../model/producto.model';
+import { ProductoItemComponent } from '../producto-item/producto-item';
 
 @Component({
-  selector: 'app-restaurantes',
+  selector: 'app-restaurante',
   standalone: true,
-  // QUITA 'Footer' y 'Header' de aquí, deja solo CommonModule y lo que uses de verdad
-  imports: [CommonModule], 
+  imports: [CommonModule, ProductoItemComponent], // Importamos el hijo aquí
   templateUrl: './restaurantes.html',
   styleUrls: ['./restaurantes.css']
 })
-export class RestaurantesComponent {
-  // Datos de ejemplo que luego vendrán de Firebase Firestore
-  burgers = [
-    {
-      name: 'Royal Cheese Burger with extra fries',
-      description: '100% beef patty, cheese, onion, pickles, mustard and ketchup.',
-      price: '13.10',
-      image: 'assets/burger1.jpg'
-    },
-    {
-      name: 'The Classics for 2',
-      description: '2 beef patties, 2 cheese slices, special sauce and fries.',
-      price: '23.10',
-      image: 'assets/burger2.jpg'
-    },
-    {
-      name: 'The Classics for 3',
-      description: '3 beef patties, bacon, double cheese and massive fries.',
-      price: '33.10',
-      image: 'assets/burger3.jpg'
-    }
-  ];
+export class RestauranteComponent implements OnInit {
+  private productoService = inject(ProductoService);
+
+  // Listas para cada categoría que tienes en el HTML
+  campero: Producto[] = [];
+  patatas: Producto[] = [];
+  ensaladas: Producto[] = [];
+  bebidas: Producto[] = [];
+  pizzas: Producto[] = [];
+
+  ngOnInit() {
+    this.productoService.obtenerProductos().subscribe({
+      next: (productos) => {
+        // Filtramos los productos que vienen de la BD por su categoría
+        // Asegúrate de que en Firebase la categoría se llame igual que aquí
+        this.campero = productos.filter(p => p.categoria.toLowerCase() === 'campero');
+        this.patatas = productos.filter(p => p.categoria.toLowerCase() === 'patatas');
+        this.ensaladas = productos.filter(p => p.categoria.toLowerCase() === 'ensalada');
+        this.bebidas = productos.filter(p => p.categoria.toLowerCase() === 'bebidas');
+        this.pizzas = productos.filter(p => p.categoria.toLowerCase() === 'pizzas');
+      },
+      error: (err) => console.error("Error cargando productos", err)
+    });
+  }
 }

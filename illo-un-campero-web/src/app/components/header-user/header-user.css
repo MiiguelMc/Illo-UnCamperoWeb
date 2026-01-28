@@ -1,3 +1,5 @@
+
+
 .split-bar { display: flex; height: 50px; color: white; font-weight: bold; position: relative; }
 
 .user-info { 
@@ -49,6 +51,10 @@
   padding-right: 20px;
   cursor: pointer;
   font-weight: bold;
+}
+
+.cart-icon{
+  height: 30px;
 }
 
 /* El menú desplegable que sale al pulsar el nombre */

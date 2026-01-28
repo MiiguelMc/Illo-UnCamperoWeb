@@ -4,3 +4,18 @@
     --azul-oscuro: #0A0E21;
     --gris-claro: #EAEAEA;
   }
+
+  /* src/styles.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* Esto evita que si algún elemento se pasa de ancho, salga el scroll horizontal */
+  overflow-x: hidden; 
+}
+
+/* Opcional pero muy recomendable para TFGs */
+* {
+  box-sizing: border-box;
+}

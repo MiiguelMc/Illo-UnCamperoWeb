@@ -7,11 +7,14 @@
         <label>Nombre</label>
         <input formControlName="nombre" type="text">
         
-        <label>Email (No editable)</label>
+        <label>Email</label>
         <input formControlName="email" type="email">
   
         <label>Teléfono</label>
         <input formControlName="telefono" type="text">
+
+        <label>Dirección</label>
+        <input formControlName="direccion" type="text">
       </div>
   
       <button type="submit" [disabled]="profileForm.invalid">Guardar Cambios</button>
