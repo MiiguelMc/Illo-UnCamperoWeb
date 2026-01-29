@@ -1,34 +1,96 @@
-.flex-row { display: flex; align-items: center; justify-content: space-between; }
-.container { max-width: 1200px; margin: 0 auto; width: 100%; }
-
-/* Franja Superior */
-.top-header { background: white; border-bottom: 1px solid #ddd; font-size: 13px; height: 5vh; align-items: center; 
-  justify-content: center; text-align: center; display: flex;
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.orange-text { color: var(--naranja-illo); font-weight: bold; cursor: pointer; }
-.cart-box { 
-  display: flex;  background: var(--azul-oscuro);
-  height: 50px; width: auto; justify-content: center; align-items: center; border-radius: 100%; width: 50px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Franja Superior */
+.top-header {
+  background: white;
+  border-bottom: 1px solid #ddd;
+  font-size: 13px;
+  height: 5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+
+.orange-text {
+  color: var(--naranja-illo);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cart-box {
+  display: flex;
+  background: var(--azul-oscuro);
+  height: 50px;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 50px;
 }
 
 /* Navegación */
-.main-nav { background: white; padding: 5px 0; border-bottom: 2px solid #eee; }
-.logo img { height: 150px;width: 200px; }
-.nav-links { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; font-weight: 500; }
-.nav-links li { cursor: pointer; transition: 0.3s; }
-.nav-links li.active { 
-  background: var(--naranja-illo); color: white; 
-  padding: 8px 20px; border-radius: 20px; 
+.main-nav {
+  background: white;
+  padding: 5px 0;
+  border-bottom: 2px solid #eee;
+}
+
+.logo img {
+  height: 60px;      /* Esta es la altura ideal para un logo en web */
+  width: auto;        /* Esto hace que mantenga su proporción original */
+  max-width: 100%;    /* Evita que se salga del contenedor en móviles */
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+}
+
+.nav-links li {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-links li.active {
+  background: var(--naranja-illo);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
 }
 
 .login-pill {
-  background: var(--azul-oscuro); color: white; border: none;
-  padding: 10px 25px; border-radius: 30px; cursor: pointer;
-  display: flex; align-items: center; font-weight: bold;
+  background: var(--azul-oscuro);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
 }
 
 .btn-register {
-  border-radius: 30px; padding: 10px 25px; border: none;
-  box-shadow: grey 0px 0px 10px; font-weight: bold; cursor: pointer;
+  border-radius: 30px;
+  padding: 10px 25px;
+  border: none;
+  box-shadow: grey 0px 0px 10px;
+  font-weight: bold;
+  cursor: pointer;
 }

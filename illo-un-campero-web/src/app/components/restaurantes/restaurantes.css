@@ -4,17 +4,16 @@
     margin: 0 auto;
     padding: 20px;
 }
-
-/* Hero Banner */
 .hero-section {
-    background-color: #0A0E21; /* El azul oscuro de tu diseño */
-    color: white;
+    background-image: url("/assets/Foto-Banner.webp");
+    background-size: cover;       /* Cubre el área sin deformar */
+    background-position: center;
+    
+    width: 100%;                  /* Ocupa todo el ancho disponible */
+    aspect-ratio: 2 / 1;          /* <--- ESTA ES LA CLAVE (Proporción 2 de ancho por 1 de alto) */
+    
     border-radius: 20px;
-    padding: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+    /* Eliminamos min-height porque aspect-ratio se encarga de la altura */
 }
 
 .highlight { color: #F39200; } /* Naranja Illo */
