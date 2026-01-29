@@ -1,27 +1,24 @@
-<header>
-    <!-- Franja de Navegación -->
-    <nav class="main-nav">
-      <div class="container flex-row">
-        <div class="logo">
-          <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
-        </div>
-        <ul class="nav-links">
-          <li class="active">Inicio</li>
-          <li>Ofertas Especiales</li>
-          <li>Carta</li>
-          <li>Tu pedido</li>
-        </ul>
-        <div class="auth-btn">
-          <button class="login-pill" routerLink="/login">
-            Iniciar sesión
-          </button>
-        </div>
+<nav class="main-nav">
+  <div class="container flex-row">
+    
+    <!-- Logo: Ahora es un enlace que redirige a restaurantes -->
+    <a routerLink="/restaurantes" class="logo">
+      <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
+    </a>
 
-        <div>
-          <button class="btn-register" routerLink="/registro">
-            Registrarse
-          </button>
-        </div>
-      </div>
-    </nav>    
-</header>
+    <!-- Menú: El 'Inicio' ahora tiene el routerLink -->
+    <ul class="nav-links">
+      <li class="active" routerLink="/restaurantes">Inicio</li>
+      <li>Ofertas Especiales</li>
+      <li>Carta</li>
+      <li>Tu pedido</li>
+    </ul>
+
+    <!-- Botones agrupados -->
+    <div class="auth-container">
+      <button class="login-pill" routerLink="/login">Iniciar sesión</button>
+      <button class="btn-register" routerLink="/registro">Registrarse</button>
+    </div>
+
+  </div>
+</nav>

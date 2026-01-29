@@ -1,38 +1,144 @@
-.perfil-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+/* Contenedor de fondo para dar aire */
+.perfil-wrapper {
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 80px); /* Ajusta según la altura de tu header */
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Tarjeta principal */
+.perfil-card {
+  background: white;
+  max-width: 800px;
+  width: 100%;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+h1 {
+  color: #0d1117;
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section h3 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Rejilla de inputs: 2 columnas */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Estilo de los inputs */
+input {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.3s;
+  background-color: #fdfdfd;
+}
+
+input:focus {
+  outline: none;
+  border-color: #f39200; /* Naranja Illo */
+  box-shadow: 0 0 0 3px rgba(243, 146, 0, 0.1);
+}
+
+/* Botones */
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #f39200;
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+  max-width: 300px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #d68100;
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #0d1117;
+  border: 2px solid #0d1117;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #0d1117;
+  color: white;
+}
+
+.security p {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Mensajes de éxito */
+.success-msg {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Responsive: 1 columna en móviles */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .section {
-    margin-bottom: 30px;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .danger-zone {
-    border: 1px solid #ff4d4d;
-    background-color: #fff5f5;
-    border-radius: 8px;
-  }
-  
-  .btn-danger {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .success-msg {
-    color: #28a745;
-    font-weight: bold;
-    text-align: center;
-    padding: 10px;
-    background: #e8f5e9;
-    border-radius: 5px;
-  }
+}

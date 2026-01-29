@@ -1,74 +1,140 @@
-
-
-.split-bar { display: flex; height: 50px; color: white; font-weight: bold; position: relative; }
-
-.user-info { 
-  flex: 1; background: #F39200; display: flex; align-items: center; 
-  padding-left: 20px; gap: 10px; cursor: pointer; position: relative;
+/* FUERZA EL TAMAÑO DE LA IMAGEN DEL CARRO */
+.img-carrito-fija {
+  height: 20px !important; 
+  width: auto !important;
+  display: inline-block;
+  filter: brightness(0) invert(1);
 }
 
-.cart-info { 
-  flex: 1; background: #008445; display: flex; align-items: center; 
-  justify-content: flex-end; padding-right: 20px; gap: 10px; cursor: pointer;
-}
-
-/* Estilo Menú Desplegable */
-.dropdown-menu {
-  position: absolute; top: 50px; left: 0; background: white; 
-  color: #333; width: 200px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  border-radius: 0 0 10px 10px; z-index: 100;
-}
-.dropdown-menu ul { list-style: none; padding: 0; margin: 0; }
-.dropdown-menu li { padding: 12px 20px; border-bottom: 1px solid #eee; }
-.dropdown-menu li:hover { background: #f5f5f5; }
-.logout { color: red; font-weight: bold; }
-
-.split-bar {
-  display: flex;
-  height: 50px;
+/* ESTRUCTURA */
+.main-nav {
+  background: white;
+  border-bottom: 2px solid #eee;
+  padding: 10px 0;
   width: 100%;
 }
 
-.user-section {
-  flex: 1;
-  background-color: #F39200; /* Naranja Illo */
+.container.flex-row {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: relative; /* Base para el menú */
+}
+
+/* LOGO */
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+/* MENÚ CENTRAL */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  align-items: center; /* Alinea verticalmente los textos con el botón naranja */
+}
+
+.nav-links li {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px 15px;
+}
+
+.nav-links li.active {
+  background: #f39200;
   color: white;
+  border-radius: 20px;
+}
+
+/* CONTENEDOR DERECHA */
+.auth-container {
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  gap: 15px;
+}
+
+/* --- CLAVE PARA EL DESPLEGABLE --- */
+.user-dropdown-wrapper {
+  position: relative; /* Esto hace que el menú se posicione RESPECTO al botón */
+}
+
+.user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f4f4f4;
+  padding: 8px 18px;
+  border-radius: 30px;
   cursor: pointer;
-  position: relative;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.user-trigger:hover {
+  background: #ebebeb;
+}
+
+.cart-pill {
+  background: #0d1117;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
   font-weight: bold;
 }
 
-.cart-section {
-  flex: 1;
-  background-color: #008445; /* Verde Illo */
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 20px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.cart-icon{
-  height: 30px;
-}
-
-/* El menú desplegable que sale al pulsar el nombre */
+/* --- MENÚ DESPLEGABLE CORREGIDO --- */
 .dropdown-menu {
   position: absolute;
-  top: 50px;
-  left: 0;
+  top: calc(100% + 10px); /* Justo debajo del botón con un pequeño margen */
+  left: 0;                /* Alineado al inicio del nombre */
   background: white;
-  color: #333;
-  width: 200px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-  z-index: 100;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  z-index: 1000;
+  min-width: 180px;
+  overflow: hidden;
+  border: 1px solid #eee;
 }
 
-.dropdown-menu ul { list-style: none; padding: 0; margin: 0; }
-.dropdown-menu li { padding: 10px 20px; border-bottom: 1px solid #eee; }
-.dropdown-menu li:hover { background: #f5f5f5; }
+.dropdown-menu ul { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+}
+
+.dropdown-menu li { 
+  padding: 12px 20px; 
+  border-bottom: 1px solid #f5f5f5; 
+  cursor: pointer; 
+  color: #333;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu li:hover { 
+  background: #fff5e6; /* Fondo naranja muy suave */
+  color: #f39200;      /* Texto naranja */
+}
+
+.logout { 
+  color: #e74c3c !important; /* Rojo para cerrar sesión */
+  font-weight: bold;
+}
+
+.logout:hover {
+  background: #fdf2f2 !important;
+}

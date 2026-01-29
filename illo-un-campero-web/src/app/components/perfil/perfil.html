@@ -1,32 +1,51 @@
-<div class="perfil-container">
+<div class="perfil-wrapper">
+  <div class="perfil-card">
     <h1>Configuración de mi Perfil</h1>
     
     <form [formGroup]="profileForm" (ngSubmit)="guardarCambios()">
       <div class="section">
-        <h3>Datos Personales</h3>
-        <label>Nombre</label>
-        <input formControlName="nombre" type="text">
+        <h3><span class="icon">👤</span> Datos Personales</h3>
         
-        <label>Email</label>
-        <input formControlName="email" type="email">
-  
-        <label>Teléfono</label>
-        <input formControlName="telefono" type="text">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input formControlName="nombre" type="text" placeholder="Tu nombre">
+          </div>
+          
+          <div class="form-group">
+            <label>Email</label>
+            <input formControlName="email" type="email" placeholder="ejemplo@correo.com">
+          </div>
+    
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input formControlName="telefono" type="text" placeholder="600 000 000">
+          </div>
 
-        <label>Dirección</label>
-        <input formControlName="direccion" type="text">
+          <div class="form-group">
+            <label>Dirección</label>
+            <input formControlName="direccion" type="text" placeholder="Calle, Número, Ciudad">
+          </div>
+        </div>
       </div>
   
-      <button type="submit" [disabled]="profileForm.invalid">Guardar Cambios</button>
+      <div class="actions">
+        <button type="submit" class="btn-primary" [disabled]="profileForm.invalid">
+          Guardar Cambios
+        </button>
+      </div>
     </form>
   
     <div class="section security">
-      <h3>Seguridad</h3>
+      <h3><span class="icon">🔒</span> Seguridad</h3>
+      <p>Protege tu cuenta actualizando tu contraseña periódicamente.</p>
       <button class="btn-secondary" (click)="cambiarPass()">Cambiar Contraseña</button>
     </div>
   
     @if (mensaje) {
-      <p class="success-msg">{{ mensaje }}</p>
+      <div class="success-msg">
+        {{ mensaje }}
+      </div>
     }
   </div>
-
+</div>
