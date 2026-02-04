@@ -1,24 +1,24 @@
 <nav class="main-nav">
   <div class="container flex-row">
-    
-    <!-- Logo: Ahora es un enlace que redirige a restaurantes -->
+
     <a routerLink="/restaurantes" class="logo">
       <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
     </a>
 
-    <!-- Menú: El 'Inicio' ahora tiene el routerLink -->
     <ul class="nav-links">
-      <li class="active" routerLink="/restaurantes">Inicio</li>
-      <li>Ofertas Especiales</li>
-      <li>Carta</li>
-      <li>Tu pedido</li>
+      <!-- Inicio: exact: true para que solo sea naranja en la home -->
+      <li routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</li>
+
+      <!-- Carta: Se pondrá naranja automáticamente al entrar en /carta -->
+      <li routerLink="/carta" routerLinkActive="active">Carta</li>
+
+      <!-- Tu pedido -->
+      <li routerLink="/tu-pedido" routerLinkActive="active">Tu pedido</li>
     </ul>
 
-    <!-- Botones agrupados -->
     <div class="auth-container">
       <button class="login-pill" routerLink="/login">Iniciar sesión</button>
       <button class="btn-register" routerLink="/registro">Registrarse</button>
     </div>
-
   </div>
 </nav>

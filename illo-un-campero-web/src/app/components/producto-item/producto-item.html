@@ -1,13 +1,18 @@
 <div class="producto-card">
-    <div class="info">
-      <h3>{{ producto.nombre }}</h3>
-      <p class="desc">{{ producto.descripcion }}</p>
-      <p class="precio">€ {{ producto.precio | number:'1.2-2' }}</p>
+  <div class="info-container">
+    <div class="texto-principal">
+      <h3 class="nombre">{{ producto.nombre }}</h3>
+      <p class="descripcion">{{ producto.descripcion }}</p>
     </div>
-    
-    <div class="image-section">
-      <img [src]="producto.imagenUrl || 'assets/placeholder-food.png'" alt="producto">
+
+    <div class="precio-row">
+      <span class="precio">€ {{ producto.precio | number:'1.2-2' }}</span>
+      <button class="btn-add">+</button>
     </div>
-  
-    <button class="btn-add">+</button>
   </div>
+
+  <div class="img-container">
+    <!-- Intentamos cargar 'imagen' o 'imagenUrl'. Si fallan ambos, usa el placeholder -->
+    <img [src]="producto.imagen || producto.imagenUrl || 'assets/placeholder-food.png'" [alt]="producto.nombre">
+  </div>
+</div>

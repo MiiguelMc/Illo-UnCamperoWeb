@@ -1,8 +1,11 @@
 export interface Producto {
-    id?: string;
+    id?: number;
     nombre: string;
     descripcion: string;
     precio: number;
-    imagenUrl: string;
-    categoria: string; // "burgers", "patatas", "ensaladas", etc.
-  }
+    categoria: string;
+    subcategoria: string;
+    // Permitimos ambos nombres para que no falle la imagen
+    imagen?: string; 
+    imagenUrl?: string; 
+}

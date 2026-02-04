@@ -1,23 +1,19 @@
 <nav class="main-nav">
   <div class="container flex-row">
-    
-    <!-- 1. Logo -->
+
     <a routerLink="/restaurantes" class="logo">
       <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
     </a>
 
-    <!-- 2. Menú Central -->
     <ul class="nav-links">
-      <li class="active" routerLink="/restaurantes">Inicio</li>
-      <li>Ofertas Especiales</li>
-      <li>Carta</li>
-      <li>Tu pedido</li>
+      <li routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</li>
+
+      <li routerLink="/carta" routerLinkActive="active">Carta</li>
+
+      <li routerLink="/tu-pedido" routerLinkActive="active">Tu pedido</li>
     </ul>
 
-    <!-- 3. Controles Derecha -->
     <div class="auth-container">
-      
-      <!-- Usuario -->
       <div class="user-dropdown-wrapper">
         <div class="user-trigger" (click)="toggleMenu()">
           <span class="avatar-icon">👤</span>
@@ -25,23 +21,20 @@
         </div>
 
         @if (isMenuOpen) {
-          <div class="dropdown-menu">
-            <ul>
-              <li routerLink="/perfil">Configuración</li>
-              <li>Mis Pedidos</li>
-              <li class="logout" (click)="logout()">Cerrar sesión</li>
-            </ul>
-          </div>
+        <div class="dropdown-menu">
+          <ul>
+            <li routerLink="/perfil">Configuración</li>
+            <li>Mis Pedidos</li>
+            <li class="logout" (click)="logout()">Cerrar sesión</li>
+          </ul>
+        </div>
         }
       </div>
 
-      <!-- Carrito (CON CLASE PARA CONTROLAR EL TAMAÑO) -->
       <div class="cart-pill" routerLink="/carrito">
         <img src="assets/carro.webp" class="img-carrito-fija">
         <span>0.00€</span>
       </div>
-
     </div>
-
   </div>
 </nav>

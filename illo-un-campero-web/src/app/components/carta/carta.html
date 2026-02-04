@@ -1,0 +1,62 @@
+<div class="carta-container">
+    <div class="carta-header">
+        <h1>Nuestra Carta</h1>
+        <p>Calidad malagueña en cada bocado</p>
+    </div>
+
+    <!-- 1. CAMPEROS -->
+    <section class="seccion-menu" *ngIf="getPorCategoria('Campero').length > 0">
+        <h2 class="titulo-categoria">TIPOS DE CAMPEROS</h2>
+
+        <!-- Bloque Veganos -->
+        <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', 'Vegano').length > 0">
+            <h3 class="titulo-subcategoria">Veganos</h3>
+            <div class="productos-grid">
+                <app-producto-item *ngFor="let p of getPorSubcategoria('Campero', 'Vegano')"
+                    [producto]="p"></app-producto-item>
+            </div>
+        </div>
+
+        <!-- Bloque Carnívoros -->
+        <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', 'Carnivoro').length > 0">
+            <h3 class="titulo-subcategoria">Carnívoros</h3>
+            <div class="productos-grid">
+                <app-producto-item *ngFor="let p of getPorSubcategoria('Campero', 'Carnivoro')"
+                    [producto]="p"></app-producto-item>
+            </div>
+        </div>
+
+        <!-- Otros Camperos (Los que no encajan en lo anterior o no tienen subcategoría) -->
+        <div class="sub-bloque" *ngIf="getOtros('Campero', ['Vegano', 'Carnivoro']).length > 0">
+            <h3 class="titulo-subcategoria">Clásicos y Otros</h3>
+            <div class="productos-grid">
+                <app-producto-item *ngFor="let p of getOtros('Campero', ['Vegano', 'Carnivoro'])"
+                    [producto]="p"></app-producto-item>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. ENTRANTES -->
+    <section class="seccion-menu" *ngIf="getPorCategoria('Entrante').length > 0">
+        <h2 class="titulo-categoria">ENTRANTES</h2>
+        <div class="productos-grid">
+            <app-producto-item *ngFor="let p of getPorCategoria('Entrante')" [producto]="p"></app-producto-item>
+        </div>
+    </section>
+
+    <!-- 3. POSTRES -->
+    <section class="seccion-menu" *ngIf="getPorCategoria('Postre').length > 0">
+        <h2 class="titulo-categoria">POSTRES</h2>
+        <div class="productos-grid">
+            <app-producto-item *ngFor="let p of getPorCategoria('Postre')" [producto]="p"></app-producto-item>
+        </div>
+    </section>
+
+    <!-- 4. BEBIDAS -->
+    <section class="seccion-menu" *ngIf="getPorCategoria('Bebida').length > 0">
+        <h2 class="titulo-categoria">BEBIDAS</h2>
+        <div class="productos-grid">
+            <app-producto-item *ngFor="let p of getPorCategoria('Bebida')" [producto]="p"></app-producto-item>
+        </div>
+    </section>
+</div>

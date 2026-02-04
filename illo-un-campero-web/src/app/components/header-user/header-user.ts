@@ -1,24 +1,20 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Necesario para el pipe async y ngIf
-import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common'; 
+import { RouterModule } from '@angular/router'; // <--- CAMBIO: Importamos RouterModule completo
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header-user',
   standalone: true,
-  // IMPORTANTE: Tienes que importar CommonModule para que el HTML entienda el pipe async
-  imports: [CommonModule, RouterLink], 
+  // Añadimos RouterModule aquí para que reconozca routerLinkActive y routerLinkActiveOptions
+  imports: [CommonModule, RouterModule], 
   templateUrl: './header-user.html',
   styleUrl: './header-user.css'
 })
 export class HeaderUserComponent {
-  // 1. Inyectamos el servicio
   private authService = inject(AuthService);
 
-  // 2. Creamos la propiedad user$ que el HTML está buscando
   user$ = this.authService.user$;
-
-  // 3. Estado para el menú desplegable (que también lo usas en el HTML)
   isMenuOpen = false;
 
   toggleMenu() {
