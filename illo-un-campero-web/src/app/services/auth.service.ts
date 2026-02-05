@@ -103,11 +103,11 @@ export class AuthService {
         // para que el @RequestBody de Java lo reciba completo.
         const datosCompletos = { ...datos, uid: uid };
   
-        console.log("✈️ Enviando actualización al backend a: " + `${this.API_URL}/actualizar`);
+        console.log("✈️ Enviando actualización al backend a: " + `${this.API_URL}/perfil`);
         
         // 4. Enviamos el PUT. 
         // NOTA: He quitado el ${uid} de la URL porque tu backend no lo pide por URL (@PathVariable)
-        return this.http.put<Usuario>(`${this.API_URL}/actualizar`, datosCompletos, { headers });
+        return this.http.put<Usuario>(`${this.API_URL}/perfil`, datosCompletos, { headers });
       })
     );
   }

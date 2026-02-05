@@ -53,3 +53,209 @@
     color: #999;
     padding: 100px;
 }
+
+/* ==========================================
+   ESTILOS DEL MODAL (POP-UP)
+   ========================================== */
+
+/* ==========================================
+   ESTILOS DEL MODAL (ESTILO CARTA REAL)
+   ========================================== */
+
+/* Fondo semi-transparente para centrar la atención */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Oscurece el fondo suavemente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    backdrop-filter: blur(3px);
+    /* Desenfoque suave para estilo moderno */
+}
+
+/* Tarjeta del modal con los colores de tu web */
+.modal-content {
+    background-color: #ffffff;
+    /* Fondo blanco como tu carta */
+    width: 100%;
+    max-width: 550px;
+    border-radius: 8px;
+    /* Bordes menos redondeados, más limpios */
+    border-top: 8px solid #f39200;
+    /* Detalle naranja arriba, como tus títulos */
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+}
+
+/* Botón de cerrar (X) en naranja */
+.btn-cerrar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #f39200;
+    /* Naranja corporativo */
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.btn-cerrar:hover {
+    color: #222;
+    /* Cambia a gris oscuro al pasar el ratón */
+}
+
+/* Título en el gris de tus categorías */
+.modal-titulo {
+    color: #222;
+    font-size: 1.8rem;
+    padding: 30px 20px 15px 20px;
+    margin: 0;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* Imagen con el estilo de tus items */
+.modal-imagen-container {
+    width: 85%;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.modal-imagen-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Precio en naranja para que destaque */
+.modal-precio {
+    color: #f39200;
+    /* Naranja corporativo */
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 20px 0 10px 0;
+}
+
+/* Descripción en el gris de tus subcategorías */
+.modal-descripcion {
+    color: #555;
+    /* Mismo color que usas en .titulo-subcategoria */
+    font-size: 1.1rem;
+    padding: 0 40px 40px 40px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Animación de deslizamiento hacia arriba */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste para que los productos de la rejilla parezcan clickables */
+app-producto-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+app-producto-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Contenedor de botones en el modal */
+.modal-acciones {
+    padding: 20px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Selector de cantidad (- 1 +) */
+.selector-cantidad {
+    display: flex;
+    align-items: center;
+    background: #f8f8f8;
+    border-radius: 50px;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+
+.selector-cantidad button {
+    background: white;
+    border: 1px solid #ddd;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #f39200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.selector-cantidad button:hover {
+    background: #f39200;
+    color: white;
+    border-color: #f39200;
+}
+
+.selector-cantidad span {
+    padding: 0 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    min-width: 50px;
+    color: #222;
+}
+
+/* Botón Añadir al Pedido */
+.btn-anadir {
+    background-color: #f39200;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(243, 146, 0, 0.3);
+}
+
+.btn-anadir:hover {
+    background-color: #d88200;
+    /* Un naranja un poco más oscuro */
+    transform: translateY(-2px);
+}
+
+.btn-anadir:active {
+    transform: translateY(0);
+}

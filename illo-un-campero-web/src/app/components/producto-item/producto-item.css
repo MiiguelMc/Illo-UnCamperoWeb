@@ -61,17 +61,42 @@
   font-size: 1rem;
   color: #333;
 }
-
-.btn-add {
-  background: white;
-  border: 1px solid #eee;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  font-weight: bold;
+.selector-tarjeta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
+.btn-circular {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border: 1.5px solid #f39200; /* Naranja corporativo */
+    border-radius: 50%;
+    color: #f39200;
+    font-size: 1.2rem;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.btn-circular:hover {
+    background: #f39200;
+    color: white;
+}
+
+.cantidad-texto {
+    font-weight: 800;
+    color: #222;
+    font-size: 1.1rem;
+    min-width: 15px;
+    text-align: center;
+}
+
 
 /* CONTENEDOR DE IMAGEN */
 .img-container {
@@ -85,4 +110,4 @@
   height: 100%;
   object-fit: contain; /* Cambia a 'cover' si quieres que llene todo el cuadro */
   border-radius: 10px;
-}
+} 

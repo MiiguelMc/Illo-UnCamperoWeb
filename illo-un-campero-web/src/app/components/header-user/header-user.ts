@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { RouterModule } from '@angular/router'; // <--- CAMBIO: Importamos RouterModule completo
 import { AuthService } from '../../services/auth.service';
+import { CarritoService } from '../../services/carrito.service';
+
 
 @Component({
   selector: 'app-header-user',
@@ -13,6 +15,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderUserComponent {
   private authService = inject(AuthService);
+  carritoService = inject(CarritoService);
+
 
   user$ = this.authService.user$;
   isMenuOpen = false;

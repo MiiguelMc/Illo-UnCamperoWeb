@@ -8,10 +8,3 @@ export interface Usuario {
 }
 
 
-export interface Producto {
-    id?: number; // El ? es por si el id lo genera el backend
-    nombre: string;
-    descripcion: string;
-    precio: number;
-    imagen: string;
-}

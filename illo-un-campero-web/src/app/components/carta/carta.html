@@ -4,51 +4,71 @@
         <p>Calidad malagueña en cada bocado</p>
     </div>
 
-    <!-- 1. CAMPEROS -->
-    <section class="seccion-menu" *ngIf="getPorCategoria('Campero').length > 0">
-        <h2 class="titulo-categoria">TIPOS DE CAMPEROS</h2>
-
-        <!-- Bloque Veganos -->
-        <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', 'Vegano').length > 0">
-            <h3 class="titulo-subcategoria">Veganos</h3>
-            <div class="productos-grid">
-                <app-producto-item *ngFor="let p of getPorSubcategoria('Campero', 'Vegano')"
-                    [producto]="p"></app-producto-item>
-            </div>
-        </div>
-
-        <!-- Bloque Carnívoros -->
-        <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', 'Carnivoro').length > 0">
-            <h3 class="titulo-subcategoria">Carnívoros</h3>
-            <div class="productos-grid">
-                <app-producto-item *ngFor="let p of getPorSubcategoria('Campero', 'Carnivoro')"
-                    [producto]="p"></app-producto-item>
-            </div>
-        </div>
-
-        <!-- Otros Camperos (Los que no encajan en lo anterior o no tienen subcategoría) -->
-        <div class="sub-bloque" *ngIf="getOtros('Campero', ['Vegano', 'Carnivoro']).length > 0">
-            <h3 class="titulo-subcategoria">Clásicos y Otros</h3>
-            <div class="productos-grid">
-                <app-producto-item *ngFor="let p of getOtros('Campero', ['Vegano', 'Carnivoro'])"
-                    [producto]="p"></app-producto-item>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. ENTRANTES -->
+    <!-- 1. ENTRANTES (Ahora primero) -->
     <section class="seccion-menu" *ngIf="getPorCategoria('Entrante').length > 0">
         <h2 class="titulo-categoria">ENTRANTES</h2>
-        <div class="productos-grid">
-            <app-producto-item *ngFor="let p of getPorCategoria('Entrante')" [producto]="p"></app-producto-item>
+        <ng-container *ngFor="let sub of subEntrantes">
+            <div class="sub-bloque" *ngIf="getPorSubcategoria('Entrante', sub).length > 0">
+                <h3 class="titulo-subcategoria">{{ sub === 'Patata' ? 'Patatas' : (sub === 'Croqueta' ? 'Croquetas' : sub) }}</h3>
+                <div class="productos-grid">
+                    <app-producto-item *ngFor="let p of getPorSubcategoria('Entrante', sub)" 
+                        [producto]="p" 
+                        (click)="abrirModal(p)">
+                    </app-producto-item>
+                </div>
+            </div>
+        </ng-container>
+    </section>
+
+    <!-- 2. CAMPEROS -->
+    <section class="seccion-menu" *ngIf="getPorCategoria('Campero').length > 0">
+        <h2 class="titulo-categoria">TIPOS DE CAMPEROS</h2>
+        
+        <!-- Camperos específicos (Vegano, Carnivoro, etc.) -->
+        <ng-container *ngFor="let sub of subCamperos">
+            <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', sub).length > 0">
+                <h3 class="titulo-subcategoria">{{ sub === 'Mini' ? 'Mini Camperos' : sub }}</h3>
+                <div class="productos-grid">
+                    <app-producto-item *ngFor="let p of getPorSubcategoria('Campero', sub)" 
+                        [producto]="p" 
+                        (click)="abrirModal(p)">
+                    </app-producto-item>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- SECCIÓN DE TO LA VIA (Todo lo que no es Vegano, Carnívoro, etc.) -->
+        <div class="sub-bloque" *ngIf="getOtros('Campero', subCamperos).length > 0">
+            <h3 class="titulo-subcategoria">De to la via</h3>
+            <div class="productos-grid">
+                <app-producto-item *ngFor="let p of getOtros('Campero', subCamperos)" 
+                    [producto]="p" 
+                    (click)="abrirModal(p)">
+                </app-producto-item>
+            </div>
         </div>
     </section>
 
     <!-- 3. POSTRES -->
     <section class="seccion-menu" *ngIf="getPorCategoria('Postre').length > 0">
         <h2 class="titulo-categoria">POSTRES</h2>
-        <div class="productos-grid">
-            <app-producto-item *ngFor="let p of getPorCategoria('Postre')" [producto]="p"></app-producto-item>
+        <div class="sub-bloque" *ngIf="getPorSubcategoria('Postre', 'Cheesecake').length > 0">
+            <h3 class="titulo-subcategoria">Nuestras Tartas de Queso</h3>
+            <div class="productos-grid">
+                <app-producto-item *ngFor="let p of getPorSubcategoria('Postre', 'Cheesecake')" 
+                    [producto]="p" 
+                    (click)="abrirModal(p)">
+                </app-producto-item>
+            </div>
+        </div>
+        <div class="sub-bloque" *ngIf="getOtros('Postre', ['Cheesecake']).length > 0">
+            <h3 class="titulo-subcategoria">Más Dulces</h3>
+            <div class="productos-grid">
+                <app-producto-item *ngFor="let p of getOtros('Postre', ['Cheesecake'])" 
+                    [producto]="p" 
+                    (click)="abrirModal(p)">
+                </app-producto-item>
+            </div>
         </div>
     </section>
 
@@ -56,7 +76,35 @@
     <section class="seccion-menu" *ngIf="getPorCategoria('Bebida').length > 0">
         <h2 class="titulo-categoria">BEBIDAS</h2>
         <div class="productos-grid">
-            <app-producto-item *ngFor="let p of getPorCategoria('Bebida')" [producto]="p"></app-producto-item>
+            <app-producto-item *ngFor="let p of getPorCategoria('Bebida')" 
+                [producto]="p" 
+                (click)="abrirModal(p)">
+            </app-producto-item>
         </div>
     </section>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" *ngIf="productoSeleccionado" (click)="cerrarModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <button class="btn-cerrar" (click)="cerrarModal()">&times;</button>
+            <h2 class="modal-titulo">{{ productoSeleccionado.nombre }}</h2>
+            <div class="modal-imagen-container">
+                <img [src]="productoSeleccionado.imagenUrl || 'assets/no-image.png'" [alt]="productoSeleccionado.nombre">
+            </div>
+            <div class="modal-info">
+                <p class="modal-precio">{{ productoSeleccionado.precio | number:'1.2-2' }}€</p>
+                <p class="modal-descripcion">{{ productoSeleccionado.descripcion }}</p>
+            </div>
+            <div class="modal-acciones">
+                <div class="selector-cantidad">
+                    <button (click)="decrementar()">-</button>
+                    <span>{{ cantidadSeleccionada }}</span>
+                    <button (click)="incrementar()">+</button>
+                </div>
+                <button class="btn-anadir" (click)="agregarAlPedido()">
+                    AÑADIR - {{ (productoSeleccionado.precio * cantidadSeleccionada) | number:'1.2-2' }}€
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

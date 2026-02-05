@@ -33,7 +33,9 @@
 
       <div class="cart-pill" routerLink="/carrito">
         <img src="assets/carro.webp" class="img-carrito-fija">
-        <span>0.00€</span>
+        <i class="fas fa-shopping-cart"></i>
+        <!-- Se actualizará automáticamente -->
+        {{ carritoService.totalPrecio() | number:'1.2-2' }}€
       </div>
     </div>
   </div>

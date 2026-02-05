@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductoItemComponent } from '../producto-item/producto-item';
 import { ProductoService } from '../../services/producto.service';
+import { CarritoService } from '../../services/carrito.service';
 import { Producto } from '../../../model/producto.model';
 
 @Component({
@@ -12,44 +13,67 @@ import { Producto } from '../../../model/producto.model';
   styleUrls: ['./carta.css']
 })
 export class CartaComponent implements OnInit {
-  productos: Producto[] = [];
+  private productoService = inject(ProductoService);
+  private carritoService = inject(CarritoService);
 
-  constructor(private productoService: ProductoService) {}
+  productos: Producto[] = [];
+  productoSeleccionado: Producto | null = null;
+  cantidadSeleccionada: number = 1;
+
+  // Quitamos "De to la via" de aquí para manejarlo con getOtros
+  subCamperos = ['Vegano', 'Vegetariano', 'Carnivoro', 'Pan de Pizza', 'Mini'];
+  subEntrantes = ['Ensalada', 'Patata', 'Croqueta', 'Variante'];
 
   ngOnInit(): void {
     this.productoService.obtenerProductos().subscribe({
       next: (res) => {
         this.productos = res;
-        // ESTO ES CLAVE: Abre la consola (F12) y verás una tabla con tus datos reales
-        console.table(res); 
       },
       error: (err) => console.error('Error al cargar la carta:', err)
     });
   }
 
-  // Filtra por categoría principal (ignorando mayúsculas/minúsculas)
+  abrirModal(p: Producto) {
+    this.productoSeleccionado = p;
+    this.cantidadSeleccionada = 1;
+    document.body.style.overflow = 'hidden';
+  }
+
+  cerrarModal() {
+    this.productoSeleccionado = null;
+    document.body.style.overflow = 'auto';
+  }
+
+  incrementar() { this.cantidadSeleccionada++; }
+  decrementar() { if (this.cantidadSeleccionada > 1) this.cantidadSeleccionada--; }
+
+  agregarAlPedido() {
+    if (this.productoSeleccionado) {
+      this.carritoService.agregar(this.productoSeleccionado, this.cantidadSeleccionada);
+      this.cerrarModal();
+    }
+  }
+
   getPorCategoria(nombreCat: string): Producto[] {
-    return this.productos.filter(p => 
-      p.categoria?.toLowerCase().trim() === nombreCat.toLowerCase().trim()
+    return this.productos.filter(p =>
+      p.categoria?.toLowerCase().trim().includes(nombreCat.toLowerCase().trim())
     );
   }
 
-  // Filtra por subcategoría dentro de una categoría
-  getPorSubcategoria(cat: string, sub: string): Producto[] {
-    return this.productos.filter(p => 
-      p.categoria?.toLowerCase().trim() === cat.toLowerCase().trim() &&
-      p.subcategoria?.toLowerCase().trim().includes(sub.toLowerCase().trim())
-    );
-  }
-
-  // Productos que NO tienen una subcategoría de las que buscamos (para que no se pierdan)
-  getOtros(cat: string, subCategoriasConocidas: string[]): Producto[] {
+  getPorSubcategoria(cat: string, subKeyword: string): Producto[] {
     return this.productos.filter(p => {
-      const esDeLaCategoria = p.categoria?.toLowerCase().trim() === cat.toLowerCase().trim();
-      const esSubconocida = subCategoriasConocidas.some(sub => 
-        p.subcategoria?.toLowerCase().trim().includes(sub.toLowerCase().trim())
-      );
-      return esDeLaCategoria && !esSubconocida;
+      const coincideCat = p.categoria?.toLowerCase().includes(cat.toLowerCase());
+      const textoABuscar = ((p.subcategoria || '') + ' ' + (p.nombre || '')).toLowerCase();
+      return coincideCat && textoABuscar.includes(subKeyword.toLowerCase());
+    });
+  }
+
+  getOtros(cat: string, palabrasClave: string[]): Producto[] {
+    return this.productos.filter(p => {
+      const coincideCat = p.categoria?.toLowerCase().includes(cat.toLowerCase());
+      const textoABuscar = ((p.subcategoria || '') + ' ' + (p.nombre || '')).toLowerCase();
+      const yaEstaEnSub = palabrasClave.some(kw => textoABuscar.includes(kw.toLowerCase()));
+      return coincideCat && !yaEstaEnSub;
     });
   }
 }

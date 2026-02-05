@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../../model/usuario.model';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './perfil.html',
   styleUrls: ['./perfil.css']
 })
@@ -21,61 +21,61 @@ export class PerfilComponent implements OnInit {
 
   constructor() {
     this.profileForm = this.fb.group({
-      nombre: ['', Validators.required],
-      email: [{ value: '', disabled: false }], // El email no se edita
-      telefono: [''],
-      direccion: ['']
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      email: [{ value: '', disabled: true }], // El email no se edita
+      telefono: ['', [Validators.required]],
+      direccion: ['', [Validators.required]]
     });
   }
 
-  ngOnInit() {
-    this.authService.user$.subscribe(user => {
+  ngOnInit(): void {
+    this.authService.user$.subscribe((user: Usuario | null) => {
       if (user) {
         this.usuario = user;
         this.profileForm.patchValue({
           nombre: user.nombre,
           email: user.email,
-          // rellena aquí más campos si tu modelo 'Usuario' los tiene
+          telefono: user.telefono || '',
+          direccion: user.direccion || ''
         });
       }
     });
   }
 
-  // En perfil.ts
-guardarCambios() {
-  if (this.profileForm.valid && this.usuario) {
-    // Usamos getRawValue() para que incluya el email aunque esté disabled
-    const datosActualizados = this.profileForm.getRawValue();
+  guardarCambios(): void {
+    if (this.profileForm.valid && this.usuario) {
+      const datosActualizados: Usuario = {
+        ...this.usuario,
+        ...this.profileForm.getRawValue()
+      };
 
-    this.authService.updateUserData(this.usuario.uid, datosActualizados).subscribe({
-      next: (res) => {
-        console.log("✅ Backend actualizado:", res);
-        this.mensaje = "¡Perfil actualizado con éxito!";
-        setTimeout(() => this.mensaje = '', 3000);
-      },
-      error: (err) => {
-        console.error("❌ Error 403 o similar:", err);
-        this.mensaje = "Error al guardar: No tienes permisos o el servidor rechazó la petición.";
-      }
-    });
+      this.authService.updateUserData(this.usuario.uid, datosActualizados).subscribe({
+        next: (res: any) => {
+          console.log("✅ Perfil actualizado:", res);
+          this.mensaje = "¡Perfil actualizado con éxito!";
+          setTimeout(() => this.mensaje = '', 3000);
+        },
+        error: (err: any) => {
+          console.error("❌ Error al actualizar:", err);
+          this.mensaje = "Error al guardar: No se pudo actualizar el perfil.";
+        }
+      });
+    } else {
+      this.mensaje = "Por favor, rellena todos los campos correctamente.";
+    }
   }
-}
 
-  cambiarPass() {
+  cambiarPass(): void {
     if (this.usuario && this.usuario.email) {
       this.authService.sendPasswordReset(this.usuario.email)
         .then(() => {
-          this.mensaje = "Se ha enviado un correo a " + this.usuario?.email + " para cambiar tu contraseña.";
-          
-          // Limpiar el mensaje después de 5 segundos
+          this.mensaje = "Se ha enviado un correo para cambiar tu contraseña.";
           setTimeout(() => this.mensaje = '', 5000);
         })
-        .catch((error) => {
-          console.error("Error al enviar email de reset:", error);
+        .catch((error: any) => {
+          console.error("Error al enviar reset:", error);
           this.mensaje = "Hubo un error al intentar enviar el correo.";
         });
     }
   }
-
-  
 }

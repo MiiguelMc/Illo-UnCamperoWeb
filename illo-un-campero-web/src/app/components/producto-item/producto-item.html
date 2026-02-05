@@ -7,12 +7,21 @@
 
     <div class="precio-row">
       <span class="precio">€ {{ producto.precio | number:'1.2-2' }}</span>
-      <button class="btn-add">+</button>
+      
+      <div class="selector-tarjeta">
+        <!-- Botón menos (solo aparece si hay cantidad) -->
+        <button class="btn-circular" *ngIf="cantidadEnCarrito() > 0" (click)="restar($event)">-</button>
+        
+        <!-- Cantidad central -->
+        <span class="cantidad-texto" *ngIf="cantidadEnCarrito() > 0">{{ cantidadEnCarrito() }}</span>
+        
+        <!-- Botón más (el círculo naranja de tu foto) -->
+        <button class="btn-circular" (click)="sumar($event)">+</button>
+      </div>
     </div>
   </div>
 
   <div class="img-container">
-    <!-- Intentamos cargar 'imagen' o 'imagenUrl'. Si fallan ambos, usa el placeholder -->
     <img [src]="producto.imagen || producto.imagenUrl || 'assets/placeholder-food.png'" [alt]="producto.nombre">
   </div>
 </div>

@@ -5,7 +5,6 @@ export interface Producto {
     precio: number;
     categoria: string;
     subcategoria: string;
-    // Permitimos ambos nombres para que no falle la imagen
     imagen?: string; 
     imagenUrl?: string; 
 }

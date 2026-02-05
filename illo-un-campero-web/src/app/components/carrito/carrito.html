@@ -1,0 +1,50 @@
+<div class="carrito-page-container">
+    <div class="carrito-header">
+        <h1>Tu Pedido</h1>
+        <p>Revisa tus productos antes de confirmar</p>
+    </div>
+
+    <!-- Si el carrito está vacío -->
+    <div class="carrito-vacio" *ngIf="items().length === 0">
+        <div class="icon-vacio">🛒</div>
+        <h2>Tu carrito está vacío</h2>
+        <p>Parece que aún no has añadido ningún campero.</p>
+        <button routerLink="/carta" class="btn-volver">Ir a la Carta</button>
+    </div>
+
+    <!-- Lista de productos -->
+    <div class="carrito-contenido" *ngIf="items().length > 0">
+        <div class="items-lista">
+            <div class="card-item" *ngFor="let item of items()">
+                <img [src]="item.producto.imagenUrl || 'assets/no-image.png'" alt="producto">
+                
+                <div class="detalles">
+                    <h3>{{ item.producto.nombre }}</h3>
+                    <p class="precio-unit">{{ item.producto.precio | number:'1.2-2' }}€ / unidad</p>
+                </div>
+
+                <div class="controles">
+                    <button (click)="disminuir(item.producto)">-</button>
+                    <span class="cantidad">{{ item.cantidad }}</span>
+                    <button (click)="aumentar(item.producto)">+</button>
+                </div>
+
+                <div class="subtotal">
+                    {{ (item.producto.precio * item.cantidad) | number:'1.2-2' }}€
+                </div>
+
+                <button class="btn-borrar" (click)="eliminar(item.producto)">×</button>
+            </div>
+        </div>
+
+        <!-- Resumen del Pago -->
+        <div class="resumen-pago">
+            <div class="fila-total">
+                <span>Total a pagar:</span>
+                <span class="monto-total">{{ total() | number:'1.2-2' }}€</span>
+            </div>
+            <button class="btn-confirmar">CONFIRMAR PEDIDO</button>
+            <button routerLink="/carta" class="btn-seguir">Seguir comprando</button>
+        </div>
+    </div>
+</div>
