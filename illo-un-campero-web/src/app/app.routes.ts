@@ -3,9 +3,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RestauranteComponent } from './components/restaurantes/restaurantes'; 
 import { RegistroComponent } from './components/registro/registro'; 
 import { PerfilComponent } from './components/perfil/perfil';
-// Importamos el nuevo componente de la Carta
 import { CartaComponent } from './components/carta/carta'; 
-import { CarritoComponent } from './components/carrito/carrito'; // Importa el nuevo componente del carrito
+import { CarritoComponent } from './components/carrito/carrito';
+import { ConfirmarPedidoComponent } from './components/confirmar-pedido/confirmar-pedido';
+import { PedidoExitosoComponent } from './components/pedido-exitoso/pedido-exitoso';
+import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -13,7 +15,10 @@ export const routes: Routes = [
     { path: 'carrito', component: CarritoComponent },
     { path: 'registro', component: RegistroComponent }, 
     { path: 'perfil', component: PerfilComponent },
-    { path: 'carta', component: CartaComponent }, // <--- Añadimos la ruta de la carta
+    { path: 'carta', component: CartaComponent },
+    { path: 'confirmar-pedido', component: ConfirmarPedidoComponent },
+    { path: 'pedido-exitoso', component: PedidoExitosoComponent },
+    { path: 'mis-pedidos', component: MisPedidosComponent },
     { path: '', redirectTo: 'restaurantes', pathMatch: 'full' },
     { path: '**', redirectTo: 'restaurantes' }
 ];

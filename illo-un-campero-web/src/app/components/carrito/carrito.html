@@ -43,7 +43,7 @@
                 <span>Total a pagar:</span>
                 <span class="monto-total">{{ total() | number:'1.2-2' }}€</span>
             </div>
-            <button class="btn-confirmar">CONFIRMAR PEDIDO</button>
+            <button class="btn-confirmar" (click)="irAConfirmarPedido()">CONFIRMAR PEDIDO</button>
             <button routerLink="/carta" class="btn-seguir">Seguir comprando</button>
         </div>
     </div>

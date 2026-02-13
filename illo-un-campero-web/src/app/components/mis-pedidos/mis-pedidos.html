@@ -1,0 +1,81 @@
+<div class="mis-pedidos-container">
+  <div class="header-pedidos">
+    <h1>Mis Pedidos</h1>
+    <button routerLink="/restaurantes" class="btn-volver">← Volver</button>
+  </div>
+
+  <!-- Estado de carga -->
+  <div class="cargando" *ngIf="cargando()">
+    <div class="spinner"></div>
+    <p>Cargando tus pedidos...</p>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div class="error-mensaje" *ngIf="error() && !cargando()">
+    <p>{{ error() }}</p>
+    <button routerLink="/login" class="btn-login">Iniciar Sesión</button>
+  </div>
+
+  <!-- Sin pedidos -->
+  <div class="sin-pedidos" *ngIf="!cargando() && !error() && pedidos().length === 0">
+    <div class="icon-vacio">📦</div>
+    <h2>Aún no tienes pedidos</h2>
+    <p>Cuando realices un pedido, aparecerá aquí</p>
+    <button routerLink="/carta" class="btn-pedir">Hacer mi primer pedido</button>
+  </div>
+
+  <!-- Lista de pedidos -->
+  <div class="lista-pedidos" *ngIf="!cargando() && !error() && pedidos().length > 0">
+    <div class="pedido-card" *ngFor="let pedido of pedidos()">
+      <!-- Encabezado del pedido -->
+      <div class="pedido-header">
+        <div class="info-basica">
+          <h3>Pedido #{{ pedido.id }}</h3>
+          <p class="fecha">{{ formatearFecha(pedido.fecha) }}</p>
+        </div>
+        <div class="estado-badge" [style.background-color]="getEstadoColor(pedido.estado)">
+          {{ pedido.estado }}
+        </div>
+      </div>
+
+      <!-- Items del pedido -->
+      <div class="pedido-items">
+        <div class="item" *ngFor="let item of pedido.productos">
+          <img src="assets/no-image.png" alt="{{ item.nombre }}">
+          <div class="item-detalles">
+            <p class="nombre">{{ item.nombre }}</p>
+            <p class="cantidad-precio">{{ item.cantidad }}x {{ item.precioUnidad | number:'1.2-2' }}€</p>
+            <p class="notas-item" *ngIf="item.notas">{{ item.notas }}</p>
+          </div>
+          <p class="subtotal">{{ (item.precioUnidad * item.cantidad) | number:'1.2-2' }}€</p>
+        </div>
+      </div>
+
+      <!-- Footer del pedido -->
+      <div class="pedido-footer">
+        <div class="info-entrega">
+          <p><strong>Dirección:</strong> {{ pedido.direccion }}</p>
+          <p><strong>Teléfono:</strong> {{ pedido.telefono }}</p>
+          <p *ngIf="pedido.metodoPago"><strong>Método de pago:</strong> {{ pedido.metodoPago }}</p>
+          <p *ngIf="pedido.notasGenerales"><strong>Notas:</strong> {{ pedido.notasGenerales }}</p>
+        </div>
+        
+        <div class="total-y-acciones">
+          <p class="total-pedido">
+            <strong>Total:</strong> 
+            <span class="monto">{{ pedido.total | number:'1.2-2' }}€</span>
+          </p>
+          
+          <!-- Botón de cancelar solo si está pendiente -->
+          <button 
+            *ngIf="pedido.estado === 'PENDIENTE'" 
+            class="btn-cancelar"
+            (click)="cancelarPedido(pedido.id!)"
+          >
+            Cancelar Pedido
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

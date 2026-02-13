@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CarritoService } from '../../services/carrito.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { CarritoService } from '../../services/carrito.service';
 export class CarritoComponent {
   // Inyectamos el servicio que creamos antes
   public carritoService = inject(CarritoService);
+  private router = inject(Router);
 
   // Acceso directo a los datos del carrito
   items = this.carritoService.items;
@@ -31,5 +32,12 @@ export class CarritoComponent {
 
   eliminar(producto: any) {
     this.carritoService.eliminar(producto);
+  }
+
+  // Navegar a la página de confirmación de pedido
+  irAConfirmarPedido() {
+    if (this.items().length > 0) {
+      this.router.navigate(['/confirmar-pedido']);
+    }
   }
 }

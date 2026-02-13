@@ -1,0 +1,126 @@
+<div class="confirmar-pedido-container">
+  <div class="header-confirmacion">
+    <button class="btn-volver" (click)="volver()">
+      ← Volver al carrito
+    </button>
+    <h1>Confirmar Pedido</h1>
+  </div>
+
+  <div class="contenido-confirmacion">
+    <!-- Columna izquierda: Resumen del pedido -->
+    <div class="resumen-pedido">
+      <h2>Resumen del Pedido</h2>
+      
+      <div class="items-lista">
+        <div class="item-resumen" *ngFor="let item of items()">
+          <img [src]="item.producto.imagenUrl || 'assets/no-image.png'" alt="{{ item.producto.nombre }}">
+          <div class="item-info">
+            <h3>{{ item.producto.nombre }}</h3>
+            <p class="cantidad-precio">{{ item.cantidad }}x {{ item.producto.precio | number:'1.2-2' }}€</p>
+          </div>
+          <div class="item-subtotal">
+            {{ (item.producto.precio * item.cantidad) | number:'1.2-2' }}€
+          </div>
+        </div>
+      </div>
+
+      <div class="total-pedido">
+        <span>Total:</span>
+        <span class="monto-total">{{ total() | number:'1.2-2' }}€</span>
+      </div>
+    </div>
+
+    <!-- Columna derecha: Datos de entrega -->
+    <div class="datos-entrega">
+      <h2>Datos de Entrega</h2>
+
+      <!-- Mensaje de error -->
+      <div class="alert-error" *ngIf="error()">
+        {{ error() }}
+      </div>
+
+      <form class="form-confirmacion">
+        <!-- Dirección de entrega -->
+        <div class="form-group">
+          <label for="direccion">Dirección de Entrega *</label>
+          <input 
+            type="text" 
+            id="direccion" 
+            [(ngModel)]="direccionEntrega"
+            name="direccion"
+            placeholder="Calle, número, piso, puerta..."
+            required
+            [disabled]="cargando()"
+          >
+        </div>
+
+        <!-- Teléfono de contacto -->
+        <div class="form-group">
+          <label for="telefono">Teléfono de Contacto *</label>
+          <input 
+            type="tel" 
+            id="telefono" 
+            [(ngModel)]="telefonoContacto"
+            name="telefono"
+            placeholder="+34 600 123 456"
+            required
+            [disabled]="cargando()"
+          >
+        </div>
+
+        <!-- Método de pago -->
+        <div class="form-group">
+          <label for="metodoPago">Método de Pago *</label>
+          <select 
+            id="metodoPago" 
+            [(ngModel)]="metodoPago"
+            name="metodoPago"
+            [disabled]="cargando()"
+          >
+            <option *ngFor="let metodo of metodosPago" [value]="metodo">
+              {{ metodo }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Notas adicionales -->
+        <div class="form-group">
+          <label for="notas">Notas Adicionales (Opcional)</label>
+          <textarea 
+            id="notas" 
+            [(ngModel)]="notas"
+            name="notas"
+            rows="3"
+            placeholder="Ej: Sin cebolla, llamar al llegar, etc."
+            [disabled]="cargando()"
+          ></textarea>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="botones-accion">
+          <button 
+            type="button" 
+            class="btn-cancelar" 
+            (click)="volver()"
+            [disabled]="cargando()"
+          >
+            Cancelar
+          </button>
+          <button 
+            type="button" 
+            class="btn-confirmar" 
+            (click)="confirmarPedido()"
+            [disabled]="cargando()"
+          >
+            <span *ngIf="!cargando()">Confirmar y Pagar</span>
+            <span *ngIf="cargando()">Procesando...</span>
+          </button>
+        </div>
+      </form>
+
+      <p class="info-pago">
+        <strong>Método de pago:</strong> El pago se realizará {{ metodoPago === 'EFECTIVO' ? 'en efectivo al recibir' : 'mediante ' + metodoPago.toLowerCase() }}
+      </p>
+    </div>
+  </div>
+</div>

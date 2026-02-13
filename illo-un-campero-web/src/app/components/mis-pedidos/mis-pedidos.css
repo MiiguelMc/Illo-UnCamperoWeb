@@ -1,0 +1,286 @@
+.mis-pedidos-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.header-pedidos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header-pedidos h1 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+}
+
+.btn-volver {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s;
+}
+
+.btn-volver:hover {
+  color: #c0392b;
+}
+
+/* Estado de carga */
+.cargando {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #e74c3c;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mensaje de error */
+.error-mensaje {
+  text-align: center;
+  padding: 3rem;
+  background: #fee;
+  border-radius: 10px;
+  color: #c0392b;
+}
+
+.btn-login {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Sin pedidos */
+.sin-pedidos {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.icon-vacio {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.sin-pedidos h2 {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.sin-pedidos p {
+  color: #999;
+  margin-bottom: 2rem;
+}
+
+.btn-pedir {
+  padding: 1rem 2rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-pedir:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Lista de pedidos */
+.lista-pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pedido-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pedido-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Encabezado del pedido */
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+.info-basica h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0 0 0.25rem 0;
+}
+
+.fecha {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.estado-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+/* Items del pedido */
+.pedido-items {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.item-detalles {
+  flex: 1;
+}
+
+.item-detalles .nombre {
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.25rem 0;
+}
+
+.item-detalles .cantidad-precio {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.item .subtotal {
+  font-weight: bold;
+  color: #e74c3c;
+  margin: 0;
+}
+
+/* Footer del pedido */
+.pedido-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-top: 1px solid #eee;
+  gap: 2rem;
+}
+
+.info-entrega {
+  flex: 1;
+}
+
+.info-entrega p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.info-entrega strong {
+  color: #333;
+}
+
+.total-y-acciones {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.total-pedido {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #333;
+}
+
+.total-pedido .monto {
+  color: #e74c3c;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.btn-cancelar {
+  padding: 0.5rem 1.5rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-cancelar:hover {
+  background: #c0392b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pedido-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .total-y-acciones {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .header-pedidos {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
