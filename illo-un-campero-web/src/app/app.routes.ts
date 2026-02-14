@@ -8,6 +8,8 @@ import { CarritoComponent } from './components/carrito/carrito';
 import { ConfirmarPedidoComponent } from './components/confirmar-pedido/confirmar-pedido';
 import { PedidoExitosoComponent } from './components/pedido-exitoso/pedido-exitoso';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos';
+import { CocinaDashboardComponent } from './components/cocina-dashboard/cocina-dashboard';
+
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -19,6 +21,7 @@ export const routes: Routes = [
     { path: 'confirmar-pedido', component: ConfirmarPedidoComponent },
     { path: 'pedido-exitoso', component: PedidoExitosoComponent },
     { path: 'mis-pedidos', component: MisPedidosComponent },
+    { path: 'cocina', component: CocinaDashboardComponent },
     { path: '', redirectTo: 'restaurantes', pathMatch: 'full' },
     { path: '**', redirectTo: 'restaurantes' }
 ];
