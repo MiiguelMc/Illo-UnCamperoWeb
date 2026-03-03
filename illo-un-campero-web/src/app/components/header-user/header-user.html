@@ -23,9 +23,12 @@
         @if (isMenuOpen) {
         <div class="dropdown-menu">
           <ul>
-            <li routerLink="/perfil">Configuración</li>
-            <li>Mis Pedidos</li>
-            <li class="logout" (click)="logout()">Cerrar sesión</li>
+            <li routerLink="/perfil" (click)="isMenuOpen = false">Configuración</li>
+            
+            <!-- Enlace a Mis Pedidos añadido aquí -->
+            <li routerLink="/mis-pedidos" (click)="isMenuOpen = false">Mis Pedidos</li>
+            
+            <li class="logout" (click)="logout(); isMenuOpen = false">Cerrar sesión</li>
           </ul>
         </div>
         }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderUser } from './header-user';
+import { HeaderUserComponent  } from './header-user';
 
 describe('HeaderUser', () => {
-  let component: HeaderUser;
-  let fixture: ComponentFixture<HeaderUser>;
+  let component: HeaderUserComponent ;
+  let fixture: ComponentFixture<HeaderUserComponent >;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderUser]
+      imports: [HeaderUserComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HeaderUser);
+    fixture = TestBed.createComponent(HeaderUserComponent );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -20,4 +20,5 @@ describe('HeaderUser', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

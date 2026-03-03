@@ -28,4 +28,5 @@ export class HeaderUserComponent {
   logout() {
     this.authService.logout();
   }
+  
 }
