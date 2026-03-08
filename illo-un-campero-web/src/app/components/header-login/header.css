@@ -1,81 +1,105 @@
-/* 1. Contenedor principal del Header */
-.main-nav {
-  background: white;
-  border-bottom: 2px solid #eee;
-  padding: 10px 0;
-  width: 100%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-/* 2. La fila que contiene todo */
-.main-nav .container.flex-row {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between; /* Logo a la izq, Menú centro, Botones derecha */
-  align-items: center;            /* Todo a la misma altura vertical */
-}
-
-/* 3. EL LOGO (Aquí es donde se arregla el tamaño gigante) */
-.logo img {
-  height: 50px !important; /* Forzamos el tamaño para que no sea enorme */
-  width: auto;
-  display: block;
-  cursor: pointer;
+.main-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px); /* Efecto cristal berraco */
+  height: 80px;
   display: flex;
   align-items: center;
-  text-decoration: none; /* Quita subrayados si los hubiera */
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Elevación pro */
+  font-family: 'Poppins', sans-serif;
 }
 
-/* 4. EL MENÚ CENTRAL */
-.nav-links {
+.header-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.logo-box img {
+  height: 55px;
+  transition: transform 0.3s ease;
+}
+.logo-box:hover img {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+/* MENÚ CENTRAL */
+.nav-menu {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 25px;
   margin: 0;
   padding: 0;
-  align-items: center; /* Alinea los textos con el botón naranja */
 }
 
-.nav-links li {
-  cursor: pointer;
-  font-weight: 500;
+.nav-menu a, .nav-link-btn {
+  text-decoration: none;
   color: #333;
-  padding: 8px 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 18px;
+  border-radius: 50px;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
-.nav-links li.active {
+.nav-menu a.active, .nav-link-btn.active {
   background: #f39200;
   color: white;
-  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(243, 146, 0, 0.3);
 }
 
-/* 5. LOS BOTONES (Recuperamos su estética) */
-.auth-container {
+.nav-menu a:hover:not(.active), .nav-link-btn:hover:not(.active) {
+  color: #f39200;
+  background: rgba(243, 146, 0, 0.05);
+}
+
+/* BOTONES DE ACCIÓN */
+.actions-box {
   display: flex;
   gap: 15px;
   align-items: center;
 }
 
-.login-pill {
-  background: #0d1117; /* Tu azul oscuro */
+.btn-login-black {
+  background: #0d1117; /* El negro de tu corillo */
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
-  font-weight: bold;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-weight: 700;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.btn-register {
+.btn-login-black:hover {
+  background: #1a222c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.btn-register-white {
   background: white;
-  color: black;
+  color: #0d1117;
   border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
-  font-weight: bold;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* La sombra de antes */
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Tu sombra berraca */
 }
 
-
+.btn-register-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}

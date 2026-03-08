@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -11,41 +11,31 @@ import Swal from 'sweetalert2';
   styleUrls: ['./header.css']
 })
 export class Header {
-
-  constructor(public router: Router) {}
+  public router = inject(Router); // Para las clases activas
 
   comprobarPedido() {
-    // Comprobamos si hay sesión (token)
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      // Si está logueado, vamos a la página
-      this.router.navigate(['/tu-pedido']);
-    } else {
-      // Pop-up con los estilos de tu web
-      Swal.fire({
-        title: '<strong>¿Aún no te has registrado?</strong>',
-        text: 'Para gestionar tus pedidos echa un vistazo a nuestra zona de registro.',
-        icon: 'info',
-        iconColor: '#f39200', // El naranja de tu menú
-        showCloseButton: true, // La X en la esquina
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: 'Registrarse',
-        cancelButtonText: 'Ahora no',
-        buttonsStyling: false, // Desactivamos el estilo por defecto de Swal
-        customClass: {
-          confirmButton: 'pop-btn-negro',   // Estilo como tu login-pill
-          cancelButton: 'pop-btn-blanco',   // Estilo como tu btn-register
-          popup: 'pop-redondeado'
-        },
-        heightAuto: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Si pulsa el botón negro (Registrarse), va a registro
-          this.router.navigate(['/registro']);
-        }
-      });
-    }
+    // Al no estar logueado, soltamos el pop-up "Real hasta la muerte"
+    Swal.fire({
+      title: '<strong>¿Aún no te has registrado?</strong>',
+      text: 'Para gestionar tus pedidos echa un vistazo a nuestra zona de registro.',
+      icon: 'info',
+      iconColor: '#f39200',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText: 'Registrarse',
+      cancelButtonText: 'Ahora no',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'pop-btn-negro',   // Estas clases deben seguir en styles.css global
+        cancelButton: 'pop-btn-blanco',
+        popup: 'pop-redondeado'
+      },
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/registro']);
+      }
+    });
   }
 }
