@@ -1,22 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { RouterModule } from '@angular/router'; // <--- CAMBIO: Importamos RouterModule completo
+import { RouterModule, Router } from '@angular/router'; // <--- Añadimos Router
 import { AuthService } from '../../services/auth.service';
 import { CarritoService } from '../../services/carrito.service';
-
 
 @Component({
   selector: 'app-header-user',
   standalone: true,
-  // Añadimos RouterModule aquí para que reconozca routerLinkActive y routerLinkActiveOptions
   imports: [CommonModule, RouterModule], 
   templateUrl: './header-user.html',
   styleUrl: './header-user.css'
 })
 export class HeaderUserComponent {
   private authService = inject(AuthService);
+  public router = inject(Router); // <--- Inyectamos el Router
   carritoService = inject(CarritoService);
-
 
   user$ = this.authService.user$;
   isMenuOpen = false;
@@ -28,5 +26,4 @@ export class HeaderUserComponent {
   logout() {
     this.authService.logout();
   }
-  
 }

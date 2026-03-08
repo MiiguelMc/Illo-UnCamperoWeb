@@ -20,7 +20,9 @@ export class CartaComponent implements OnInit {
   productoSeleccionado: Producto | null = null;
   cantidadSeleccionada: number = 1;
 
-  // Quitamos "De to la via" de aquí para manejarlo con getOtros
+  // MIRA AQUÍ PAPI: 'todos' para que al principio salga to' el combo
+  filtroActual: string = 'todos'; 
+
   subCamperos = ['Vegano', 'Vegetariano', 'Carnivoro', 'Pan de Pizza', 'Mini'];
   subEntrantes = ['Ensalada', 'Patata', 'Croqueta', 'Variante'];
 
@@ -29,8 +31,14 @@ export class CartaComponent implements OnInit {
       next: (res) => {
         this.productos = res;
       },
-      error: (err) => console.error('Error al cargar la carta:', err)
+      error: (err) => console.error('Oye, falló la vuelta cargando la carta:', err)
     });
+  }
+
+  // ESTA ES LA QUE MANDA: Cambia el filtro y limpia la pantalla
+  setFiltro(categoria: string) {
+    this.filtroActual = categoria;
+    window.scrollTo({top: 250, behavior: 'smooth'}); // Un pequeño ajuste pa' que se vea bien
   }
 
   abrirModal(p: Producto) {
@@ -54,6 +62,7 @@ export class CartaComponent implements OnInit {
     }
   }
 
+  // --- LÓGICA DE FILTRADO RECOGE-CABLE ---
   getPorCategoria(nombreCat: string): Producto[] {
     return this.productos.filter(p =>
       p.categoria?.toLowerCase().trim().includes(nombreCat.toLowerCase().trim())

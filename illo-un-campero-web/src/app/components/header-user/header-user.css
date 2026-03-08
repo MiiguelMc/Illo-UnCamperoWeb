@@ -1,140 +1,157 @@
-/* FUERZA EL TAMAÑO DE LA IMAGEN DEL CARRO */
-.img-carrito-fija {
-  height: 20px !important; 
-  width: auto !important;
-  display: inline-block;
-  filter: brightness(0) invert(1);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.main-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px); /* Efecto cristal berraco */
+  height: 80px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Elevación pro */
+  font-family: 'Poppins', sans-serif;
 }
 
-/* ESTRUCTURA */
-.main-nav {
-  background: white;
-  border-bottom: 2px solid #eee;
-  padding: 10px 0;
-  width: 100%;
-}
-
-.container.flex-row {
-  max-width: 1200px;
+.header-container {
+  max-width: 1300px;
   margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  position: relative; /* Base para el menú */
 }
 
 /* LOGO */
-.logo img {
-  height: 50px;
-  width: auto;
+.logo-box img {
+  height: 55px;
+  transition: transform 0.3s ease;
+}
+.logo-box:hover img {
+  transform: scale(1.05) rotate(-2deg);
 }
 
 /* MENÚ CENTRAL */
-.nav-links {
+.nav-menu {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 30px;
   margin: 0;
   padding: 0;
-  align-items: center; /* Alinea verticalmente los textos con el botón naranja */
 }
 
-.nav-links li {
-  cursor: pointer;
-  font-weight: 500;
-  padding: 8px 15px;
+.nav-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 50px;
+  transition: all 0.3s;
 }
 
-.nav-links li.active {
+.nav-menu a.active {
   background: #f39200;
   color: white;
-  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(243, 146, 0, 0.3);
 }
 
-/* CONTENEDOR DERECHA */
-.auth-container {
+.nav-menu a:hover:not(.active) {
+  color: #f39200;
+  background: rgba(243, 146, 0, 0.05);
+}
+
+/* ACCIONES (USER & CART) */
+.actions-box {
   display: flex;
-  align-items: center;
   gap: 15px;
+  align-items: center;
 }
 
-/* --- CLAVE PARA EL DESPLEGABLE --- */
-.user-dropdown-wrapper {
-  position: relative; /* Esto hace que el menú se posicione RESPECTO al botón */
-}
-
-.user-trigger {
+.user-pill {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #f4f4f4;
+  background: #f5f5f7;
   padding: 8px 18px;
-  border-radius: 30px;
+  border-radius: 50px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
-}
-
-.user-trigger:hover {
-  background: #ebebeb;
-}
-
-.cart-pill {
-  background: #0d1117;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* --- MENÚ DESPLEGABLE CORREGIDO --- */
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 10px); /* Justo debajo del botón con un pequeño margen */
-  left: 0;                /* Alineado al inicio del nombre */
-  background: white;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  border-radius: 12px;
-  z-index: 1000;
-  min-width: 180px;
-  overflow: hidden;
+  position: relative;
+  transition: 0.3s;
   border: 1px solid #eee;
 }
 
-.dropdown-menu ul { 
-  list-style: none; 
-  padding: 0; 
-  margin: 0; 
+.user-pill:hover {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.dropdown-menu li { 
-  padding: 12px 20px; 
-  border-bottom: 1px solid #f5f5f5; 
-  cursor: pointer; 
-  color: #333;
-  font-size: 14px;
-  transition: all 0.2s;
+.user-name {
+  font-weight: 600;
+  color: #222;
+  font-size: 0.9rem;
 }
 
-.dropdown-menu li:last-child {
-  border-bottom: none;
+/* CARRITO NEGRO */
+.cart-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #0d1117;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.dropdown-menu li:hover { 
-  background: #fff5e6; /* Fondo naranja muy suave */
-  color: #f39200;      /* Texto naranja */
+.cart-pill:hover {
+  transform: translateY(-2px);
+  background: #1a222c;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
-.logout { 
-  color: #e74c3c !important; /* Rojo para cerrar sesión */
-  font-weight: bold;
+.cart-img {
+  height: 22px;
+  filter: brightness(0) invert(1); /* Pone el carro blanco pa' que resalte */
 }
 
-.logout:hover {
-  background: #fdf2f2 !important;
+.cart-amount {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* DROPDOWN FANCY */
+.dropdown-fancy {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: white;
+  min-width: 200px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  animation: slideDown 0.3s ease-out;
+}
+
+.dropdown-fancy a {
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #444;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.dropdown-fancy a:hover {
+  background: #f9f9f9;
+  color: #f39200;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

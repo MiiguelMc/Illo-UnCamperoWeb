@@ -1,37 +1,57 @@
 <main class="content">
-    <!-- HERO BANNER (Se queda igual) -->
-    <section class="hero-section">  </section>
-
-
-    <!-- MENU SECTION: Campero -->
-    <section class="menu-group" *ngIf="campero.length > 0">
-        <h3>Campero</h3>
-        <div class="product-grid">
-            <!-- Llamamos al componente hijo por cada burger de la lista -->
-            <app-producto-item 
-                *ngFor="let b of campero" 
-                [producto]="b">
-            </app-producto-item>
+    <!-- HERO SECTION (Diseño pro) -->
+    <section class="hero-section">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <span class="badge-promo">🔥 OFERTA DE BIENVENIDA</span>
+                <h1>El auténtico sabor del <span class="highlight-text">Campero Malagueño</span></h1>
+                <p>Pide ahora y recíbelo en menos de 30 minutos.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" (click)="scrollTo('sec-camperos')">Ver Menú</button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Puedes repetir lo mismo para patatas, etc. -->
-    <section class="menu-group" *ngIf="patatas.length > 0">
-        <h3>Patatas</h3>
-        <div class="product-grid">
-            <app-producto-item *ngFor="let p of patatas" [producto]="p"></app-producto-item>
-        </div>
-    </section>
+    <!-- FILTROS (Basados en tu carta) -->
+    <nav class="categories-nav">
+        <div class="cat-item" [class.active]="categoriaActiva === 'sec-entrantes'" (click)="scrollTo('sec-entrantes')">🍟 Entrantes</div>
+        <div class="cat-item" [class.active]="categoriaActiva === 'sec-camperos'" (click)="scrollTo('sec-camperos')">🍔 Camperos</div>
+        <div class="cat-item" [class.active]="categoriaActiva === 'sec-postres'" (click)="scrollTo('sec-postres')">🍰 Postres</div>
+        <div class="cat-item" [class.active]="categoriaActiva === 'sec-bebidas'" (click)="scrollTo('sec-bebidas')">🥤 Bebidas</div>
+    </nav>
 
-    <!-- MENU SECTION: Ensaladas -->
-    <section class="menu-group" *ngIf="ensaladas.length > 0">
-        <h3>Ensaladas</h3>
-        <div class="product-grid">
-            <!-- Llamamos al componente hijo por cada burger de la lista -->
-            <app-producto-item 
-                *ngFor="let b of ensaladas" 
-                [producto]="b">
-            </app-producto-item>
-        </div>
-    </section>
+    <div class="menu-container">
+        <!-- SECCIÓN ENTRANTES -->
+        <section id="sec-entrantes" class="menu-group" *ngIf="entrantes.length > 0">
+            <div class="section-header"><h3>Entrantes</h3></div>
+            <div class="product-grid">
+                <app-producto-item *ngFor="let p of entrantes" [producto]="p"></app-producto-item>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CAMPEROS -->
+        <section id="sec-camperos" class="menu-group" *ngIf="camperos.length > 0">
+            <div class="section-header"><h3>Nuestros Camperos</h3></div>
+            <div class="product-grid">
+                <app-producto-item *ngFor="let p of camperos" [producto]="p"></app-producto-item>
+            </div>
+        </section>
+
+        <!-- SECCIÓN POSTRES -->
+        <section id="sec-postres" class="menu-group" *ngIf="postres.length > 0">
+            <div class="section-header"><h3>Postres</h3></div>
+            <div class="product-grid">
+                <app-producto-item *ngFor="let p of postres" [producto]="p"></app-producto-item>
+            </div>
+        </section>
+
+        <!-- SECCIÓN BEBIDAS -->
+        <section id="sec-bebidas" class="menu-group" *ngIf="bebidas.length > 0">
+            <div class="section-header"><h3>Bebidas</h3></div>
+            <div class="product-grid">
+                <app-producto-item *ngFor="let p of bebidas" [producto]="p"></app-producto-item>
+            </div>
+        </section>
+    </div>
 </main>

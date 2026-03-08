@@ -19,3 +19,49 @@ html, body {
 * {
   box-sizing: border-box;
 }
+/* --- ESTILOS PARA EL POP-UP PERSONALIZADO --- */
+
+/* Botón Registrarse (Negro como tu .login-pill) */
+.pop-btn-negro {
+  background: #0d1117 !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 25px !important;
+  border-radius: 30px !important;
+  font-weight: bold !important;
+  cursor: pointer;
+  margin: 10px;
+  min-width: 120px;
+  transition: 0.3s;
+}
+
+/* Botón Ahora no (Blanco con sombra como tu .btn-register) */
+.pop-btn-blanco {
+  background: white !important;
+  color: black !important;
+  border: none !important;
+  padding: 10px 25px !important;
+  border-radius: 30px !important;
+  font-weight: bold !important;
+  cursor: pointer;
+  margin: 10px;
+  min-width: 120px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1) !important;
+  transition: 0.3s;
+}
+
+/* Redondear el cuerpo del pop-up */
+.pop-redondeado {
+  border-radius: 20px !important;
+}
+
+/* Hover para los botones */
+.pop-btn-negro:hover, .pop-btn-blanco:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Color de la X al pasar el ratón */
+.swal2-close:hover {
+  color: #f39200 !important;
+}

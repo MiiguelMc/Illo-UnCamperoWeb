@@ -7,32 +7,48 @@ import { ProductoItemComponent } from '../producto-item/producto-item';
 @Component({
   selector: 'app-restaurante',
   standalone: true,
-  imports: [CommonModule, ProductoItemComponent], // Importamos el hijo aquí
+  imports: [CommonModule, ProductoItemComponent],
   templateUrl: './restaurantes.html',
   styleUrls: ['./restaurantes.css']
 })
 export class RestauranteComponent implements OnInit {
   private productoService = inject(ProductoService);
 
-  // Listas para cada categoría que tienes en el HTML
-  campero: Producto[] = [];
-  patatas: Producto[] = [];
-  ensaladas: Producto[] = [];
+  // Listas filtradas
+  camperos: Producto[] = [];
+  entrantes: Producto[] = [];
+  postres: Producto[] = [];
   bebidas: Producto[] = [];
-  pizzas: Producto[] = [];
+
+  categoriaActiva: string = '';
 
   ngOnInit() {
     this.productoService.obtenerProductos().subscribe({
       next: (productos) => {
-        // Filtramos los productos que vienen de la BD por su categoría
-        // Asegúrate de que en Firebase la categoría se llame igual que aquí
-        this.campero = productos.filter(p => p.categoria.toLowerCase() === 'campero');
-        this.patatas = productos.filter(p => p.categoria.toLowerCase() === 'patatas');
-        this.ensaladas = productos.filter(p => p.categoria.toLowerCase() === 'ensalada');
-        this.bebidas = productos.filter(p => p.categoria.toLowerCase() === 'bebidas');
-        this.pizzas = productos.filter(p => p.categoria.toLowerCase() === 'pizzas');
+        // Usamos la misma lógica que os funciona en la carta (.includes es más seguro)
+        this.camperos = productos.filter(p => p.categoria.toLowerCase().includes('campero'));
+        this.entrantes = productos.filter(p => p.categoria.toLowerCase().includes('entrant'));
+        this.postres = productos.filter(p => p.categoria.toLowerCase().includes('postre'));
+        this.bebidas = productos.filter(p => p.categoria.toLowerCase().includes('bebida'));
+        
+        console.log("Productos filtrados:", { 
+          camperos: this.camperos.length, 
+          entrantes: this.entrantes.length, 
+          postres: this.postres.length, 
+          bebidas: this.bebidas.length 
+        });
       },
       error: (err) => console.error("Error cargando productos", err)
     });
+  }
+
+  scrollTo(id: string) {
+    this.categoriaActiva = id;
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -100; 
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
   }
 }

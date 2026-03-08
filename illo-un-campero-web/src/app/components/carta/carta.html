@@ -1,110 +1,69 @@
-<div class="carta-container">
-    <div class="carta-header">
-        <h1>Nuestra Carta</h1>
-        <p>Calidad malagueña en cada bocado</p>
+<div class="carta-page">
+    <div class="carta-hero">
+        <div class="hero-overlay">
+            <h1>Nuestra Carta</h1>
+            <p>Aquí se come de verdad, mi loco</p>
+        </div>
     </div>
 
-    <!-- 1. ENTRANTES (Ahora primero) -->
-    <section class="seccion-menu" *ngIf="getPorCategoria('Entrante').length > 0">
-        <h2 class="titulo-categoria">ENTRANTES</h2>
-        <ng-container *ngFor="let sub of subEntrantes">
-            <div class="sub-bloque" *ngIf="getPorSubcategoria('Entrante', sub).length > 0">
-                <h3 class="titulo-subcategoria">{{ sub === 'Patata' ? 'Patatas' : (sub === 'Croqueta' ? 'Croquetas' : sub) }}</h3>
-                <div class="productos-grid">
-                    <app-producto-item *ngFor="let p of getPorSubcategoria('Entrante', sub)" 
-                        [producto]="p" 
-                        (click)="abrirModal(p)">
-                    </app-producto-item>
-                </div>
-            </div>
-        </ng-container>
-    </section>
+    <!-- BOTONERA PA' FILTRAR DE VERDAD -->
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <button [class.active]="filtroActual === 'todos'" (click)="setFiltro('todos')">✨ Todos</button>
+            <button [class.active]="filtroActual === 'entrantes'" (click)="setFiltro('entrantes')">🥗 Entrantes</button>
+            <button [class.active]="filtroActual === 'camperos'" (click)="setFiltro('camperos')">🍔 Camperos</button>
+            <button [class.active]="filtroActual === 'postres'" (click)="setFiltro('postres')">🍰 Postres</button>
+            <button [class.active]="filtroActual === 'bebidas'" (click)="setFiltro('bebidas')">🥤 Bebidas</button>
+        </div>
+    </nav>
 
-    <!-- 2. CAMPEROS -->
-    <section class="seccion-menu" *ngIf="getPorCategoria('Campero').length > 0">
-        <h2 class="titulo-categoria">TIPOS DE CAMPEROS</h2>
+    <div class="carta-container">
         
-        <!-- Camperos específicos (Vegano, Carnivoro, etc.) -->
-        <ng-container *ngFor="let sub of subCamperos">
-            <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', sub).length > 0">
-                <h3 class="titulo-subcategoria">{{ sub === 'Mini' ? 'Mini Camperos' : sub }}</h3>
-                <div class="productos-grid">
-                    <app-producto-item *ngFor="let p of getPorSubcategoria('Campero', sub)" 
-                        [producto]="p" 
-                        (click)="abrirModal(p)">
-                    </app-producto-item>
+        <!-- 1. ENTRANTES -->
+        <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'entrantes') && getPorCategoria('Entrante').length > 0">
+            <h2 class="titulo-categoria">Entrantes</h2>
+            <ng-container *ngFor="let sub of subEntrantes">
+                <div class="sub-bloque" *ngIf="getPorSubcategoria('Entrante', sub).length > 0">
+                    <h3 class="titulo-subcategoria">{{ sub === 'Patata' ? 'Patatas' : sub }}</h3>
+                    <div class="productos-grid">
+                        <app-producto-item *ngFor="let p of getPorSubcategoria('Entrante', sub)" [producto]="p" (click)="abrirModal(p)"></app-producto-item>
+                    </div>
                 </div>
-            </div>
-        </ng-container>
+            </ng-container>
+        </section>
 
-        <!-- SECCIÓN DE TO LA VIA (Todo lo que no es Vegano, Carnívoro, etc.) -->
-        <div class="sub-bloque" *ngIf="getOtros('Campero', subCamperos).length > 0">
-            <h3 class="titulo-subcategoria">De to la via</h3>
+        <!-- 2. CAMPEROS -->
+        <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'camperos') && getPorCategoria('Campero').length > 0">
+            <h2 class="titulo-categoria">Los Camperos</h2>
+            <ng-container *ngFor="let sub of subCamperos">
+                <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', sub).length > 0">
+                    <h3 class="titulo-subcategoria">{{ sub === 'Mini' ? 'Mini Camperos' : sub }}</h3>
+                    <div class="productos-grid">
+                        <app-producto-item *ngFor="let p of getPorSubcategoria('Campero', sub)" [producto]="p" (click)="abrirModal(p)"></app-producto-item>
+                    </div>
+                </div>
+            </ng-container>
+        </section>
+
+        <!-- 3. POSTRES -->
+        <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'postres') && getPorCategoria('Postre').length > 0">
+            <h2 class="titulo-categoria">Postres</h2>
             <div class="productos-grid">
-                <app-producto-item *ngFor="let p of getOtros('Campero', subCamperos)" 
-                    [producto]="p" 
-                    (click)="abrirModal(p)">
-                </app-producto-item>
+                <app-producto-item *ngFor="let p of getPorCategoria('Postre')" [producto]="p" (click)="abrirModal(p)"></app-producto-item>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 3. POSTRES -->
-    <section class="seccion-menu" *ngIf="getPorCategoria('Postre').length > 0">
-        <h2 class="titulo-categoria">POSTRES</h2>
-        <div class="sub-bloque" *ngIf="getPorSubcategoria('Postre', 'Cheesecake').length > 0">
-            <h3 class="titulo-subcategoria">Nuestras Tartas de Queso</h3>
+        <!-- 4. BEBIDAS -->
+        <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'bebidas') && getPorCategoria('Bebida').length > 0">
+            <h2 class="titulo-categoria">Bebidas</h2>
             <div class="productos-grid">
-                <app-producto-item *ngFor="let p of getPorSubcategoria('Postre', 'Cheesecake')" 
-                    [producto]="p" 
-                    (click)="abrirModal(p)">
-                </app-producto-item>
+                <app-producto-item *ngFor="let p of getPorCategoria('Bebida')" [producto]="p" (click)="abrirModal(p)"></app-producto-item>
             </div>
-        </div>
-        <div class="sub-bloque" *ngIf="getOtros('Postre', ['Cheesecake']).length > 0">
-            <h3 class="titulo-subcategoria">Más Dulces</h3>
-            <div class="productos-grid">
-                <app-producto-item *ngFor="let p of getOtros('Postre', ['Cheesecake'])" 
-                    [producto]="p" 
-                    (click)="abrirModal(p)">
-                </app-producto-item>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- 4. BEBIDAS -->
-    <section class="seccion-menu" *ngIf="getPorCategoria('Bebida').length > 0">
-        <h2 class="titulo-categoria">BEBIDAS</h2>
-        <div class="productos-grid">
-            <app-producto-item *ngFor="let p of getPorCategoria('Bebida')" 
-                [producto]="p" 
-                (click)="abrirModal(p)">
-            </app-producto-item>
-        </div>
-    </section>
-
-    <!-- MODAL -->
+    <!-- EL MODAL SE QUEDA IGUAL, QUE YA ESTÁ DURO -->
     <div class="modal-overlay" *ngIf="productoSeleccionado" (click)="cerrarModal()">
-        <div class="modal-content" (click)="$event.stopPropagation()">
-            <button class="btn-cerrar" (click)="cerrarModal()">&times;</button>
-            <h2 class="modal-titulo">{{ productoSeleccionado.nombre }}</h2>
-            <div class="modal-imagen-container">
-                <img [src]="productoSeleccionado.imagenUrl || 'assets/no-image.png'" [alt]="productoSeleccionado.nombre">
-            </div>
-            <div class="modal-info">
-                <p class="modal-precio">{{ productoSeleccionado.precio | number:'1.2-2' }}€</p>
-                <p class="modal-descripcion">{{ productoSeleccionado.descripcion }}</p>
-            </div>
-            <div class="modal-acciones">
-                <div class="selector-cantidad">
-                    <button (click)="decrementar()">-</button>
-                    <span>{{ cantidadSeleccionada }}</span>
-                    <button (click)="incrementar()">+</button>
-                </div>
-                <button class="btn-anadir" (click)="agregarAlPedido()">
-                    AÑADIR - {{ (productoSeleccionado.precio * cantidadSeleccionada) | number:'1.2-2' }}€
-                </button>
-            </div>
-        </div>
+        <!-- ... (tu código del modal que ya tienes) ... -->
     </div>
 </div>

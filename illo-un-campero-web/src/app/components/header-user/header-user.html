@@ -1,45 +1,43 @@
-<nav class="main-nav">
-  <div class="container flex-row">
-
-    <a routerLink="/restaurantes" class="logo">
+<nav class="main-header">
+  <div class="header-container">
+    
+    <!-- LOGO CON PIQUETE -->
+    <a routerLink="/restaurantes" class="logo-box">
       <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
     </a>
 
-    <ul class="nav-links">
-      <li routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</li>
-
-      <li routerLink="/carta" routerLinkActive="active">Carta</li>
-
-      <li routerLink="/tu-pedido" routerLinkActive="active">Tu pedido</li>
+    <!-- LINKS CON FLOW -->
+    <ul class="nav-menu">
+      <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+      <li><a routerLink="/carta" routerLinkActive="active">Carta</a></li>
+      <li><a routerLink="/carrito" routerLinkActive="active">Tu pedido</a></li>
     </ul>
 
-    <div class="auth-container">
-      <div class="user-dropdown-wrapper">
-        <div class="user-trigger" (click)="toggleMenu()">
-          <span class="avatar-icon">👤</span>
-          <span class="user-name">{{ (user$ | async)?.nombre }}</span>
-        </div>
-
+    <!-- ACCIONES DEL USUARIO -->
+    <div class="actions-box">
+      <div class="user-pill" (click)="toggleMenu()">
+        <span class="user-icon">👤</span>
+        <span class="user-name">{{ (user$ | async)?.nombre }}</span>
+        
+        <!-- DROPDOWN MEJORADO -->
         @if (isMenuOpen) {
-        <div class="dropdown-menu">
-          <ul>
-            <li routerLink="/perfil" (click)="isMenuOpen = false">Configuración</li>
-            
-            <!-- Enlace a Mis Pedidos añadido aquí -->
-            <li routerLink="/mis-pedidos" (click)="isMenuOpen = false">Mis Pedidos</li>
-            
-            <li class="logout" (click)="logout(); isMenuOpen = false">Cerrar sesión</li>
-          </ul>
-        </div>
+          <div class="dropdown-fancy">
+            <a routerLink="/perfil" (click)="isMenuOpen = false">⚙️ Configuración</a>
+            <a routerLink="/mis-pedidos" (click)="isMenuOpen = false">📦 Mis Pedidos</a>
+            <hr>
+            <a class="logout-link" (click)="logout()">🚪 Cerrar sesión</a>
+          </div>
         }
       </div>
 
+      <!-- CARRITO PREMIUM -->
       <div class="cart-pill" routerLink="/carrito">
-        <img src="assets/carro.webp" class="img-carrito-fija">
-        <i class="fas fa-shopping-cart"></i>
-        <!-- Se actualizará automáticamente -->
-        {{ carritoService.totalPrecio() | number:'1.2-2' }}€
+        <div class="cart-icon-box">
+           <img src="assets/carro.webp" class="cart-img">
+        </div>
+        <span class="cart-amount">{{ carritoService.totalPrecio() | number:'1.2-2' }}€</span>
       </div>
     </div>
+
   </div>
 </nav>

@@ -6,14 +6,15 @@
     </a>
 
     <ul class="nav-links">
-      <!-- Inicio: exact: true para que solo sea naranja en la home -->
       <li routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</li>
-
-      <!-- Carta: Se pondrá naranja automáticamente al entrar en /carta -->
       <li routerLink="/carta" routerLinkActive="active">Carta</li>
 
-      <!-- Tu pedido -->
-      <li routerLink="/tu-pedido" routerLinkActive="active">Tu pedido</li>
+      <!-- Sección con la nueva función -->
+      <li (click)="comprobarPedido()" 
+          style="cursor: pointer;"
+          [class.active]="router.url === '/tu-pedido'">
+          Tu pedido
+      </li>
     </ul>
 
     <div class="auth-container">

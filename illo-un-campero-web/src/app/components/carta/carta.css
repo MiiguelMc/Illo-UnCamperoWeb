@@ -1,261 +1,271 @@
-.carta-container {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 40px 20px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+.carta-page {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    min-height: 100vh;
 }
 
-.carta-header {
+/* HERO HEADER */
+.carta-hero {
+    background-image: url('https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1965&auto=format&fit=crop'); /* Puedes cambiarla por una tuya */
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    position: relative;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
     text-align: center;
-    margin-bottom: 60px;
 }
 
-.carta-header h1 {
-    color: #f39200;
-    font-size: 3rem;
+.hero-overlay h1 {
+    font-size: 4rem;
     font-weight: 800;
+    margin: 0;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
 
-.seccion-menu {
-    margin-bottom: 80px;
+.hero-overlay p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* STICKY NAV */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.nav-container button {
+    background: transparent;
+    border: 1px solid #eee;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-container button.active {
+    background: #f39200;
+    color: white;
+    border-color: #f39200;
+    transform: scale(1.1);
+}
+
+/* CONTENEDOR CARTA */
+.carta-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.categoria-header {
+    margin-bottom: 40px;
 }
 
 .titulo-categoria {
-    font-size: 2.2rem;
-    color: #222;
-    border-bottom: 4px solid #f39200;
-    display: inline-block;
-    margin-bottom: 30px;
+    font-size: 2.8rem;
+    color: #1a1a1a;
+    font-weight: 800;
+    margin-bottom: 5px;
     text-transform: uppercase;
 }
 
-.sub-bloque {
-    margin-bottom: 40px;
+.linea-adorno {
+    width: 80px;
+    height: 6px;
+    background: #f39200;
+    border-radius: 10px;
 }
 
 .titulo-subcategoria {
     font-size: 1.6rem;
-    color: #555;
-    margin: 20px 0;
+    color: #444;
+    margin: 30px 0 20px 0;
     padding-left: 15px;
     border-left: 5px solid #f39200;
 }
 
 .productos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 30px;
-    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
 }
 
-.loading {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #999;
-    padding: 100px;
-}
-
-/* ==========================================
-   ESTILOS DEL MODAL (POP-UP)
-   ========================================== */
-
-/* ==========================================
-   ESTILOS DEL MODAL (ESTILO CARTA REAL)
-   ========================================== */
-
-/* Fondo semi-transparente para centrar la atención */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Oscurece el fondo suavemente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    padding: 20px;
-    backdrop-filter: blur(3px);
-    /* Desenfoque suave para estilo moderno */
-}
-
-/* Tarjeta del modal con los colores de tu web */
-.modal-content {
-    background-color: #ffffff;
-    /* Fondo blanco como tu carta */
-    width: 100%;
-    max-width: 550px;
-    border-radius: 8px;
-    /* Bordes menos redondeados, más limpios */
-    border-top: 8px solid #f39200;
-    /* Detalle naranja arriba, como tus títulos */
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    animation: slideUp 0.3s ease-out;
-}
-
-/* Botón de cerrar (X) en naranja */
-.btn-cerrar {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    color: #f39200;
-    /* Naranja corporativo */
-    font-size: 30px;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 1;
-    transition: color 0.2s;
-}
-
-.btn-cerrar:hover {
-    color: #222;
-    /* Cambia a gris oscuro al pasar el ratón */
-}
-
-/* Título en el gris de tus categorías */
-.modal-titulo {
-    color: #222;
-    font-size: 1.8rem;
-    padding: 30px 20px 15px 20px;
-    margin: 0;
-    font-weight: 800;
-    text-transform: uppercase;
-}
-
-/* Imagen con el estilo de tus items */
-.modal-imagen-container {
-    width: 85%;
-    margin: 0 auto;
-    border-radius: 4px;
-    overflow: hidden;
-    border: 1px solid #eee;
-}
-
-.modal-imagen-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Precio en naranja para que destaque */
-.modal-precio {
-    color: #f39200;
-    /* Naranja corporativo */
-    font-size: 2rem;
-    font-weight: 800;
-    margin: 20px 0 10px 0;
-}
-
-/* Descripción en el gris de tus subcategorías */
-.modal-descripcion {
-    color: #555;
-    /* Mismo color que usas en .titulo-subcategoria */
-    font-size: 1.1rem;
-    padding: 0 40px 40px 40px;
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* Animación de deslizamiento hacia arriba */
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Ajuste para que los productos de la rejilla parezcan clickables */
+/* EFECTO EN LOS ITEMS */
 app-producto-item {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
 }
 
 app-producto-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
 }
 
-/* Contenedor de botones en el modal */
-.modal-acciones {
-    padding: 20px 40px 40px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-/* Selector de cantidad (- 1 +) */
-.selector-cantidad {
-    display: flex;
-    align-items: center;
-    background: #f8f8f8;
-    border-radius: 50px;
-    padding: 5px;
-    border: 1px solid #ddd;
-}
-
-.selector-cantidad button {
-    background: white;
-    border: 1px solid #ddd;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #f39200;
+/* MODAL MODERNO */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.2s;
+    z-index: 2000;
+    padding: 20px;
 }
 
-.selector-cantidad button:hover {
-    background: #f39200;
-    color: white;
-    border-color: #f39200;
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    animation: zoomIn 0.3s ease-out;
+}
+
+.btn-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(0,0,0,0.1);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-img-box {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.modal-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-text {
+    padding: 30px;
+    text-align: center;
+}
+
+.modal-titulo {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.modal-descripcion {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.modal-precio-unitario {
+    font-weight: 600;
+    color: #f39200;
+}
+
+.modal-footer {
+    padding: 0 30px 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.selector-cantidad {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 8px;
+    border-radius: 50px;
+}
+
+.selector-cantidad button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f39200;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .selector-cantidad span {
-    padding: 0 20px;
-    font-size: 1.3rem;
-    font-weight: bold;
-    min-width: 50px;
-    color: #222;
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 0 25px;
 }
 
-/* Botón Añadir al Pedido */
 .btn-anadir {
-    background-color: #f39200;
+    width: 100%;
+    background: #f39200;
     color: white;
     border: none;
-    padding: 15px 30px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: bold;
+    padding: 18px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-weight: 800;
     cursor: pointer;
-    width: 100%;
-    transition: background 0.3s ease;
-    text-transform: uppercase;
-    box-shadow: 0 4px 15px rgba(243, 146, 0, 0.3);
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(243, 146, 0, 0.3);
 }
 
 .btn-anadir:hover {
-    background-color: #d88200;
-    /* Un naranja un poco más oscuro */
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(243, 146, 0, 0.4);
 }
 
-.btn-anadir:active {
-    transform: translateY(0);
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .nav-container { overflow-x: auto; padding-bottom: 5px; }
+    .hero-overlay h1 { font-size: 2.5rem; }
+    .titulo-categoria { font-size: 2rem; }
 }
