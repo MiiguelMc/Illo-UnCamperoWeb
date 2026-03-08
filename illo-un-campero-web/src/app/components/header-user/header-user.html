@@ -1,41 +1,78 @@
-<nav class="main-header">
+<nav class="main-header anim-entrance">
   <div class="header-container">
     
-    <!-- LOGO CON PIQUETE -->
-    <a routerLink="/restaurantes" class="logo-box">
-      <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
-    </a>
+    <!-- 1. LADO IZQUIERDO: LOGO -->
+    <div class="header-left">
+      <a routerLink="/restaurantes" class="logo-box" (click)="menuMovilAbierto = false">
+        <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
+      </a>
+    </div>
 
-    <!-- LINKS CON FLOW -->
-    <ul class="nav-menu">
-      <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
-      <li><a routerLink="/carta" routerLinkActive="active">Carta</a></li>
-      <li><a routerLink="/carrito" routerLinkActive="active">Tu pedido</a></li>
-    </ul>
+    <!-- 2. CENTRO: LINKS PC (Centradito nivel Dios) -->
+    <div class="header-center desktop-only">
+      <ul class="nav-menu">
+        <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+        <li><a routerLink="/carta" routerLinkActive="active">Carta</a></li>
+        <li><a routerLink="/carrito" routerLinkActive="active">Tu pedido</a></li>
+      </ul>
+    </div>
 
-    <!-- ACCIONES DEL USUARIO -->
-    <div class="actions-box">
-      <div class="user-pill" (click)="toggleMenu()">
-        <span class="user-icon">👤</span>
-        <span class="user-name">{{ (user$ | async)?.nombre }}</span>
+    <!-- 3. LADO DERECHO: ACCIONES -->
+    <div class="header-right">
+      <div class="actions-wrapper">
         
-        <!-- DROPDOWN MEJORADO -->
-        @if (isMenuOpen) {
-          <div class="dropdown-fancy">
-            <a routerLink="/perfil" (click)="isMenuOpen = false">⚙️ Configuración</a>
-            <a routerLink="/mis-pedidos" (click)="isMenuOpen = false">📦 Mis Pedidos</a>
-            <hr>
-            <a class="logout-link" (click)="logout()">🚪 Cerrar sesión</a>
+        <!-- PERFIL USUARIO (Solo PC) -->
+        <div class="user-pill-container desktop-only">
+          <div class="user-pill" (click)="toggleMenu($event)" [class.active]="isMenuOpen">
+            <span class="user-icon">👤</span>
+            <span class="user-name">{{ (user$ | async)?.nombre }}</span>
           </div>
-        }
-      </div>
-
-      <!-- CARRITO PREMIUM -->
-      <div class="cart-pill" routerLink="/carrito">
-        <div class="cart-icon-box">
-           <img src="assets/carro.webp" class="cart-img">
+          
+          <!-- DROPDOWN PC -->
+          <div class="dropdown-fancy" *ngIf="isMenuOpen">
+            <a routerLink="/perfil" (click)="isMenuOpen = false">⚙️ Perfil</a>
+            <a routerLink="/mis-pedidos" (click)="isMenuOpen = false">📦 Mis Pedidos</a>
+            <hr class="dropdown-divider">
+            <a class="logout-link" (click)="logout()">🚪 Salir</a>
+          </div>
         </div>
-        <span class="cart-amount">{{ carritoService.totalPrecio() | number:'1.2-2' }}€</span>
+
+        <!-- CARRITO (PC y Móvil siempre activo) -->
+        <div class="cart-pill" routerLink="/carrito" (click)="menuMovilAbierto = false">
+          <img src="assets/carro.webp" class="cart-img">
+          <span class="cart-amount">{{ carritoService.totalPrecio() | number:'1.2-2' }}€</span>
+        </div>
+
+        <!-- BOTÓN HAMBURGUESA (Solo Celular) -->
+        <button class="hamburger-btn mobile-only" (click)="toggleMobileMenu()" [class.active]="menuMovilAbierto">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. OVERLAY MÓVIL (AQUÍ ESTÁ EL TRUCO: Solo existe si se abre) -->
+    <div class="mobile-overlay" [class.open]="menuMovilAbierto" *ngIf="menuMovilAbierto">
+      <button class="close-mobile-btn" (click)="toggleMobileMenu()">✕</button>
+      
+      <div class="mobile-content">
+        <div class="user-header-mobile">
+          <span class="avatar-big">👤</span>
+          <h3>¡Dímelo, {{ (user$ | async)?.nombre }}!</h3>
+        </div>
+        
+        <ul class="mobile-nav">
+          <li><a routerLink="/restaurantes" (click)="toggleMobileMenu()">🏠 Inicio</a></li>
+          <li><a routerLink="/carta" (click)="toggleMobileMenu()">📜 La Carta</a></li>
+          <li><a routerLink="/carrito" (click)="toggleMobileMenu()">🛒 Mi Pedido</a></li>
+          <li><a routerLink="/mis-pedidos" (click)="toggleMobileMenu()">📦 Mis Compras</a></li>
+          <li><a routerLink="/perfil" (click)="toggleMobileMenu()">⚙️ Ajustes</a></li>
+        </ul>
+
+        <div class="mobile-footer">
+          <button class="btn-logout-mobile" (click)="logout()">🚪 Cerrar sesión</button>
+        </div>
       </div>
     </div>
 

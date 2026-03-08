@@ -11,29 +11,36 @@ import Swal from 'sweetalert2';
   styleUrls: ['./header.css']
 })
 export class Header {
-  public router = inject(Router); // Para las clases activas
+  public router = inject(Router);
+  menuMovilAbierto = false;
+
+  // ESTA FUNCIÓN ABRE Y CIERRA EL CHIRINGUITO EN EL MÓVIL
+  toggleMenu() {
+    this.menuMovilAbierto = !this.menuMovilAbierto;
+  }
 
   comprobarPedido() {
-    // Al no estar logueado, soltamos el pop-up "Real hasta la muerte"
+    // Cerramos el menú del móvil antes de soltar el bombazo del pop-up
+    this.menuMovilAbierto = false;
+
     Swal.fire({
-      title: '<strong>¿Aún no te has registrado?</strong>',
-      text: 'Para gestionar tus pedidos echa un vistazo a nuestra zona de registro.',
+      title: '¡Epa, primo!',
+      text: 'Para poder ver tu pedido y que te llegue el campero a casa, primero tienes que registrarte en la familia.',
       icon: 'info',
       iconColor: '#f39200',
-      showCloseButton: true,
       showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonText: 'Registrarse',
-      cancelButtonText: 'Ahora no',
-      buttonsStyling: false,
+      confirmButtonText: '¡Me registro!',
+      cancelButtonText: 'Luego lo hago',
+      confirmButtonColor: '#f39200',
+      cancelButtonColor: '#0d1117',
+      heightAuto: false,
+      backdrop: `rgba(0,0,123,0.1)`, // Un toquecito de color al fondo para que resalte
       customClass: {
-        confirmButton: 'pop-btn-negro',   // Estas clases deben seguir en styles.css global
-        cancelButton: 'pop-btn-blanco',
-        popup: 'pop-redondeado'
-      },
-      heightAuto: false
+        popup: 'pop-redondeado' // Clase por si quieres redondearlo más en CSS
+      }
     }).then((result) => {
       if (result.isConfirmed) {
+        // Directo al bloque de registro, berraco
         this.router.navigate(['/registro']);
       }
     });

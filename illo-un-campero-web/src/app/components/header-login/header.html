@@ -1,37 +1,47 @@
 <nav class="main-header">
   <div class="header-container">
-    <!-- LOGO CON PIQUETE -->
-    <a routerLink="/restaurantes" class="logo-box">
-      <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo" />
-    </a>
-
-    <!-- LINKS CENTRALES -->
-    <ul class="nav-menu">
-      <li>
-        <a
-          routerLink="/restaurantes"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >Inicio</a
-        >
-      </li>
-      <li><a routerLink="/carta" routerLinkActive="active">Carta</a></li>
-      <!-- Tu pedido llama a la función del pop-up porque no hay sesión -->
-      <li>
-        <a
-          (click)="comprobarPedido()"
-          class="nav-link-btn"
-          [class.active]="router.url === '/tu-pedido'"
-        >
-          Tu pedido
-        </a>
-      </li>
-    </ul>
-
-    <!-- BOTONES DE ACCIÓN (Gemelos de la Home) -->
-    <div class="actions-box">
-      <button class="btn-login-black" routerLink="/login">Iniciar sesión</button>
-      <button class="btn-register-white" routerLink="/registro">Registrarse</button>
+    
+    <!-- IZQUIERDA: LOGO -->
+    <div class="header-left">
+      <a routerLink="/restaurantes" class="logo-box" (click)="menuMovilAbierto = false">
+        <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
+      </a>
     </div>
+
+    <!-- CENTRO: MENÚ PC -->
+    <div class="header-center">
+      <ul class="nav-menu">
+        <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+        <li><a routerLink="/carta" routerLinkActive="active">Carta</a></li>
+        <li><a (click)="comprobarPedido()" class="nav-link-btn">Tu pedido</a></li>
+      </ul>
+    </div>
+
+    <!-- DERECHA: ACCIONES PC -->
+    <div class="header-right">
+      <div class="actions-wrapper">
+        <button class="btn-login" routerLink="/login">Iniciar sesión</button>
+        <button class="btn-register" routerLink="/registro">Registrarse</button>
+      </div>
+      
+      <!-- BOTÓN MÓVIL (Solo sale en celular) -->
+      <button class="hamburger-btn" (click)="toggleMenu()">
+        <span>{{ menuMovilAbierto ? '✕' : '☰' }}</span>
+      </button>
+    </div>
+
+    <!-- DESPLEGABLE MÓVIL (Overlay con flow) -->
+    <div class="mobile-overlay" [class.open]="menuMovilAbierto">
+      <ul class="mobile-nav">
+        <li><a routerLink="/restaurantes" (click)="toggleMenu()" routerLinkActive="active">Inicio</a></li>
+        <li><a routerLink="/carta" (click)="toggleMenu()" routerLinkActive="active">Carta</a></li>
+        <li><a (click)="comprobarPedido(); toggleMenu()" class="nav-link-btn">Tu pedido</a></li>
+      </ul>
+      <div class="mobile-buttons">
+        <button class="btn-login" (click)="toggleMenu()" routerLink="/login">Iniciar sesión</button>
+        <button class="btn-register" (click)="toggleMenu()" routerLink="/registro">Registrarse</button>
+      </div>
+    </div>
+
   </div>
 </nav>

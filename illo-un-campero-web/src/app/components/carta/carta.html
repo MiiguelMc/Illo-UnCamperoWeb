@@ -1,12 +1,16 @@
 <div class="carta-page">
+    <!-- HERO HEADER -->
     <div class="carta-hero">
         <div class="hero-overlay">
             <h1>Nuestra Carta</h1>
-            <p>Aquí se come de verdad, mi loco</p>
+            <p>La grasa más dura de Málaga, oíste?</p>
+            <div class="search-container">
+                <input type="text" [(ngModel)]="textoBusqueda" placeholder="Busca tu campero favorito, berraco...">
+            </div>
         </div>
     </div>
 
-    <!-- BOTONERA PA' FILTRAR DE VERDAD -->
+    <!-- FILTROS -->
     <nav class="sticky-nav">
         <div class="nav-container">
             <button [class.active]="filtroActual === 'todos'" (click)="setFiltro('todos')">✨ Todos</button>
@@ -18,8 +22,7 @@
     </nav>
 
     <div class="carta-container">
-        
-        <!-- 1. ENTRANTES -->
+        <!-- SECCIÓN ENTRANTES -->
         <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'entrantes') && getPorCategoria('Entrante').length > 0">
             <h2 class="titulo-categoria">Entrantes</h2>
             <ng-container *ngFor="let sub of subEntrantes">
@@ -32,7 +35,7 @@
             </ng-container>
         </section>
 
-        <!-- 2. CAMPEROS -->
+        <!-- SECCIÓN CAMPEROS -->
         <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'camperos') && getPorCategoria('Campero').length > 0">
             <h2 class="titulo-categoria">Los Camperos</h2>
             <ng-container *ngFor="let sub of subCamperos">
@@ -45,7 +48,7 @@
             </ng-container>
         </section>
 
-        <!-- 3. POSTRES -->
+        <!-- SECCIÓN POSTRES -->
         <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'postres') && getPorCategoria('Postre').length > 0">
             <h2 class="titulo-categoria">Postres</h2>
             <div class="productos-grid">
@@ -53,7 +56,7 @@
             </div>
         </section>
 
-        <!-- 4. BEBIDAS -->
+        <!-- SECCIÓN BEBIDAS -->
         <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'bebidas') && getPorCategoria('Bebida').length > 0">
             <h2 class="titulo-categoria">Bebidas</h2>
             <div class="productos-grid">
@@ -62,8 +65,36 @@
         </section>
     </div>
 
-    <!-- EL MODAL SE QUEDA IGUAL, QUE YA ESTÁ DURO -->
+    <!-- EL MODAL SLIM PREMIUM - AQUÍ ESTÁ LA MAGIA -->
     <div class="modal-overlay" *ngIf="productoSeleccionado" (click)="cerrarModal()">
-        <!-- ... (tu código del modal que ya tienes) ... -->
+        <div class="modal-content-slim" (click)="$event.stopPropagation()">
+            
+            <button class="btn-close-minimal" (click)="cerrarModal()">✕</button>
+            
+            <div class="modal-hero-slim">
+                <img [src]="productoSeleccionado.imagenUrl || 'assets/no-image.png'" [alt]="productoSeleccionado.nombre">
+            </div>
+
+            <div class="modal-body-slim">
+                <div class="header-info-slim">
+                    <h2 class="product-title-slim">{{ productoSeleccionado.nombre }}</h2>
+                    <span class="price-badge-slim">{{ productoSeleccionado.precio | number:'1.2-2' }}€</span>
+                </div>
+                <div class="divider-slim"></div>
+                <p class="product-desc-slim">{{ productoSeleccionado.descripcion }}</p>
+            </div>
+
+            <div class="modal-footer-slim">
+                <div class="qty-control-slim">
+                    <button (click)="decrementar()">-</button>
+                    <span>{{ cantidadSeleccionada }}</span>
+                    <button (click)="incrementar()">+</button>
+                </div>
+                
+                <button class="btn-add-slim" (click)="agregarAlPedido()">
+                    AÑADIR AL PEDIDO • {{ (productoSeleccionado.precio * cantidadSeleccionada) | number:'1.2-2' }}€
+                </button>
+            </div>
+        </div>
     </div>
 </div>
