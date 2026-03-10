@@ -1,57 +1,77 @@
-import { Injectable, signal, computed } from '@angular/core';
-import { Producto } from '../../model/producto.model'; // Asegúrate de que la ruta es correcta
+import { Injectable, signal, computed, effect } from '@angular/core';
+import { Producto } from '../../model/producto.model';
 
 export interface ItemCarrito {
-    producto: Producto;
-    cantidad: number;
+  producto: Producto;
+  cantidad: number;
 }
 
-@Injectable({
-    providedIn: 'root'
-})
+const STORAGE_KEY = 'illo_carrito';
+
+@Injectable({ providedIn: 'root' })
 export class CarritoService {
-    // Estado privado del carrito
-    private _items = signal<ItemCarrito[]>([]);
 
-    // Signals computados (se actualizan solos)
-    items = computed(() => this._items());
+  private _items = signal<ItemCarrito[]>(this.cargarStorage());
 
-    totalPrecio = computed(() =>
-        this._items().reduce((acc, item) => acc + (item.producto.precio * item.cantidad), 0)
-    );
+  items = computed(() => this._items());
 
-    totalItems = computed(() =>
-        this._items().reduce((acc, item) => acc + item.cantidad, 0)
-    );
+  totalPrecio = computed(() =>
+    this._items().reduce((acc, item) => acc + (item.producto.precio * item.cantidad), 0)
+  );
 
-    agregar(producto: Producto, cantidad: number = 1) {
-        const actual = this._items();
-        const index = actual.findIndex(i => i.producto.id === producto.id || i.producto.nombre === producto.nombre);
+  totalItems = computed(() =>
+    this._items().reduce((acc, item) => acc + item.cantidad, 0)
+  );
 
-        if (index >= 0) {
-            actual[index].cantidad += cantidad;
-            this._items.set([...actual]);
-        } else {
-            this._items.set([...actual, { producto, cantidad }]);
-        }
+  constructor() {
+    effect(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this._items()));
+      } catch {
+        // localStorage no disponible, continuamos sin persistencia
+      }
+    });
+  }
+
+  private cargarStorage(): ItemCarrito[] {
+    try {
+      const guardado = localStorage.getItem(STORAGE_KEY);
+      return guardado ? JSON.parse(guardado) : [];
+    } catch {
+      return [];
     }
+  }
 
-    quitar(producto: Producto) {
-        const actual = this._items();
-        const index = actual.findIndex(i => i.producto.nombre === producto.nombre);
-        if (index >= 0) {
-            if (actual[index].cantidad > 1) {
-                actual[index].cantidad--;
-                this._items.set([...actual]);
-            } else {
-                this.eliminar(producto);
-            }
-        }
+  agregar(producto: Producto, cantidad: number = 1) {
+    const actual = this._items();
+    const index = actual.findIndex(i => i.producto.id === producto.id);
+    if (index >= 0) {
+      actual[index].cantidad += cantidad;
+      this._items.set([...actual]);
+    } else {
+      this._items.set([...actual, { producto, cantidad }]);
     }
+  }
 
-    eliminar(producto: Producto) {
-        this._items.set(this._items().filter(i => i.producto.nombre !== producto.nombre));
+  quitar(producto: Producto) {
+    const actual = this._items();
+    const index = actual.findIndex(i => i.producto.id === producto.id);
+    if (index >= 0) {
+      if (actual[index].cantidad > 1) {
+        actual[index].cantidad--;
+        this._items.set([...actual]);
+      } else {
+        this.eliminar(producto);
+      }
     }
+  }
 
-    vaciar() { this._items.set([]); }
+  eliminar(producto: Producto) {
+    this._items.set(this._items().filter(i => i.producto.id !== producto.id));
+  }
+
+  vaciar() {
+    this._items.set([]);
+    try { localStorage.removeItem(STORAGE_KEY); } catch { }
+  }
 }

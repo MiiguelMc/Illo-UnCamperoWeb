@@ -1,15 +1,15 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Auth } from '@angular/fire/auth';
-import { Producto } from '../../model/producto.model';
+import { Cupon, ValidacionCupon } from '../../model/cupon.model';
 
 @Injectable({ providedIn: 'root' })
-export class ProductoService {
+export class CuponService {
     private http = inject(HttpClient);
     private auth = inject(Auth);
-    private API_URL = 'https://illo-uncamperobackend.onrender.com/api/productos';
+    private API_URL = 'https://illo-uncamperobackend.onrender.com/api/cupones';
 
     private async getAuthHeaders(): Promise<HttpHeaders> {
         const user = this.auth.currentUser;
@@ -21,30 +21,34 @@ export class ProductoService {
         });
     }
 
-    obtenerProductos(): Observable<Producto[]> {
-        return this.http.get<Producto[]>(this.API_URL);
-    }
-
-    crearProducto(producto: Producto): Observable<string> {
+    validarCupon(codigo: string): Observable<ValidacionCupon> {
         return from(this.getAuthHeaders()).pipe(
             switchMap(headers =>
-                this.http.post(this.API_URL, producto, { headers, responseType: 'text' })
+                this.http.post<ValidacionCupon>(`${this.API_URL}/validar`, { codigo }, { headers })
             )
         );
     }
 
-    editarProducto(id: string, producto: Producto): Observable<string> {
+    listarCupones(): Observable<Cupon[]> {
         return from(this.getAuthHeaders()).pipe(
             switchMap(headers =>
-                this.http.put(`${this.API_URL}/${id}`, producto, { headers, responseType: 'text' })
+                this.http.get<Cupon[]>(this.API_URL, { headers })
             )
         );
     }
 
-    eliminarProducto(id: string): Observable<string> {
+    crearCupon(cupon: { codigo: string; descuento: number }): Observable<string> {
         return from(this.getAuthHeaders()).pipe(
             switchMap(headers =>
-                this.http.delete(`${this.API_URL}/${id}`, { headers, responseType: 'text' })
+                this.http.post(this.API_URL, cupon, { headers, responseType: 'text' })
+            )
+        );
+    }
+
+    desactivarCupon(id: string): Observable<string> {
+        return from(this.getAuthHeaders()).pipe(
+            switchMap(headers =>
+                this.http.patch(`${this.API_URL}/${id}/desactivar`, {}, { headers, responseType: 'text' })
             )
         );
     }

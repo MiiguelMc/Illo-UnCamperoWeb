@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, signal, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Pedido } from '../../../model/pedido.model';
 
@@ -9,54 +9,42 @@ import { Pedido } from '../../../model/pedido.model';
   templateUrl: './pedido-card-cocina.html',
   styleUrls: ['./pedido-card-cocina.css']
 })
-export class PedidoCardCocinaComponent implements OnInit {
+export class PedidoCardCocinaComponent implements OnInit, OnDestroy {
   @Input() pedido!: Pedido;
   @Input() accionTexto: string = 'Acción';
   @Input() accionColor: string = '#3498db';
-  
+
   @Output() onAccion = new EventEmitter<void>();
-  
+
   tiempoTranscurrido = signal('');
+  private intervaloId?: ReturnType<typeof setInterval>;
 
   ngOnInit() {
     this.calcularTiempoTranscurrido();
-    
-    // Actualizar tiempo cada minuto
-    setInterval(() => {
-      this.calcularTiempoTranscurrido();
-    }, 60000);
+    this.intervaloId = setInterval(() => this.calcularTiempoTranscurrido(), 60000);
+  }
+
+  ngOnDestroy() {
+    if (this.intervaloId) clearInterval(this.intervaloId);
   }
 
   calcularTiempoTranscurrido() {
-    const ahora = Date.now();
-    const diferencia = ahora - this.pedido.fecha;
-    
-    const minutos = Math.floor(diferencia / 60000);
+    const minutos = Math.floor((Date.now() - this.pedido.fecha) / 60000);
     const horas = Math.floor(minutos / 60);
-    
-    if (horas > 0) {
-      this.tiempoTranscurrido.set(`Hace ${horas}h ${minutos % 60}m`);
-    } else {
-      this.tiempoTranscurrido.set(`Hace ${minutos}m`);
-    }
+    this.tiempoTranscurrido.set(
+      horas > 0 ? `${horas}h ${minutos % 60}m` : `${minutos}m`
+    );
   }
 
   formatearHora(timestamp: number): string {
-    const fecha = new Date(timestamp);
-    return fecha.toLocaleTimeString('es-ES', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
+    return new Date(timestamp).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  esUrgente(): boolean {
+    return Math.floor((Date.now() - this.pedido.fecha) / 60000) > 30;
   }
 
   ejecutarAccion() {
     this.onAccion.emit();
-  }
-
-  // Determinar si el pedido es urgente (más de 30 minutos)
-  esUrgente(): boolean {
-    const diferencia = Date.now() - this.pedido.fecha;
-    const minutos = Math.floor(diferencia / 60000);
-    return minutos > 30;
   }
 }

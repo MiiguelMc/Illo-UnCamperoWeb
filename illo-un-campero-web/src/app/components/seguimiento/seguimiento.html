@@ -1,0 +1,95 @@
+<div class="seguimiento-wrapper">
+
+    <div class="seguimiento-header">
+        <button class="btn-volver" routerLink="/mis-pedidos">← Mis pedidos</button>
+        <h1>Seguimiento del pedido</h1>
+    </div>
+
+    <div class="spinner-container" *ngIf="cargando()">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+    </div>
+
+    <div class="error-box" *ngIf="error()">{{ error() }}</div>
+
+    <div class="seguimiento-card" *ngIf="pedido() && !cargando()">
+
+        <!-- Pedido cancelado -->
+        <div class="cancelado-box" *ngIf="esCancelado()">
+            <div class="cancelado-icon">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h2>Pedido cancelado</h2>
+            <p>El pedido #{{ idCorto(pedido()!.id!) }} ha sido cancelado.</p>
+            <button routerLink="/carta" class="btn-pedir-nuevo">Hacer un nuevo pedido</button>
+        </div>
+
+        <!-- Progreso normal -->
+        <div class="progreso-section" *ngIf="!esCancelado()">
+
+            <div class="pedido-ref">
+                <span>Pedido</span>
+                <strong>#{{ idCorto(pedido()!.id!) }}</strong>
+                <span class="hora-pedido">· {{ formatearHora(pedido()!.fecha) }}</span>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="progreso-barra">
+                <div class="barra-linea">
+                    <div class="barra-relleno"
+                         [style.width.%]="getEstadoActualIndex() >= 0 ? (getEstadoActualIndex() / (pasos.length - 1)) * 100 : 0">
+                    </div>
+                </div>
+
+                <div class="pasos-lista">
+                    <div class="paso"
+                         *ngFor="let paso of pasos; let i = index"
+                         [class.completado]="i <= getEstadoActualIndex()"
+                         [class.actual]="i === getEstadoActualIndex()">
+                        <div class="paso-circulo">
+                            <i class="fas fa-check" *ngIf="i < getEstadoActualIndex()"></i>
+                            <div class="punto-activo" *ngIf="i === getEstadoActualIndex()"></div>
+                        </div>
+                        <span class="paso-label">{{ paso.label }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Descripción del estado actual -->
+            <div class="estado-descripcion" *ngIf="getEstadoActualIndex() >= 0">
+                <p>{{ pasos[getEstadoActualIndex()].descripcion }}</p>
+                <span class="actualiza-info">Se actualiza cada 15 segundos</span>
+            </div>
+
+        </div>
+
+        <!-- Resumen del pedido -->
+        <div class="resumen-section">
+            <h3>Resumen</h3>
+            <div class="resumen-items">
+                <div class="resumen-item" *ngFor="let item of pedido()!.productos">
+                    <span class="item-cant">{{ item.cantidad }}x</span>
+                    <span class="item-nombre">{{ item.nombre }}</span>
+                    <span class="item-precio">{{ (item.cantidad * item.precioUnidad) | number:'1.2-2' }}€</span>
+                </div>
+            </div>
+            <div class="resumen-total">
+                <span>Total</span>
+                <strong>{{ pedido()!.total | number:'1.2-2' }}€</strong>
+            </div>
+            <div class="resumen-direccion">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{{ pedido()!.direccion }}</span>
+            </div>
+        </div>
+
+        <!-- Botón valorar si entregado -->
+        <div class="valorar-section" *ngIf="pedido()!.estado === 'ENTREGADO'">
+            <button class="btn-valorar" [routerLink]="['/valorar', pedido()!.id]">
+                Valorar pedido
+            </button>
+        </div>
+
+    </div>
+
+</div>

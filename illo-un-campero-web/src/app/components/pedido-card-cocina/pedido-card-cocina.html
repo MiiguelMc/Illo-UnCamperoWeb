@@ -1,8 +1,8 @@
 <div class="pedido-card" [class.urgente]="esUrgente()">
-  <!-- Header de la tarjeta -->
+
   <div class="card-header">
     <div class="pedido-info">
-      <h3 class="pedido-numero">Pedido #{{ pedido.id?.substring(0, 8) }}</h3>
+      <h3 class="pedido-numero">Pedido #{{ pedido.id?.substring(0, 8).toUpperCase() }}</h3>
       <p class="pedido-hora">{{ formatearHora(pedido.fecha) }}</p>
     </div>
     <div class="tiempo-badge" [class.urgente]="esUrgente()">
@@ -10,50 +10,34 @@
     </div>
   </div>
 
-  <!-- Información del cliente -->
   <div class="cliente-info">
-    <p class="cliente-nombre">
-      <strong>👤 {{ pedido.nombreCliente || 'Cliente' }}</strong>
-    </p>
-    <p class="cliente-direccion" *ngIf="pedido.direccion">
-      📍 {{ pedido.direccion }}
-    </p>
+    <p class="cliente-nombre">{{ pedido.nombreCliente || 'Cliente' }}</p>
+    <p class="cliente-direccion" *ngIf="pedido.direccion">{{ pedido.direccion }}</p>
   </div>
 
-  <!-- Lista de productos -->
   <div class="productos-lista">
     <div class="producto-item" *ngFor="let item of pedido.productos">
-      <div class="producto-cantidad">
-        <span class="cantidad-badge">{{ item.cantidad }}x</span>
-      </div>
+      <span class="cantidad-badge">{{ item.cantidad }}x</span>
       <div class="producto-detalles">
         <p class="producto-nombre">{{ item.nombre }}</p>
-        <p class="producto-notas" *ngIf="item.notas">
-          📝 {{ item.notas }}
-        </p>
+        <p class="producto-notas" *ngIf="item.notas">{{ item.notas }}</p>
       </div>
     </div>
   </div>
 
-  <!-- Notas generales del pedido -->
   <div class="notas-generales" *ngIf="pedido.notasGenerales">
-    <p><strong>📌 Notas:</strong> {{ pedido.notasGenerales }}</p>
+    <p><strong>Notas:</strong> {{ pedido.notasGenerales }}</p>
   </div>
 
-  <!-- Total -->
   <div class="card-footer">
     <div class="total">
-      <span class="total-label">Total:</span>
+      <span class="total-label">Total</span>
       <span class="total-monto">{{ pedido.total | number:'1.2-2' }}€</span>
     </div>
   </div>
 
-  <!-- Botón de acción -->
-  <button 
-    class="btn-accion" 
-    [style.background-color]="accionColor"
-    (click)="ejecutarAccion()"
-  >
+  <button class="btn-accion" [style.background-color]="accionColor" (click)="ejecutarAccion()">
     {{ accionTexto }}
   </button>
+
 </div>

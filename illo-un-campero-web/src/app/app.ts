@@ -1,38 +1,35 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
-
-// IMPORTACIÓN DE TUS COMPONENTES
-// Asegúrate de que los archivos existan en estas rutas
-import { Header } from './components/header-login/header'; 
+import { TiendaService } from './services/tienda.service';
+import { Header } from './components/header-login/header';
 import { HeaderUserComponent } from './components/header-user/header-user';
 import { Footer } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    CommonModule,        // Necesario para que funcione el pipe | async en el HTML
-    RouterOutlet,        // Necesario para que funcionen las rutas (login, registro...)
-    Header,              // Componente del header de invitado
-    HeaderUserComponent, // Componente del header de usuario logueado
-    Footer               // Componente del footer
-  ],
+  imports: [CommonModule, RouterOutlet, Header, HeaderUserComponent, Footer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-// app.component.ts
-export class AppComponent {
+export class AppComponent implements OnInit {
   private authService = inject(AuthService);
+  private tiendaService = inject(TiendaService);
+
   user$ = this.authService.user$;
-  
-  // Opcional: Para evitar parpadeos visuales
   authInitialized = false;
 
   constructor() {
     this.user$.subscribe(() => {
       this.authInitialized = true;
     });
+  }
+
+  ngOnInit() {
+    // Cargamos el estado de la tienda al arrancar para que esté disponible
+    // en toda la app desde el primer momento
+    this.tiendaService.cargarEstado();
   }
 }

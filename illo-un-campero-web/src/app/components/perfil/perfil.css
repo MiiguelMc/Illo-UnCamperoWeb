@@ -1,144 +1,426 @@
-/* Contenedor de fondo para dar aire */
 .perfil-wrapper {
   background-color: #f8f9fa;
-  min-height: calc(100vh - 80px); /* Ajusta según la altura de tu header */
+  min-height: calc(100vh - 85px);
   padding: 40px 20px;
   display: flex;
   justify-content: center;
 }
 
-/* Tarjeta principal */
 .perfil-card {
   background: white;
-  max-width: 800px;
+  max-width: 860px;
   width: 100%;
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
 }
 
-h1 {
-  color: #0d1117;
-  font-size: 28px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.section {
-  margin-bottom: 40px;
-}
-
-.section h3 {
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 25px;
-  color: #333;
+/* Cabecera del perfil */
+.perfil-titulo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
+  margin-bottom: 35px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-/* Rejilla de inputs: 2 columnas */
+.avatar-grande {
+  width: 64px;
+  height: 64px;
+  background: #f39200;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.perfil-titulo h1 {
+  font-size: 1.5rem;
+  color: #0d1117;
+  margin: 0 0 6px;
+}
+
+.rol-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #e8f5e9;
+  color: #27ae60;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rol-badge.rol-admin {
+  background: #fff3e0;
+  color: #f39200;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0;
+}
+
+.tab-btn {
+  padding: 10px 22px;
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: inherit;
+}
+
+.tab-btn:hover { color: #f39200; }
+.tab-btn.activo { color: #f39200; border-bottom-color: #f39200; }
+.tab-btn.tab-admin.activo { color: #e74c3c; border-bottom-color: #e74c3c; }
+.tab-btn.tab-admin { color: #e74c3c; opacity: 0.7; }
+.tab-btn.tab-admin:hover { opacity: 1; }
+
+/* Secciones */
+.section { margin-bottom: 35px; }
+
+.section h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
-label {
-  font-weight: bold;
-  font-size: 14px;
-  color: #666;
+.form-group label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
 }
 
-/* Estilo de los inputs */
-input {
-  padding: 12px 15px;
+.form-group input {
+  padding: 11px 14px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  font-size: 15px;
-  transition: all 0.3s;
-  background-color: #fdfdfd;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
 }
 
-input:focus {
+.form-group input:focus {
   outline: none;
-  border-color: #f39200; /* Naranja Illo */
-  box-shadow: 0 0 0 3px rgba(243, 146, 0, 0.1);
+  border-color: #f39200;
+  box-shadow: 0 0 0 3px rgba(243,146,0,0.1);
+  background: white;
 }
 
-/* Botones */
-.actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.btn-primary {
-  background-color: #f39200;
-  color: white;
-  border: none;
-  padding: 14px 40px;
-  border-radius: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-  width: 100%;
-  max-width: 300px;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background-color: #d68100;
-  transform: translateY(-2px);
-}
-
-.btn-primary:disabled {
-  background-color: #ccc;
+.form-group input:disabled {
+  background: #f0f0f0;
+  color: #999;
   cursor: not-allowed;
 }
 
+.error-hint {
+  font-size: 0.78rem;
+  color: #e74c3c;
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background: #f39200;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.btn-primary:hover:not(:disabled) { background: #d68100; transform: translateY(-1px); }
+.btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+
+.texto-ayuda {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
 .btn-secondary {
-  background-color: white;
+  background: white;
   color: #0d1117;
   border: 2px solid #0d1117;
-  padding: 10px 25px;
-  border-radius: 30px;
-  font-weight: bold;
+  padding: 11px 26px;
+  border-radius: 25px;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.2s, color 0.2s;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+.btn-secondary:hover { background: #0d1117; color: white; }
+
+/* ===================== SECCIÓN ADMIN ===================== */
+
+/* Control apertura restaurante */
+.restaurante-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #f8f9fa;
+  padding: 18px 22px;
+  border-radius: 12px;
+  flex-wrap: wrap;
 }
 
-.btn-secondary:hover {
-  background-color: #0d1117;
-  color: white;
+.estado-restaurante {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
-.security p {
-  color: #777;
-  font-size: 14px;
-  margin-bottom: 15px;
+.estado-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-/* Mensajes de éxito */
-.success-msg {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #d4edda;
-  color: #155724;
-  border-radius: 10px;
+.estado-restaurante.abierto .estado-dot { background: #27ae60; box-shadow: 0 0 0 3px rgba(39,174,96,0.2); }
+.estado-restaurante.abierto .estado-texto { color: #27ae60; }
+.estado-restaurante.cerrado .estado-dot { background: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.2); }
+.estado-restaurante.cerrado .estado-texto { color: #e74c3c; }
+
+.btn-toggle {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.875rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-toggle:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn-cerrar { background: #e74c3c; color: white; }
+.btn-abrir  { background: #27ae60; color: white; }
+
+/* Estadísticas */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.stat-card {
+  background: #f8f9fa;
+  border-radius: 14px;
+  padding: 22px;
   text-align: center;
-  font-weight: bold;
+  border: 2px solid transparent;
 }
 
-/* Responsive: 1 columna en móviles */
+.stat-card.destacado {
+  background: #fff8ee;
+  border-color: #f39200;
+}
+
+.stat-numero {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0d1117;
+  margin-bottom: 4px;
+}
+
+.stat-card.destacado .stat-numero { color: #f39200; }
+
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* Tabla de pedidos admin */
+.section-header-admin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.section-header-admin h3 { margin: 0; border: none; padding: 0; }
+
+.btn-refrescar {
+  padding: 7px 18px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+  color: #555;
+}
+.btn-refrescar:hover:not(:disabled) { background: #e0e0e0; }
+.btn-refrescar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.cargando-pedidos {
+  text-align: center;
+  padding: 30px;
+}
+
+.spinner-small {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #eee;
+  border-top-color: #f39200;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.sin-pedidos-admin {
+  text-align: center;
+  padding: 30px;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.tabla-pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pedido-fila {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 14px 18px;
+  background: #fafafa;
+  transition: box-shadow 0.2s;
+}
+
+.pedido-fila:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.07); background: white; }
+
+.pedido-fila-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.pedido-id { font-weight: 700; color: #333; font-size: 0.9rem; }
+.pedido-cliente { flex: 1; color: #555; font-size: 0.9rem; }
+.pedido-total { font-weight: 700; color: #f39200; font-size: 0.95rem; margin-left: auto; }
+
+.pedido-estado-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.pedido-fila-detalle {
+  display: flex;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.pedido-acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-estado {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #0d1117;
+  color: white;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-estado:hover { background: #2c3e50; transform: translateY(-1px); }
+.btn-cancelar-pedido { background: #fee; color: #e74c3c; border: 1px solid #f5c6c6; }
+.btn-cancelar-pedido:hover { background: #e74c3c; color: white; }
+
+/* Mensaje de feedback */
+.feedback-msg {
+  margin-top: 24px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #d4edda;
+  color: #155724;
+  text-align: center;
+}
+
+.feedback-msg.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
 @media (max-width: 600px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
+  .perfil-card { padding: 24px 18px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .restaurante-control { flex-direction: column; align-items: flex-start; }
+  .pedido-fila-header { flex-direction: column; align-items: flex-start; }
+  .pedido-total { margin-left: 0; }
 }

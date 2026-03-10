@@ -1,49 +1,44 @@
 <nav class="main-header anim-entrance">
   <div class="header-container">
-    
-    <!-- 1. LADO IZQUIERDO: LOGO -->
+
     <div class="header-left">
       <a routerLink="/restaurantes" class="logo-box" (click)="menuMovilAbierto = false">
-        <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
+        <img src="assets/LogoFondoTransparente.webp" alt="Illo Un Campero">
       </a>
     </div>
 
-    <!-- 2. CENTRO: LINKS PC (Centradito nivel Dios) -->
     <div class="header-center desktop-only">
       <ul class="nav-menu">
         <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
         <li><a routerLink="/carta" routerLinkActive="active">Carta</a></li>
         <li><a routerLink="/carrito" routerLinkActive="active">Tu pedido</a></li>
+        <li *ngIf="esAdmin()"><a routerLink="/cocina" routerLinkActive="active" class="nav-link-admin">Cocina</a></li>
       </ul>
     </div>
 
-    <!-- 3. LADO DERECHO: ACCIONES -->
     <div class="header-right">
       <div class="actions-wrapper">
-        
-        <!-- PERFIL USUARIO (Solo PC) -->
+
         <div class="user-pill-container desktop-only">
           <div class="user-pill" (click)="toggleMenu($event)" [class.active]="isMenuOpen">
-            <span class="user-icon">👤</span>
+            <span class="user-initial">{{ getInicial() }}</span>
             <span class="user-name">{{ (user$ | async)?.nombre }}</span>
           </div>
-          
-          <!-- DROPDOWN PC -->
+
           <div class="dropdown-fancy" *ngIf="isMenuOpen">
-            <a routerLink="/perfil" (click)="isMenuOpen = false">⚙️ Perfil</a>
-            <a routerLink="/mis-pedidos" (click)="isMenuOpen = false">📦 Mis Pedidos</a>
+            <a routerLink="/perfil" (click)="isMenuOpen = false">Perfil</a>
+            <a routerLink="/mis-pedidos" (click)="isMenuOpen = false">Mis Pedidos</a>
+            <a *ngIf="esAdmin()" routerLink="/cocina" (click)="isMenuOpen = false" class="link-admin">Panel de Cocina</a>
             <hr class="dropdown-divider">
-            <a class="logout-link" (click)="logout()">🚪 Salir</a>
+            <a class="logout-link" (click)="logout()">Cerrar sesión</a>
           </div>
         </div>
 
-        <!-- CARRITO (PC y Móvil siempre activo) -->
         <div class="cart-pill" routerLink="/carrito" (click)="menuMovilAbierto = false">
-          <img src="assets/carro.webp" class="cart-img">
+          <img src="assets/carro.webp" class="cart-img" alt="Carrito">
           <span class="cart-amount">{{ carritoService.totalPrecio() | number:'1.2-2' }}€</span>
         </div>
 
-        <!-- BOTÓN HAMBURGUESA (Solo Celular) -->
         <button class="hamburger-btn mobile-only" (click)="toggleMobileMenu()" [class.active]="menuMovilAbierto">
           <div class="bar"></div>
           <div class="bar"></div>
@@ -52,26 +47,26 @@
       </div>
     </div>
 
-    <!-- 4. OVERLAY MÓVIL (AQUÍ ESTÁ EL TRUCO: Solo existe si se abre) -->
-    <div class="mobile-overlay" [class.open]="menuMovilAbierto" *ngIf="menuMovilAbierto">
+    <div class="mobile-overlay" *ngIf="menuMovilAbierto">
       <button class="close-mobile-btn" (click)="toggleMobileMenu()">✕</button>
-      
+
       <div class="mobile-content">
         <div class="user-header-mobile">
-          <span class="avatar-big">👤</span>
-          <h3>¡Dímelo, {{ (user$ | async)?.nombre }}!</h3>
+          <span class="avatar-big">{{ getInicial() }}</span>
+          <h3>{{ (user$ | async)?.nombre }}</h3>
         </div>
-        
+
         <ul class="mobile-nav">
-          <li><a routerLink="/restaurantes" (click)="toggleMobileMenu()">🏠 Inicio</a></li>
-          <li><a routerLink="/carta" (click)="toggleMobileMenu()">📜 La Carta</a></li>
-          <li><a routerLink="/carrito" (click)="toggleMobileMenu()">🛒 Mi Pedido</a></li>
-          <li><a routerLink="/mis-pedidos" (click)="toggleMobileMenu()">📦 Mis Compras</a></li>
-          <li><a routerLink="/perfil" (click)="toggleMobileMenu()">⚙️ Ajustes</a></li>
+          <li><a routerLink="/restaurantes" (click)="toggleMobileMenu()">Inicio</a></li>
+          <li><a routerLink="/carta" (click)="toggleMobileMenu()">La Carta</a></li>
+          <li><a routerLink="/carrito" (click)="toggleMobileMenu()">Mi Pedido</a></li>
+          <li><a routerLink="/mis-pedidos" (click)="toggleMobileMenu()">Mis Pedidos</a></li>
+          <li><a routerLink="/perfil" (click)="toggleMobileMenu()">Perfil</a></li>
+          <li *ngIf="esAdmin()"><a routerLink="/cocina" (click)="toggleMobileMenu()" class="link-admin-mobile">Panel de Cocina</a></li>
         </ul>
 
         <div class="mobile-footer">
-          <button class="btn-logout-mobile" (click)="logout()">🚪 Cerrar sesión</button>
+          <button class="btn-logout-mobile" (click)="logout()">Cerrar sesión</button>
         </div>
       </div>
     </div>

@@ -14,19 +14,18 @@ export class ProductoItemComponent {
   @Input() producto!: Producto;
   private carritoService = inject(CarritoService);
 
-  // Sincroniza la cantidad con el carrito en tiempo real
   cantidadEnCarrito = computed(() => {
-    const item = this.carritoService.items().find(i => i.producto.nombre === this.producto.nombre);
+    const item = this.carritoService.items().find(i => i.producto.id === this.producto.id);
     return item ? item.cantidad : 0;
   });
 
   sumar(event: Event) {
-    event.stopPropagation(); // Evita abrir el modal
+    event.stopPropagation();
     this.carritoService.agregar(this.producto, 1);
   }
 
   restar(event: Event) {
-    event.stopPropagation(); // Evita abrir el modal
+    event.stopPropagation();
     this.carritoService.quitar(this.producto);
   }
 }
