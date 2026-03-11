@@ -2,7 +2,8 @@
 
   <div class="card-header">
     <div class="pedido-info">
-      <h3 class="pedido-numero">Pedido #{{ pedido.id?.substring(0, 8).toUpperCase() }}</h3>
+      <!-- MIRA AQUÍ PAPI: Le ponemos el seguro con (pedido.id || '') -->
+      <h3 class="pedido-numero">Pedido #{{ (pedido.id || '........').substring(0, 8).toUpperCase() }}</h3>
       <p class="pedido-hora">{{ formatearHora(pedido.fecha) }}</p>
     </div>
     <div class="tiempo-badge" [class.urgente]="esUrgente()">

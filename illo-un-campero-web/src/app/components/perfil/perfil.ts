@@ -10,6 +10,8 @@ import { Pedido, EstadoPedido } from '../../../model/pedido.model';
 import { Cupon } from '../../../model/cupon.model';
 import { GestionProductosComponent } from '../gestion-productos/gestion-productos';
 import { interval, Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms'; // <--- AÑADE ESTO ARRIBA
+
 
 type TabActiva = 'perfil' | 'admin';
 type SubTabAdmin = 'pedidos' | 'productos' | 'cupones' | 'estadisticas' | 'tienda';
@@ -17,7 +19,7 @@ type SubTabAdmin = 'pedidos' | 'productos' | 'cupones' | 'estadisticas' | 'tiend
 @Component({
     selector: 'app-perfil',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, GestionProductosComponent],
+    imports: [CommonModule, ReactiveFormsModule, GestionProductosComponent, FormsModule],
     templateUrl: './perfil.html',
     styleUrls: ['./perfil.css']
 })
