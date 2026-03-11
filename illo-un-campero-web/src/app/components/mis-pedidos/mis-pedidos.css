@@ -26,33 +26,23 @@
   padding: 0.5rem 1rem;
   transition: color 0.2s;
 }
+.btn-volver:hover { color: #c0392b; }
 
-.btn-volver:hover {
-  color: #c0392b;
-}
-
-/* Estado de carga */
 .cargando {
   text-align: center;
   padding: 4rem 0;
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
+  width: 50px; height: 50px;
   border: 4px solid #f3f3f3;
   border-top: 4px solid #e74c3c;
   border-radius: 50%;
   margin: 0 auto 1rem;
   animation: spin 1s linear infinite;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Mensaje de error */
 .error-mensaje {
   text-align: center;
   padding: 3rem;
@@ -73,27 +63,13 @@
   font-weight: 600;
 }
 
-/* Sin pedidos */
 .sin-pedidos {
   text-align: center;
   padding: 4rem 2rem;
 }
 
-.icon-vacio {
-  font-size: 5rem;
-  margin-bottom: 1rem;
-}
-
-.sin-pedidos h2 {
-  font-size: 1.5rem;
-  color: #666;
-  margin-bottom: 0.5rem;
-}
-
-.sin-pedidos p {
-  color: #999;
-  margin-bottom: 2rem;
-}
+.sin-pedidos h2 { font-size: 1.5rem; color: #666; margin-bottom: 0.5rem; }
+.sin-pedidos p { color: #999; margin-bottom: 2rem; }
 
 .btn-pedir {
   padding: 1rem 2rem;
@@ -104,15 +80,10 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: 0.2s;
 }
+.btn-pedir:hover { background: #c0392b; transform: translateY(-2px); }
 
-.btn-pedir:hover {
-  background: #c0392b;
-  transform: translateY(-2px);
-}
-
-/* Lista de pedidos */
 .lista-pedidos {
   display: flex;
   flex-direction: column;
@@ -122,17 +93,12 @@
 .pedido-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
 }
+.pedido-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
 
-.pedido-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Encabezado del pedido */
 .pedido-header {
   display: flex;
   justify-content: space-between;
@@ -142,17 +108,8 @@
   border-bottom: 1px solid #eee;
 }
 
-.info-basica h3 {
-  font-size: 1.2rem;
-  color: #333;
-  margin: 0 0 0.25rem 0;
-}
-
-.fecha {
-  color: #666;
-  font-size: 0.9rem;
-  margin: 0;
-}
+.info-basica h3 { font-size: 1.2rem; color: #333; margin: 0 0 0.25rem; }
+.fecha { color: #666; font-size: 0.9rem; margin: 0; }
 
 .estado-badge {
   padding: 0.5rem 1rem;
@@ -163,50 +120,19 @@
   text-transform: uppercase;
 }
 
-/* Items del pedido */
 .pedido-items {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
+.item { display: flex; align-items: center; gap: 1rem; }
+.item-detalles { flex: 1; }
+.item-detalles .nombre { font-weight: 600; color: #333; margin: 0 0 0.25rem; }
+.item-detalles .cantidad-precio { color: #666; font-size: 0.9rem; margin: 0; }
+.item .subtotal { font-weight: bold; color: #e74c3c; margin: 0; }
 
-.item img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.item-detalles {
-  flex: 1;
-}
-
-.item-detalles .nombre {
-  font-weight: 600;
-  color: #333;
-  margin: 0 0 0.25rem 0;
-}
-
-.item-detalles .cantidad-precio {
-  color: #666;
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.item .subtotal {
-  font-weight: bold;
-  color: #e74c3c;
-  margin: 0;
-}
-
-/* Footer del pedido */
 .pedido-footer {
   display: flex;
   justify-content: space-between;
@@ -217,70 +143,89 @@
   gap: 2rem;
 }
 
-.info-entrega {
-  flex: 1;
-}
-
-.info-entrega p {
-  margin: 0.25rem 0;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.info-entrega strong {
-  color: #333;
-}
+.info-entrega { flex: 1; }
+.info-entrega p { margin: 0.25rem 0; font-size: 0.9rem; color: #666; }
+.info-entrega strong { color: #333; }
 
 .total-y-acciones {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
-.total-pedido {
-  font-size: 1.2rem;
-  margin: 0;
-  color: #333;
+.total-pedido { font-size: 1.2rem; margin: 0; color: #333; }
+.total-pedido .monto { color: #e74c3c; font-weight: bold; font-size: 1.4rem; }
+
+/* ---- BOTONES DE ACCIÓN DEL PEDIDO ---- */
+.botones-pedido {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
 }
 
-.total-pedido .monto {
-  color: #e74c3c;
-  font-weight: bold;
-  font-size: 1.4rem;
-}
-
-.btn-cancelar {
-  padding: 0.5rem 1.5rem;
-  background: #e74c3c;
+.btn-seguimiento {
+  padding: 8px 16px;
+  background: #3498db;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.2s;
+  transition: 0.2s;
+  font-family: inherit;
 }
+.btn-seguimiento:hover { background: #2980b9; transform: translateY(-1px); }
 
-.btn-cancelar:hover {
-  background: #c0392b;
+.btn-valorar {
+  padding: 8px 16px;
+  background: #f39200;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: inherit;
+  text-decoration: none;
+  display: inline-block;
 }
+.btn-valorar:hover { background: #d88200; transform: translateY(-1px); }
 
-/* Responsive */
+.btn-repetir {
+  padding: 8px 16px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: inherit;
+}
+.btn-repetir:hover { background: #219653; transform: translateY(-1px); }
+
+.btn-cancelar {
+  padding: 8px 16px;
+  background: white;
+  color: #e74c3c;
+  border: 1.5px solid #e74c3c;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: inherit;
+}
+.btn-cancelar:hover { background: #e74c3c; color: white; }
+
 @media (max-width: 768px) {
-  .pedido-footer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .total-y-acciones {
-    width: 100%;
-    align-items: flex-start;
-  }
-
-  .header-pedidos {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-  }
+  .pedido-footer { flex-direction: column; align-items: flex-start; }
+  .total-y-acciones { width: 100%; align-items: flex-start; }
+  .botones-pedido { justify-content: flex-start; }
+  .header-pedidos { flex-direction: column; gap: 1rem; align-items: flex-start; }
 }
