@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { PedidoService } from '../../services/pedido.service';
 import { TiendaService } from '../../services/tienda.service';
@@ -10,8 +10,6 @@ import { Pedido, EstadoPedido } from '../../../model/pedido.model';
 import { Cupon } from '../../../model/cupon.model';
 import { GestionProductosComponent } from '../gestion-productos/gestion-productos';
 import { interval, Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms'; // <--- AÑADE ESTO ARRIBA
-
 
 type TabActiva = 'perfil' | 'admin';
 type SubTabAdmin = 'pedidos' | 'productos' | 'cupones' | 'estadisticas' | 'tienda';
@@ -19,7 +17,7 @@ type SubTabAdmin = 'pedidos' | 'productos' | 'cupones' | 'estadisticas' | 'tiend
 @Component({
     selector: 'app-perfil',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, GestionProductosComponent, FormsModule],
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, GestionProductosComponent],
     templateUrl: './perfil.html',
     styleUrls: ['./perfil.css']
 })
@@ -48,7 +46,6 @@ export class PerfilComponent implements OnInit, OnDestroy {
     tiendaAbierta = this.tiendaService.tiendaAbierta;
     guardandoEstado = signal(false);
 
-    // Cupones
     cupones = signal<Cupon[]>([]);
     nuevoCuponCodigo = '';
     nuevoCuponDescuento: number | null = null;
@@ -73,8 +70,10 @@ export class PerfilComponent implements OnInit, OnDestroy {
             if (user) {
                 this.usuario = user;
                 this.profileForm.patchValue({
-                    nombre: user.nombre, email: user.email,
-                    telefono: user.telefono || '', direccion: user.direccion || ''
+                    nombre: user.nombre,
+                    email: user.email,
+                    telefono: user.telefono || '',
+                    direccion: user.direccion || ''
                 });
                 const rol = user.rol?.toUpperCase();
                 this.esAdmin.set(rol === 'ADMIN' || rol === 'COCINA');
@@ -82,7 +81,9 @@ export class PerfilComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() { this.refreshSub?.unsubscribe(); }
+    ngOnDestroy() {
+        this.refreshSub?.unsubscribe();
+    }
 
     setTab(tab: TabActiva) {
         this.tabActiva.set(tab);
@@ -195,7 +196,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
                     this.mensaje = 'Perfil actualizado correctamente.';
                     setTimeout(() => this.mensaje = '', 3000);
                 },
-                error: () => { this.mensajeError = 'Error al guardar.'; }
+                error: () => { this.mensajeError = 'Error al guardar los cambios.'; }
             });
         } else {
             this.mensajeError = 'Revisa los campos del formulario.';
@@ -207,16 +208,18 @@ export class PerfilComponent implements OnInit, OnDestroy {
             this.authService.sendPasswordReset(this.usuario.email).then(() => {
                 this.mensaje = 'Correo enviado para cambiar la contraseña.';
                 setTimeout(() => this.mensaje = '', 5000);
-            }).catch(() => { this.mensajeError = 'Error al enviar el correo.'; });
+            }).catch(() => {
+                this.mensajeError = 'Error al enviar el correo.';
+            });
         }
     }
 
     getEstadoColor(estado: string): string {
-        const c: Record<string, string> = {
+        const colores: Record<string, string> = {
             PENDIENTE: '#f39c12', COCINANDO: '#3498db',
             REPARTO: '#1abc9c', ENTREGADO: '#27ae60', CANCELADO: '#e74c3c'
         };
-        return c[estado] || '#95a5a6';
+        return colores[estado] || '#95a5a6';
     }
 
     formatearFecha(fecha: number): string {
@@ -231,5 +234,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
         return min < 60 ? `Hace ${min} min` : `Hace ${Math.floor(min / 60)}h ${min % 60}m`;
     }
 
-    idCorto(id: string): string { return id.substring(0, 8).toUpperCase(); }
+    idCorto(id: string): string {
+        return id.substring(0, 8).toUpperCase();
+    }
 }

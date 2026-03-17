@@ -9,5 +9,5 @@ export interface ValidacionCupon {
     valido: boolean;
     descuento: number;
     mensaje: string;
-    codigo?: string; // <--- ESTA ES LA QUE FALTABA, MI LOCO
+    codigo?: string;
 }

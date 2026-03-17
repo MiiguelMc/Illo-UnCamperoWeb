@@ -24,9 +24,7 @@ export class LoginComponent {
     this.emailError = '';
     this.passwordError = '';
 
-    // VALIDACIÓN DE FORMATO DE CORREO (Regex)
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
     if (!emailPattern.test(this.email)) {
       this.emailError = 'Introduce un correo válido (ejemplo@correo.com)';
       return;
@@ -36,8 +34,7 @@ export class LoginComponent {
       await this.authService.login(this.email, this.password);
       this.router.navigate(['/restaurantes']);
     } catch (error: any) {
-      this.password = ''; // Limpiamos contraseña en caso de fallo
-      
+      this.password = '';
       if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
         this.passwordError = 'Contraseña incorrecta o usuario no encontrado.';
       } else if (error.code === 'auth/user-not-found') {

@@ -28,8 +28,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Cargamos el estado de la tienda al arrancar para que esté disponible
-    // en toda la app desde el primer momento
     this.tiendaService.cargarEstado();
   }
 }

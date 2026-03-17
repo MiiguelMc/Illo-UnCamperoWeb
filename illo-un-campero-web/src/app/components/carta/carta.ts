@@ -20,7 +20,7 @@ export class CartaComponent implements OnInit {
   productos: Producto[] = [];
   productoSeleccionado: Producto | null = null;
   cantidadSeleccionada: number = 1;
-  filtroActual: string = 'todos'; 
+  filtroActual: string = 'todos';
   textoBusqueda: string = '';
 
   subCamperos = ['Vegano', 'Vegetariano', 'Carnivoro', 'Pan de Pizza', 'Mini'];
@@ -29,7 +29,7 @@ export class CartaComponent implements OnInit {
   ngOnInit(): void {
     this.productoService.obtenerProductos().subscribe({
       next: (res) => { this.productos = res; },
-      error: (err) => console.error('Se cayó el sistema, mi loco:', err)
+      error: (err) => console.error('Error al cargar los productos:', err)
     });
   }
 
@@ -41,7 +41,7 @@ export class CartaComponent implements OnInit {
   abrirModal(p: Producto) {
     this.productoSeleccionado = p;
     this.cantidadSeleccionada = 1;
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden';
   }
 
   cerrarModal() {
@@ -60,7 +60,7 @@ export class CartaComponent implements OnInit {
   }
 
   filtrarProductos(lista: Producto[]): Producto[] {
-    return lista.filter(p => 
+    return lista.filter(p =>
       p.nombre.toLowerCase().includes(this.textoBusqueda.toLowerCase())
     );
   }
