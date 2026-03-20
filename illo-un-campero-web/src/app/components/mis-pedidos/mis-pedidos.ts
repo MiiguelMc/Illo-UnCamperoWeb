@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { PedidoService } from '../../services/pedido.service';
@@ -9,7 +10,7 @@ import { switchMap, take, of, Subject, takeUntil } from 'rxjs';
 @Component({
     selector: 'app-mis-pedidos',
     standalone: true,
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, TranslateModule],
     templateUrl: './mis-pedidos.html',
     styleUrls: ['./mis-pedidos.css']
 })

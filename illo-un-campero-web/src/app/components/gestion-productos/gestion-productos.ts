@@ -1,4 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProductoService } from '../../services/producto.service';
@@ -7,7 +8,7 @@ import { Producto } from '../../../model/producto.model';
 @Component({
     selector: 'app-gestion-productos',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, TranslateModule],
     templateUrl: './gestion-productos.html',
     styleUrls: ['./gestion-productos.css']
 })

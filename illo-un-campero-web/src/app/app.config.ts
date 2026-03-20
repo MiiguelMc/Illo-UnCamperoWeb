@@ -3,10 +3,12 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 
-// Importaciones de Firebase
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth, initializeAuth, browserLocalPersistence  } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore'; 
+import { getAuth, provideAuth, browserLocalPersistence } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCuFeD7nPAxbG2rVQVHp2tKGhyCQt2ZFlQ",
@@ -21,11 +23,20 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
+
+    // 🔥 ngx-translate nuevo
+    provideTranslateService({
+      defaultLanguage: 'es',
+      loader: provideTranslateHttpLoader({
+        prefix: './assets/i18n/',
+        suffix: '.json'
+      })
+    }),
+
+    // 🔥 Firebase
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    // Configuramos Auth para que use explícitamente la persistencia local
     provideAuth(() => {
       const auth = getAuth();
-      // Esto asegura que la sesión se guarde en el navegador
       auth.setPersistence(browserLocalPersistence);
       return auth;
     }),

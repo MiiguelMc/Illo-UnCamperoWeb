@@ -1,44 +1,21 @@
 <div class="pedido-exitoso-container">
   <div class="success-card">
-    <div class="icon-success">
-      ✓
-    </div>
-    
-    <h1>¡Pedido Realizado con Éxito!</h1>
-    
-    <p class="mensaje-principal">
-      Tu pedido ha sido confirmado y está siendo preparado.
-    </p>
-
+    <div class="icon-success">✓</div>
+    <h1>{{ 'EXITOSO.TITULO' | translate }}</h1>
+    <p class="mensaje-principal">{{ 'EXITOSO.MSG' | translate }}</p>
     <div class="info-pedido" *ngIf="pedidoId()">
-      <p class="numero-pedido">
-        <strong>Número de pedido:</strong> #{{ pedidoId() }}
-      </p>
+      <p class="numero-pedido"><strong>{{ 'EXITOSO.NUMERO' | translate }}</strong> #{{ pedidoId() }}</p>
     </div>
-
     <div class="mensaje-secundario">
-      <p>
-        Recibirás una notificación cuando tu pedido esté en camino.
-        Puedes consultar el estado de tu pedido en cualquier momento.
-      </p>
+      <p>{{ 'EXITOSO.MSG2' | translate }}</p>
     </div>
-
     <div class="botones-accion">
-      <button class="btn-primario" (click)="verMisPedidos()">
-        Ver Mis Pedidos
-      </button>
-      <button class="btn-secundario" (click)="irARestaurantes()">
-        Volver al Inicio
-      </button>
+      <button class="btn-primario" (click)="verMisPedidos()">{{ 'EXITOSO.VER_PEDIDOS' | translate }}</button>
+      <button class="btn-secundario" (click)="irARestaurantes()">{{ 'EXITOSO.VOLVER' | translate }}</button>
     </div>
-
     <div class="info-adicional">
-      <p>
-        <strong>Tiempo estimado de entrega:</strong> 30-45 minutos
-      </p>
-      <p>
-        Si tienes alguna pregunta, no dudes en contactarnos.
-      </p>
+      <p><strong>{{ 'EXITOSO.TIEMPO' | translate }}</strong> {{ 'EXITOSO.TIEMPO_VALOR' | translate }}</p>
+      <p>{{ 'EXITOSO.CONTACTO' | translate }}</p>
     </div>
   </div>
 </div>

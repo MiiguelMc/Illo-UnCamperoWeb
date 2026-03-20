@@ -1,57 +1,38 @@
 <main class="content">
-    <!-- HERO SECTION (Diseño pro) -->
     <section class="hero-section">
         <div class="hero-overlay">
             <div class="hero-content">
-                <span class="badge-promo">🔥 OFERTA DE BIENVENIDA</span>
-                <h1>El auténtico sabor del <span class="highlight-text">Campero Malagueño</span></h1>
-                <p>Pide ahora y recíbelo en menos de 30 minutos.</p>
+                <span class="badge-promo">🔥 {{ 'RESTAURANTES.PROMO' | translate }}</span>
+                <h1>{{ 'RESTAURANTES.TITULO' | translate }} <span class="highlight-text">{{ 'RESTAURANTES.HIGHLIGHT' | translate }}</span></h1>
+                <p>{{ 'RESTAURANTES.DESC' | translate }}</p>
                 <div class="hero-buttons">
-                    <button class="btn-primary" (click)="scrollTo('sec-camperos')">Ver Menú</button>
+                    <button class="btn-primary" (click)="scrollTo('sec-camperos')">{{ 'RESTAURANTES.VER_MENU' | translate }}</button>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- FILTROS (Basados en tu carta) -->
     <nav class="categories-nav">
-        <div class="cat-item" [class.active]="categoriaActiva === 'sec-entrantes'" (click)="scrollTo('sec-entrantes')">🍟 Entrantes</div>
-        <div class="cat-item" [class.active]="categoriaActiva === 'sec-camperos'" (click)="scrollTo('sec-camperos')">🍔 Camperos</div>
-        <div class="cat-item" [class.active]="categoriaActiva === 'sec-postres'" (click)="scrollTo('sec-postres')">🍰 Postres</div>
-        <div class="cat-item" [class.active]="categoriaActiva === 'sec-bebidas'" (click)="scrollTo('sec-bebidas')">🥤 Bebidas</div>
+        <div class="cat-item" [class.active]="categoriaActiva === 'sec-entrantes'" (click)="scrollTo('sec-entrantes')">🍟 {{ 'RESTAURANTES.ENTRANTES' | translate }}</div>
+        <div class="cat-item" [class.active]="categoriaActiva === 'sec-camperos'" (click)="scrollTo('sec-camperos')">🍔 {{ 'RESTAURANTES.CAMPEROS' | translate }}</div>
+        <div class="cat-item" [class.active]="categoriaActiva === 'sec-postres'" (click)="scrollTo('sec-postres')">🍰 {{ 'RESTAURANTES.POSTRES' | translate }}</div>
+        <div class="cat-item" [class.active]="categoriaActiva === 'sec-bebidas'" (click)="scrollTo('sec-bebidas')">🥤 {{ 'RESTAURANTES.BEBIDAS' | translate }}</div>
     </nav>
-
     <div class="menu-container">
-        <!-- SECCIÓN ENTRANTES -->
         <section id="sec-entrantes" class="menu-group" *ngIf="entrantes.length > 0">
-            <div class="section-header"><h3>Entrantes</h3></div>
-            <div class="product-grid">
-                <app-producto-item *ngFor="let p of entrantes" [producto]="p"></app-producto-item>
-            </div>
+            <div class="section-header"><h3>{{ 'RESTAURANTES.ENTRANTES' | translate }}</h3></div>
+            <div class="product-grid"><app-producto-item *ngFor="let p of entrantes" [producto]="p"></app-producto-item></div>
         </section>
-
-        <!-- SECCIÓN CAMPEROS -->
         <section id="sec-camperos" class="menu-group" *ngIf="camperos.length > 0">
-            <div class="section-header"><h3>Nuestros Camperos</h3></div>
-            <div class="product-grid">
-                <app-producto-item *ngFor="let p of camperos" [producto]="p"></app-producto-item>
-            </div>
+            <div class="section-header"><h3>{{ 'RESTAURANTES.CAMPEROS' | translate }}</h3></div>
+            <div class="product-grid"><app-producto-item *ngFor="let p of camperos" [producto]="p"></app-producto-item></div>
         </section>
-
-        <!-- SECCIÓN POSTRES -->
         <section id="sec-postres" class="menu-group" *ngIf="postres.length > 0">
-            <div class="section-header"><h3>Postres</h3></div>
-            <div class="product-grid">
-                <app-producto-item *ngFor="let p of postres" [producto]="p"></app-producto-item>
-            </div>
+            <div class="section-header"><h3>{{ 'RESTAURANTES.POSTRES' | translate }}</h3></div>
+            <div class="product-grid"><app-producto-item *ngFor="let p of postres" [producto]="p"></app-producto-item></div>
         </section>
-
-        <!-- SECCIÓN BEBIDAS -->
         <section id="sec-bebidas" class="menu-group" *ngIf="bebidas.length > 0">
-            <div class="section-header"><h3>Bebidas</h3></div>
-            <div class="product-grid">
-                <app-producto-item *ngFor="let p of bebidas" [producto]="p"></app-producto-item>
-            </div>
+            <div class="section-header"><h3>{{ 'RESTAURANTES.BEBIDAS' | translate }}</h3></div>
+            <div class="product-grid"><app-producto-item *ngFor="let p of bebidas" [producto]="p"></app-producto-item></div>
         </section>
     </div>
 </main>

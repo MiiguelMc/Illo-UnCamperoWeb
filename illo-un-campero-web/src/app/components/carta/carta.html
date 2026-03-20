@@ -1,80 +1,54 @@
 <div class="carta-page">
-    <!-- HERO HEADER -->
     <div class="carta-hero">
         <div class="hero-overlay">
-            <h1>Nuestra Carta</h1>
-            <p>La grasa más dura de Málaga, oíste?</p>
+            <h1>{{ 'CARTA.TITULO' | translate }}</h1>
+            <p>{{ 'CARTA.SUBTITULO' | translate }}</p>
             <div class="search-container">
-                <input type="text" [(ngModel)]="textoBusqueda" placeholder="Busca tu campero favorito, berraco...">
+                <input type="text" [(ngModel)]="textoBusqueda" [placeholder]="'CARTA.BUSCAR' | translate">
             </div>
         </div>
     </div>
-
-    <!-- FILTROS -->
     <nav class="sticky-nav">
         <div class="nav-container">
-            <button [class.active]="filtroActual === 'todos'" (click)="setFiltro('todos')">✨ Todos</button>
-            <button [class.active]="filtroActual === 'entrantes'" (click)="setFiltro('entrantes')">🥗 Entrantes</button>
-            <button [class.active]="filtroActual === 'camperos'" (click)="setFiltro('camperos')">🍔 Camperos</button>
-            <button [class.active]="filtroActual === 'postres'" (click)="setFiltro('postres')">🍰 Postres</button>
-            <button [class.active]="filtroActual === 'bebidas'" (click)="setFiltro('bebidas')">🥤 Bebidas</button>
+            <button [class.active]="filtroActual === 'todos'" (click)="setFiltro('todos')">✨ {{ 'CARTA.TODOS' | translate }}</button>
+            <button [class.active]="filtroActual === 'entrantes'" (click)="setFiltro('entrantes')">🥗 {{ 'CARTA.ENTRANTES' | translate }}</button>
+            <button [class.active]="filtroActual === 'camperos'" (click)="setFiltro('camperos')">🍔 {{ 'CARTA.CAMPEROS' | translate }}</button>
+            <button [class.active]="filtroActual === 'postres'" (click)="setFiltro('postres')">🍰 {{ 'CARTA.POSTRES' | translate }}</button>
+            <button [class.active]="filtroActual === 'bebidas'" (click)="setFiltro('bebidas')">🥤 {{ 'CARTA.BEBIDAS' | translate }}</button>
         </div>
     </nav>
-
     <div class="carta-container">
-        <!-- SECCIÓN ENTRANTES -->
         <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'entrantes') && getPorCategoria('Entrante').length > 0">
-            <h2 class="titulo-categoria">Entrantes</h2>
+            <h2 class="titulo-categoria">{{ 'CARTA.SEC_ENTRANTES' | translate }}</h2>
             <ng-container *ngFor="let sub of subEntrantes">
                 <div class="sub-bloque" *ngIf="getPorSubcategoria('Entrante', sub).length > 0">
                     <h3 class="titulo-subcategoria">{{ sub === 'Patata' ? 'Patatas' : sub }}</h3>
-                    <div class="productos-grid">
-                        <app-producto-item *ngFor="let p of getPorSubcategoria('Entrante', sub)" [producto]="p" (click)="abrirModal(p)"></app-producto-item>
-                    </div>
+                    <div class="productos-grid"><app-producto-item *ngFor="let p of getPorSubcategoria('Entrante', sub)" [producto]="p" (click)="abrirModal(p)"></app-producto-item></div>
                 </div>
             </ng-container>
         </section>
-
-        <!-- SECCIÓN CAMPEROS -->
         <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'camperos') && getPorCategoria('Campero').length > 0">
-            <h2 class="titulo-categoria">Los Camperos</h2>
+            <h2 class="titulo-categoria">{{ 'CARTA.SEC_CAMPEROS' | translate }}</h2>
             <ng-container *ngFor="let sub of subCamperos">
                 <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', sub).length > 0">
                     <h3 class="titulo-subcategoria">{{ sub === 'Mini' ? 'Mini Camperos' : sub }}</h3>
-                    <div class="productos-grid">
-                        <app-producto-item *ngFor="let p of getPorSubcategoria('Campero', sub)" [producto]="p" (click)="abrirModal(p)"></app-producto-item>
-                    </div>
+                    <div class="productos-grid"><app-producto-item *ngFor="let p of getPorSubcategoria('Campero', sub)" [producto]="p" (click)="abrirModal(p)"></app-producto-item></div>
                 </div>
             </ng-container>
         </section>
-
-        <!-- SECCIÓN POSTRES -->
         <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'postres') && getPorCategoria('Postre').length > 0">
-            <h2 class="titulo-categoria">Postres</h2>
-            <div class="productos-grid">
-                <app-producto-item *ngFor="let p of getPorCategoria('Postre')" [producto]="p" (click)="abrirModal(p)"></app-producto-item>
-            </div>
+            <h2 class="titulo-categoria">{{ 'CARTA.SEC_POSTRES' | translate }}</h2>
+            <div class="productos-grid"><app-producto-item *ngFor="let p of getPorCategoria('Postre')" [producto]="p" (click)="abrirModal(p)"></app-producto-item></div>
         </section>
-
-        <!-- SECCIÓN BEBIDAS -->
         <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'bebidas') && getPorCategoria('Bebida').length > 0">
-            <h2 class="titulo-categoria">Bebidas</h2>
-            <div class="productos-grid">
-                <app-producto-item *ngFor="let p of getPorCategoria('Bebida')" [producto]="p" (click)="abrirModal(p)"></app-producto-item>
-            </div>
+            <h2 class="titulo-categoria">{{ 'CARTA.SEC_BEBIDAS' | translate }}</h2>
+            <div class="productos-grid"><app-producto-item *ngFor="let p of getPorCategoria('Bebida')" [producto]="p" (click)="abrirModal(p)"></app-producto-item></div>
         </section>
     </div>
-
-    <!-- EL MODAL SLIM PREMIUM - AQUÍ ESTÁ LA MAGIA -->
     <div class="modal-overlay" *ngIf="productoSeleccionado" (click)="cerrarModal()">
         <div class="modal-content-slim" (click)="$event.stopPropagation()">
-            
             <button class="btn-close-minimal" (click)="cerrarModal()">✕</button>
-            
-            <div class="modal-hero-slim">
-                <img [src]="productoSeleccionado.imagenUrl || 'assets/no-image.png'" [alt]="productoSeleccionado.nombre">
-            </div>
-
+            <div class="modal-hero-slim"><img [src]="productoSeleccionado.imagenUrl || 'assets/no-image.png'" [alt]="productoSeleccionado.nombre"></div>
             <div class="modal-body-slim">
                 <div class="header-info-slim">
                     <h2 class="product-title-slim">{{ productoSeleccionado.nombre }}</h2>
@@ -83,16 +57,14 @@
                 <div class="divider-slim"></div>
                 <p class="product-desc-slim">{{ productoSeleccionado.descripcion }}</p>
             </div>
-
             <div class="modal-footer-slim">
                 <div class="qty-control-slim">
                     <button (click)="decrementar()">-</button>
                     <span>{{ cantidadSeleccionada }}</span>
                     <button (click)="incrementar()">+</button>
                 </div>
-                
                 <button class="btn-add-slim" (click)="agregarAlPedido()">
-                    AÑADIR AL PEDIDO • {{ (productoSeleccionado.precio * cantidadSeleccionada) | number:'1.2-2' }}€
+                    {{ 'CARTA.ANADIR' | translate }} • {{ (productoSeleccionado.precio * cantidadSeleccionada) | number:'1.2-2' }}€
                 </button>
             </div>
         </div>

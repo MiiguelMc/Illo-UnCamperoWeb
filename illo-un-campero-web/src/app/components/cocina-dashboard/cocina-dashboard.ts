@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PedidoService } from '../../services/pedido.service';
@@ -11,7 +12,7 @@ import { PedidoCardCocinaComponent } from '../pedido-card-cocina/pedido-card-coc
 @Component({
   selector: 'app-cocina-dashboard',
   standalone: true,
-  imports: [CommonModule, PedidoCardCocinaComponent],
+  imports: [CommonModule, PedidoCardCocinaComponent, TranslateModule],
   templateUrl: './cocina-dashboard.html',
   styleUrls: ['./cocina-dashboard.css']
 })

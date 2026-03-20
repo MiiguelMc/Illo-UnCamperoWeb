@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ProductoItemComponent } from '../producto-item/producto-item';
 import { ProductoService } from '../../services/producto.service';
@@ -9,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-carta',
   standalone: true,
-  imports: [CommonModule, ProductoItemComponent, FormsModule],
+  imports: [CommonModule, ProductoItemComponent, FormsModule, TranslateModule],
   templateUrl: './carta.html',
   styleUrls: ['./carta.css']
 })

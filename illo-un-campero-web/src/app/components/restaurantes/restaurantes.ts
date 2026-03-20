@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../../model/producto.model';
@@ -7,7 +8,7 @@ import { ProductoItemComponent } from '../producto-item/producto-item';
 @Component({
   selector: 'app-restaurante',
   standalone: true,
-  imports: [CommonModule, ProductoItemComponent],
+  imports: [CommonModule, ProductoItemComponent, TranslateModule],
   templateUrl: './restaurantes.html',
   styleUrls: ['./restaurantes.css']
 })

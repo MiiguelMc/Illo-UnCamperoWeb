@@ -136,3 +136,33 @@
 
   .mobile-buttons { display: flex; flex-direction: column; gap: 15px; width: 85%; }
 }
+/* Añadir al final de header-user.css y header-login.css */
+.btn-idioma {
+  background: transparent;
+  border: 1.5px solid rgba(0,0,0,0.3);
+  color: black;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: 0.2s;
+  font-family: inherit;
+}
+.btn-idioma:hover { background: rgba(255,255,255,0.15); border-color: white; }
+.btn-idioma-mobile {
+  background: white;
+  border: 1.5px solid #ddd;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  font-family: inherit;
+  transition: 0.2s;
+}
+.btn-idioma-mobile:hover { background: #f4f5f7; }

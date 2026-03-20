@@ -1,47 +1,38 @@
 <nav class="main-header">
   <div class="header-container">
-    
-    <!-- IZQUIERDA: LOGO -->
     <div class="header-left">
       <a routerLink="/restaurantes" class="logo-box" (click)="menuMovilAbierto = false">
         <img src="assets/LogoFondoTransparente.webp" alt="Illo Logo">
       </a>
     </div>
-
-    <!-- CENTRO: MENÚ PC -->
     <div class="header-center">
       <ul class="nav-menu">
-        <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
-        <li><a routerLink="/carta" routerLinkActive="active">Carta</a></li>
-        <li><a (click)="comprobarPedido()" class="nav-link-btn">Tu pedido</a></li>
+        <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'NAV.INICIO' | translate }}</a></li>
+        <li><a routerLink="/carta" routerLinkActive="active">{{ 'NAV.CARTA' | translate }}</a></li>
+        <li><a (click)="comprobarPedido()" class="nav-link-btn">{{ 'NAV.TU_PEDIDO' | translate }}</a></li>
       </ul>
     </div>
-
-    <!-- DERECHA: ACCIONES PC -->
     <div class="header-right">
       <div class="actions-wrapper">
-        <button class="btn-login" routerLink="/login">Iniciar sesión</button>
-        <button class="btn-register" routerLink="/registro">Registrarse</button>
+        <button class="btn-idioma" (click)="cambiarIdioma()">{{ 'IDIOMA.CAMBIAR_A' | translate }}</button>
+        <button class="btn-login" routerLink="/login">{{ 'NAV.INICIAR_SESION' | translate }}</button>
+        <button class="btn-register" routerLink="/registro">{{ 'NAV.REGISTRARSE' | translate }}</button>
       </div>
-      
-      <!-- BOTÓN MÓVIL (Solo sale en celular) -->
       <button class="hamburger-btn" (click)="toggleMenu()">
         <span>{{ menuMovilAbierto ? '✕' : '☰' }}</span>
       </button>
     </div>
-
-    <!-- DESPLEGABLE MÓVIL (Overlay con flow) -->
     <div class="mobile-overlay" [class.open]="menuMovilAbierto">
       <ul class="mobile-nav">
-        <li><a routerLink="/restaurantes" (click)="toggleMenu()" routerLinkActive="active">Inicio</a></li>
-        <li><a routerLink="/carta" (click)="toggleMenu()" routerLinkActive="active">Carta</a></li>
-        <li><a (click)="comprobarPedido(); toggleMenu()" class="nav-link-btn">Tu pedido</a></li>
+        <li><a routerLink="/restaurantes" (click)="toggleMenu()" routerLinkActive="active">{{ 'NAV.INICIO' | translate }}</a></li>
+        <li><a routerLink="/carta" (click)="toggleMenu()" routerLinkActive="active">{{ 'NAV.CARTA' | translate }}</a></li>
+        <li><a (click)="comprobarPedido(); toggleMenu()" class="nav-link-btn">{{ 'NAV.TU_PEDIDO' | translate }}</a></li>
       </ul>
       <div class="mobile-buttons">
-        <button class="btn-login" (click)="toggleMenu()" routerLink="/login">Iniciar sesión</button>
-        <button class="btn-register" (click)="toggleMenu()" routerLink="/registro">Registrarse</button>
+        <button class="btn-idioma-mobile" (click)="cambiarIdioma()">{{ idiomaActual === 'es' ? 'English' : 'Español' }}</button>
+        <button class="btn-login" (click)="toggleMenu()" routerLink="/login">{{ 'NAV.INICIAR_SESION' | translate }}</button>
+        <button class="btn-register" (click)="toggleMenu()" routerLink="/registro">{{ 'NAV.REGISTRARSE' | translate }}</button>
       </div>
     </div>
-
   </div>
 </nav>

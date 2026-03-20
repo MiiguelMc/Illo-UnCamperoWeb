@@ -1,28 +1,20 @@
 <div class="gestion-wrapper">
-
     <div class="gestion-header">
-        <h2>Gestión de productos</h2>
-        <button class="btn-nuevo" (click)="abrirNuevo()">+ Nuevo producto</button>
+        <h2>{{ 'GESTION.TITULO' | translate }}</h2>
+        <button class="btn-nuevo" (click)="abrirNuevo()">{{ 'GESTION.NUEVO' | translate }}</button>
     </div>
-
     <div class="success-msg" *ngIf="mensajeExito()">{{ mensajeExito() }}</div>
     <div class="error-msg" *ngIf="error()">{{ error() }}</div>
-
-    <!-- Spinner -->
-    <div class="spinner-box" *ngIf="cargando()">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Tabla de productos -->
+    <div class="spinner-box" *ngIf="cargando()"><div class="spinner"></div></div>
     <div class="tabla-wrapper" *ngIf="!cargando()">
         <table class="productos-tabla">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Precio</th>
-                    <th>Disponible</th>
-                    <th>Acciones</th>
+                    <th>{{ 'GESTION.COL_NOMBRE' | translate }}</th>
+                    <th>{{ 'GESTION.COL_CATEGORIA' | translate }}</th>
+                    <th>{{ 'GESTION.COL_PRECIO' | translate }}</th>
+                    <th>{{ 'GESTION.COL_DISPONIBLE' | translate }}</th>
+                    <th>{{ 'GESTION.COL_ACCIONES' | translate }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,94 +25,77 @@
                             <span>{{ p.nombre }}</span>
                         </div>
                     </td>
-                    <td>
-                        <span class="badge-categoria">{{ p.categoria }}</span>
-                        <span class="badge-sub">{{ p.subcategoria }}</span>
-                    </td>
+                    <td><span class="badge-categoria">{{ p.categoria }}</span><span class="badge-sub">{{ p.subcategoria }}</span></td>
                     <td class="precio-col">{{ p.precio | number:'1.2-2' }}€</td>
                     <td>
-                        <button class="toggle-disponible"
-                            [class.activo]="p.disponible !== false"
-                            (click)="toggleDisponible(p)">
-                            {{ p.disponible !== false ? 'Activo' : 'Inactivo' }}
+                        <button class="toggle-disponible" [class.activo]="p.disponible !== false" (click)="toggleDisponible(p)">
+                            {{ p.disponible !== false ? ('GESTION.ACTIVO' | translate) : ('GESTION.INACTIVO' | translate) }}
                         </button>
                     </td>
                     <td class="acciones-col">
-                        <button class="btn-editar" (click)="abrirEditar(p)">Editar</button>
-                        <button class="btn-borrar" (click)="eliminar(p)">Borrar</button>
+                        <button class="btn-editar" (click)="abrirEditar(p)">{{ 'GESTION.EDITAR' | translate }}</button>
+                        <button class="btn-borrar" (click)="eliminar(p)">{{ 'GESTION.BORRAR' | translate }}</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-    <!-- Formulario -->
     <div class="formulario-overlay" *ngIf="modoFormulario() !== 'cerrado'" (click)="cerrarFormulario()"></div>
-
     <div class="formulario-panel" *ngIf="modoFormulario() !== 'cerrado'">
         <div class="formulario-header">
-            <h3>{{ modoFormulario() === 'nuevo' ? 'Nuevo producto' : 'Editar producto' }}</h3>
+            <h3>{{ modoFormulario() === 'nuevo' ? ('GESTION.FORM_NUEVO' | translate) : ('GESTION.FORM_EDITAR' | translate) }}</h3>
             <button class="btn-cerrar" (click)="cerrarFormulario()">✕</button>
         </div>
-
         <form [formGroup]="form" class="producto-form">
             <div class="form-grid">
                 <div class="form-group span2">
-                    <label>Nombre *</label>
-                    <input formControlName="nombre" type="text" placeholder="Ej: Campero Especial">
-                    <span class="err" *ngIf="campoInvalido('nombre')">Nombre obligatorio.</span>
+                    <label>{{ 'GESTION.LABEL_NOMBRE' | translate }}</label>
+                    <input formControlName="nombre" type="text" [placeholder]="'GESTION.PLACEHOLDER_NOMBRE' | translate">
+                    <span class="err" *ngIf="campoInvalido('nombre')">{{ 'GESTION.ERR_NOMBRE' | translate }}</span>
                 </div>
-
                 <div class="form-group span2">
-                    <label>Descripción</label>
-                    <textarea formControlName="descripcion" rows="2" placeholder="Ingredientes, alérgenos..."></textarea>
+                    <label>{{ 'GESTION.LABEL_DESC' | translate }}</label>
+                    <textarea formControlName="descripcion" rows="2" [placeholder]="'GESTION.PLACEHOLDER_DESC' | translate"></textarea>
                 </div>
-
                 <div class="form-group">
-                    <label>Precio (€) *</label>
+                    <label>{{ 'GESTION.LABEL_PRECIO' | translate }}</label>
                     <input formControlName="precio" type="number" step="0.01" min="0" placeholder="4.50">
-                    <span class="err" *ngIf="campoInvalido('precio')">Precio válido requerido.</span>
+                    <span class="err" *ngIf="campoInvalido('precio')">{{ 'GESTION.ERR_PRECIO' | translate }}</span>
                 </div>
-
                 <div class="form-group">
-                    <label>URL imagen</label>
+                    <label>{{ 'GESTION.LABEL_IMAGEN' | translate }}</label>
                     <input formControlName="imagenUrl" type="text" placeholder="https://...">
                 </div>
-
                 <div class="form-group">
-                    <label>Categoría *</label>
+                    <label>{{ 'GESTION.LABEL_CATEGORIA' | translate }}</label>
                     <select formControlName="categoria">
-                        <option value="">Seleccionar...</option>
+                        <option value="">{{ 'GESTION.SELECCIONAR' | translate }}</option>
                         <option *ngFor="let c of categorias" [value]="c">{{ c }}</option>
                     </select>
-                    <span class="err" *ngIf="campoInvalido('categoria')">Categoría obligatoria.</span>
+                    <span class="err" *ngIf="campoInvalido('categoria')">{{ 'GESTION.ERR_CATEGORIA' | translate }}</span>
                 </div>
-
                 <div class="form-group">
-                    <label>Subcategoría *</label>
+                    <label>{{ 'GESTION.LABEL_SUBCATEGORIA' | translate }}</label>
                     <select formControlName="subcategoria">
-                        <option value="">Seleccionar...</option>
+                        <option value="">{{ 'GESTION.SELECCIONAR' | translate }}</option>
                         <option *ngFor="let s of subcategoriasDisponibles()" [value]="s">{{ s }}</option>
                     </select>
-                    <span class="err" *ngIf="campoInvalido('subcategoria')">Subcategoría obligatoria.</span>
+                    <span class="err" *ngIf="campoInvalido('subcategoria')">{{ 'GESTION.ERR_SUBCATEGORIA' | translate }}</span>
                 </div>
-
                 <div class="form-group">
-                    <label>Disponible</label>
+                    <label>{{ 'GESTION.LABEL_DISPONIBLE' | translate }}</label>
                     <select formControlName="disponible">
-                        <option [ngValue]="true">Sí</option>
-                        <option [ngValue]="false">No</option>
+                        <option [ngValue]="true">{{ 'GESTION.SI' | translate }}</option>
+                        <option [ngValue]="false">{{ 'GESTION.NO' | translate }}</option>
                     </select>
                 </div>
             </div>
-
             <div class="form-actions">
-                <button type="button" class="btn-cancel" (click)="cerrarFormulario()" [disabled]="guardando()">Cancelar</button>
+                <button type="button" class="btn-cancel" (click)="cerrarFormulario()" [disabled]="guardando()">{{ 'GESTION.CANCELAR' | translate }}</button>
                 <button type="button" class="btn-save" (click)="guardar()" [disabled]="guardando()">
-                    {{ guardando() ? 'Guardando...' : 'Guardar' }}
+                    {{ guardando() ? ('GESTION.GUARDANDO' | translate) : ('GESTION.GUARDAR' | translate) }}
                 </button>
             </div>
         </form>
     </div>
-
 </div>

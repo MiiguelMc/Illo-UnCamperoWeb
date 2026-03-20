@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -17,7 +18,7 @@ type SubTabAdmin = 'pedidos' | 'productos' | 'cupones' | 'estadisticas' | 'tiend
 @Component({
     selector: 'app-perfil',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, GestionProductosComponent],
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, GestionProductosComponent, TranslateModule],
     templateUrl: './perfil.html',
     styleUrls: ['./perfil.css']
 })

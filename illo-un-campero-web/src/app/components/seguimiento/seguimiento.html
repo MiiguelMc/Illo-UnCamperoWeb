@@ -1,51 +1,32 @@
 <div class="seguimiento-wrapper">
-
     <div class="seguimiento-header">
-        <button class="btn-volver" routerLink="/mis-pedidos">← Mis pedidos</button>
-        <h1>Seguimiento del pedido</h1>
+        <button class="btn-volver" routerLink="/mis-pedidos">{{ 'SEGUIMIENTO.VOLVER' | translate }}</button>
+        <h1>{{ 'SEGUIMIENTO.TITULO' | translate }}</h1>
     </div>
-
     <div class="spinner-container" *ngIf="cargando()">
-        <div class="spinner"></div>
-        <p>Cargando...</p>
+        <div class="spinner"></div><p>{{ 'SEGUIMIENTO.CARGANDO' | translate }}</p>
     </div>
-
     <div class="error-box" *ngIf="error()">{{ error() }}</div>
-
     <div class="seguimiento-card" *ngIf="pedido() && !cargando()">
-
-        <!-- Pedido cancelado -->
         <div class="cancelado-box" *ngIf="esCancelado()">
-            <div class="cancelado-icon">
-                <i class="fas fa-times-circle"></i>
-            </div>
-            <h2>Pedido cancelado</h2>
-            <p>El pedido #{{ idCorto(pedido()!.id!) }} ha sido cancelado.</p>
-            <button routerLink="/carta" class="btn-pedir-nuevo">Hacer un nuevo pedido</button>
+            <div class="cancelado-icon"><i class="fas fa-times-circle"></i></div>
+            <h2>{{ 'SEGUIMIENTO.CANCELADO_TITULO' | translate }}</h2>
+            <p>{{ 'SEGUIMIENTO.PEDIDO' | translate }} #{{ idCorto(pedido()!.id!) }} {{ 'SEGUIMIENTO.CANCELADO_DESC' | translate }}</p>
+            <button routerLink="/carta" class="btn-pedir-nuevo">{{ 'SEGUIMIENTO.NUEVO_PEDIDO' | translate }}</button>
         </div>
-
-        <!-- Progreso normal -->
         <div class="progreso-section" *ngIf="!esCancelado()">
-
             <div class="pedido-ref">
-                <span>Pedido</span>
+                <span>{{ 'SEGUIMIENTO.PEDIDO' | translate }}</span>
                 <strong>#{{ idCorto(pedido()!.id!) }}</strong>
                 <span class="hora-pedido">· {{ formatearHora(pedido()!.fecha) }}</span>
             </div>
-
-            <!-- Barra de progreso -->
             <div class="progreso-barra">
                 <div class="barra-linea">
-                    <div class="barra-relleno"
-                         [style.width.%]="getEstadoActualIndex() >= 0 ? (getEstadoActualIndex() / (pasos.length - 1)) * 100 : 0">
-                    </div>
+                    <div class="barra-relleno" [style.width.%]="getEstadoActualIndex() >= 0 ? (getEstadoActualIndex() / (pasos.length - 1)) * 100 : 0"></div>
                 </div>
-
                 <div class="pasos-lista">
-                    <div class="paso"
-                         *ngFor="let paso of pasos; let i = index"
-                         [class.completado]="i <= getEstadoActualIndex()"
-                         [class.actual]="i === getEstadoActualIndex()">
+                    <div class="paso" *ngFor="let paso of pasos; let i = index"
+                         [class.completado]="i <= getEstadoActualIndex()" [class.actual]="i === getEstadoActualIndex()">
                         <div class="paso-circulo">
                             <i class="fas fa-check" *ngIf="i < getEstadoActualIndex()"></i>
                             <div class="punto-activo" *ngIf="i === getEstadoActualIndex()"></div>
@@ -54,18 +35,13 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Descripción del estado actual -->
             <div class="estado-descripcion" *ngIf="getEstadoActualIndex() >= 0">
                 <p>{{ pasos[getEstadoActualIndex()].descripcion }}</p>
-                <span class="actualiza-info">Se actualiza cada 15 segundos</span>
+                <span class="actualiza-info">{{ 'SEGUIMIENTO.ACTUALIZA' | translate }}</span>
             </div>
-
         </div>
-
-        <!-- Resumen del pedido -->
         <div class="resumen-section">
-            <h3>Resumen</h3>
+            <h3>{{ 'SEGUIMIENTO.RESUMEN' | translate }}</h3>
             <div class="resumen-items">
                 <div class="resumen-item" *ngFor="let item of pedido()!.productos">
                     <span class="item-cant">{{ item.cantidad }}x</span>
@@ -74,7 +50,7 @@
                 </div>
             </div>
             <div class="resumen-total">
-                <span>Total</span>
+                <span>{{ 'SEGUIMIENTO.TOTAL' | translate }}</span>
                 <strong>{{ pedido()!.total | number:'1.2-2' }}€</strong>
             </div>
             <div class="resumen-direccion">
@@ -82,14 +58,8 @@
                 <span>{{ pedido()!.direccion }}</span>
             </div>
         </div>
-
-        <!-- Botón valorar si entregado -->
         <div class="valorar-section" *ngIf="pedido()!.estado === 'ENTREGADO'">
-            <button class="btn-valorar" [routerLink]="['/valorar', pedido()!.id]">
-                Valorar pedido
-            </button>
+            <button class="btn-valorar" [routerLink]="['/valorar', pedido()!.id]">{{ 'SEGUIMIENTO.VALORAR' | translate }}</button>
         </div>
-
     </div>
-
 </div>

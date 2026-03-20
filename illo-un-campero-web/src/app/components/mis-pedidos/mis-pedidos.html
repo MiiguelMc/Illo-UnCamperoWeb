@@ -1,38 +1,30 @@
 <div class="mis-pedidos-container">
     <div class="header-pedidos">
-        <h1>Mis Pedidos</h1>
-        <button routerLink="/restaurantes" class="btn-volver">← Volver</button>
+        <h1>{{ 'PEDIDOS.TITULO' | translate }}</h1>
+        <button routerLink="/restaurantes" class="btn-volver">{{ 'PEDIDOS.VOLVER' | translate }}</button>
     </div>
-
     <div class="cargando" *ngIf="cargando()">
         <div class="spinner"></div>
-        <p>Cargando tus pedidos...</p>
+        <p>{{ 'PEDIDOS.CARGANDO' | translate }}</p>
     </div>
-
     <div class="error-mensaje" *ngIf="error() && !cargando()">
         <p>{{ error() }}</p>
-        <button routerLink="/login" class="btn-login">Iniciar sesión</button>
+        <button routerLink="/login" class="btn-login">{{ 'PEDIDOS.BTN_LOGIN' | translate }}</button>
     </div>
-
     <div class="sin-pedidos" *ngIf="!cargando() && !error() && pedidos().length === 0">
-        <h2>Aún no tienes pedidos</h2>
-        <p>Cuando realices un pedido aparecerá aquí</p>
-        <button routerLink="/carta" class="btn-pedir">Hacer mi primer pedido</button>
+        <h2>{{ 'PEDIDOS.VACIO_TITULO' | translate }}</h2>
+        <p>{{ 'PEDIDOS.VACIO_DESC' | translate }}</p>
+        <button routerLink="/carta" class="btn-pedir">{{ 'PEDIDOS.VACIO_BTN' | translate }}</button>
     </div>
-
     <div class="lista-pedidos" *ngIf="!cargando() && !error() && pedidos().length > 0">
         <div class="pedido-card" *ngFor="let pedido of pedidos()">
-
             <div class="pedido-header">
                 <div class="info-basica">
-                    <h3>Pedido #{{ idCorto(pedido.id!) }}</h3>
+                    <h3>{{ 'PEDIDOS.PEDIDO' | translate }} #{{ idCorto(pedido.id!) }}</h3>
                     <p class="fecha">{{ formatearFecha(pedido.fecha) }}</p>
                 </div>
-                <div class="estado-badge" [style.background-color]="getEstadoColor(pedido.estado)">
-                    {{ pedido.estado }}
-                </div>
+                <div class="estado-badge" [style.background-color]="getEstadoColor(pedido.estado)">{{ pedido.estado }}</div>
             </div>
-
             <div class="pedido-items">
                 <div class="item" *ngFor="let item of pedido.productos">
                     <div class="item-detalles">
@@ -42,47 +34,21 @@
                     <p class="subtotal">{{ (item.precioUnidad * item.cantidad) | number:'1.2-2' }}€</p>
                 </div>
             </div>
-
             <div class="pedido-footer">
                 <div class="info-entrega">
-                    <p><strong>Dirección:</strong> {{ pedido.direccion }}</p>
-                    <p *ngIf="pedido.metodoPago"><strong>Pago:</strong> {{ pedido.metodoPago }}</p>
+                    <p><strong>{{ 'PEDIDOS.DIRECCION' | translate }}</strong> {{ pedido.direccion }}</p>
+                    <p *ngIf="pedido.metodoPago"><strong>{{ 'PEDIDOS.PAGO' | translate }}</strong> {{ pedido.metodoPago }}</p>
                 </div>
-
                 <div class="total-y-acciones">
                     <p class="total-pedido">
-                        <strong>Total:</strong>
+                        <strong>{{ 'PEDIDOS.TOTAL' | translate }}</strong>
                         <span class="monto">{{ pedido.total | number:'1.2-2' }}€</span>
                     </p>
-
                     <div class="botones-pedido">
-                        <!-- Seguimiento si está activo -->
-                        <button *ngIf="puedeRastrear(pedido.estado)"
-                            class="btn-seguimiento"
-                            (click)="verSeguimiento(pedido.id!)">
-                            Ver seguimiento
-                        </button>
-
-                        <!-- Valorar si fue entregado -->
-                        <button *ngIf="puedeValorar(pedido)"
-                            class="btn-valorar"
-                            [routerLink]="['/valorar', pedido.id]">
-                            Valorar
-                        </button>
-
-                        <!-- Repetir si está entregado o cancelado -->
-                        <button *ngIf="pedido.estado === 'ENTREGADO' || pedido.estado === 'CANCELADO'"
-                            class="btn-repetir"
-                            (click)="repetirPedido(pedido)">
-                            Repetir pedido
-                        </button>
-
-                        <!-- Cancelar si está pendiente -->
-                        <button *ngIf="pedido.estado === 'PENDIENTE'"
-                            class="btn-cancelar"
-                            (click)="cancelarPedido(pedido.id!)">
-                            Cancelar
-                        </button>
+                        <button *ngIf="puedeRastrear(pedido.estado)" class="btn-seguimiento" (click)="verSeguimiento(pedido.id!)">{{ 'PEDIDOS.SEGUIMIENTO' | translate }}</button>
+                        <button *ngIf="puedeValorar(pedido)" class="btn-valorar" [routerLink]="['/valorar', pedido.id]">{{ 'PEDIDOS.VALORAR' | translate }}</button>
+                        <button *ngIf="pedido.estado === 'ENTREGADO' || pedido.estado === 'CANCELADO'" class="btn-repetir" (click)="repetirPedido(pedido)">{{ 'PEDIDOS.REPETIR' | translate }}</button>
+                        <button *ngIf="pedido.estado === 'PENDIENTE'" class="btn-cancelar" (click)="cancelarPedido(pedido.id!)">{{ 'PEDIDOS.CANCELAR' | translate }}</button>
                     </div>
                 </div>
             </div>

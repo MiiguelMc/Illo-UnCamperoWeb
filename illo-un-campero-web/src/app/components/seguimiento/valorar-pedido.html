@@ -1,55 +1,40 @@
 <div class="valorar-wrapper">
     <div class="valorar-card" *ngIf="!exito()">
-        <h1>Valora tu pedido</h1>
-
+        <h1>{{ 'VALORAR.TITULO' | translate }}</h1>
         <div class="pedido-mini" *ngIf="pedido()">
-            <p>Pedido #{{ pedido()!.id!.substring(0, 8).toUpperCase() }}</p>
+            <p>{{ 'PEDIDOS.PEDIDO' | translate }} #{{ pedido()!.id!.substring(0, 8).toUpperCase() }}</p>
             <p class="items-mini">{{ pedido()!.productos[0].nombre }}
-                <span *ngIf="pedido()!.productos.length > 1"> y {{ pedido()!.productos.length - 1 }} más</span>
+                <span *ngIf="pedido()!.productos.length > 1"> {{ 'VALORAR.Y_MAS' | translate }} {{ pedido()!.productos.length - 1 }} {{ 'VALORAR.MAS' | translate }}</span>
             </p>
         </div>
-
         <div class="estrellas">
-            <button
-                *ngFor="let _ of [1,2,3,4,5]; let i = index"
-                class="estrella"
-                [class.activa]="i < puntuacion()"
-                (click)="setPuntuacion(i + 1)"
-                type="button">
-                ★
-            </button>
+            <button *ngFor="let _ of [1,2,3,4,5]; let i = index"
+                class="estrella" [class.activa]="i < puntuacion()"
+                (click)="setPuntuacion(i + 1)" type="button">★</button>
         </div>
-
         <p class="puntuacion-texto">
-            <span *ngIf="puntuacion() === 0">Toca las estrellas para valorar</span>
-            <span *ngIf="puntuacion() === 1">Muy malo</span>
-            <span *ngIf="puntuacion() === 2">Malo</span>
-            <span *ngIf="puntuacion() === 3">Regular</span>
-            <span *ngIf="puntuacion() === 4">Bueno</span>
-            <span *ngIf="puntuacion() === 5">¡Excelente!</span>
+            <span *ngIf="puntuacion() === 0">{{ 'VALORAR.TOCA' | translate }}</span>
+            <span *ngIf="puntuacion() === 1">{{ 'VALORAR.MUY_MALO' | translate }}</span>
+            <span *ngIf="puntuacion() === 2">{{ 'VALORAR.MALO' | translate }}</span>
+            <span *ngIf="puntuacion() === 3">{{ 'VALORAR.REGULAR' | translate }}</span>
+            <span *ngIf="puntuacion() === 4">{{ 'VALORAR.BUENO' | translate }}</span>
+            <span *ngIf="puntuacion() === 5">{{ 'VALORAR.EXCELENTE' | translate }}</span>
         </p>
-
         <div class="form-group">
-            <label>Comentario (opcional)</label>
-            <textarea [(ngModel)]="comentario" rows="3"
-                placeholder="¿Qué te ha parecido? Nos ayuda a mejorar..."
-                [disabled]="enviando()">
-            </textarea>
+            <label>{{ 'VALORAR.COMENTARIO' | translate }}</label>
+            <textarea [(ngModel)]="comentario" rows="3" [placeholder]="'VALORAR.PLACEHOLDER' | translate" [disabled]="enviando()"></textarea>
         </div>
-
         <div class="error-msg" *ngIf="error()">{{ error() }}</div>
-
         <div class="acciones">
-            <button class="btn-omitir" routerLink="/mis-pedidos" [disabled]="enviando()">Omitir</button>
+            <button class="btn-omitir" routerLink="/mis-pedidos" [disabled]="enviando()">{{ 'VALORAR.OMITIR' | translate }}</button>
             <button class="btn-enviar" (click)="enviarResena()" [disabled]="enviando() || puntuacion() === 0">
-                {{ enviando() ? 'Enviando...' : 'Enviar valoración' }}
+                {{ enviando() ? ('VALORAR.ENVIANDO' | translate) : ('VALORAR.ENVIAR' | translate) }}
             </button>
         </div>
     </div>
-
     <div class="exito-card" *ngIf="exito()">
         <div class="exito-icon">✓</div>
-        <h2>¡Gracias por tu valoración!</h2>
-        <p>Tu opinión nos ayuda a mejorar.</p>
+        <h2>{{ 'VALORAR.EXITO_TITULO' | translate }}</h2>
+        <p>{{ 'VALORAR.EXITO_DESC' | translate }}</p>
     </div>
 </div>

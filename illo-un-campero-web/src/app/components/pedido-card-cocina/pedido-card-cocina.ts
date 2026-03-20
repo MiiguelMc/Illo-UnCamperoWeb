@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter, signal, OnInit, OnDestroy } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Pedido } from '../../../model/pedido.model';
 
 @Component({
   selector: 'app-pedido-card-cocina',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './pedido-card-cocina.html',
   styleUrls: ['./pedido-card-cocina.css']
 })

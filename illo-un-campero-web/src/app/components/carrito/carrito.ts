@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CarritoService } from '../../services/carrito.service';
@@ -6,7 +7,7 @@ import { CarritoService } from '../../services/carrito.service';
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './carrito.html',
   styleUrls: ['./carrito.css']
 })

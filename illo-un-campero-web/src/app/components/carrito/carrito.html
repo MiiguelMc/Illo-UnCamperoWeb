@@ -1,50 +1,38 @@
 <div class="carrito-page-container">
     <div class="carrito-header">
-        <h1>Tu Pedido</h1>
-        <p>Revisa tus productos antes de confirmar</p>
+        <h1>{{ 'CARRITO.TITULO' | translate }}</h1>
+        <p>{{ 'CARRITO.SUBTITULO' | translate }}</p>
     </div>
-
-    <!-- Si el carrito está vacío -->
     <div class="carrito-vacio" *ngIf="items().length === 0">
         <div class="icon-vacio"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="#ccc" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg></div>
-        <h2>Tu carrito está vacío</h2>
-        <p>Parece que aún no has añadido ningún campero.</p>
-        <button routerLink="/carta" class="btn-volver">Ir a la Carta</button>
+        <h2>{{ 'CARRITO.VACIO_TITULO' | translate }}</h2>
+        <p>{{ 'CARRITO.VACIO_DESC' | translate }}</p>
+        <button routerLink="/carta" class="btn-volver">{{ 'CARRITO.IR_CARTA' | translate }}</button>
     </div>
-
-    <!-- Lista de productos -->
     <div class="carrito-contenido" *ngIf="items().length > 0">
         <div class="items-lista">
             <div class="card-item" *ngFor="let item of items()">
                 <img [src]="item.producto.imagenUrl || 'assets/no-image.png'" alt="producto">
-                
                 <div class="detalles">
                     <h3>{{ item.producto.nombre }}</h3>
-                    <p class="precio-unit">{{ item.producto.precio | number:'1.2-2' }}€ / unidad</p>
+                    <p class="precio-unit">{{ item.producto.precio | number:'1.2-2' }}€ {{ 'CARRITO.UNIDAD' | translate }}</p>
                 </div>
-
                 <div class="controles">
                     <button (click)="disminuir(item.producto)">-</button>
                     <span class="cantidad">{{ item.cantidad }}</span>
                     <button (click)="aumentar(item.producto)">+</button>
                 </div>
-
-                <div class="subtotal">
-                    {{ (item.producto.precio * item.cantidad) | number:'1.2-2' }}€
-                </div>
-
+                <div class="subtotal">{{ (item.producto.precio * item.cantidad) | number:'1.2-2' }}€</div>
                 <button class="btn-borrar" (click)="eliminar(item.producto)">×</button>
             </div>
         </div>
-
-        <!-- Resumen del Pago -->
         <div class="resumen-pago">
             <div class="fila-total">
-                <span>Total a pagar:</span>
+                <span>{{ 'CARRITO.TOTAL' | translate }}</span>
                 <span class="monto-total">{{ total() | number:'1.2-2' }}€</span>
             </div>
-            <button class="btn-confirmar" (click)="irAConfirmarPedido()">CONFIRMAR PEDIDO</button>
-            <button routerLink="/carta" class="btn-seguir">Seguir comprando</button>
+            <button class="btn-confirmar" (click)="irAConfirmarPedido()">{{ 'CARRITO.CONFIRMAR' | translate }}</button>
+            <button routerLink="/carta" class="btn-seguir">{{ 'CARRITO.SEGUIR' | translate }}</button>
         </div>
     </div>
 </div>

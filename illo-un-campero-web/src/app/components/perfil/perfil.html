@@ -1,66 +1,59 @@
 <div class="perfil-wrapper">
-
   <div class="perfil-tabs" *ngIf="esAdmin()">
-    <button [class.active]="tabActiva() === 'perfil'" (click)="setTab('perfil')">Mi perfil</button>
-    <button [class.active]="tabActiva() === 'admin'" (click)="setTab('admin')">Panel de administración</button>
+    <button [class.active]="tabActiva() === 'perfil'" (click)="setTab('perfil')">{{ 'PERFIL.TAB' | translate }}</button>
+    <button [class.active]="tabActiva() === 'admin'" (click)="setTab('admin')">{{ 'PERFIL.TAB_ADMIN' | translate }}</button>
   </div>
-
-  <!-- ====== PERFIL ====== -->
   <div class="perfil-card" *ngIf="tabActiva() === 'perfil'">
-    <h1>Mi perfil</h1>
+    <h1>{{ 'PERFIL.TITULO' | translate }}</h1>
     <form [formGroup]="profileForm" (ngSubmit)="guardarCambios()">
       <div class="section">
-        <h3>Datos personales</h3>
+        <h3>{{ 'PERFIL.DATOS' | translate }}</h3>
         <div class="form-grid">
           <div class="form-group">
-            <label>Nombre</label>
-            <input formControlName="nombre" type="text" placeholder="Tu nombre">
-            <span class="field-error" *ngIf="profileForm.get('nombre')?.invalid && profileForm.get('nombre')?.touched">Mínimo 3 caracteres.</span>
+            <label>{{ 'PERFIL.NOMBRE' | translate }}</label>
+            <input formControlName="nombre" type="text" [placeholder]="'PERFIL.NOMBRE_PLACEHOLDER' | translate">
+            <span class="field-error" *ngIf="profileForm.get('nombre')?.invalid && profileForm.get('nombre')?.touched">{{ 'PERFIL.ERR_NOMBRE' | translate }}</span>
           </div>
           <div class="form-group">
-            <label>Email</label>
+            <label>{{ 'PERFIL.EMAIL' | translate }}</label>
             <input formControlName="email" type="email">
           </div>
           <div class="form-group">
-            <label>Teléfono</label>
+            <label>{{ 'PERFIL.TELEFONO' | translate }}</label>
             <input formControlName="telefono" type="text" placeholder="600 000 000">
-            <span class="field-error" *ngIf="profileForm.get('telefono')?.invalid && profileForm.get('telefono')?.touched">Teléfono español válido.</span>
+            <span class="field-error" *ngIf="profileForm.get('telefono')?.invalid && profileForm.get('telefono')?.touched">{{ 'PERFIL.ERR_TELEFONO' | translate }}</span>
           </div>
           <div class="form-group">
-            <label>Dirección</label>
-            <input formControlName="direccion" type="text" placeholder="Calle, número, ciudad">
+            <label>{{ 'PERFIL.DIRECCION' | translate }}</label>
+            <input formControlName="direccion" type="text" [placeholder]="'PERFIL.DIR_PLACEHOLDER' | translate">
           </div>
         </div>
       </div>
       <div class="actions">
-        <button type="submit" class="btn-primary" [disabled]="profileForm.invalid">Guardar cambios</button>
+        <button type="submit" class="btn-primary" [disabled]="profileForm.invalid">{{ 'PERFIL.GUARDAR' | translate }}</button>
       </div>
     </form>
     <div class="section security">
-      <h3>Seguridad</h3>
-      <p>Actualiza tu contraseña periódicamente.</p>
-      <button class="btn-secondary" (click)="cambiarPass()">Cambiar contraseña</button>
+      <h3>{{ 'PERFIL.SEGURIDAD' | translate }}</h3>
+      <p>{{ 'PERFIL.SEGURIDAD_DESC' | translate }}</p>
+      <button class="btn-secondary" (click)="cambiarPass()">{{ 'PERFIL.CAMBIAR_PASS' | translate }}</button>
     </div>
     <div class="success-msg" *ngIf="mensaje">{{ mensaje }}</div>
     <div class="error-msg" *ngIf="mensajeError">{{ mensajeError }}</div>
   </div>
-
-  <!-- ====== ADMIN ====== -->
   <div class="admin-panel" *ngIf="tabActiva() === 'admin' && esAdmin()">
     <div class="admin-subnav">
-      <button [class.active]="subTabAdmin() === 'pedidos'" (click)="setSubTab('pedidos')">Pedidos</button>
-      <button [class.active]="subTabAdmin() === 'productos'" (click)="setSubTab('productos')">Productos</button>
-      <button [class.active]="subTabAdmin() === 'cupones'" (click)="setSubTab('cupones')">Cupones</button>
-      <button [class.active]="subTabAdmin() === 'estadisticas'" (click)="setSubTab('estadisticas')">Estadísticas</button>
-      <button [class.active]="subTabAdmin() === 'tienda'" (click)="setSubTab('tienda')">Estado tienda</button>
+      <button [class.active]="subTabAdmin() === 'pedidos'" (click)="setSubTab('pedidos')">{{ 'ADMIN.PEDIDOS' | translate }}</button>
+      <button [class.active]="subTabAdmin() === 'productos'" (click)="setSubTab('productos')">{{ 'ADMIN.PRODUCTOS' | translate }}</button>
+      <button [class.active]="subTabAdmin() === 'cupones'" (click)="setSubTab('cupones')">{{ 'ADMIN.CUPONES' | translate }}</button>
+      <button [class.active]="subTabAdmin() === 'estadisticas'" (click)="setSubTab('estadisticas')">{{ 'ADMIN.ESTADISTICAS' | translate }}</button>
+      <button [class.active]="subTabAdmin() === 'tienda'" (click)="setSubTab('tienda')">{{ 'ADMIN.TIENDA' | translate }}</button>
     </div>
-
-    <!-- PEDIDOS -->
     <div class="admin-content" *ngIf="subTabAdmin() === 'pedidos'">
       <div class="admin-section-header">
-        <h2>Pedidos activos</h2>
+        <h2>{{ 'ADMIN.PEDIDOS_TITULO' | translate }}</h2>
         <button class="btn-refresh" (click)="cargarPedidos()" [disabled]="cargandoPedidos()">
-          {{ cargandoPedidos() ? 'Cargando...' : 'Actualizar' }}
+          {{ cargandoPedidos() ? ('ADMIN.CARGANDO' | translate) : ('ADMIN.ACTUALIZAR' | translate) }}
         </button>
       </div>
       <div class="spinner-container" *ngIf="cargandoPedidos()"><div class="spinner"></div></div>
@@ -82,7 +75,7 @@
             </div>
             <div class="pedido-productos">
               <p *ngFor="let item of pedido.productos">{{ item.cantidad }}x {{ item.nombre }}</p>
-              <p *ngIf="pedido.notasGenerales" class="notas-pedido">Nota: {{ pedido.notasGenerales }}</p>
+              <p *ngIf="pedido.notasGenerales" class="notas-pedido">{{ 'ADMIN.NOTA' | translate }} {{ pedido.notasGenerales }}</p>
             </div>
             <div class="pedido-total-col">
               <span class="total-amount">{{ pedido.total | number:'1.2-2' }}€</span>
@@ -90,109 +83,93 @@
             </div>
           </div>
           <div class="cambiar-estado">
-            <label>Cambiar estado:</label>
+            <label>{{ 'ADMIN.CAMBIAR_ESTADO' | translate }}</label>
             <div class="estado-botones">
               <button *ngFor="let estado of estadosDisponibles" class="btn-estado"
                 [class.actual]="pedido.estado === estado"
                 [style.border-color]="getEstadoColor(estado)"
                 [style.color]="pedido.estado === estado ? '#fff' : getEstadoColor(estado)"
                 [style.background]="pedido.estado === estado ? getEstadoColor(estado) : 'transparent'"
-                (click)="cambiarEstadoPedido(pedido.id!, estado)">
-                {{ estado }}
-              </button>
+                (click)="cambiarEstadoPedido(pedido.id!, estado)">{{ estado }}</button>
             </div>
           </div>
         </div>
       </div>
       <div class="vacio-estado" *ngIf="!cargandoPedidos() && pedidosActivos().length === 0 && !errorPedidos()">
-        <p>No hay pedidos activos en este momento.</p>
+        <p>{{ 'ADMIN.SIN_PEDIDOS' | translate }}</p>
       </div>
     </div>
-
-    <!-- PRODUCTOS -->
     <div class="admin-content" *ngIf="subTabAdmin() === 'productos'">
       <app-gestion-productos></app-gestion-productos>
     </div>
-
-    <!-- CUPONES -->
     <div class="admin-content" *ngIf="subTabAdmin() === 'cupones'">
-      <h2>Cupones de descuento</h2>
+      <h2>{{ 'ADMIN.CUPONES_TITULO' | translate }}</h2>
       <div class="cupon-crear">
-        <h3>Crear nuevo cupón</h3>
+        <h3>{{ 'ADMIN.CREAR_CUPON' | translate }}</h3>
         <div class="cupon-form-grid">
           <div class="form-group">
-            <label>Código</label>
+            <label>{{ 'ADMIN.CUPON_CODIGO' | translate }}</label>
             <input type="text" [(ngModel)]="nuevoCuponCodigo" placeholder="VERANO25" style="text-transform:uppercase">
           </div>
           <div class="form-group">
-            <label>Descuento (%)</label>
+            <label>{{ 'ADMIN.CUPON_DESCUENTO' | translate }}</label>
             <input type="number" [(ngModel)]="nuevoCuponDescuento" placeholder="10" min="1" max="100">
           </div>
         </div>
         <div class="success-msg" *ngIf="mensajeCupon()">{{ mensajeCupon() }}</div>
-        <button class="btn-primary" (click)="crearCupon()"
-          [disabled]="guardandoCupon() || !nuevoCuponCodigo || !nuevoCuponDescuento">
-          {{ guardandoCupon() ? 'Guardando...' : 'Crear cupón' }}
+        <button class="btn-primary" (click)="crearCupon()" [disabled]="guardandoCupon() || !nuevoCuponCodigo || !nuevoCuponDescuento">
+          {{ guardandoCupon() ? ('ADMIN.GUARDANDO' | translate) : ('ADMIN.CREAR_BTN' | translate) }}
         </button>
       </div>
-
       <div class="cupones-lista">
-        <h3>Cupones activos</h3>
+        <h3>{{ 'ADMIN.CUPONES_ACTIVOS' | translate }}</h3>
         <div class="cupon-item" *ngFor="let c of cupones()">
           <div class="cupon-info">
             <span class="cupon-codigo">{{ c.codigo }}</span>
-            <span class="cupon-desc">{{ c.descuento }}% de descuento</span>
+            <span class="cupon-desc">{{ c.descuento }}% {{ 'ADMIN.DESCUENTO_LABEL' | translate }}</span>
           </div>
           <div class="cupon-acciones">
-            <span class="badge-activo" [class.inactivo]="!c.activo">{{ c.activo ? 'Activo' : 'Inactivo' }}</span>
-            <button *ngIf="c.activo" class="btn-desactivar" (click)="desactivarCupon(c.id!)">Desactivar</button>
+            <span class="badge-activo" [class.inactivo]="!c.activo">{{ c.activo ? ('ADMIN.ACTIVO' | translate) : ('ADMIN.INACTIVO' | translate) }}</span>
+            <button *ngIf="c.activo" class="btn-desactivar" (click)="desactivarCupon(c.id!)">{{ 'ADMIN.DESACTIVAR' | translate }}</button>
           </div>
         </div>
-        <p class="vacio-estado" *ngIf="cupones().length === 0">No hay cupones creados.</p>
+        <p class="vacio-estado" *ngIf="cupones().length === 0">{{ 'ADMIN.SIN_CUPONES' | translate }}</p>
       </div>
     </div>
-
-    <!-- ESTADÍSTICAS -->
     <div class="admin-content" *ngIf="subTabAdmin() === 'estadisticas'">
-      <h2>Estadísticas de hoy</h2>
+      <h2>{{ 'ADMIN.STATS_TITULO' | translate }}</h2>
       <div class="stats-grid" *ngIf="estadisticas()">
         <div class="stat-card">
           <span class="stat-valor">{{ estadisticas()!.totalPedidos }}</span>
-          <span class="stat-label">Pedidos realizados</span>
+          <span class="stat-label">{{ 'ADMIN.PEDIDOS_REALIZADOS' | translate }}</span>
         </div>
         <div class="stat-card destacado">
           <span class="stat-valor">{{ estadisticas()!.totalDinero | number:'1.2-2' }}€</span>
-          <span class="stat-label">Recaudado hoy</span>
+          <span class="stat-label">{{ 'ADMIN.RECAUDADO' | translate }}</span>
         </div>
         <div class="stat-card" *ngIf="estadisticas()!.totalPedidos > 0">
           <span class="stat-valor">{{ (estadisticas()!.totalDinero / estadisticas()!.totalPedidos) | number:'1.2-2' }}€</span>
-          <span class="stat-label">Ticket medio</span>
+          <span class="stat-label">{{ 'ADMIN.TICKET' | translate }}</span>
         </div>
       </div>
-      <div class="vacio-estado" *ngIf="!estadisticas()"><p>No hay datos disponibles.</p></div>
+      <div class="vacio-estado" *ngIf="!estadisticas()"><p>{{ 'ADMIN.SIN_DATOS' | translate }}</p></div>
     </div>
-
-    <!-- TIENDA -->
     <div class="admin-content" *ngIf="subTabAdmin() === 'tienda'">
-      <h2>Estado de la tienda</h2>
+      <h2>{{ 'ADMIN.TIENDA_TITULO' | translate }}</h2>
       <div class="tienda-control">
         <div class="tienda-estado-visual" [class.abierta]="tiendaAbierta()" [class.cerrada]="!tiendaAbierta()">
           <div class="tienda-indicator"></div>
           <div class="tienda-texto">
-            <strong>{{ tiendaAbierta() ? 'Tienda abierta' : 'Tienda cerrada' }}</strong>
-            <span>{{ tiendaAbierta() ? 'Los clientes pueden realizar pedidos.' : 'No se están aceptando pedidos.' }}</span>
+            <strong>{{ tiendaAbierta() ? ('ADMIN.TIENDA_ABIERTA' | translate) : ('ADMIN.TIENDA_CERRADA' | translate) }}</strong>
+            <span>{{ tiendaAbierta() ? ('ADMIN.TIENDA_ABIERTA_DESC' | translate) : ('ADMIN.TIENDA_CERRADA_DESC' | translate) }}</span>
           </div>
         </div>
-        <button class="btn-toggle-tienda"
-          [class.cerrar]="tiendaAbierta()" [class.abrir]="!tiendaAbierta()"
+        <button class="btn-toggle-tienda" [class.cerrar]="tiendaAbierta()" [class.abrir]="!tiendaAbierta()"
           (click)="toggleTienda()" [disabled]="guardandoEstado()">
-          {{ guardandoEstado() ? 'Guardando...' : (tiendaAbierta() ? 'Cerrar la tienda' : 'Abrir la tienda') }}
+          {{ guardandoEstado() ? ('ADMIN.GUARDANDO' | translate) : (tiendaAbierta() ? ('ADMIN.CERRAR_TIENDA' | translate) : ('ADMIN.ABRIR_TIENDA' | translate)) }}
         </button>
-        <div class="tienda-aviso">
-          <p>Al cerrar la tienda, los clientes verán un mensaje de cierre y no podrán completar pedidos.</p>
-        </div>
+        <div class="tienda-aviso"><p>{{ 'ADMIN.TIENDA_AVISO' | translate }}</p></div>
       </div>
     </div>
-
   </div>
 </div>

@@ -1,48 +1,43 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
 export class Header {
   public router = inject(Router);
+  translate = inject(TranslateService);
   menuMovilAbierto = false;
 
-  // ESTA FUNCIÓN ABRE Y CIERRA EL CHIRINGUITO EN EL MÓVIL
-  toggleMenu() {
-    this.menuMovilAbierto = !this.menuMovilAbierto;
+  get idiomaActual() { return this.translate.currentLang || 'es'; }
+
+  cambiarIdioma() {
+    const nuevo = this.idiomaActual === 'es' ? 'en' : 'es';
+    this.translate.use(nuevo);
+    localStorage.setItem('illo_idioma', nuevo);
   }
 
-  comprobarPedido() {
-    // Cerramos el menú del móvil antes de soltar el bombazo del pop-up
-    this.menuMovilAbierto = false;
+  toggleMenu() { this.menuMovilAbierto = !this.menuMovilAbierto; }
 
+  comprobarPedido() {
+    this.menuMovilAbierto = false;
+    const esEs = this.idiomaActual === 'es';
     Swal.fire({
-      title: '¡Epa, primo!',
-      text: 'Para poder ver tu pedido y que te llegue el campero a casa, primero tienes que registrarte en la familia.',
-      icon: 'info',
-      iconColor: '#f39200',
-      showCancelButton: true,
-      confirmButtonText: '¡Me registro!',
-      cancelButtonText: 'Luego lo hago',
-      confirmButtonColor: '#f39200',
-      cancelButtonColor: '#0d1117',
-      heightAuto: false,
-      backdrop: `rgba(0,0,123,0.1)`, // Un toquecito de color al fondo para que resalte
-      customClass: {
-        popup: 'pop-redondeado' // Clase por si quieres redondearlo más en CSS
-      }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Directo al bloque de registro, berraco
-        this.router.navigate(['/registro']);
-      }
-    });
+      title: esEs ? '¡Epa, primo!' : 'Hold on!',
+      text: esEs
+        ? 'Para poder ver tu pedido tienes que registrarte primero.'
+        : 'You need to sign up first to see your order.',
+      icon: 'info', iconColor: '#f39200', showCancelButton: true,
+      confirmButtonText: esEs ? '¡Me registro!' : 'Sign me up!',
+      cancelButtonText: esEs ? 'Luego lo hago' : 'Maybe later',
+      confirmButtonColor: '#f39200', cancelButtonColor: '#0d1117', heightAuto: false,
+    }).then(r => { if (r.isConfirmed) this.router.navigate(['/registro']); });
   }
 }
