@@ -101,6 +101,7 @@ export class CocinaDashboardComponent implements OnInit, OnDestroy {
         if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
+          this.cargarPedidos()
           this.error.set('No se pudo cambiar el estado. Inténtalo de nuevo.');
         }
       }
