@@ -24,7 +24,7 @@ export class CartaComponent implements OnInit {
   filtroActual: string = 'todos';
   textoBusqueda: string = '';
 
-  subCamperos = ['Vegano', 'Vegetariano', 'Carnivoro', 'Pan de Pizza', 'Mini'];
+  subCamperos = ['Vegano', 'Vegetariano', 'Carnívoro', 'Pan de Pizza', 'Mini', 'De To La Vía'];
   subEntrantes = ['Ensalada', 'Patata', 'Croqueta', 'Variante'];
 
   ngOnInit(): void {
