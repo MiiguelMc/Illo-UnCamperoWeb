@@ -44,7 +44,8 @@ export class GestionProductosComponent implements OnInit {
             categoria: ['', Validators.required],
             subcategoria: ['', Validators.required],
             imagenUrl: [''],
-            disponible: [true]
+            disponible: [true],
+            esOferta: [false]
         });
 
         this.form.get('categoria')?.valueChanges.subscribe(cat => {
@@ -72,7 +73,7 @@ export class GestionProductosComponent implements OnInit {
     }
 
     abrirNuevo() {
-        this.form.reset({ disponible: true });
+        this.form.reset({ disponible: true, esOferta: false });
         this.productActual.set(null);
         this.modoFormulario.set('nuevo');
         this.mensajeExito.set('');
@@ -88,7 +89,8 @@ export class GestionProductosComponent implements OnInit {
             categoria: p.categoria,
             subcategoria: p.subcategoria,
             imagenUrl: p.imagenUrl || '',
-            disponible: p.disponible !== false
+            disponible: p.disponible !== false,
+            esOferta: p.esOferta === true
         });
         this.modoFormulario.set('editar');
         this.mensajeExito.set('');

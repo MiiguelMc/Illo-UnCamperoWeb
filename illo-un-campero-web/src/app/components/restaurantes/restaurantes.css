@@ -2,13 +2,20 @@
 
 :host {
     font-family: 'Poppins', sans-serif;
+    --brand: #f39200;
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --text: #0b1220;
+    --muted: rgba(11, 18, 32, 0.7);
+    --stroke: rgba(11, 18, 32, 0.10);
 }
 
 .content {
-    max-width: 1300px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #fcfcfc; /* Un blanco roto muy elegante */
+    padding: 18px 16px 36px;
+    background: var(--bg);
+    color: var(--text);
 }
 
 /* HERO SECTION PRO */
@@ -18,20 +25,22 @@
     background-size: cover;
     background-position: center;
     width: 100%;
-    aspect-ratio: 2.5 / 1; 
-    border-radius: 25px;
+    min-height: 320px;
+    border-radius: 22px;
     overflow: hidden;
-    margin-bottom: 40px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    margin-bottom: 22px;
+    box-shadow: 0 18px 34px rgba(0,0,0,0.16);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%);
+    background:
+        linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.10) 78%),
+        radial-gradient(1200px 500px at 20% 50%, rgba(243,146,0,0.18), transparent 60%);
     display: flex;
     align-items: center;
-    padding: 0 60px;
+    padding: 32px 34px;
 }
 
 .hero-content {
@@ -40,23 +49,29 @@
 }
 
 .badge-promo {
-    background: #f39200;
-    padding: 5px 12px;
-    border-radius: 50px;
-    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
 }
 
 .hero-content h1 {
-    font-size: 3rem;
+    font-size: 3.1rem;
     line-height: 1.1;
     margin: 15px 0;
-    font-weight: 800;
+    font-weight: 900;
+    letter-spacing: -0.6px;
 }
 
 .highlight-text {
-    color: #f39200;
+    color: var(--brand);
 }
 
 .hero-content p {
@@ -71,14 +86,20 @@
 }
 
 .btn-primary {
-    background: #f39200;
+    background: var(--brand);
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 12px;
-    font-weight: 600;
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: 900;
     cursor: pointer;
-    transition: 0.3s;
+    transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+    box-shadow: 0 12px 22px rgba(243,146,0,0.25);
+}
+
+.btn-primary:hover {
+    background: #d97f00;
+    transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -126,15 +147,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
-    border-left: 6px solid #f39200;
-    padding-left: 15px;
+    margin-bottom: 14px;
+    padding-left: 14px;
+    border-left: 6px solid var(--brand);
 }
 
 .section-header h3 {
-    font-size: 1.8rem;
+    font-size: 1.35rem;
     margin: 0;
-    font-weight: 700;
+    font-weight: 900;
+    letter-spacing: -0.2px;
 }
 
 .item-count {
@@ -158,4 +180,251 @@
 
 .menu-group {
     animation: fadeInUp 0.6s ease-out forwards;
+}
+/* ── SECCIÓN OFERTAS ── */
+.ofertas-section {
+    margin-bottom: 18px;
+}
+
+/* ── PACKS (DESLIZABLE) ── */
+.packs-section {
+    margin-bottom: 18px;
+}
+
+.packs-scroll {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+}
+.packs-scroll::-webkit-scrollbar { display: none; }
+
+.pack-card {
+    appearance: none;
+    border: 1px solid var(--stroke);
+    cursor: pointer;
+    text-align: left;
+    background: var(--card);
+    color: var(--text);
+    border-radius: 18px;
+    padding: 16px;
+    min-width: 280px;
+    max-width: 340px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 10px 22px rgba(11,18,32,0.10);
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.pack-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(11,18,32,0.14);
+    border-color: rgba(243,146,0,0.35);
+}
+
+.pack-top {
+    display: flex;
+    align-items: flex-start;
+}
+
+.pack-info h4 {
+    margin: 0 0 6px;
+    font-size: 1.08rem;
+    font-weight: 950;
+}
+
+.pack-info p {
+    margin: 0;
+    font-size: 0.86rem;
+    color: var(--muted);
+    line-height: 1.35;
+}
+
+.pack-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--stroke);
+}
+
+.pack-price {
+    font-size: 1.18rem;
+    font-weight: 950;
+    color: var(--text);
+    letter-spacing: -0.2px;
+}
+
+.pack-add-btn {
+    background: var(--brand);
+    color: white;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 950;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.pack-add-btn:hover {
+    background: #d97f00;
+}
+
+
+.ofertas-section .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    border-left: 6px solid #f39200;
+    padding-left: 15px;
+}
+
+.ofertas-section .section-header h3 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.section-badge {
+    background: #fff3e0;
+    color: var(--brand);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--brand);
+    letter-spacing: 0.5px;
+}
+
+/* Scroll horizontal de tarjetas */
+.ofertas-scroll {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+}
+.ofertas-scroll::-webkit-scrollbar { display: none; }
+
+/* Tarjeta individual */
+.oferta-card {
+    background: var(--card);
+    color: var(--text);
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 230px;
+    max-width: 260px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid var(--stroke);
+    box-shadow: 0 10px 22px rgba(11,18,32,0.10);
+    transition: transform 0.2s;
+}
+
+.oferta-card:hover {
+    transform: translateY(-4px);
+}
+
+.oferta-icono {
+    font-size: 1.8rem;
+}
+
+.oferta-info h4 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.oferta-info p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+.oferta-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--stroke);
+}
+
+.oferta-precio {
+    font-size: 1.2rem;
+    font-weight: 950;
+    color: var(--text);
+}
+
+.oferta-controles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-anadir-oferta {
+    background: var(--brand);
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 950;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.btn-anadir-oferta:hover {
+    background: #d97f00;
+}
+
+.btn-quitar-oferta {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.btn-quitar-oferta:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.oferta-cantidad {
+    font-size: 1rem;
+    font-weight: 800;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Responsive — en móvil las tarjetas ocupan más */
+@media (max-width: 600px) {
+    .oferta-card {
+        min-width: 190px;
+        padding: 16px;
+    }
+
+    .pack-card {
+        min-width: 230px;
+        padding: 16px;
+    }
 }

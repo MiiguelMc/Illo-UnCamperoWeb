@@ -127,7 +127,8 @@
     "NO": "No",
     "CANCELAR": "Cancelar",
     "GUARDAR": "Guardar",
-    "GUARDANDO": "Guardando..."
+    "GUARDANDO": "Guardando...",
+    "LABEL_OFERTA": "Oferta especial"
   },
   "LOGIN": {
     "TITULO": "¡Hola de nuevo!",
@@ -244,7 +245,27 @@
     "ENTRANTES": "Entrantes",
     "CAMPEROS": "Nuestros Camperos",
     "POSTRES": "Postres",
-    "BEBIDAS": "Bebidas"
+    "BEBIDAS": "Bebidas",
+    "OFERTAS": "Ofertas especiales",
+    "SOLO_TIEMPO": "Solo por tiempo limitado",
+    "ANADIR": "Añadir",
+    "PACKS": {
+      "TITULO": "Packs listos para pedir",
+      "SUBTITULO": "Añade todo al carrito en 1 toque",
+      "BTN": "Añadir pack y abrir carrito",
+      "PAREJA": {
+        "TITULO": "Noche de pareja",
+        "DESC": "2 camperos + 1 ración de papas + 2 cervezas"
+      },
+      "COLEGA": {
+        "TITULO": "Cena con colegas",
+        "DESC": "3 camperos + 2 raciones para compartir + 3 bebidas"
+      },
+      "FAMILIA": {
+        "TITULO": "Pack familiar",
+        "DESC": "4 camperos + 2 entrantes + 4 bebidas"
+      }
+    }
   },
   "SEGUIMIENTO": {
     "VOLVER": "← Mis pedidos",

@@ -8,4 +8,5 @@ export interface Producto {
     imagen?: string; 
     imagenUrl?: string; 
     disponible?: boolean;
+    esOferta?: boolean;
 }

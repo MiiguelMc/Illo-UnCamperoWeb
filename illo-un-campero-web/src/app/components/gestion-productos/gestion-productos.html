@@ -89,6 +89,13 @@
                         <option [ngValue]="false">{{ 'GESTION.NO' | translate }}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>{{ 'GESTION.LABEL_OFERTA' | translate }}</label>
+                    <select formControlName="esOferta">
+                        <option [ngValue]="false">{{ 'GESTION.NO' | translate }}</option>
+                        <option [ngValue]="true">{{ 'GESTION.SI' | translate }}</option>
+                    </select>
+                </div>
             </div>
             <div class="form-actions">
                 <button type="button" class="btn-cancel" (click)="cerrarFormulario()" [disabled]="guardando()">{{ 'GESTION.CANCELAR' | translate }}</button>

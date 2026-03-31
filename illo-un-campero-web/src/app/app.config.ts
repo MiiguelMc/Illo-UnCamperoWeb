@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
 
-    // 🔥 ngx-translate nuevo
+    // ngx-translate
     provideTranslateService({
       defaultLanguage: 'es',
       loader: provideTranslateHttpLoader({
@@ -33,7 +33,7 @@ export const appConfig: ApplicationConfig = {
       })
     }),
 
-    // 🔥 Firebase
+    // Firebase
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => {
       const auth = getAuth();

@@ -10,11 +10,11 @@
     </div>
     <nav class="sticky-nav">
         <div class="nav-container">
-            <button [class.active]="filtroActual === 'todos'" (click)="setFiltro('todos')">✨ {{ 'CARTA.TODOS' | translate }}</button>
-            <button [class.active]="filtroActual === 'entrantes'" (click)="setFiltro('entrantes')">🥗 {{ 'CARTA.ENTRANTES' | translate }}</button>
-            <button [class.active]="filtroActual === 'camperos'" (click)="setFiltro('camperos')">🍔 {{ 'CARTA.CAMPEROS' | translate }}</button>
-            <button [class.active]="filtroActual === 'postres'" (click)="setFiltro('postres')">🍰 {{ 'CARTA.POSTRES' | translate }}</button>
-            <button [class.active]="filtroActual === 'bebidas'" (click)="setFiltro('bebidas')">🥤 {{ 'CARTA.BEBIDAS' | translate }}</button>
+            <button [class.active]="filtroActual === 'todos'" (click)="setFiltro('todos')">{{ 'CARTA.TODOS' | translate }}</button>
+            <button [class.active]="filtroActual === 'entrantes'" (click)="setFiltro('entrantes')">{{ 'CARTA.ENTRANTES' | translate }}</button>
+            <button [class.active]="filtroActual === 'camperos'" (click)="setFiltro('camperos')">{{ 'CARTA.CAMPEROS' | translate }}</button>
+            <button [class.active]="filtroActual === 'postres'" (click)="setFiltro('postres')">{{ 'CARTA.POSTRES' | translate }}</button>
+            <button [class.active]="filtroActual === 'bebidas'" (click)="setFiltro('bebidas')">{{ 'CARTA.BEBIDAS' | translate }}</button>
         </div>
     </nav>
     <div class="carta-container">

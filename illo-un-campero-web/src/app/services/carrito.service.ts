@@ -33,6 +33,13 @@ export class CarritoService {
     });
   }
 
+  private key(producto: Producto): string {
+    return (
+      producto.id ??
+      `${(producto.nombre || '').trim()}__${(producto.categoria || '').trim()}__${(producto.subcategoria || '').trim()}`
+    );
+  }
+
   private cargarStorage(): ItemCarrito[] {
     try {
       const guardado = localStorage.getItem(STORAGE_KEY);
@@ -43,8 +50,10 @@ export class CarritoService {
   }
 
   agregar(producto: Producto, cantidad: number = 1) {
+    if (producto?.disponible === false) return;
     const actual = this._items();
-    const index = actual.findIndex(i => i.producto.id === producto.id);
+    const k = this.key(producto);
+    const index = actual.findIndex(i => this.key(i.producto) === k);
     if (index >= 0) {
       actual[index].cantidad += cantidad;
       this._items.set([...actual]);
@@ -55,7 +64,8 @@ export class CarritoService {
 
   quitar(producto: Producto) {
     const actual = this._items();
-    const index = actual.findIndex(i => i.producto.id === producto.id);
+    const k = this.key(producto);
+    const index = actual.findIndex(i => this.key(i.producto) === k);
     if (index >= 0) {
       if (actual[index].cantidad > 1) {
         actual[index].cantidad--;
@@ -67,7 +77,8 @@ export class CarritoService {
   }
 
   eliminar(producto: Producto) {
-    this._items.set(this._items().filter(i => i.producto.id !== producto.id));
+    const k = this.key(producto);
+    this._items.set(this._items().filter(i => this.key(i.producto) !== k));
   }
 
   vaciar() {

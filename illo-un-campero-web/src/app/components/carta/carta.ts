@@ -29,7 +29,7 @@ export class CartaComponent implements OnInit {
 
   ngOnInit(): void {
     this.productoService.obtenerProductos().subscribe({
-      next: (res) => { this.productos = res; },
+      next: (res) => { this.productos = (res || []).filter(p => p?.disponible !== false); },
       error: (err) => console.error('Error al cargar los productos:', err)
     });
   }

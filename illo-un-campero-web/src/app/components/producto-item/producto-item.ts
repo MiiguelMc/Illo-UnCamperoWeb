@@ -15,7 +15,13 @@ export class ProductoItemComponent {
   private carritoService = inject(CarritoService);
 
   cantidadEnCarrito = computed(() => {
-    const item = this.carritoService.items().find(i => i.producto.id === this.producto.id);
+    const item = this.carritoService.items().find(i =>
+      (i.producto.id && this.producto.id && i.producto.id === this.producto.id) ||
+      (!i.producto.id && !this.producto.id &&
+        (i.producto.nombre || '').trim() === (this.producto.nombre || '').trim() &&
+        (i.producto.categoria || '').trim() === (this.producto.categoria || '').trim() &&
+        (i.producto.subcategoria || '').trim() === (this.producto.subcategoria || '').trim())
+    );
     return item ? item.cantidad : 0;
   });
 

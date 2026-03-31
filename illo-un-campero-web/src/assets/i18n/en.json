@@ -127,7 +127,8 @@
     "NO": "No",
     "CANCELAR": "Cancel",
     "GUARDAR": "Save",
-    "GUARDANDO": "Saving..."
+    "GUARDANDO": "Saving...",
+    "LABEL_OFERTA": "Special offer"
   },
   "LOGIN": {
     "TITULO": "Welcome back!",
@@ -244,7 +245,27 @@
     "ENTRANTES": "Starters",
     "CAMPEROS": "Our Camperos",
     "POSTRES": "Desserts",
-    "BEBIDAS": "Drinks"
+    "BEBIDAS": "Drinks",
+    "OFERTAS": "Special offers",
+    "SOLO_TIEMPO": "Limited time only",
+    "ANADIR": "Add",
+    "PACKS": {
+      "TITULO": "Ready-to-order packs",
+      "SUBTITULO": "Add everything to cart in 1 tap",
+      "BTN": "Add pack and open cart",
+      "PAREJA": {
+        "TITULO": "Couple night",
+        "DESC": "2 camperos + fries + 2 beers"
+      },
+      "COLEGA": {
+        "TITULO": "Dinner with friends",
+        "DESC": "3 camperos + 2 sharing sides + 3 drinks"
+      },
+      "FAMILIA": {
+        "TITULO": "Family pack",
+        "DESC": "4 camperos + 2 starters + 4 drinks"
+      }
+    }
   },
   "SEGUIMIENTO": {
     "VOLVER": "← My orders",
