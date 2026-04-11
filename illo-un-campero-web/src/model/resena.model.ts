@@ -1,8 +1,10 @@
+// lo que devuelve /api/resenas (nombreUsuario lo añade el back)
 export interface Resena {
     id?: string;
-    usuarioId: string;
-    usuarioNombre: string;
-    comentario: string;
+    idPedido?: string;
+    idUsuario?: string;
+    nombreUsuario?: string;
+    comentario?: string;
     puntuacion: number;
-    fecha: any;
+    fecha: number;
 }

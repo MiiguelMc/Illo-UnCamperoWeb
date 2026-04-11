@@ -6,6 +6,7 @@ import { Auth } from '@angular/fire/auth';
 import { Pedido, CrearPedidoDTO, EstadoPedido } from '../../model/pedido.model';
 import { CarritoService } from './carrito.service';
 import { Producto } from '../../model/producto.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class PedidoService {
@@ -13,7 +14,7 @@ export class PedidoService {
     private auth = inject(Auth);
     private carritoService = inject(CarritoService);
 
-    private API_URL = 'https://illo-uncamperobackend.onrender.com/api/pedidos';
+    private API_URL = `${environment.apiUrl}/pedidos`;
 
     private async getAuthHeaders(): Promise<HttpHeaders> {
         const user = this.auth.currentUser;
@@ -82,7 +83,6 @@ export class PedidoService {
         return this.actualizarEstadoPedido(id, 'CANCELADO');
     }
 
-    // Carga los productos de un pedido anterior en el carrito
     repetirPedido(pedido: Pedido): void {
         this.carritoService.vaciar();
         pedido.productos.forEach(item => {

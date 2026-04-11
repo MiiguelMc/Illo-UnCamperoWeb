@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Auth } from '@angular/fire/auth';
 import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 const STORAGE_KEY = 'restaurante_abierto';
 
@@ -11,10 +12,10 @@ export class RestauranteService {
   private auth = inject(Auth);
   private http = inject(HttpClient);
 
-  private API_URL = 'https://illo-uncamperobackend.onrender.com/api';
+  // misma base que el resto de servicios (estadisticas las teniamos aqui por la pantalla restaurantes)
+  private API_URL = environment.apiUrl;
 
-  // Estado reactivo del restaurante. Por defecto abierto.
-  // Se lee de localStorage para persistir entre recargas.
+  // si no hay nada guardado asumimos abierto
   abierto = signal<boolean>(this.leerEstadoLocal());
 
   private leerEstadoLocal(): boolean {

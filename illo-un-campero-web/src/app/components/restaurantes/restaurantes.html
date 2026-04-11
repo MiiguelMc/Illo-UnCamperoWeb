@@ -1,23 +1,67 @@
-<main class="content">
+<main class="home">
 
-    <!-- HERO -->
-    <section class="hero-section">
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <span class="badge-promo">{{ 'RESTAURANTES.PROMO' | translate }}</span>
-                <h1>{{ 'RESTAURANTES.TITULO' | translate }} <span class="highlight-text">{{ 'RESTAURANTES.HIGHLIGHT' | translate }}</span></h1>
-                <p>{{ 'RESTAURANTES.DESC' | translate }}</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary" (click)="scrollTo('sec-camperos')">{{ 'RESTAURANTES.VER_MENU' | translate }}</button>
-                </div>
+    <div class="aviso-cerrado" *ngIf="!tienda.cargando() && !tienda.tiendaAbierta()">
+        <span class="aviso-cerrado-ico">🌙</span>
+        <p>{{ 'RESTAURANTES.CERRADO_AVISO' | translate }}</p>
+    </div>
+
+    <!-- Hero estilo apps de comida a domicilio -->
+    <section class="hero" aria-labelledby="home-titulo">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-gradient" aria-hidden="true"></div>
+        <div class="hero-inner">
+            <span class="badge-promo">{{ 'RESTAURANTES.PROMO' | translate }}</span>
+            <h1 id="home-titulo">
+                {{ 'RESTAURANTES.TITULO' | translate }}
+                <span class="highlight-text">{{ 'RESTAURANTES.HIGHLIGHT' | translate }}</span>
+            </h1>
+            <p class="hero-desc">{{ 'RESTAURANTES.DESC' | translate }}</p>
+
+            <ul class="hero-trust" role="list">
+                <li>
+                    <span class="trust-dot" aria-hidden="true"></span>
+                    {{ 'RESTAURANTES.TRUST_ENVIO' | translate }}
+                </li>
+                <li>
+                    <span class="trust-dot" aria-hidden="true"></span>
+                    {{ 'RESTAURANTES.TRUST_DOM' | translate }}
+                </li>
+                <li>
+                    <span class="trust-dot" aria-hidden="true"></span>
+                    {{ 'RESTAURANTES.TRUST_FRESCO' | translate }}
+                </li>
+            </ul>
+
+            <div class="hero-cta">
+                <a routerLink="/carta" class="btn-pedir">
+                    {{ 'RESTAURANTES.PEDIR_AHORA' | translate }}
+                </a>
+                <a routerLink="/carta" class="btn-secundario">
+                    {{ 'RESTAURANTES.VER_MENU' | translate }}
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- ── PACKS (DESLIZABLE) ── -->
-    <section class="packs-section" *ngIf="packs.length > 0">
+    <!-- Accesos rápidos (scroll horizontal en móvil, tipo Glovo / Uber Eats) -->
+    <nav class="quick-chips" aria-label="Atajos">
+        <a routerLink="/carta" class="chip chip-menu">
+            <span class="chip-emoji" aria-hidden="true">🍔</span>
+            {{ 'RESTAURANTES.CHIP_MENU' | translate }}
+        </a>
+        <button type="button" class="chip" *ngIf="packs.length > 0" (click)="scrollTo('sec-packs')">
+            <span class="chip-emoji" aria-hidden="true">📦</span>
+            {{ 'RESTAURANTES.CHIP_PACKS' | translate }}
+        </button>
+        <button type="button" class="chip" *ngIf="ofertas.length > 0" (click)="scrollTo('sec-ofertas')">
+            <span class="chip-emoji" aria-hidden="true">🔥</span>
+            {{ 'RESTAURANTES.CHIP_OFERTAS' | translate }}
+        </button>
+    </nav>
+
+    <section class="packs-section" id="sec-packs" *ngIf="packs.length > 0">
         <div class="section-header">
-            <h3>{{ 'RESTAURANTES.PACKS.TITULO' | translate }}</h3>
+            <h2>{{ 'RESTAURANTES.PACKS.TITULO' | translate }}</h2>
             <span class="section-badge">{{ 'RESTAURANTES.PACKS.SUBTITULO' | translate }}</span>
         </div>
 
@@ -25,42 +69,39 @@
             <button class="pack-card" type="button" *ngFor="let pack of packs" (click)="agregarPack(pack, $event)">
                 <div class="pack-top">
                     <div class="pack-info">
-                        <h4>{{ pack.titleKey | translate }}</h4>
+                        <h3>{{ pack.titleKey | translate }}</h3>
                         <p>{{ pack.descKey | translate }}</p>
                     </div>
                 </div>
                 <div class="pack-footer">
                     <span class="pack-price" *ngIf="precioPack(pack) !== null">{{ precioPack(pack) | number:'1.2-2' }}€</span>
                     <span class="pack-price" *ngIf="precioPack(pack) === null">-</span>
-                    <button class="pack-add-btn" type="button" (click)="agregarPack(pack, $event)">
-                        {{ 'RESTAURANTES.PACKS.BTN' | translate }}
-                    </button>
+                    <span class="pack-add-btn" role="text">{{ 'RESTAURANTES.PACKS.BTN' | translate }}</span>
                 </div>
             </button>
         </div>
     </section>
 
-    <!-- ── SECCIÓN OFERTAS ── -->
-    <section class="ofertas-section" *ngIf="ofertas.length > 0">
+    <section class="ofertas-section" id="sec-ofertas" *ngIf="ofertas.length > 0">
         <div class="section-header">
-            <h3>{{ 'RESTAURANTES.OFERTAS' | translate }}</h3>
-            <span class="section-badge">{{ 'RESTAURANTES.SOLO_TIEMPO' | translate }}</span>
+            <h2>{{ 'RESTAURANTES.OFERTAS' | translate }}</h2>
+            <span class="section-badge badge-hot">{{ 'RESTAURANTES.SOLO_TIEMPO' | translate }}</span>
         </div>
 
         <div class="ofertas-scroll">
             <div class="oferta-card" *ngFor="let p of ofertas">
                 <div class="oferta-info">
-                    <h4>{{ p.nombre }}</h4>
+                    <h3>{{ p.nombre }}</h3>
                     <p>{{ p.descripcion }}</p>
                 </div>
                 <div class="oferta-footer">
                     <span class="oferta-precio">{{ p.precio | number:'1.2-2' }}€</span>
                     <div class="oferta-controles">
-                        <button class="btn-quitar-oferta"
+                        <button type="button" class="btn-quitar-oferta"
                                 *ngIf="cantidadEnCarrito(p) > 0"
-                                (click)="quitarOferta(p, $event)">-</button>
+                                (click)="quitarOferta(p, $event)">−</button>
                         <span class="oferta-cantidad" *ngIf="cantidadEnCarrito(p) > 0">{{ cantidadEnCarrito(p) }}</span>
-                        <button class="btn-anadir-oferta" (click)="agregarOferta(p, $event)">
+                        <button type="button" class="btn-anadir-oferta" (click)="agregarOferta(p, $event)">
                             {{ 'RESTAURANTES.ANADIR' | translate }}
                         </button>
                     </div>
@@ -68,7 +109,5 @@
             </div>
         </div>
     </section>
-
-    <!-- (Menú completo oculto por petición) -->
 
 </main>

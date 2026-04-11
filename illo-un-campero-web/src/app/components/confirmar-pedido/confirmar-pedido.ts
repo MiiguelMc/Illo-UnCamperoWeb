@@ -136,6 +136,16 @@ export class ConfirmarPedidoComponent implements OnInit {
             metodoPago: this.metodoPago
         };
 
+        const cup = this.cuponAplicado();
+        const subtotal = this.totalSinDescuento();
+        if (cup?.valido && cup.descuento && subtotal > 0) {
+            const ahorro = subtotal - this.totalFinal;
+            if (ahorro > 0) {
+                pedidoDTO.descuento = Math.round(ahorro * 100) / 100;
+                pedidoDTO.cupon = (cup.codigo || this.codigoCupon).trim().toUpperCase();
+            }
+        }
+
         this.pedidoService.crearPedido(pedidoDTO).subscribe({
             next: (pedidoId) => {
                 this.carritoService.vaciar();

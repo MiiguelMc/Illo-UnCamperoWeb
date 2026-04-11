@@ -28,7 +28,7 @@ export class CarritoService {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this._items()));
       } catch {
-        // localStorage no disponible, continuamos sin persistencia
+        // modo privado o lo que sea, nada grave
       }
     });
   }

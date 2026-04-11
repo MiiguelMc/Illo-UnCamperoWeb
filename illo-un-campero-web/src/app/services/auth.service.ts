@@ -12,6 +12,7 @@ import {
   signOut
 } from '@angular/fire/auth';
 import { Usuario } from '../../model/usuario.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthService {
   private auth = inject(Auth);
   private http = inject(HttpClient);
 
-  private API_URL = 'https://illo-uncamperobackend.onrender.com/api/usuarios';
+  private API_URL = `${environment.apiUrl}/usuarios`;
 
   user$ = authState(this.auth).pipe(
     switchMap(async (fbUser) => {

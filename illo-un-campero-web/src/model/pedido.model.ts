@@ -30,6 +30,8 @@ export interface Pedido {
     fecha: number;
     notasGenerales?: string;
     metodoPago?: MetodoPago;
+    cupon?: string;
+    descuento?: number;
 }
 
 export interface CrearPedidoDTO {
@@ -40,4 +42,6 @@ export interface CrearPedidoDTO {
     productos: ItemPedido[];
     notasGenerales?: string;
     metodoPago?: MetodoPago;
+    descuento?: number; // euros quitados si hay cupon
+    cupon?: string;
 }

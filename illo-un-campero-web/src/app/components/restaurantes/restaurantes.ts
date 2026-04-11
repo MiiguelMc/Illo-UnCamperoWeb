@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { CarritoService } from '../../services/carrito.service';
+import { TiendaService } from '../../services/tienda.service';
 import { Producto } from '../../../model/producto.model';
 
 type PackItem = {
@@ -21,7 +22,7 @@ type PackDef = {
 @Component({
   selector: 'app-restaurante',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, RouterModule],
   templateUrl: './restaurantes.html',
   styleUrls: ['./restaurantes.css']
 })
@@ -29,6 +30,7 @@ export class RestauranteComponent implements OnInit {
   private productoService = inject(ProductoService);
   private carritoService = inject(CarritoService);
   private router = inject(Router);
+  readonly tienda = inject(TiendaService);
 
   ofertas: Producto[] = [];
   camperos: Producto[] = [];
@@ -137,7 +139,7 @@ export class RestauranteComponent implements OnInit {
     this.categoriaActiva = id;
     const element = document.getElementById(id);
     if (element) {
-      const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+      const y = element.getBoundingClientRect().top + window.pageYOffset - 88;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   }

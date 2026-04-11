@@ -26,14 +26,22 @@ export class RegistroComponent {
     apellidos: '',
     telefono: '',
     email: '',
-    password: ''
+    password: '',
+    generico: ''
   };
 
   private authService = inject(AuthService);
   private router = inject(Router);
 
   async onRegister() {
-    this.errores = { nombre: '', apellidos: '', telefono: '', email: '', password: '' };
+    this.errores = {
+      nombre: '',
+      apellidos: '',
+      telefono: '',
+      email: '',
+      password: '',
+      generico: ''
+    };
     let hayErrores = false;
 
     if (!this.usuario.nombre.trim()) {
@@ -80,7 +88,8 @@ export class RegistroComponent {
       if (error.code === 'auth/email-already-in-use') {
         this.errores.email = 'Este correo ya está registrado.';
       } else {
-        alert('Error inesperado: ' + error.message);
+        this.errores.generico =
+          'No se pudo completar el registro. Prueba otra vez o cambia la contraseña.';
       }
     }
   }

@@ -8,6 +8,7 @@ export interface Cupon {
 export interface ValidacionCupon {
     valido: boolean;
     descuento: number;
-    mensaje: string;
+    mensaje?: string; // a veces no viene
+    descripcion?: string;
     codigo?: string;
 }

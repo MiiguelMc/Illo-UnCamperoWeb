@@ -4,12 +4,13 @@ import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Auth } from '@angular/fire/auth';
 import { Resena } from '../../model/resena.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ResenaService {
     private http = inject(HttpClient);
     private auth = inject(Auth);
-    private API_URL = 'https://illo-uncamperobackend.onrender.com/api/resenas';
+    private API_URL = `${environment.apiUrl}/resenas`;
 
     private async getAuthHeaders(): Promise<HttpHeaders> {
         const user = this.auth.currentUser;

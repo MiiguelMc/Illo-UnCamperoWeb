@@ -4,12 +4,13 @@ import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Auth } from '@angular/fire/auth';
 import { Cupon, ValidacionCupon } from '../../model/cupon.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CuponService {
     private http = inject(HttpClient);
     private auth = inject(Auth);
-    private API_URL = 'https://illo-uncamperobackend.onrender.com/api/cupones';
+    private API_URL = `${environment.apiUrl}/cupones`;
 
     private async getAuthHeaders(): Promise<HttpHeaders> {
         const user = this.auth.currentUser;

@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Auth } from '@angular/fire/auth';
 import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TiendaService {
   private http = inject(HttpClient);
   private auth = inject(Auth);
 
-  private API_URL = 'https://illo-uncamperobackend.onrender.com/api/tienda';
+  private API_URL = `${environment.apiUrl}/tienda`;
 
   tiendaAbierta = signal<boolean>(true);
   cargando = signal<boolean>(true);

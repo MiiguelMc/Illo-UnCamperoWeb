@@ -10,6 +10,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth, browserLocalPersistence } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
+// datos del proyecto en la consola de firebase (web)
 const firebaseConfig = {
   apiKey: "AIzaSyCuFeD7nPAxbG2rVQVHp2tKGhyCQt2ZFlQ",
   authDomain: "illo-uncampero.firebaseapp.com",
@@ -24,7 +25,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
 
-    // ngx-translate
     provideTranslateService({
       defaultLanguage: 'es',
       loader: provideTranslateHttpLoader({
@@ -33,7 +33,6 @@ export const appConfig: ApplicationConfig = {
       })
     }),
 
-    // Firebase
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => {
       const auth = getAuth();

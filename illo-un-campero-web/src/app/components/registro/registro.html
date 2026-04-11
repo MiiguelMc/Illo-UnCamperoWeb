@@ -33,6 +33,7 @@
                 <input type="password" [(ngModel)]="usuario.password" name="password" [placeholder]="'REGISTRO.PASSWORD_PLACEHOLDER' | translate" [class.input-error]="errores.password">
                 <span class="error-text" *ngIf="errores.password">{{ errores.password }}</span>
             </div>
+            <span class="error-text error-text-bloque" *ngIf="errores.generico">{{ errores.generico }}</span>
             <button type="submit" class="btn-login">{{ 'REGISTRO.BTN' | translate }}</button>
             <p class="footer-text">
                 {{ 'REGISTRO.YA_CUENTA' | translate }} <span class="link" routerLink="/login">{{ 'REGISTRO.INICIA' | translate }}</span>
