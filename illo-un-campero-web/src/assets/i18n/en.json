@@ -257,13 +257,40 @@
     "OFERTAS": "Special offers",
     "SOLO_TIEMPO": "Limited time only",
     "ANADIR": "Add",
+    "PASOS": {
+      "TITULO": "How it works",
+      "P1_T": "Pick your Campero",
+      "P1_D": "Browse our menu and select what you crave the most.",
+      "P2_T": "We cook it",
+      "P2_D": "Our masters prepare your order fresh with the best ingredients.",
+      "P3_T": "Enjoy!",
+      "P3_D": "Receive it in Teatinos in under 30 mins. Hot and ready to eat!"
+    },
+    "RESEÑAS": {
+      "TITULO": "What our fans say",
+      "R1_U": "Dani 'The Anchovy'",
+      "R1_T": "The best in Teatinos! The bread arrives actually crunchy, crazy good.",
+      "R2_U": "Mary Garcia",
+      "R2_T": "Amazing speed. The couple pack is perfect to save our Friday nights.",
+      "R3_U": "Charles Ruiz",
+      "R3_T": "Pure Malaga quality. You can tell the products are fresh and local."
+    },
+    "FAQ": {
+      "TITULO": "Frequent questions",
+      "Q1": "Do you deliver to my area?",
+      "A1": "We deliver all over Teatinos, Colonia Santa Ines and near the University.",
+      "Q2": "Do you have gluten-free options?",
+      "A2": "Yes! We have special bread and we strictly avoid cross-contamination.",
+      "Q3": "Can I schedule an order?",
+      "A3": "Yes, you can choose your preferred delivery time at checkout."
+    },
     "PACKS": {
       "TITULO": "Ready-to-order packs",
       "SUBTITULO": "Add everything to cart in 1 tap",
-      "BTN": "Add pack and open cart",
+      "BTN": "Add pack and open cart", 
       "PAREJA": {
         "TITULO": "Couple night",
-        "DESC": "2 camperos + fries + 2 beers"
+        "DESC": "2 camperos + 1 ración of fries + 2 beers"
       },
       "COLEGA": {
         "TITULO": "Dinner with friends",

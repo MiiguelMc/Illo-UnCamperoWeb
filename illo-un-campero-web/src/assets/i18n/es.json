@@ -232,7 +232,7 @@
     "CUPONES_ACTIVOS": "Cupones activos",
     "DESCUENTO_LABEL": "% de descuento",
     "ACTIVO": "Activo",
-    "INACTIVO": "Inactivo",
+    "INACTIVO": "Inactive",
     "DESACTIVAR": "Desactivar",
     "SIN_CUPONES": "No hay cupones creados."
   },
@@ -257,6 +257,33 @@
     "OFERTAS": "Ofertas especiales",
     "SOLO_TIEMPO": "Solo por tiempo limitado",
     "ANADIR": "Añadir",
+    "PASOS": {
+      "TITULO": "¿Cómo funciona?",
+      "P1_T": "Elige tu Campero",
+      "P1_D": "Navega por nuestra carta y selecciona lo que más te apetezca.",
+      "P2_T": "Lo cocinamos",
+      "P2_D": "Nuestros maestros preparan tu pedido al momento con ingredientes frescos.",
+      "P3_T": "¡A disfrutar!",
+      "P3_D": "Recíbelo en Teatinos en menos de 30 min. ¡Caliente y listo para comer!"
+    },
+    "RESEÑAS": {
+      "TITULO": "Lo que dicen los berracos",
+      "R1_U": "Dani 'El Boquerón'",
+      "R1_T": "¡El mejor de todo Teatinos! El pan llega crujiente de verdad, una locura.",
+      "R2_U": "María García",
+      "R2_T": "Rapidez increíble. El pack pareja es perfecto para salvarnos los viernes noche.",
+      "R3_U": "Carlos Ruíz",
+      "R3_T": "Calidad malagueña pura. Se nota que el producto es fresco y del día."
+    },
+    "FAQ": {
+      "TITULO": "Preguntas frecuentes",
+      "Q1": "¿Llegáis a mi zona?",
+      "A1": "Repartimos por todo Teatinos, Colonia Santa Inés y alrededores de la Universidad.",
+      "Q2": "¿Tenéis opciones sin gluten?",
+      "A2": "¡Claro! Tenemos pan especial y cuidamos a tope para evitar la contaminación cruzada.",
+      "Q3": "¿Puedo programar un pedido?",
+      "A3": "Sí, al confirmar el pedido puedes elegir la hora de entrega que mejor te venga."
+    },
     "PACKS": {
       "TITULO": "Packs listos para pedir",
       "SUBTITULO": "Añade todo al carrito en 1 toque",
