@@ -1,27 +1,38 @@
 import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { PedidoService } from '../../services/pedido.service';
 import { AuthService } from '../../services/auth.service';
+import { ResenaService } from '../../services/resena.service';
 import { Pedido } from '../../../model/pedido.model';
 import { switchMap, take, of, Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-mis-pedidos',
     standalone: true,
-    imports: [CommonModule, RouterModule, TranslateModule],
+    imports: [CommonModule, FormsModule, RouterModule, TranslateModule],
     templateUrl: './mis-pedidos.html',
     styleUrls: ['./mis-pedidos.css']
 })
 export class MisPedidosComponent implements OnInit, OnDestroy {
     private pedidoService = inject(PedidoService);
     private authService = inject(AuthService);
+    private resenaService = inject(ResenaService);
     private router = inject(Router);
 
     pedidos = signal<Pedido[]>([]);
     cargando = signal(true);
     error = signal('');
+
+    // Estado del modal de valoración
+    pedidoAValorar = signal<Pedido | null>(null);
+    puntuacionModal = signal(0);
+    comentarioModal = '';
+    enviandoValoracion = signal(false);
+    errorValoracion = signal('');
+    exitoValoracion = signal(false);
 
     private destroy$ = new Subject<void>();
 
@@ -100,5 +111,53 @@ export class MisPedidosComponent implements OnInit, OnDestroy {
 
     idCorto(id: string): string {
         return id.substring(0, 8).toUpperCase();
+    }
+
+    // ---- Modal valorar ----
+
+    abrirModalValorar(pedido: Pedido) {
+        this.pedidoAValorar.set(pedido);
+        this.puntuacionModal.set(0);
+        this.comentarioModal = '';
+        this.errorValoracion.set('');
+        this.exitoValoracion.set(false);
+    }
+
+    cerrarModalValorar() {
+        this.pedidoAValorar.set(null);
+    }
+
+    setPuntuacion(n: number) {
+        this.puntuacionModal.set(n);
+    }
+
+    enviarValoracion() {
+        if (this.puntuacionModal() === 0) {
+            this.errorValoracion.set('Selecciona una puntuación.');
+            return;
+        }
+        this.enviandoValoracion.set(true);
+        this.errorValoracion.set('');
+
+        const pedido = this.pedidoAValorar()!;
+        this.resenaService.crearResena({
+            idPedido: pedido.id!,
+            puntuacion: this.puntuacionModal(),
+            comentario: this.comentarioModal
+        }).subscribe({
+            next: () => {
+                this.exitoValoracion.set(true);
+                this.enviandoValoracion.set(false);
+                setTimeout(() => this.cerrarModalValorar(), 2000);
+            },
+            error: (err) => {
+                this.errorValoracion.set(err?.error || 'Error al enviar la valoración.');
+                this.enviandoValoracion.set(false);
+            }
+        });
+    }
+
+    estrellasArray(): number[] {
+        return [1, 2, 3, 4, 5];
     }
 }

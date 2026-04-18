@@ -137,7 +137,11 @@
     "PASSWORD": "Contraseña",
     "BTN": "Iniciar Sesión",
     "SIN_CUENTA": "¿No tienes cuenta?",
-    "REGISTRATE": "Regístrate"
+    "REGISTRATE": "Regístrate",
+    "ERR_EMAIL": "Introduce un correo válido (ejemplo@correo.com).",
+    "ERR_CREDENCIALES": "Contraseña incorrecta o usuario no encontrado.",
+    "ERR_NOT_FOUND": "Este correo no está registrado.",
+    "ERR_GENERIC": "Error al iniciar sesión. Revisa tus datos."
   },
   "REGISTRO": {
     "TITULO": "Crea tu cuenta",
@@ -150,7 +154,14 @@
     "PASSWORD_PLACEHOLDER": "Mín. 6 caracteres",
     "BTN": "Registrarse",
     "YA_CUENTA": "¿Ya tienes cuenta?",
-    "INICIA": "Inicia sesión"
+    "INICIA": "Inicia sesión",
+    "ERR_NOMBRE": "El nombre es obligatorio.",
+    "ERR_APELLIDOS": "Los apellidos son obligatorios.",
+    "ERR_TELEFONO": "El teléfono debe tener 9 dígitos numéricos.",
+    "ERR_EMAIL": "Introduce un correo electrónico válido.",
+    "ERR_PASSWORD": "La contraseña debe tener al menos 6 caracteres.",
+    "ERR_DUPLICADO": "Este correo ya está registrado.",
+    "ERR_GENERIC": "No se pudo completar el registro. Prueba otra vez."
   },
   "PEDIDOS": {
     "TITULO": "Mis Pedidos",
@@ -258,6 +269,7 @@
     "SOLO_TIEMPO": "Solo por tiempo limitado",
     "ANADIR": "Añadir",
     "PASOS": {
+      "LABEL": "Proceso",
       "TITULO": "¿Cómo funciona?",
       "P1_T": "Elige tu Campero",
       "P1_D": "Navega por nuestra carta y selecciona lo que más te apetezca.",
@@ -288,6 +300,7 @@
       "TITULO": "Packs listos para pedir",
       "SUBTITULO": "Añade todo al carrito en 1 toque",
       "BTN": "Añadir pack y abrir carrito",
+      "LABEL": "Para compartir",
       "PAREJA": {
         "TITULO": "Noche de pareja",
         "DESC": "2 camperos + 1 ración de papas + 2 cervezas"

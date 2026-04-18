@@ -46,12 +46,53 @@
                     </p>
                     <div class="botones-pedido">
                         <button *ngIf="puedeRastrear(pedido.estado)" class="btn-seguimiento" (click)="verSeguimiento(pedido.id!)">{{ 'PEDIDOS.SEGUIMIENTO' | translate }}</button>
-                        <button *ngIf="puedeValorar(pedido)" class="btn-valorar" [routerLink]="['/valorar', pedido.id]">{{ 'PEDIDOS.VALORAR' | translate }}</button>
+                        <button *ngIf="puedeValorar(pedido)" class="btn-valorar" (click)="abrirModalValorar(pedido)">{{ 'PEDIDOS.VALORAR' | translate }}</button>
                         <button *ngIf="pedido.estado === 'ENTREGADO' || pedido.estado === 'CANCELADO'" class="btn-repetir" (click)="repetirPedido(pedido)">{{ 'PEDIDOS.REPETIR' | translate }}</button>
                         <button *ngIf="pedido.estado === 'PENDIENTE'" class="btn-cancelar" (click)="cancelarPedido(pedido.id!)">{{ 'PEDIDOS.CANCELAR' | translate }}</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de valoración -->
+<div class="modal-overlay" *ngIf="pedidoAValorar()" (click)="cerrarModalValorar()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+        <div *ngIf="!exitoValoracion()">
+            <h2>{{ 'VALORAR.TITULO' | translate }}</h2>
+            <p class="modal-pedido-id">{{ 'PEDIDOS.PEDIDO' | translate }} #{{ idCorto(pedidoAValorar()!.id!) }}</p>
+            <div class="modal-estrellas">
+                <button *ngFor="let n of estrellasArray()"
+                    class="estrella" [class.activa]="n <= puntuacionModal()"
+                    (click)="setPuntuacion(n)" type="button">★</button>
+            </div>
+            <p class="modal-puntuacion-texto">
+                <span *ngIf="puntuacionModal() === 0">{{ 'VALORAR.TOCA' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 1">{{ 'VALORAR.MUY_MALO' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 2">{{ 'VALORAR.MALO' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 3">{{ 'VALORAR.REGULAR' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 4">{{ 'VALORAR.BUENO' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 5">{{ 'VALORAR.EXCELENTE' | translate }}</span>
+            </p>
+            <textarea class="modal-comentario" [(ngModel)]="comentarioModal" rows="3"
+                [placeholder]="'VALORAR.PLACEHOLDER' | translate"
+                [disabled]="enviandoValoracion()"></textarea>
+            <p class="modal-error" *ngIf="errorValoracion()">{{ errorValoracion() }}</p>
+            <div class="modal-acciones">
+                <button class="btn-omitir" (click)="cerrarModalValorar()" [disabled]="enviandoValoracion()">
+                    {{ 'VALORAR.OMITIR' | translate }}
+                </button>
+                <button class="btn-enviar-valoracion" (click)="enviarValoracion()"
+                    [disabled]="enviandoValoracion() || puntuacionModal() === 0">
+                    {{ enviandoValoracion() ? ('VALORAR.ENVIANDO' | translate) : ('VALORAR.ENVIAR' | translate) }}
+                </button>
+            </div>
+        </div>
+        <div class="modal-exito" *ngIf="exitoValoracion()">
+            <div class="exito-check">✓</div>
+            <h3>{{ 'VALORAR.EXITO_TITULO' | translate }}</h3>
+            <p>{{ 'VALORAR.EXITO_DESC' | translate }}</p>
         </div>
     </div>
 </div>

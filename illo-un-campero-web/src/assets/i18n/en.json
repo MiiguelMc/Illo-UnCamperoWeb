@@ -137,7 +137,11 @@
     "PASSWORD": "Password",
     "BTN": "Log In",
     "SIN_CUENTA": "Don't have an account?",
-    "REGISTRATE": "Sign up"
+    "REGISTRATE": "Sign up",
+    "ERR_EMAIL": "Please enter a valid email address.",
+    "ERR_CREDENCIALES": "Incorrect password or user not found.",
+    "ERR_NOT_FOUND": "This email is not registered.",
+    "ERR_GENERIC": "Login failed. Please check your details."
   },
   "REGISTRO": {
     "TITULO": "Create your account",
@@ -150,7 +154,14 @@
     "PASSWORD_PLACEHOLDER": "Min. 6 characters",
     "BTN": "Sign up",
     "YA_CUENTA": "Already have an account?",
-    "INICIA": "Log in"
+    "INICIA": "Log in",
+    "ERR_NOMBRE": "First name is required.",
+    "ERR_APELLIDOS": "Last name is required.",
+    "ERR_TELEFONO": "Phone must have 9 numeric digits.",
+    "ERR_EMAIL": "Please enter a valid email address.",
+    "ERR_PASSWORD": "Password must be at least 6 characters.",
+    "ERR_DUPLICADO": "This email is already registered.",
+    "ERR_GENERIC": "Registration failed. Please try again."
   },
   "PEDIDOS": {
     "TITULO": "My Orders",
@@ -258,6 +269,7 @@
     "SOLO_TIEMPO": "Limited time only",
     "ANADIR": "Add",
     "PASOS": {
+      "LABEL": "Process",
       "TITULO": "How it works",
       "P1_T": "Pick your Campero",
       "P1_D": "Browse our menu and select what you crave the most.",
@@ -276,7 +288,7 @@
       "R3_T": "Pure Malaga quality. You can tell the products are fresh and local."
     },
     "FAQ": {
-      "TITULO": "Frequent questions",
+      "TITULO": "Frequently Asked Questions",
       "Q1": "Do you deliver to my area?",
       "A1": "We deliver all over Teatinos, Colonia Santa Ines and near the University.",
       "Q2": "Do you have gluten-free options?",
@@ -287,10 +299,11 @@
     "PACKS": {
       "TITULO": "Ready-to-order packs",
       "SUBTITULO": "Add everything to cart in 1 tap",
-      "BTN": "Add pack and open cart", 
+      "BTN": "Add pack and open cart",
+      "LABEL": "For Sharing",
       "PAREJA": {
         "TITULO": "Couple night",
-        "DESC": "2 camperos + 1 ración of fries + 2 beers"
+        "DESC": "2 camperos + 1 portion of fries + 2 beers"
       },
       "COLEGA": {
         "TITULO": "Dinner with friends",

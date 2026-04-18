@@ -25,7 +25,7 @@
   <div class="card-footer">
     <div class="total">
       <span class="total-label">{{ 'CARD.TOTAL' | translate }}</span>
-      <span class="total-monto">{{ pedido.total | number:'1.2-2' }}€</span>
+      <span class="total-monto">{{ calcularTotal() | number:'1.2-2' }}€</span>
     </div>
   </div>
   <button class="btn-accion" [style.background-color]="accionColor" (click)="ejecutarAccion()">{{ accionTexto }}</button>

@@ -1,8 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { CarritoService } from '../../services/carrito.service';
 import { PedidoService } from '../../services/pedido.service';
 import { AuthService } from '../../services/auth.service';
@@ -19,7 +21,8 @@ import { Usuario } from '../../../model/usuario.model';
     templateUrl: './confirmar-pedido.html',
     styleUrls: ['./confirmar-pedido.css']
 })
-export class ConfirmarPedidoComponent implements OnInit {
+export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
     private carritoService = inject(CarritoService);
     private pedidoService = inject(PedidoService);
     private authService = inject(AuthService);
@@ -63,12 +66,12 @@ export class ConfirmarPedidoComponent implements OnInit {
             this.router.navigate(['/carta']);
             return;
         }
-        this.authService.user$.subscribe(user => {
+        this.authService.user$.pipe(takeUntil(this.destroy$)).subscribe(user => {
             if (user) {
                 this.usuario.set(user);
                 this.direccionEntrega = user.direccion || '';
                 this.telefonoContacto = user.telefono || '';
-            } else {
+            } else if (user === null) {
                 this.router.navigate(['/login']);
             }
         });
@@ -147,15 +150,20 @@ export class ConfirmarPedidoComponent implements OnInit {
         }
 
         this.pedidoService.crearPedido(pedidoDTO).subscribe({
-            next: (pedidoId) => {
+            next: () => {
                 this.carritoService.vaciar();
-                this.router.navigate(['/pedido-exitoso'], { queryParams: { pedidoId } });
+                this.router.navigate(['/mis-pedidos']);
             },
             error: () => {
                 this.error.set('Error al procesar el pedido. Inténtalo de nuevo.');
                 this.cargando.set(false);
             }
         });
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     volver() { this.router.navigate(['/carrito']); }

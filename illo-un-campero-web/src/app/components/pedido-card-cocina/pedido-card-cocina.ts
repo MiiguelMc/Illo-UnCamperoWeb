@@ -30,19 +30,28 @@ export class PedidoCardCocinaComponent implements OnInit, OnDestroy {
   }
 
   calcularTiempoTranscurrido() {
-    const minutos = Math.floor((Date.now() - this.pedido.fecha) / 60000);
+    const ts = this.pedido.fecha > 1e12 ? this.pedido.fecha : this.pedido.fecha * 1000;
+    const minutos = Math.floor((Date.now() - ts) / 60000);
     const horas = Math.floor(minutos / 60);
     this.tiempoTranscurrido.set(
-      horas > 0 ? `${horas}h ${minutos % 60}m` : `${minutos}m`
+      horas > 0 && minutos >= 120 ? `${horas}h ${minutos % 60}m` : `${minutos}m`
+    );
+  }
+
+  calcularTotal(): number {
+    return this.pedido.productos.reduce(
+      (sum, item) => sum + (item.precioUnidad * item.cantidad), 0
     );
   }
 
   formatearHora(timestamp: number): string {
-    return new Date(timestamp).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    const ts = timestamp > 1e12 ? timestamp : timestamp * 1000;
+    return new Date(ts).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
   }
 
   esUrgente(): boolean {
-    return Math.floor((Date.now() - this.pedido.fecha) / 60000) > 30;
+    const ts = this.pedido.fecha > 1e12 ? this.pedido.fecha : this.pedido.fecha * 1000;
+    return Math.floor((Date.now() - ts) / 60000) > 45;
   }
 
   ejecutarAccion() {

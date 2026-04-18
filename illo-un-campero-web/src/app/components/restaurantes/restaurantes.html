@@ -38,7 +38,7 @@
                         {{ 'RESTAURANTES.PEDIR_AHORA' | translate }}
                         <span class="arrow">→</span>
                     </a>
-                    <a (click)="scrollTo('sec-packs')" class="btn-secundario">{{ 'RESTAURANTES.VER_MENU' | translate }}</a>
+                    <a routerLink="/carta" class="btn-secundario">{{ 'RESTAURANTES.VER_MENU' | translate }}</a>
                 </div>
             </div>
         </div>
@@ -63,8 +63,8 @@
     <section class="steps-section">
         <div class="container-centrado">
             <div class="section-header centered">
-                <span class="pre-title">Proceso</span>
-                <h2>¿Cómo pedir tu Campero?</h2>
+                <span class="pre-title">{{ 'RESTAURANTES.PASOS.LABEL' | translate }}</span>
+                <h2>{{ 'RESTAURANTES.PASOS.TITULO' | translate }}</h2>
             </div>
             <div class="steps-grid">
                 <div class="step-card">
@@ -93,7 +93,7 @@
     <section class="container-centrado" id="sec-packs" *ngIf="packs.length > 0">
         <div class="section-header">
             <div>
-                <span class="pre-title">Para compartir</span>
+                <span class="pre-title">{{ 'RESTAURANTES.PACKS.LABEL' | translate }}</span>
                 <h2>{{ 'RESTAURANTES.PACKS.TITULO' | translate }}</h2>
             </div>
         </div>
@@ -165,7 +165,7 @@
     <section class="container-centrado footer-info">
         <div class="info-grid">
             <div class="faq-box">
-                <h2>Preguntas Frecuentes</h2>
+                <h2>{{ 'RESTAURANTES.FAQ.TITULO' | translate }}</h2>
                 <details class="faq-item" open>
                     <summary>{{ 'RESTAURANTES.FAQ.Q1' | translate }}</summary>
                     <div class="content">{{ 'RESTAURANTES.FAQ.A1' | translate }}</div>

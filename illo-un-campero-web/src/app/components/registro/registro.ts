@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registro',
@@ -12,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './registro.html',
   styleUrls: ['./registro.css']
 })
-export class RegistroComponent {
+export class RegistroComponent implements OnInit {
   usuario = {
     nombre: '',
     apellidos: '',
@@ -33,6 +34,12 @@ export class RegistroComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  ngOnInit() {
+    this.authService.user$.pipe(take(1)).subscribe(user => {
+      if (user) this.router.navigate(['/restaurantes']);
+    });
+  }
+
   async onRegister() {
     this.errores = {
       nombre: '',
@@ -45,28 +52,28 @@ export class RegistroComponent {
     let hayErrores = false;
 
     if (!this.usuario.nombre.trim()) {
-      this.errores.nombre = 'El nombre es obligatorio.';
+      this.errores.nombre = 'REGISTRO.ERR_NOMBRE';
       hayErrores = true;
     }
     if (!this.usuario.apellidos.trim()) {
-      this.errores.apellidos = 'Los apellidos son obligatorios.';
+      this.errores.apellidos = 'REGISTRO.ERR_APELLIDOS';
       hayErrores = true;
     }
 
     const telPattern = /^[0-9]{9}$/;
     if (!telPattern.test(this.usuario.telefono)) {
-      this.errores.telefono = 'El teléfono debe tener 9 dígitos numéricos.';
+      this.errores.telefono = 'REGISTRO.ERR_TELEFONO';
       hayErrores = true;
     }
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.usuario.email)) {
-      this.errores.email = 'Introduce un correo electrónico válido.';
+      this.errores.email = 'REGISTRO.ERR_EMAIL';
       hayErrores = true;
     }
 
     if (this.usuario.password.length < 6) {
-      this.errores.password = 'La contraseña debe tener al menos 6 caracteres.';
+      this.errores.password = 'REGISTRO.ERR_PASSWORD';
       this.usuario.password = '';
       hayErrores = true;
     }
@@ -86,10 +93,9 @@ export class RegistroComponent {
       this.router.navigate(['/restaurantes']);
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
-        this.errores.email = 'Este correo ya está registrado.';
+        this.errores.email = 'REGISTRO.ERR_DUPLICADO';
       } else {
-        this.errores.generico =
-          'No se pudo completar el registro. Prueba otra vez o cambia la contraseña.';
+        this.errores.generico = 'REGISTRO.ERR_GENERIC';
       }
     }
   }

@@ -29,11 +29,11 @@
             <a class="logout-link" (click)="logout()">{{ 'NAV.CERRAR_SESION' | translate }}</a>
           </div>
         </div>
-        <div class="cart-pill" routerLink="/carrito" (click)="menuMovilAbierto = false">
+        <a class="cart-pill" routerLink="/carrito" (click)="menuMovilAbierto = false">
           <img src="assets/carro.webp" class="cart-img" alt="Carrito">
           <span class="cart-amount">{{ carritoService.totalPrecio() | number:'1.2-2' }}€</span>
-        </div>
-        <button class="hamburger-btn mobile-only" (click)="toggleMobileMenu()" [class.active]="menuMovilAbierto">
+        </a>
+        <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="menuMovilAbierto">
           <div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </button>
       </div>

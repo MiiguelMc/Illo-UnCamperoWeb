@@ -5,7 +5,9 @@ import { Router, RouterModule } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { CarritoService } from '../../services/carrito.service';
 import { TiendaService } from '../../services/tienda.service';
+import { AuthService } from '../../services/auth.service';
 import { Producto } from '../../../model/producto.model';
+import { take } from 'rxjs/operators';
 
 type PackItem = {
   qty: number;
@@ -29,6 +31,7 @@ type PackDef = {
 export class RestauranteComponent implements OnInit {
   private productoService = inject(ProductoService);
   private carritoService = inject(CarritoService);
+  private authService = inject(AuthService);
   private router = inject(Router);
   readonly tienda = inject(TiendaService);
 
@@ -114,12 +117,17 @@ export class RestauranteComponent implements OnInit {
     event?.stopPropagation();
     if (!this.disponibles.length) return;
 
-    for (const it of pack.items) {
-      const producto = this.disponibles.find(it.match);
-      if (producto) this.carritoService.agregar(producto, it.qty);
-    }
-
-    this.router.navigate(['/carrito']);
+    this.authService.user$.pipe(take(1)).subscribe(user => {
+      if (!user) {
+        this.router.navigate(['/login']);
+        return;
+      }
+      for (const it of pack.items) {
+        const producto = this.disponibles.find(it.match);
+        if (producto) this.carritoService.agregar(producto, it.qty);
+      }
+      this.router.navigate(['/carrito']);
+    });
   }
 
   precioPack(pack: PackDef): number | null {
