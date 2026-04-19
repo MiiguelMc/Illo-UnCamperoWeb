@@ -57,7 +57,7 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
 
     items = this.carritoService.items;
     totalSinDescuento = this.carritoService.totalPrecio;
-    metodosPago: MetodoPago[] = ['EFECTIVO', 'TARJETA', 'TRANSFERENCIA'];
+    metodosPago: MetodoPago[] = ['EFECTIVO', 'TARJETA'];
 
     get totalFinal(): number {
         const cupon = this.cuponAplicado();
@@ -85,6 +85,12 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
                 this.router.navigate(['/login']);
             }
         });
+    }
+
+    seleccionarMetodo(metodo: MetodoPago) {
+        if (this.cargando()) return;
+        this.metodoPago = metodo;
+        this.onMetodoPagoChange();
     }
 
     // Se llama cuando el usuario cambia el método de pago
