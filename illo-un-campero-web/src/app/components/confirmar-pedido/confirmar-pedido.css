@@ -213,3 +213,29 @@
 .btn-confirmar { background: #e74c3c; color: white; }
 .btn-confirmar:hover:not(:disabled) { background: #c0392b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(231,76,60,0.3); }
 .btn-confirmar:disabled, .btn-cancelar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---- Stripe card element ---- */
+.stripe-card-container {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  transition: border-color 0.2s;
+}
+.stripe-card-container:focus-within { border-color: #e74c3c; }
+
+.stripe-test-info {
+  font-size: 0.78rem;
+  color: #27ae60;
+  background: #f0faf4;
+  border: 1px solid #b7eacb;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin: 6px 0 0;
+}
+
+.error-stripe {
+  color: #e74c3c;
+  font-size: 0.82rem;
+  margin: 4px 0 0;
+}

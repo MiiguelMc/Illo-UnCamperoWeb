@@ -3,16 +3,19 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, firstValueFrom } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { loadStripe, Stripe, StripeCardElement } from '@stripe/stripe-js';
 import { CarritoService } from '../../services/carrito.service';
 import { PedidoService } from '../../services/pedido.service';
+import { PagoService } from '../../services/pago.service';
 import { AuthService } from '../../services/auth.service';
 import { TiendaService } from '../../services/tienda.service';
 import { CuponService } from '../../services/cupon.service';
 import { CrearPedidoDTO, ItemPedido, MetodoPago } from '../../../model/pedido.model';
 import { ValidacionCupon } from '../../../model/cupon.model';
 import { Usuario } from '../../../model/usuario.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-confirmar-pedido',
@@ -22,9 +25,10 @@ import { Usuario } from '../../../model/usuario.model';
     styleUrls: ['./confirmar-pedido.css']
 })
 export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+    private destroy$ = new Subject<void>();
     private carritoService = inject(CarritoService);
     private pedidoService = inject(PedidoService);
+    private pagoService = inject(PagoService);
     private authService = inject(AuthService);
     private tiendaService = inject(TiendaService);
     private cuponService = inject(CuponService);
@@ -44,6 +48,12 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
     cuponAplicado = signal<ValidacionCupon | null>(null);
     validandoCupon = signal(false);
     errorCupon = signal('');
+
+    // Stripe
+    private stripe: Stripe | null = null;
+    private cardElement: StripeCardElement | null = null;
+    stripeListoParaPagar = signal(false);
+    errorStripe = signal('');
 
     items = this.carritoService.items;
     totalSinDescuento = this.carritoService.totalPrecio;
@@ -75,6 +85,66 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
                 this.router.navigate(['/login']);
             }
         });
+    }
+
+    // Se llama cuando el usuario cambia el método de pago
+    onMetodoPagoChange() {
+        if (this.metodoPago === 'TARJETA') {
+            // Pequeño delay para que Angular renderice el div antes de montar Stripe
+            setTimeout(() => this.montarStripe(), 50);
+        } else {
+            this.desmontarStripe();
+        }
+    }
+
+    private async montarStripe() {
+        this.errorStripe.set('');
+
+        // Carga Stripe solo la primera vez
+        if (!this.stripe) {
+            this.stripe = await loadStripe(environment.stripePublishableKey);
+        }
+        if (!this.stripe) {
+            this.errorStripe.set('No se pudo cargar el sistema de pago.');
+            return;
+        }
+
+        // Si ya hay un card element montado, lo destruimos y creamos uno nuevo
+        if (this.cardElement) {
+            this.cardElement.destroy();
+            this.cardElement = null;
+        }
+
+        const elements = this.stripe.elements();
+        this.cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '15px',
+                    color: '#333333',
+                    fontFamily: 'Poppins, sans-serif',
+                    '::placeholder': { color: '#999999' }
+                },
+                invalid: { color: '#e74c3c' }
+            }
+        });
+
+        const container = document.getElementById('stripe-card-element');
+        if (container) {
+            this.cardElement.mount(container);
+            this.cardElement.on('change', (event) => {
+                this.stripeListoParaPagar.set(event.complete);
+                this.errorStripe.set(event.error?.message || '');
+            });
+        }
+    }
+
+    private desmontarStripe() {
+        if (this.cardElement) {
+            this.cardElement.destroy();
+            this.cardElement = null;
+        }
+        this.stripeListoParaPagar.set(false);
+        this.errorStripe.set('');
     }
 
     aplicarCupon() {
@@ -121,6 +191,15 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
         this.cargando.set(true);
         this.error.set('');
 
+        // Si el método de pago es TARJETA, procesamos el pago con Stripe primero
+        if (this.metodoPago === 'TARJETA') {
+            const pagoOk = await this.procesarPagoStripe();
+            if (!pagoOk) {
+                this.cargando.set(false);
+                return;
+            }
+        }
+
         const itemsPedido: ItemPedido[] = this.items().map(item => ({
             productoId: item.producto.id?.toString() || '',
             nombre: item.producto.nombre,
@@ -161,7 +240,37 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
         });
     }
 
+    private async procesarPagoStripe(): Promise<boolean> {
+        if (!this.stripe || !this.cardElement) {
+            this.error.set('El sistema de pago no está listo. Espera un momento.');
+            return false;
+        }
+
+        try {
+            // 1. Pedimos al backend que cree el PaymentIntent
+            const { clientSecret } = await firstValueFrom(
+                this.pagoService.crearIntent(this.totalFinal)
+            );
+
+            // 2. Confirmamos el pago con Stripe directamente desde el navegador
+            const resultado = await this.stripe.confirmCardPayment(clientSecret, {
+                payment_method: { card: this.cardElement }
+            });
+
+            if (resultado.error) {
+                this.error.set(resultado.error.message || 'Error al procesar la tarjeta.');
+                return false;
+            }
+
+            return true;
+        } catch {
+            this.error.set('Error al conectar con el sistema de pago. Inténtalo de nuevo.');
+            return false;
+        }
+    }
+
     ngOnDestroy() {
+        this.desmontarStripe();
         this.destroy$.next();
         this.destroy$.complete();
     }

@@ -79,6 +79,7 @@
     "TEL_LABEL": "Teléfono de contacto *",
     "TEL_PLACEHOLDER": "600 000 000",
     "PAGO_LABEL": "Método de pago *",
+    "DATOS_TARJETA": "Datos de la tarjeta",
     "NOTAS_LABEL": "Notas adicionales",
     "NOTAS_PLACEHOLDER": "Sin cebolla...",
     "CANCELAR": "Cancelar",

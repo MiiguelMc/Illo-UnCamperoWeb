@@ -79,6 +79,7 @@
     "TEL_LABEL": "Contact phone *",
     "TEL_PLACEHOLDER": "600 000 000",
     "PAGO_LABEL": "Payment method *",
+    "DATOS_TARJETA": "Card details",
     "NOTAS_LABEL": "Additional notes",
     "NOTAS_PLACEHOLDER": "No onions...",
     "CANCELAR": "Cancel",

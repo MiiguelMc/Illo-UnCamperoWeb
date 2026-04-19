@@ -63,17 +63,27 @@
                 </div>
                 <div class="form-group">
                     <label>{{ 'CONF.PAGO_LABEL' | translate }}</label>
-                    <select [(ngModel)]="metodoPago" [disabled]="cargando()">
+                    <select [(ngModel)]="metodoPago" (ngModelChange)="onMetodoPagoChange()" [disabled]="cargando()">
                         <option *ngFor="let metodo of metodosPago" [value]="metodo">{{ metodo }}</option>
                     </select>
                 </div>
+
+                <!-- Campo de tarjeta de Stripe (solo visible cuando se elige TARJETA) -->
+                <div class="form-group" *ngIf="metodoPago === 'TARJETA'">
+                    <label>{{ 'CONF.DATOS_TARJETA' | translate }}</label>
+                    <div id="stripe-card-element" class="stripe-card-container"></div>
+                    <p class="stripe-test-info">Modo test: usa la tarjeta 4242 4242 4242 4242, fecha futura y cualquier CVC.</p>
+                    <p class="error-stripe" *ngIf="errorStripe()">{{ errorStripe() }}</p>
+                </div>
+
                 <div class="form-group">
                     <label>{{ 'CONF.NOTAS_LABEL' | translate }}</label>
                     <textarea [(ngModel)]="notas" rows="3" [placeholder]="'CONF.NOTAS_PLACEHOLDER' | translate" [disabled]="cargando()"></textarea>
                 </div>
                 <div class="botones-accion">
                     <button class="btn-cancelar" (click)="volver()" [disabled]="cargando()">{{ 'CONF.CANCELAR' | translate }}</button>
-                    <button class="btn-confirmar" (click)="confirmarPedido()" [disabled]="cargando()">
+                    <button class="btn-confirmar" (click)="confirmarPedido()"
+                        [disabled]="cargando() || (metodoPago === 'TARJETA' && !stripeListoParaPagar())">
                         {{ cargando() ? ('CONF.PROCESANDO' | translate) : ('CONF.BTN' | translate) }}
                     </button>
                 </div>
