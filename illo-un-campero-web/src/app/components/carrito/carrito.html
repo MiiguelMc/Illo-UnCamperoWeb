@@ -12,8 +12,7 @@
     <div class="carrito-contenido" *ngIf="items().length > 0">
         <div class="items-lista">
             <div class="card-item" *ngFor="let item of items()">
-                <img [src]="item.producto.imagen || item.producto.imagenUrl || ''"
-                     [attr.data-debug]="item.producto.nombre + ' | imagen:' + item.producto.imagen + ' | imagenUrl:' + item.producto.imagenUrl"
+                <img [src]="item.producto.imagenUrl || ''"
                      (error)="onImgError($event)"
                      alt="producto">
                 <div class="detalles">

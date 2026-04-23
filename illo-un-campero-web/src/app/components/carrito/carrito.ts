@@ -28,9 +28,6 @@ export class CarritoComponent {
     img.onerror = null;
     img.style.background = '#f4f5f7';
     img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='75' height='75' viewBox='0 0 75 75'%3E%3Crect width='75' height='75' rx='8' fill='%23f0f0f0'/%3E%3Ctext x='37.5' y='42' font-size='28' text-anchor='middle' fill='%23ccc'%3E%F0%9F%8D%94%3C/text%3E%3C/svg%3E";
-    // DIAGNÓSTICO: ver qué datos tiene el producto
-    const item = (event as any)._item;
-    console.log('[Carrito] Imagen rota. Datos del item:', img.dataset['debug']);
   }
 
   // Métodos para los botones de la lista
