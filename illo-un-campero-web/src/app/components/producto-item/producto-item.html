@@ -1,4 +1,5 @@
 <div class="producto-card">
+  <span class="badge-oferta" *ngIf="producto.esOferta">Oferta</span>
   <div class="info-container">
     <div class="texto-principal">
       <h3 class="nombre">{{ producto.nombre }}</h3>

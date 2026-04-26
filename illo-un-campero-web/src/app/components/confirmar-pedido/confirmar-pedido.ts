@@ -268,6 +268,11 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
                 return false;
             }
 
+            if (resultado.paymentIntent?.status !== 'succeeded') {
+                this.error.set('El pago no se ha completado. Inténtalo de nuevo.');
+                return false;
+            }
+
             return true;
         } catch {
             this.error.set('Error al conectar con el sistema de pago. Inténtalo de nuevo.');

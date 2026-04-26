@@ -9,6 +9,7 @@ import { ConfirmarPedidoComponent } from './components/confirmar-pedido/confirma
 import { PedidoExitosoComponent } from './components/pedido-exitoso/pedido-exitoso';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos';
 import { CocinaDashboardComponent } from './components/cocina-dashboard/cocina-dashboard';
+import { GestionProductosComponent } from './components/gestion-productos/gestion-productos';
 import { SeguimientoComponent } from './components/seguimiento/seguimiento';
 import { ValorarPedidoComponent } from './components/seguimiento/valorar-pedido';
 import { adminGuard } from './guards/admin.guard';
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: 'seguimiento/:id', component: SeguimientoComponent },
   { path: 'valorar/:id', component: ValorarPedidoComponent },
   { path: 'cocina', component: CocinaDashboardComponent, canActivate: [adminGuard] },
+  { path: 'gestion-productos', component: GestionProductosComponent, canActivate: [adminGuard] },
   { path: '', redirectTo: 'restaurantes', pathMatch: 'full' },
   { path: '**', redirectTo: 'restaurantes' }
 ];

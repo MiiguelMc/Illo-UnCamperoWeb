@@ -9,6 +9,7 @@
     "PERFIL": "Profile",
     "COCINA": "Kitchen",
     "PANEL_COCINA": "Kitchen Panel",
+    "GESTION_PRODUCTOS": "Product Management",
     "INICIAR_SESION": "Log in",
     "REGISTRARSE": "Sign up",
     "CERRAR_SESION": "Log out"
@@ -44,7 +45,7 @@
     "SUBTITULO": "Active Orders in Real Time",
     "ACTUALIZAR": "Refresh",
     "CARGANDO": "Loading...",
-    "AUTO_REFRESH": "Auto-refresh: 30s",
+    "AUTO_REFRESH": "Live updates active",
     "CARGANDO_PEDIDOS": "Loading orders...",
     "REINTENTAR": "Retry",
     "PENDIENTES": "PENDING",

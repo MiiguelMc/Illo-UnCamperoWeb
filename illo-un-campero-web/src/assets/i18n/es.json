@@ -9,6 +9,7 @@
     "PERFIL": "Perfil",
     "COCINA": "Cocina",
     "PANEL_COCINA": "Panel de Cocina",
+    "GESTION_PRODUCTOS": "Gestión de Productos",
     "INICIAR_SESION": "Iniciar sesión",
     "REGISTRARSE": "Registrarse",
     "CERRAR_SESION": "Cerrar sesión"
@@ -44,7 +45,7 @@
     "SUBTITULO": "Pedidos Activos en Tiempo Real",
     "ACTUALIZAR": "Actualizar",
     "CARGANDO": "Cargando...",
-    "AUTO_REFRESH": "Auto-actualización: 30s",
+    "AUTO_REFRESH": "Tiempo real activo",
     "CARGANDO_PEDIDOS": "Cargando pedidos...",
     "REINTENTAR": "Reintentar",
     "PENDIENTES": "PENDIENTES",

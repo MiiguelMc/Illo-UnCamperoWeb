@@ -15,8 +15,7 @@ export type EstadoPedido =
 
 export type MetodoPago =
     | 'EFECTIVO'
-    | 'TARJETA'
-    | 'TRANSFERENCIA';
+    | 'TARJETA';
 
 export interface Pedido {
     id?: string;

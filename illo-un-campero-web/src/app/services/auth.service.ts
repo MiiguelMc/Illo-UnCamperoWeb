@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
+  sendEmailVerification,
   signOut
 } from '@angular/fire/auth';
 import { Usuario } from '../../model/usuario.model';
@@ -55,6 +56,7 @@ export class AuthService {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     const body = { uid: credential.user.uid, email, ...datosExtra };
     await firstValueFrom(this.http.post(`${this.API_URL}/registro`, body, { headers }));
+    await sendEmailVerification(credential.user);
     return credential;
   }
 
