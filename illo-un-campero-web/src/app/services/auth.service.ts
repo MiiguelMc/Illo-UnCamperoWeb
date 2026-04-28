@@ -1,6 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { updatePassword } from '@angular/fire/auth';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, firstValueFrom, from, of } from 'rxjs';
 import { switchMap, catchError } from 'rxjs/operators';
 import {
@@ -10,39 +9,32 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   sendEmailVerification,
+  updatePassword,
   signOut
 } from '@angular/fire/auth';
 import { Usuario } from '../../model/usuario.model';
 import { environment } from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+// Los headers de autenticación los añade AuthInterceptor automáticamente
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private auth = inject(Auth);
   private http = inject(HttpClient);
 
   private API_URL = `${environment.apiUrl}/usuarios`;
 
+  // Observable del usuario autenticado con su perfil del backend
   user$ = authState(this.auth).pipe(
-    switchMap(async (fbUser) => {
-      if (fbUser) {
-        const token = await fbUser.getIdToken();
-        return { fbUser, token };
-      }
-      return null;
-    }),
-    switchMap(data => {
-      if (data) {
-        const { fbUser, token } = data;
-        const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-        return this.http.get<Usuario>(`${this.API_URL}/${fbUser.uid}`, { headers }).pipe(
-          catchError(() => {
-            return of({ uid: fbUser.uid, nombre: fbUser.displayName || 'Usuario', email: fbUser.email || '' } as Usuario);
-          })
-        );
-      }
-      return of(null);
+    switchMap(fbUser => {
+      if (!fbUser) return of(null);
+      return this.http.get<Usuario>(`${this.API_URL}/${fbUser.uid}`).pipe(
+        catchError(() => of({
+          uid: fbUser.uid,
+          nombre: fbUser.displayName || 'Usuario',
+          email: fbUser.email || ''
+        } as Usuario))
+      );
     })
   );
 
@@ -52,10 +44,8 @@ export class AuthService {
 
   async register(email: string, pass: string, datosExtra: any) {
     const credential = await createUserWithEmailAndPassword(this.auth, email, pass);
-    const token = await credential.user.getIdToken();
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     const body = { uid: credential.user.uid, email, ...datosExtra };
-    await firstValueFrom(this.http.post(`${this.API_URL}/registro`, body, { headers }));
+    await firstValueFrom(this.http.post(`${this.API_URL}/registro`, body));
     await sendEmailVerification(credential.user);
     return credential;
   }
@@ -65,18 +55,7 @@ export class AuthService {
   }
 
   updateUserData(uid: string, datos: any): Observable<Usuario> {
-    const user = this.auth.currentUser;
-    if (!user) throw new Error('No hay usuario autenticado');
-    return from(user.getIdToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        });
-        const datosCompletos = { ...datos, uid };
-        return this.http.put<Usuario>(`${this.API_URL}/perfil`, datosCompletos, { headers });
-      })
-    );
+    return this.http.put<Usuario>(`${this.API_URL}/perfil`, { ...datos, uid });
   }
 
   async updatePassword(newPass: string) {
