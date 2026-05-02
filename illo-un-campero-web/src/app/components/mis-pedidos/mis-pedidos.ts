@@ -45,7 +45,7 @@ export class MisPedidosComponent implements OnInit, OnDestroy {
                     this.cargando.set(false);
                     return of([]);
                 }
-                return this.pedidoService.obtenerPedidosUsuario(user.uid);
+                return this.pedidoService.obtenerPedidosUsuario();
             }),
             takeUntil(this.destroy$)
         ).subscribe({

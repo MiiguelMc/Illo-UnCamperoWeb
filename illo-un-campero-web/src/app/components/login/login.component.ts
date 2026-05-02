@@ -43,13 +43,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/restaurantes']);
     } catch (error: any) {
       this.password = '';
-      if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
-        this.passwordError = 'LOGIN.ERR_CREDENCIALES';
-      } else if (error.code === 'auth/user-not-found') {
-        this.emailError = 'LOGIN.ERR_NOT_FOUND';
-      } else {
-        this.emailError = 'LOGIN.ERR_GENERIC';
-      }
+      this.passwordError = 'LOGIN.ERR_CREDENCIALES';
     }
   }
 }

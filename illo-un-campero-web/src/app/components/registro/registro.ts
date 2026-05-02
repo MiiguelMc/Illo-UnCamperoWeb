@@ -72,7 +72,7 @@ export class RegistroComponent implements OnInit {
       hayErrores = true;
     }
 
-    if (this.usuario.password.length < 6) {
+    if (this.usuario.password.length < 8) {
       this.errores.password = 'REGISTRO.ERR_PASSWORD';
       this.usuario.password = '';
       hayErrores = true;

@@ -197,15 +197,6 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
         this.cargando.set(true);
         this.error.set('');
 
-        // Si el método de pago es TARJETA, procesamos el pago con Stripe primero
-        if (this.metodoPago === 'TARJETA') {
-            const pagoOk = await this.procesarPagoStripe();
-            if (!pagoOk) {
-                this.cargando.set(false);
-                return;
-            }
-        }
-
         const itemsPedido: ItemPedido[] = this.items().map(item => ({
             productoId: item.producto.id?.toString() || '',
             nombre: item.producto.nombre,
@@ -234,28 +225,41 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
             }
         }
 
-        this.pedidoService.crearPedido(pedidoDTO).subscribe({
-            next: () => {
-                this.carritoService.vaciar();
-                this.router.navigate(['/mis-pedidos']);
-            },
-            error: () => {
-                this.error.set('Error al procesar el pedido. Inténtalo de nuevo.');
+        // 1. Crear el pedido primero para obtener el ID
+        let pedidoId: string;
+        try {
+            pedidoId = await firstValueFrom(this.pedidoService.crearPedido(pedidoDTO));
+        } catch {
+            this.error.set('Error al procesar el pedido. Inténtalo de nuevo.');
+            this.cargando.set(false);
+            return;
+        }
+
+        // 2. Si es TARJETA, Stripe usa el ID del pedido para obtener el total desde el servidor
+        if (this.metodoPago === 'TARJETA') {
+            const pagoOk = await this.procesarPagoStripe(pedidoId);
+            if (!pagoOk) {
+                // Cancelar el pedido si el pago falla
+                this.pedidoService.cancelarPedido(pedidoId).subscribe();
                 this.cargando.set(false);
+                return;
             }
-        });
+        }
+
+        this.carritoService.vaciar();
+        this.router.navigate(['/mis-pedidos']);
     }
 
-    private async procesarPagoStripe(): Promise<boolean> {
+    private async procesarPagoStripe(pedidoId: string): Promise<boolean> {
         if (!this.stripe || !this.cardElement) {
             this.error.set('El sistema de pago no está listo. Espera un momento.');
             return false;
         }
 
         try {
-            // 1. Pedimos al backend que cree el PaymentIntent
+            // El backend calcula el total desde la BD usando el pedidoId
             const { clientSecret } = await firstValueFrom(
-                this.pagoService.crearIntent(this.totalFinal)
+                this.pagoService.crearIntent(pedidoId)
             );
 
             // 2. Confirmamos el pago con Stripe directamente desde el navegador

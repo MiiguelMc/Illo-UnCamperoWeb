@@ -19,8 +19,8 @@ export class PedidoService {
     return this.http.post(`${this.API_URL}/realizar-pedido`, pedidoDTO, { responseType: 'text' });
   }
 
-  obtenerPedidosUsuario(uid: string): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`${this.API_URL}/usuario/${uid}`);
+  obtenerPedidosUsuario(): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(`${this.API_URL}/mis-pedidos`);
   }
 
   obtenerPedidoPorId(id: string): Observable<Pedido> {

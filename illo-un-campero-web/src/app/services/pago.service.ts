@@ -22,12 +22,12 @@ export class PagoService {
         });
     }
 
-    crearIntent(total: number): Observable<{ clientSecret: string }> {
+    crearIntent(pedidoId: string): Observable<{ clientSecret: string }> {
         return from(this.getAuthHeaders()).pipe(
             switchMap(headers =>
                 this.http.post<{ clientSecret: string }>(
                     `${this.API_URL}/crear-intent`,
-                    { total },
+                    { pedidoId },
                     { headers }
                 )
             )
