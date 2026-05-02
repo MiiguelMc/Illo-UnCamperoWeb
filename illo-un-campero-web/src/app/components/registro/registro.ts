@@ -58,9 +58,9 @@ export class RegistroComponent {
       hayErrores = true;
     }
 
-    // Contraseña (Mínimo 6 caracteres para Firebase)
-    if (this.usuario.password.length < 6) {
-      this.errores.password = 'La contraseña debe tener al menos 6 caracteres.';
+    // Contraseña (Mínimo 8 caracteres)
+    if (this.usuario.password.length < 8) {
+      this.errores.password = 'La contraseña debe tener al menos 8 caracteres.';
       this.usuario.password = ''; // Limpiamos el campo por seguridad
       hayErrores = true;
     }
@@ -71,13 +71,13 @@ export class RegistroComponent {
     // 2. Si todo es válido, procedemos al registro en Firebase
     try {
       await this.authService.register(this.usuario);
-      alert('¡Cuenta creada con éxito! Bienvenido a Illo Un Campero.');
-      this.router.navigate(['/restaurantes']);
+      alert('¡Cuenta creada! Te hemos enviado un correo de verificación. Verifica tu email antes de iniciar sesión.');
+      this.router.navigate(['/login']);
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
         this.errores.email = 'Este correo ya está registrado.';
       } else {
-        alert('Error inesperado: ' + error.message);
+        alert('Error al crear la cuenta. Inténtalo de nuevo más tarde.');
       }
     }
   }

@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { 
-  Auth, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
-  signOut, 
-  user 
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signOut,
+  user
 } from '@angular/fire/auth';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 
@@ -28,16 +29,18 @@ export class AuthService {
     // 1. Crea el usuario en Authentication
     const credenciales = await createUserWithEmailAndPassword(this.auth, datos.email, datos.password);
     
-    // 2. Guarda los datos en la tabla 'usuarios' de Firestore usando el UID
+    // 2. Envía email de verificación
+    await sendEmailVerification(credenciales.user);
+
+    // 3. Guarda los datos en la tabla 'usuarios' de Firestore usando el UID
     const userRef = doc(this.firestore, `usuarios/${credenciales.user.uid}`);
-    
+
     return setDoc(userRef, {
       nombre: datos.nombre,
       apellidos: datos.apellidos,
       email: datos.email,
       telefono: datos.telefono,
-      rol: 'cliente',
-      contrasena: datos.password // Se guarda en la tabla según tu imagen
+      rol: 'cliente'
     });
   }
 
