@@ -8,7 +8,7 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth, browserLocalPersistence } from '@angular/fire/auth';
+import { getAuth, provideAuth, browserSessionPersistence } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 // datos del proyecto en la consola de firebase (web)
@@ -37,7 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => {
       const auth = getAuth();
-      auth.setPersistence(browserLocalPersistence);
+      auth.setPersistence(browserSessionPersistence);
       return auth;
     }),
     provideFirestore(() => getFirestore())
