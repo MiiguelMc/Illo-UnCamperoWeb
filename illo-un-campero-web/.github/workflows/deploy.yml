@@ -3,7 +3,8 @@ name: Build y Deploy a Firebase Hosting
 on:
   push:
     branches:
-      - main  # Solo se despliega cuando se hace push/merge a main
+      - main     # Deploy a producción
+      - develop  # Deploy a desarrollo (mismo Firebase project, misma URL)
 
 jobs:
   build-and-deploy:
