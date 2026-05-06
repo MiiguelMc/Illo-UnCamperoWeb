@@ -67,7 +67,7 @@
                     <input formControlName="imagenUrl" type="text" placeholder="https://...">
                     <div class="imagen-upload">
                         <label class="btn-upload" [class.disabled]="subiendoImagen()">
-                            {{ subiendoImagen() ? 'Subiendo...' : 'O selecciona archivo' }}
+                            {{ subiendoImagen() ? ('GESTION.UPLOAD_SUBIENDO' | translate) : ('GESTION.UPLOAD_BTN' | translate) }}
                             <input type="file" accept="image/jpeg,image/png,image/webp"
                                 (change)="onArchivoSeleccionado($event)" [disabled]="subiendoImagen()" hidden>
                         </label>

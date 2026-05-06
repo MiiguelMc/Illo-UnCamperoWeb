@@ -3,6 +3,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../../model/producto.model';
 import { environment } from '../../../environments/environment';
@@ -17,6 +18,7 @@ import { environment } from '../../../environments/environment';
 export class GestionProductosComponent implements OnInit {
     private productoService = inject(ProductoService);
     private http = inject(HttpClient);
+    private translate = inject(TranslateService);
     private fb = inject(FormBuilder);
 
     productos = signal<Producto[]>([]);
@@ -120,11 +122,11 @@ export class GestionProductosComponent implements OnInit {
 
         const tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
         if (!tiposPermitidos.includes(archivo.type)) {
-            this.errorImagen.set('Solo se permiten imágenes JPG, PNG o WebP.');
+            this.errorImagen.set(this.translate.instant('GESTION.UPLOAD_ERR_TIPO'));
             return;
         }
         if (archivo.size > 2 * 1024 * 1024) {
-            this.errorImagen.set('La imagen no puede superar 2 MB.');
+            this.errorImagen.set(this.translate.instant('GESTION.UPLOAD_ERR_TAMANO'));
             return;
         }
 
