@@ -218,6 +218,71 @@
 .btn-desactivar { padding: 5px 12px; background: #fde8e8; color: #c0392b; border: none; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: 0.2s; font-family: inherit; }
 .btn-desactivar:hover { background: #c0392b; color: white; }
 
+/* ---- ZONA DE PELIGRO (RGPD) ---- */
+.danger-zone {
+  border-top: 2px solid #fde8e8;
+  margin-top: 32px;
+  padding-top: 24px;
+}
+.danger-zone h3 { color: #c0392b; }
+.danger-zone p { font-size: 0.9rem; color: #555; margin-bottom: 14px; }
+.btn-danger {
+  padding: 10px 20px;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+.btn-danger:hover { background: #a93226; }
+.btn-danger:disabled { opacity: 0.6; cursor: not-allowed; }
+.confirmar-eliminar { background: #fff8f8; border: 1px solid #f5c6cb; border-radius: 8px; padding: 16px; margin-top: 12px; }
+.aviso-eliminar { color: #c0392b; font-weight: 600; margin-bottom: 12px; }
+.confirmar-acciones { display: flex; gap: 10px; }
+.privacidad-link { font-size: 0.82rem; color: #888; margin-top: 16px; }
+.privacidad-link a { color: #c0392b; text-decoration: underline; }
+
+/* ---- TOP PRODUCTOS ---- */
+.top-productos { margin-top: 32px; }
+.top-productos h3 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 16px; }
+.top-lista { display: flex; flex-direction: column; gap: 10px; }
+.top-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 70px 160px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+.top-pos { font-weight: 800; color: #c0392b; font-size: 0.9rem; }
+.top-nombre { font-weight: 600; font-size: 0.9rem; }
+.top-unidades { font-size: 0.82rem; color: #888; text-align: right; }
+.top-barra-wrap { background: #f0f0f0; border-radius: 4px; height: 8px; overflow: hidden; }
+.top-barra { height: 100%; background: #c0392b; border-radius: 4px; transition: width 0.4s ease; }
+
+/* ---- FILTRO ESTADÍSTICAS ---- */
+.stats-filtro {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.stats-filtro label { font-size: 0.82rem; font-weight: 700; color: #888; }
+.stats-filtro input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
 /* ---- RESPONSIVE ---- */
 @media (max-width: 700px) {
   .perfil-card { padding: 24px 16px; }

@@ -65,6 +65,20 @@
                 <div class="form-group">
                     <label>{{ 'GESTION.LABEL_IMAGEN' | translate }}</label>
                     <input formControlName="imagenUrl" type="text" placeholder="https://...">
+                    <div class="imagen-upload">
+                        <label class="btn-upload" [class.disabled]="subiendoImagen()">
+                            {{ subiendoImagen() ? 'Subiendo...' : 'O selecciona archivo' }}
+                            <input type="file" accept="image/jpeg,image/png,image/webp"
+                                (change)="onArchivoSeleccionado($event)" [disabled]="subiendoImagen()" hidden>
+                        </label>
+                        <div class="progreso-barra" *ngIf="subiendoImagen()">
+                            <div class="progreso-fill" [style.width.%]="progresoImagen()"></div>
+                        </div>
+                        <span class="err" *ngIf="errorImagen()">{{ errorImagen() }}</span>
+                    </div>
+                    <div class="imagen-preview" *ngIf="form.get('imagenUrl')?.value">
+                        <img [src]="form.get('imagenUrl')?.value" alt="Preview" class="preview-img">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>{{ 'GESTION.LABEL_CATEGORIA' | translate }}</label>

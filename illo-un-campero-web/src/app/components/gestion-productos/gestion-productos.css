@@ -247,3 +247,39 @@
 
 .btn-save:hover:not(:disabled) { background: #d88200; }
 .btn-save:disabled, .btn-cancel:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---- IMAGEN UPLOAD ---- */
+.imagen-upload { margin-top: 6px; display: flex; flex-direction: column; gap: 6px; }
+
+.btn-upload {
+    display: inline-block;
+    padding: 7px 14px;
+    background: #f4f5f7;
+    border: 1px dashed #bbb;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: 0.2s;
+    width: fit-content;
+}
+.btn-upload:hover:not(.disabled) { background: #eaeaea; border-color: #999; }
+.btn-upload.disabled { opacity: 0.5; cursor: not-allowed; }
+
+.progreso-barra {
+    height: 6px;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.progreso-fill { height: 100%; background: #f39200; border-radius: 4px; transition: width 0.2s; }
+
+.imagen-preview { margin-top: 8px; }
+.preview-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}

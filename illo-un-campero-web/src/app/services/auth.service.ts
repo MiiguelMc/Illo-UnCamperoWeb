@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, firstValueFrom, from, of } from 'rxjs';
+import { Observable, firstValueFrom, of } from 'rxjs';
 import { switchMap, catchError } from 'rxjs/operators';
 import {
   Auth,
@@ -15,8 +15,6 @@ import {
 import { Usuario } from '../../model/usuario.model';
 import { environment } from '../../environments/environment';
 
-// Los headers de autenticación los añade AuthInterceptor automáticamente
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private auth = inject(Auth);
@@ -24,7 +22,6 @@ export class AuthService {
 
   private API_URL = `${environment.apiUrl}/usuarios`;
 
-  // Observable del usuario autenticado con su perfil del backend
   user$ = authState(this.auth).pipe(
     switchMap(fbUser => {
       if (!fbUser) return of(null);
@@ -66,5 +63,10 @@ export class AuthService {
 
   sendPasswordReset(email: string) {
     return sendPasswordResetEmail(this.auth, email);
+  }
+
+  async eliminarCuenta(): Promise<void> {
+    await firstValueFrom(this.http.delete(`${this.API_URL}/cuenta`));
+    await signOut(this.auth);
   }
 }

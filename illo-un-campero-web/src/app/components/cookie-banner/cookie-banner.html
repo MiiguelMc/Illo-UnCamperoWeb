@@ -1,0 +1,14 @@
+@if (visible()) {
+  <div class="cookie-banner" role="region" aria-label="Aviso de cookies">
+    <div class="cookie-content">
+      <p>
+        Usamos cookies propias y de terceros (Firebase, Stripe) para el funcionamiento de la aplicación.
+        Al continuar, aceptas su uso. Puedes consultar nuestra
+        <a routerLink="/privacidad">política de privacidad</a>.
+      </p>
+      <div class="cookie-actions">
+        <button class="btn-aceptar" (click)="aceptar()">Aceptar y continuar</button>
+      </div>
+    </div>
+  </div>
+}
