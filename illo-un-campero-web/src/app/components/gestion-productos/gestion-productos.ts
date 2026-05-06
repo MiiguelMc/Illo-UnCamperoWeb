@@ -2,8 +2,10 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../../model/producto.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-gestion-productos',
@@ -14,6 +16,7 @@ import { Producto } from '../../../model/producto.model';
 })
 export class GestionProductosComponent implements OnInit {
     private productoService = inject(ProductoService);
+    private http = inject(HttpClient);
     private fb = inject(FormBuilder);
 
     productos = signal<Producto[]>([]);
@@ -23,6 +26,11 @@ export class GestionProductosComponent implements OnInit {
     productActual = signal<Producto | null>(null);
     guardando = signal(false);
     mensajeExito = signal('');
+
+    // Subida de imagen — pendiente de conectar con el servicio de almacenamiento
+    subiendoImagen = signal(false);
+    progresoImagen = signal(0);
+    errorImagen = signal('');
 
     form: FormGroup;
 
@@ -77,6 +85,7 @@ export class GestionProductosComponent implements OnInit {
         this.productActual.set(null);
         this.modoFormulario.set('nuevo');
         this.mensajeExito.set('');
+        this.errorImagen.set('');
     }
 
     abrirEditar(p: Producto) {
@@ -94,11 +103,68 @@ export class GestionProductosComponent implements OnInit {
         });
         this.modoFormulario.set('editar');
         this.mensajeExito.set('');
+        this.errorImagen.set('');
     }
 
     cerrarFormulario() {
         this.modoFormulario.set('cerrado');
         this.form.reset();
+        this.errorImagen.set('');
+        this.progresoImagen.set(0);
+    }
+
+    onArchivoSeleccionado(event: Event) {
+        const input = event.target as HTMLInputElement;
+        const archivo = input.files?.[0];
+        if (!archivo) return;
+
+        const tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!tiposPermitidos.includes(archivo.type)) {
+            this.errorImagen.set('Solo se permiten imágenes JPG, PNG o WebP.');
+            return;
+        }
+        if (archivo.size > 2 * 1024 * 1024) {
+            this.errorImagen.set('La imagen no puede superar 2 MB.');
+            return;
+        }
+
+        this.errorImagen.set('');
+        this.subiendoImagen.set(true);
+        this.progresoImagen.set(0);
+
+        // 1. Pedir la firma al backend (el api_secret nunca sale del servidor)
+        this.http.get<{ timestamp: string; signature: string; apiKey: string; cloudName: string }>(
+            `${environment.apiUrl}/cloudinary/firma`
+        ).subscribe({
+            next: (firma) => {
+                // 2. Subir directamente a Cloudinary con la firma
+                const formData = new FormData();
+                formData.append('file', archivo);
+                formData.append('api_key', firma.apiKey);
+                formData.append('timestamp', firma.timestamp);
+                formData.append('signature', firma.signature);
+                formData.append('folder', 'productos');
+
+                const uploadUrl = `https://api.cloudinary.com/v1_1/${firma.cloudName}/image/upload`;
+
+                this.http.post<{ secure_url: string }>(uploadUrl, formData).subscribe({
+                    next: (res) => {
+                        this.form.patchValue({ imagenUrl: res.secure_url });
+                        this.subiendoImagen.set(false);
+                        this.progresoImagen.set(100);
+                        setTimeout(() => this.progresoImagen.set(0), 800);
+                    },
+                    error: () => {
+                        this.errorImagen.set('Error al subir la imagen a Cloudinary.');
+                        this.subiendoImagen.set(false);
+                    }
+                });
+            },
+            error: () => {
+                this.errorImagen.set('No se pudo obtener la firma del servidor.');
+                this.subiendoImagen.set(false);
+            }
+        });
     }
 
     guardar() {
@@ -106,6 +172,8 @@ export class GestionProductosComponent implements OnInit {
             this.form.markAllAsTouched();
             return;
         }
+        if (this.subiendoImagen()) return;
+
         this.guardando.set(true);
         const datos: Producto = this.form.getRawValue();
         const modo = this.modoFormulario();

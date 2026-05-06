@@ -12,6 +12,7 @@ import { CocinaDashboardComponent } from './components/cocina-dashboard/cocina-d
 import { GestionProductosComponent } from './components/gestion-productos/gestion-productos';
 import { SeguimientoComponent } from './components/seguimiento/seguimiento';
 import { ValorarPedidoComponent } from './components/seguimiento/valorar-pedido';
+import { PrivacidadComponent } from './components/privacidad/privacidad';
 import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'valorar/:id', component: ValorarPedidoComponent },
   { path: 'cocina', component: CocinaDashboardComponent, canActivate: [adminGuard] },
   { path: 'gestion-productos', component: GestionProductosComponent, canActivate: [adminGuard] },
+  { path: 'privacidad', component: PrivacidadComponent },
   { path: '', redirectTo: 'restaurantes', pathMatch: 'full' },
   { path: '**', redirectTo: 'restaurantes' }
 ];

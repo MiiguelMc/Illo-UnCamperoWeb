@@ -10,6 +10,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth, browserSessionPersistence } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+// import { getStorage, provideStorage } from '@angular/fire/storage'; // activar cuando se configure el storage
 
 // datos del proyecto en la consola de firebase (web)
 const firebaseConfig = {
@@ -41,5 +42,6 @@ export const appConfig: ApplicationConfig = {
       return auth;
     }),
     provideFirestore(() => getFirestore())
+    // provideStorage(() => getStorage()) // activar cuando se configure el storage
   ]
 };

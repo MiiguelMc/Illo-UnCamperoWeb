@@ -37,6 +37,22 @@ export class PedidoService {
     );
   }
 
+  obtenerTodosPedidosAdmin(desde?: number, hasta?: number): Observable<Pedido[]> {
+    let params = '';
+    if (desde) params += `?desde=${desde}`;
+    if (hasta) params += `${params ? '&' : '?'}hasta=${hasta}`;
+    return this.http.get<Pedido[]>(`${this.API_URL}/todos${params}`);
+  }
+
+  obtenerTopProductos(desde?: number, hasta?: number): Observable<{ nombre: string; unidades: number }[]> {
+    let params = '';
+    if (desde) params += `?desde=${desde}`;
+    if (hasta) params += `${params ? '&' : '?'}hasta=${hasta}`;
+    return this.http.get<{ nombre: string; unidades: number }[]>(
+      `${this.API_URL}/estadisticas/productos${params}`
+    );
+  }
+
   actualizarEstadoPedido(id: string, nuevoEstado: EstadoPedido): Observable<string> {
     return this.http.patch<string>(
       `${this.API_URL}/${id}/estado?nuevoEstado=${nuevoEstado}`, {}

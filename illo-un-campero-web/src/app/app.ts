@@ -6,12 +6,13 @@ import { TiendaService } from './services/tienda.service';
 import { Header } from './components/header-login/header';
 import { HeaderUserComponent } from './components/header-user/header-user';
 import { Footer } from './components/footer/footer';
+import { CookieBannerComponent } from './components/cookie-banner/cookie-banner';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, Header, HeaderUserComponent, Footer],
+  imports: [CommonModule, RouterOutlet, Header, HeaderUserComponent, Footer, CookieBannerComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

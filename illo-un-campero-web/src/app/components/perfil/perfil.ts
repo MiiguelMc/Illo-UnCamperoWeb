@@ -2,6 +2,7 @@ import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { PedidoService } from '../../services/pedido.service';
 import { TiendaService } from '../../services/tienda.service';
@@ -18,7 +19,7 @@ type SubTabAdmin = 'pedidos' | 'productos' | 'cupones' | 'estadisticas' | 'tiend
 @Component({
     selector: 'app-perfil',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, GestionProductosComponent, TranslateModule],
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, GestionProductosComponent, TranslateModule, RouterModule],
     templateUrl: './perfil.html',
     styleUrls: ['./perfil.css']
 })
@@ -28,6 +29,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
     private tiendaService = inject(TiendaService);
     private cuponService = inject(CuponService);
     private fb = inject(FormBuilder);
+    private router = inject(Router);
 
     profileForm: FormGroup;
     usuario: Usuario | null = null;
@@ -38,20 +40,31 @@ export class PerfilComponent implements OnInit, OnDestroy {
     subTabAdmin = signal<SubTabAdmin>('pedidos');
     esAdmin = signal(false);
 
+    // Pedidos admin
     pedidosActivos = signal<Pedido[]>([]);
     cargandoPedidos = signal(false);
     errorPedidos = signal('');
 
+    // Estadísticas
     estadisticas = signal<{ totalDinero: number; totalPedidos: number } | null>(null);
+    topProductos = signal<{ nombre: string; unidades: number }[]>([]);
+    filtroDesde = '';
+    filtroHasta = '';
 
+    // Tienda
     tiendaAbierta = this.tiendaService.tiendaAbierta;
     guardandoEstado = signal(false);
 
+    // Cupones
     cupones = signal<Cupon[]>([]);
     nuevoCuponCodigo = '';
     nuevoCuponDescuento: number | null = null;
     guardandoCupon = signal(false);
     mensajeCupon = signal('');
+
+    // Eliminar cuenta
+    confirmandoEliminar = signal(false);
+    eliminandoCuenta = signal(false);
 
     private refreshSub?: Subscription;
 
@@ -111,7 +124,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
     cargarPedidos(silencioso = false) {
         if (!silencioso) this.cargandoPedidos.set(true);
         this.errorPedidos.set('');
-        this.pedidoService.obtenerTodosPedidos().subscribe({
+        this.pedidoService.obtenerTodosPedidosAdmin().subscribe({
             next: (pedidos) => {
                 this.pedidosActivos.set(pedidos.sort((a, b) => b.fecha - a.fecha));
                 this.cargandoPedidos.set(false);
@@ -124,10 +137,22 @@ export class PerfilComponent implements OnInit, OnDestroy {
     }
 
     cargarEstadisticas() {
+        const desde = this.filtroDesde ? new Date(this.filtroDesde).setHours(0, 0, 0, 0) : undefined;
+        const hasta = this.filtroHasta ? new Date(this.filtroHasta).setHours(23, 59, 59, 999) : undefined;
+
         this.pedidoService.obtenerEstadisticasHoy().subscribe({
             next: (datos) => this.estadisticas.set(datos),
             error: () => this.estadisticas.set(null)
         });
+
+        this.pedidoService.obtenerTopProductos(desde, hasta).subscribe({
+            next: (lista) => this.topProductos.set(lista),
+            error: () => this.topProductos.set([])
+        });
+    }
+
+    aplicarFiltroEstadisticas() {
+        this.cargarEstadisticas();
     }
 
     cargarCupones() {
@@ -212,6 +237,18 @@ export class PerfilComponent implements OnInit, OnDestroy {
             }).catch(() => {
                 this.mensajeError = 'Error al enviar el correo.';
             });
+        }
+    }
+
+    async eliminarCuenta() {
+        this.eliminandoCuenta.set(true);
+        try {
+            await this.authService.eliminarCuenta();
+            this.router.navigate(['/login']);
+        } catch {
+            this.mensajeError = 'No se pudo eliminar la cuenta. Inténtalo de nuevo.';
+            this.eliminandoCuenta.set(false);
+            this.confirmandoEliminar.set(false);
         }
     }
 
