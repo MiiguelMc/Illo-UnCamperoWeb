@@ -11,7 +11,6 @@
         <li><a routerLink="/carta" routerLinkActive="active">{{ 'NAV.CARTA' | translate }}</a></li>
         <li><a routerLink="/carrito" routerLinkActive="active">{{ 'NAV.TU_PEDIDO' | translate }}</a></li>
         <li *ngIf="esAdmin()"><a routerLink="/cocina" routerLinkActive="active" class="nav-link-admin">{{ 'NAV.COCINA' | translate }}</a></li>
-        <li *ngIf="esAdmin()"><a routerLink="/gestion-productos" routerLinkActive="active" class="nav-link-admin">{{ 'NAV.GESTION_PRODUCTOS' | translate }}</a></li>
       </ul>
     </div>
     <div class="header-right">
@@ -26,7 +25,7 @@
             <a routerLink="/perfil" (click)="isMenuOpen = false">{{ 'NAV.PERFIL' | translate }}</a>
             <a routerLink="/mis-pedidos" (click)="isMenuOpen = false">{{ 'NAV.MIS_PEDIDOS' | translate }}</a>
             <a *ngIf="esAdmin()" routerLink="/cocina" (click)="isMenuOpen = false" class="link-admin">{{ 'NAV.PANEL_COCINA' | translate }}</a>
-            <a *ngIf="esAdmin()" routerLink="/gestion-productos" (click)="isMenuOpen = false" class="link-admin">{{ 'NAV.GESTION_PRODUCTOS' | translate }}</a>
+            <a *ngIf="esAdmin()" routerLink="/perfil" (click)="isMenuOpen = false" class="link-admin">{{ 'NAV.PANEL_ADMIN' | translate }}</a>
             <hr class="dropdown-divider">
             <a class="logout-link" (click)="logout()">{{ 'NAV.CERRAR_SESION' | translate }}</a>
           </div>
@@ -78,8 +77,8 @@
           <a routerLink="/cocina" (click)="toggleMobileMenu()" routerLinkActive="mob-active" class="mob-admin-link">
             <span class="mob-icon">🍳</span> {{ 'NAV.PANEL_COCINA' | translate }}
           </a>
-          <a routerLink="/gestion-productos" (click)="toggleMobileMenu()" routerLinkActive="mob-active" class="mob-admin-link">
-            <span class="mob-icon">📦</span> {{ 'NAV.GESTION_PRODUCTOS' | translate }}
+          <a routerLink="/perfil" (click)="toggleMobileMenu()" routerLinkActive="mob-active" class="mob-admin-link">
+            <span class="mob-icon">⚙️</span> {{ 'NAV.PANEL_ADMIN' | translate }}
           </a>
         </div>
 
