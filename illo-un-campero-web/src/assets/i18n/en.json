@@ -10,6 +10,7 @@
     "COCINA": "Kitchen",
     "PANEL_COCINA": "Kitchen Panel",
     "GESTION_PRODUCTOS": "Product Management",
+    "PANEL_ADMIN": "Admin Panel",
     "INICIAR_SESION": "Log in",
     "REGISTRARSE": "Sign up",
     "CERRAR_SESION": "Log out"
