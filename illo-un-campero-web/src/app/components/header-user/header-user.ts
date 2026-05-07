@@ -37,7 +37,8 @@ export class HeaderUserComponent {
   }
 
   esAdmin(): boolean {
-    return this.usuarioActual?.rol?.toUpperCase() === 'ADMIN';
+    const rol = this.usuarioActual?.rol?.toUpperCase();
+    return rol === 'ADMIN' || rol === 'COCINA';
   }
 
   getInicial(): string {
