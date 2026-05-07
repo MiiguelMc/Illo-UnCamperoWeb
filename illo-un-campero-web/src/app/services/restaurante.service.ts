@@ -1,21 +1,15 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Auth } from '@angular/fire/auth';
-import { from } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 const STORAGE_KEY = 'restaurante_abierto';
 
 @Injectable({ providedIn: 'root' })
 export class RestauranteService {
-  private auth = inject(Auth);
   private http = inject(HttpClient);
-
-  // misma base que el resto de servicios (estadisticas las teniamos aqui por la pantalla restaurantes)
   private API_URL = environment.apiUrl;
 
-  // si no hay nada guardado asumimos abierto
   abierto = signal<boolean>(this.leerEstadoLocal());
 
   private leerEstadoLocal(): boolean {
@@ -34,20 +28,9 @@ export class RestauranteService {
     } catch {}
   }
 
-  private async getAuthHeaders(): Promise<HttpHeaders> {
-    const user = this.auth.currentUser;
-    if (!user) throw new Error('No autenticado');
-    const token = await user.getIdToken();
-    return new HttpHeaders({ 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' });
-  }
-
-  obtenerEstadisticasHoy() {
-    return from(this.getAuthHeaders()).pipe(
-      switchMap(headers =>
-        this.http.get<{ totalDinero: number; totalPedidos: number }>(
-          `${this.API_URL}/pedidos/estadisticas/hoy`, { headers }
-        )
-      )
+  obtenerEstadisticasHoy(): Observable<{ totalDinero: number; totalPedidos: number }> {
+    return this.http.get<{ totalDinero: number; totalPedidos: number }>(
+      `${this.API_URL}/pedidos/estadisticas/hoy`
     );
   }
 }
