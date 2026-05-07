@@ -41,7 +41,13 @@ export class AuthService {
   async register(email: string, pass: string, datosExtra: any) {
     const credential = await createUserWithEmailAndPassword(this.auth, email, pass);
     const body = { uid: credential.user.uid, email, ...datosExtra };
-    await firstValueFrom(this.http.post(`${this.API_URL}/registro`, body));
+    // Si el backend falla el usuario ya tiene cuenta en Firebase — no lanzamos error
+    // para que pueda hacer login igualmente. El perfil se guardará al actualizar datos.
+    try {
+      await firstValueFrom(this.http.post(`${this.API_URL}/registro`, body));
+    } catch {
+      console.warn('Perfil no guardado en backend al registrar, el usuario puede hacer login igualmente.');
+    }
     return credential;
   }
 
