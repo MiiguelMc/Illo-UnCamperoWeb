@@ -86,7 +86,13 @@
     "NOTAS_PLACEHOLDER": "Sin cebolla...",
     "CANCELAR": "Cancelar",
     "BTN": "Confirmar pedido",
-    "PROCESANDO": "Procesando..."
+    "PROCESANDO": "Procesando...",
+    "METODO_EFECTIVO": "Efectivo",
+    "METODO_EFECTIVO_DESC": "Paga al repartidor al recibir",
+    "METODO_TARJETA": "Tarjeta",
+    "METODO_TARJETA_DESC": "Visa, Mastercard, Amex",
+    "PAGO_SEGURO": "Pago seguro con Stripe",
+    "STRIPE_TEST": "Modo test — tarjeta: 4242 4242 4242 4242 · fecha futura · CVC: 123"
   },
   "FOOTER": {
     "DESC": "El bocata que te lleva de vuelta a Málaga, donde sea que estés. Repartimos por toda la zona centro.",

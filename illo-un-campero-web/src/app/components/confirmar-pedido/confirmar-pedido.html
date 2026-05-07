@@ -76,8 +76,8 @@
                                 </svg>
                             </div>
                             <div class="metodo-info">
-                                <span class="metodo-nombre">Efectivo</span>
-                                <span class="metodo-desc">Paga al repartidor al recibir</span>
+                                <span class="metodo-nombre">{{ 'CONF.METODO_EFECTIVO' | translate }}</span>
+                                <span class="metodo-desc">{{ 'CONF.METODO_EFECTIVO_DESC' | translate }}</span>
                             </div>
                             <div class="metodo-radio" [class.activo]="metodoPago === 'EFECTIVO'"></div>
                         </div>
@@ -93,8 +93,8 @@
                                 </svg>
                             </div>
                             <div class="metodo-info">
-                                <span class="metodo-nombre">Tarjeta</span>
-                                <span class="metodo-desc">Visa, Mastercard, Amex</span>
+                                <span class="metodo-nombre">{{ 'CONF.METODO_TARJETA' | translate }}</span>
+                                <span class="metodo-desc">{{ 'CONF.METODO_TARJETA_DESC' | translate }}</span>
                             </div>
                             <div class="metodo-radio" [class.activo]="metodoPago === 'TARJETA'"></div>
                         </div>
@@ -105,10 +105,10 @@
                 <div class="stripe-wrapper" *ngIf="metodoPago === 'TARJETA'">
                     <div class="stripe-header">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <span>Pago seguro con Stripe</span>
+                        <span>{{ 'CONF.PAGO_SEGURO' | translate }}</span>
                     </div>
                     <div id="stripe-card-element" class="stripe-card-container"></div>
-                    <p class="stripe-test-info">Modo test — tarjeta: 4242 4242 4242 4242 · fecha futura · CVC: 123</p>
+                    <p class="stripe-test-info">{{ 'CONF.STRIPE_TEST' | translate }}</p>
                     <p class="error-stripe" *ngIf="errorStripe()">{{ errorStripe() }}</p>
                 </div>
 
