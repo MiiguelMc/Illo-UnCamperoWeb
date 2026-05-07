@@ -21,7 +21,7 @@
                 <tr *ngFor="let p of productos()" [class.no-disponible]="p.disponible === false">
                     <td>
                         <div class="producto-nombre">
-                            <img *ngIf="p.imagenUrl" [src]="p.imagenUrl" [alt]="p.nombre" class="mini-img">
+                            <img *ngIf="p.imagenUrl" [src]="p.imagenUrl" [alt]="p.nombre" class="mini-img" (error)="$event.target.style.display='none'">
                             <span>{{ p.nombre }}</span>
                         </div>
                     </td>

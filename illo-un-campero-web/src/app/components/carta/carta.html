@@ -48,7 +48,7 @@
     <div class="modal-overlay" *ngIf="productoSeleccionado" (click)="cerrarModal()">
         <div class="modal-content-slim" (click)="$event.stopPropagation()">
             <button class="btn-close-minimal" (click)="cerrarModal()">✕</button>
-            <div class="modal-hero-slim"><img [src]="productoSeleccionado.imagenUrl || 'assets/no-image.png'" [alt]="productoSeleccionado.nombre"></div>
+            <div class="modal-hero-slim"><img [src]="productoSeleccionado.imagenUrl || 'assets/no-image.png'" [alt]="productoSeleccionado.nombre" (error)="$event.target.src='assets/no-image.png'"></div>
             <div class="modal-body-slim">
                 <div class="header-info-slim">
                     <h2 class="product-title-slim">{{ productoSeleccionado.nombre }}</h2>

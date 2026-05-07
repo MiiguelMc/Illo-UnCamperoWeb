@@ -2,12 +2,11 @@ import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Firestore, collection, query, where, collectionData } from '@angular/fire/firestore';
 import { PedidoService } from '../../services/pedido.service';
 import { AuthService } from '../../services/auth.service';
 import { Pedido, EstadoPedido } from '../../../model/pedido.model';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Subscription, interval } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { PedidoCardCocinaComponent } from '../pedido-card-cocina/pedido-card-cocina';
 
 @Component({
@@ -19,60 +18,72 @@ import { PedidoCardCocinaComponent } from '../pedido-card-cocina/pedido-card-coc
 })
 export class CocinaDashboardComponent implements OnInit, OnDestroy {
   private pedidoService = inject(PedidoService);
-  private authService = inject(AuthService);
-  private firestore = inject(Firestore);
-  private router = inject(Router);
+  private authService  = inject(AuthService);
+  private router       = inject(Router);
 
   pedidosPendientes = signal<Pedido[]>([]);
-  pedidosCocinando = signal<Pedido[]>([]);
-  pedidosReparto  = signal<Pedido[]>([]);
+  pedidosCocinando  = signal<Pedido[]>([]);
+  pedidosReparto    = signal<Pedido[]>([]);
   cargando = signal(true);
-  error = signal('');
+  error    = signal('');
 
-  private firestoreSub?: Subscription;
+  private pollSub?: Subscription;
   private pedidosAnteriores = 0;
 
   ngOnInit() {
     this.authService.user$.pipe(take(1)).subscribe(user => {
-      if (!user) {
-        this.router.navigate(['/login']);
-        return;
-      }
-      this.suscribirTiempoReal();
+      if (!user) { this.router.navigate(['/login']); return; }
+      this.cargarPedidos();
+      // Refresca cada 5 segundos
+      this.pollSub = interval(5000).subscribe(() => this.cargarPedidos(true));
     });
   }
 
   ngOnDestroy() {
-    this.firestoreSub?.unsubscribe();
+    this.pollSub?.unsubscribe();
   }
 
-  private suscribirTiempoReal() {
-    const pedidosRef = collection(this.firestore, 'pedidos');
-    const q = query(pedidosRef, where('estado', 'in', ['PENDIENTE', 'COCINANDO', 'REPARTO']));
+  cargarPedidos(silencioso = false) {
+    if (!silencioso) this.cargando.set(true);
 
-    this.firestoreSub = collectionData(q, { idField: 'id' }).subscribe({
-      next: (docs: any[]) => {
-        const pendientes = docs.filter(p => p.estado === 'PENDIENTE');
-        const cocinando  = docs.filter(p => p.estado === 'COCINANDO');
-        const reparto    = docs.filter(p => p.estado === 'REPARTO');
+    this.pedidoService.obtenerTodosPedidos().subscribe({
+      next: (pedidos) => {
+        const activos = pedidos.filter(p =>
+          p.estado === 'PENDIENTE' || p.estado === 'COCINANDO' || p.estado === 'REPARTO'
+        );
 
-        const totalActual = pendientes.length + cocinando.length + reparto.length;
+        const totalActual = activos.length;
         if (!this.cargando() && totalActual > this.pedidosAnteriores) {
           this.reproducirNotificacion();
         }
         this.pedidosAnteriores = totalActual;
 
-        this.pedidosPendientes.set(pendientes as Pedido[]);
-        this.pedidosCocinando.set(cocinando as Pedido[]);
-        this.pedidosReparto.set(reparto as Pedido[]);
+        this.pedidosPendientes.set(activos.filter(p => p.estado === 'PENDIENTE'));
+        this.pedidosCocinando.set(activos.filter(p => p.estado === 'COCINANDO'));
+        this.pedidosReparto.set(activos.filter(p => p.estado === 'REPARTO'));
         this.cargando.set(false);
         this.error.set('');
       },
       error: () => {
-        this.error.set('Error al conectar con Firestore en tiempo real.');
+        this.error.set('No se pudieron cargar los pedidos.');
         this.cargando.set(false);
       }
     });
+  }
+
+  cambiarEstado(pedidoId: string, nuevoEstado: EstadoPedido) {
+    this.pedidoService.actualizarEstadoPedido(pedidoId, nuevoEstado).subscribe({
+      next: () => this.cargarPedidos(true),
+      error: (err) => {
+        if (err.status === 401 || err.status === 403) {
+          this.router.navigate(['/login']);
+        }
+      }
+    });
+  }
+
+  refrescarManual() {
+    this.cargarPedidos();
   }
 
   private reproducirNotificacion() {
@@ -89,21 +100,5 @@ export class CocinaDashboardComponent implements OnInit, OnDestroy {
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.5);
     } catch {}
-  }
-
-  cambiarEstado(pedidoId: string, nuevoEstado: EstadoPedido) {
-    this.pedidoService.actualizarEstadoPedido(pedidoId, nuevoEstado).subscribe({
-      error: (err) => {
-        if (err.status === 401) {
-          this.router.navigate(['/login']);
-        }
-      }
-    });
-  }
-
-  refrescarManual() {
-    this.cargando.set(true);
-    this.firestoreSub?.unsubscribe();
-    this.suscribirTiempoReal();
   }
 }
