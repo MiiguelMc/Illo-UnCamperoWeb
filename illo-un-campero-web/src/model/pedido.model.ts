@@ -31,6 +31,7 @@ export interface Pedido {
     metodoPago?: MetodoPago;
     cupon?: string;
     descuento?: number;
+    valorado?: boolean;
 }
 
 export interface CrearPedidoDTO {

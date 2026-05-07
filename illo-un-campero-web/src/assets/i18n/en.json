@@ -86,7 +86,13 @@
     "NOTAS_PLACEHOLDER": "No onions...",
     "CANCELAR": "Cancel",
     "BTN": "Confirm order",
-    "PROCESANDO": "Processing..."
+    "PROCESANDO": "Processing...",
+    "METODO_EFECTIVO": "Cash",
+    "METODO_EFECTIVO_DESC": "Pay the delivery driver on arrival",
+    "METODO_TARJETA": "Card",
+    "METODO_TARJETA_DESC": "Visa, Mastercard, Amex",
+    "PAGO_SEGURO": "Secure payment with Stripe",
+    "STRIPE_TEST": "Test mode — card: 4242 4242 4242 4242 · future date · CVC: 123"
   },
   "FOOTER": {
     "DESC": "The sandwich that takes you back to Málaga, wherever you are. We deliver across the city centre.",

@@ -91,7 +91,7 @@ export class MisPedidosComponent implements OnInit, OnDestroy {
     }
 
     puedeValorar(pedido: Pedido): boolean {
-        return pedido.estado === 'ENTREGADO';
+        return pedido.estado === 'ENTREGADO' && !pedido.valorado;
     }
 
     getEstadoColor(estado: string): string {
