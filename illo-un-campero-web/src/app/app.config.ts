@@ -8,7 +8,7 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth, browserSessionPersistence } from '@angular/fire/auth';
+import { getAuth, provideAuth, browserLocalPersistence } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 // import { getStorage, provideStorage } from '@angular/fire/storage'; // activar cuando se configure el storage
 
@@ -38,7 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => {
       const auth = getAuth();
-      auth.setPersistence(browserSessionPersistence);
+      auth.setPersistence(browserLocalPersistence);
       return auth;
     }),
     provideFirestore(() => getFirestore())

@@ -247,7 +247,7 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
         }
 
         this.carritoService.vaciar();
-        this.router.navigate(['/mis-pedidos']);
+        this.router.navigate(['/pedido-exitoso'], { queryParams: { pedidoId } });
     }
 
     private async procesarPagoStripe(pedidoId: string): Promise<boolean> {
