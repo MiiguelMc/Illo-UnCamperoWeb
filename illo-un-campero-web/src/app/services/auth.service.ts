@@ -8,7 +8,6 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
-  sendEmailVerification,
   updatePassword,
   signOut
 } from '@angular/fire/auth';
@@ -43,7 +42,6 @@ export class AuthService {
     const credential = await createUserWithEmailAndPassword(this.auth, email, pass);
     const body = { uid: credential.user.uid, email, ...datosExtra };
     await firstValueFrom(this.http.post(`${this.API_URL}/registro`, body));
-    await sendEmailVerification(credential.user);
     return credential;
   }
 
