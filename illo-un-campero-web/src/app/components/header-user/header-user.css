@@ -14,9 +14,10 @@
 }
 
 .main-header {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  /* backdrop-filter NO va aquí — si estuviera aquí crearía un nuevo containing block
+     para position:fixed y el overlay quedaría atrapado dentro del header de 85px.
+     Se aplica en ::before para mantener el efecto sin ese efecto secundario. */
+  background: transparent;
   height: 85px;
   position: sticky;
   top: 0;
@@ -25,6 +26,17 @@
   align-items: center;
   font-family: 'Poppins', sans-serif;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+}
+
+.main-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .header-container {
