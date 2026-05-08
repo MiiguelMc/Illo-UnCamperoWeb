@@ -11,6 +11,7 @@ import {
   updatePassword,
   signOut
 } from '@angular/fire/auth';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { Usuario } from '../../model/usuario.model';
 import { environment } from '../../environments/environment';
 
@@ -18,6 +19,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   private auth = inject(Auth);
   private http = inject(HttpClient);
+  private firestore = inject(Firestore);
 
   private API_URL = `${environment.apiUrl}/usuarios`;
 
@@ -40,14 +42,24 @@ export class AuthService {
 
   async register(email: string, pass: string, datosExtra: any) {
     const credential = await createUserWithEmailAndPassword(this.auth, email, pass);
-    const body = { uid: credential.user.uid, email, ...datosExtra };
-    // Si el backend falla el usuario ya tiene cuenta en Firebase — no lanzamos error
-    // para que pueda hacer login igualmente. El perfil se guardará al actualizar datos.
-    try {
-      await firstValueFrom(this.http.post(`${this.API_URL}/registro`, body));
-    } catch {
-      console.warn('Perfil no guardado en backend al registrar, el usuario puede hacer login igualmente.');
-    }
+    const uid = credential.user.uid;
+
+    // Guardado directo en Firestore — no depende del backend
+    const userRef = doc(this.firestore, `usuarios/${uid}`);
+    await setDoc(userRef, {
+      uid,
+      email,
+      nombre: datosExtra.nombre,
+      apellidos: datosExtra.apellidos,
+      telefono: datosExtra.telefono,
+      rol: 'CLIENTE'
+    });
+
+    // Llamada al backend solo para el email de bienvenida (best-effort)
+    firstValueFrom(
+      this.http.post(`${this.API_URL}/registro`, { uid, email, ...datosExtra })
+    ).catch(() => {});
+
     return credential;
   }
 
