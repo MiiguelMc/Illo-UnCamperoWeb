@@ -32,10 +32,10 @@
           </div>
         </div>
         <a class="cart-pill" routerLink="/carrito" (click)="menuMovilAbierto = false">
-          <img src="assets/carro.webp" class="cart-img" alt="Carrito">
+          <img src="assets/carro.webp" class="cart-img" width="32" height="32" alt="Carrito">
           <span class="cart-amount">{{ carritoService.totalPrecio() | number:'1.2-2' }}€</span>
         </a>
-        <button class="hamburger-btn mobile-only" (click)="toggleMobileMenu()" [class.active]="menuMovilAbierto">
+        <button class="hamburger-btn mobile-only" type="button" aria-label="Abrir menú de navegación" [attr.aria-expanded]="menuMovilAbierto" (click)="toggleMobileMenu()" [class.active]="menuMovilAbierto">
           <div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </button>
       </div>

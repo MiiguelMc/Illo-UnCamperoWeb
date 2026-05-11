@@ -8,6 +8,7 @@ import { HeaderUserComponent } from './components/header-user/header-user';
 import { Footer } from './components/footer/footer';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner';
 import { TranslateService } from '@ngx-translate/core';
+import { SeoService } from './services/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
   private authService = inject(AuthService);
   private tiendaService = inject(TiendaService);
   private translate = inject(TranslateService);
+  private seo = inject(SeoService);
 
   user$ = this.authService.user$;
   authInitialized = false;
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.seo.init();
     this.tiendaService.cargarEstado();
     // Inicializar traducción
     this.translate.setDefaultLang('es');

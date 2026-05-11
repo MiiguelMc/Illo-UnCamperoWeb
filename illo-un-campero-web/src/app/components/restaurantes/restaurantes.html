@@ -1,4 +1,9 @@
 <main class="home">
+    <nav class="breadcrumb container-centrado" aria-label="Migas de pan">
+        <a routerLink="/restaurantes">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span>Camperos en Teatinos</span>
+    </nav>
 
     <!-- Aviso de cerrado optimizado -->
     <div class="container-centrado" *ngIf="!tienda.cargando() && !tienda.tiendaAbierta()">
@@ -87,6 +92,21 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <section class="container-centrado seo-content" aria-labelledby="seo-teatinos-title">
+        <span class="pre-title">Camperos malagueños en Málaga</span>
+        <h2 id="seo-teatinos-title">Comida a domicilio en Teatinos hecha al momento</h2>
+        <p>
+            En Illo Un Campero preparamos camperos malagueños con pan crujiente, ingredientes frescos
+            y reparto en Teatinos, Colonia Santa Inés y la zona universitaria de Málaga. Nuestra carta
+            está pensada para pedir rápido: camperos clásicos, mini camperos, entrantes para compartir,
+            bebidas frías y postres.
+        </p>
+        <p>
+            Si buscas un campero cerca de la Universidad de Málaga, puedes revisar la carta online,
+            añadir tus favoritos al pedido y seguir el estado hasta la entrega.
+        </p>
     </section>
 
     <!-- Packs (CORREGIDO: Eliminado pack.popular para evitar error TS) -->
