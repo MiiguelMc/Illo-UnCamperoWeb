@@ -14,6 +14,7 @@ export class PedidoCardCocinaComponent implements OnInit, OnDestroy {
   @Input() pedido!: Pedido;
   @Input() accionTexto: string = 'Acción';
   @Input() accionColor: string = '#3498db';
+  @Input() disabled: boolean = false;
 
   @Output() onAccion = new EventEmitter<void>();
 

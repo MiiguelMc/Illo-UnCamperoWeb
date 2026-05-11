@@ -273,6 +273,21 @@
   font-family: inherit;
 }
 .btn-idioma:hover { background: rgba(255,255,255,0.15); border-color: white; }
+.btn-theme {
+  background: transparent;
+  border: 1.5px solid rgba(0,0,0,0.3);
+  color: black;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: 0.2s;
+  font-family: inherit;
+  margin-left: 8px;
+}
+.btn-theme:hover { background: rgba(255,255,255,0.15); border-color: white; }
 .btn-idioma-mobile {
   background: white;
   border: 1.5px solid #ddd;

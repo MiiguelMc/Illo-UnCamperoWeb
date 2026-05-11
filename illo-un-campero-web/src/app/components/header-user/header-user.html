@@ -15,19 +15,20 @@
     </div>
     <div class="header-right">
       <div class="actions-wrapper">
-        <button class="btn-idioma" (click)="cambiarIdioma()">{{ idiomaActual === 'es' ? 'EN' : 'ES' }}</button>
+        <button class="btn-idioma" (click)="cambiarIdioma()" aria-label="Cambiar idioma">{{ idiomaActual === 'es' ? 'EN' : 'ES' }}</button>
+        <button class="btn-theme" (click)="toggleTheme()" aria-label="Cambiar tema">{{ isDarkMode ? '☀️' : '🌙' }}</button>
         <div class="user-pill-container desktop-only">
-          <div class="user-pill" (click)="toggleMenu($event)" [class.active]="isMenuOpen">
+          <div class="user-pill" (click)="toggleMenu($event)" [class.active]="isMenuOpen" id="user-menu" aria-haspopup="true" aria-expanded="{{isMenuOpen}}">
             <span class="user-initial">{{ getInicial() }}</span>
             <span class="user-name">{{ (user$ | async)?.nombre }}</span>
           </div>
-          <div class="dropdown-fancy" *ngIf="isMenuOpen">
-            <a routerLink="/perfil" (click)="isMenuOpen = false">{{ 'NAV.PERFIL' | translate }}</a>
-            <a routerLink="/mis-pedidos" (click)="isMenuOpen = false">{{ 'NAV.MIS_PEDIDOS' | translate }}</a>
-            <a *ngIf="esAdmin()" routerLink="/cocina" (click)="isMenuOpen = false" class="link-admin">{{ 'NAV.PANEL_COCINA' | translate }}</a>
-            <a *ngIf="esAdmin()" routerLink="/perfil" (click)="isMenuOpen = false" class="link-admin">{{ 'NAV.PANEL_ADMIN' | translate }}</a>
+          <div class="dropdown-fancy" *ngIf="isMenuOpen" role="menu" aria-labelledby="user-menu">
+            <a routerLink="/perfil" (click)="isMenuOpen = false" role="menuitem">{{ 'NAV.PERFIL' | translate }}</a>
+            <a routerLink="/mis-pedidos" (click)="isMenuOpen = false" role="menuitem">{{ 'NAV.MIS_PEDIDOS' | translate }}</a>
+            <a *ngIf="esAdmin()" routerLink="/cocina" (click)="isMenuOpen = false" class="link-admin" role="menuitem">{{ 'NAV.PANEL_COCINA' | translate }}</a>
+            <a *ngIf="esAdmin()" routerLink="/perfil" (click)="isMenuOpen = false" class="link-admin" role="menuitem">{{ 'NAV.PANEL_ADMIN' | translate }}</a>
             <hr class="dropdown-divider">
-            <a class="logout-link" (click)="logout()">{{ 'NAV.CERRAR_SESION' | translate }}</a>
+            <a class="logout-link" (click)="logout()" role="menuitem">{{ 'NAV.CERRAR_SESION' | translate }}</a>
           </div>
         </div>
         <a class="cart-pill" routerLink="/carrito" (click)="menuMovilAbierto = false">
