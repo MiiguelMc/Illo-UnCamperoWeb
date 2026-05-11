@@ -54,8 +54,10 @@ export class PedidoService {
   }
 
   actualizarEstadoPedido(id: string, nuevoEstado: EstadoPedido): Observable<string> {
-    return this.http.patch<string>(
-      `${this.API_URL}/${id}/estado?nuevoEstado=${nuevoEstado}`, {}
+    return this.http.patch(
+      `${this.API_URL}/${id}/estado?nuevoEstado=${encodeURIComponent(nuevoEstado)}`,
+      {},
+      { responseType: 'text' }
     );
   }
 

@@ -66,14 +66,27 @@ export class MisPedidosComponent implements OnInit, OnDestroy {
     }
 
     cancelarPedido(pedidoId: string) {
+        const pedido = this.pedidos().find(p => p.id === pedidoId);
+
+        if (!pedido) {
+            alert('No se encontro el pedido.');
+            return;
+        }
+
+        if (pedido.estado !== 'PENDIENTE') {
+            alert('Solo puedes cancelar pedidos pendientes.');
+            return;
+        }
+
         if (!confirm('¿Seguro que quieres cancelar este pedido?')) return;
+
         this.pedidoService.cancelarPedido(pedidoId).subscribe({
             next: () => {
                 this.pedidos.update(lista =>
                     lista.map(p => p.id === pedidoId ? { ...p, estado: 'CANCELADO' as const } : p)
                 );
             },
-            error: () => alert('No se pudo cancelar el pedido.')
+            error: (err) => alert(this.obtenerMensajeError(err, 'No se pudo cancelar el pedido.'))
         });
     }
 
@@ -159,5 +172,10 @@ export class MisPedidosComponent implements OnInit, OnDestroy {
 
     estrellasArray(): number[] {
         return [1, 2, 3, 4, 5];
+    }
+
+    private obtenerMensajeError(err: any, fallback: string): string {
+        if (typeof err?.error === 'string') return err.error;
+        return err?.error?.error || fallback;
     }
 }
