@@ -1,13 +1,26 @@
 <div class="carta-page">
+    <nav class="breadcrumb" aria-label="Migas de pan">
+        <a routerLink="/restaurantes">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span>Carta</span>
+    </nav>
     <div class="carta-hero">
         <div class="hero-overlay">
             <h1>{{ 'CARTA.TITULO' | translate }}</h1>
             <p>{{ 'CARTA.SUBTITULO' | translate }}</p>
             <div class="search-container">
-                <input type="text" [(ngModel)]="textoBusqueda" [placeholder]="'CARTA.BUSCAR' | translate">
+                <label class="sr-only" for="buscar-producto">Buscar en la carta</label>
+                <input id="buscar-producto" type="search" [(ngModel)]="textoBusqueda" [placeholder]="'CARTA.BUSCAR' | translate" autocomplete="off">
             </div>
         </div>
     </div>
+    <section class="carta-intro" aria-labelledby="carta-intro-title">
+        <h2 id="carta-intro-title">Carta online de camperos malagueños en Teatinos</h2>
+        <p>
+            Elige entre camperos, mini camperos, entrantes, patatas, bebidas y postres. Todos los
+            productos se preparan al momento para entregar en Teatinos y alrededores de Málaga.
+        </p>
+    </section>
     <nav class="sticky-nav">
         <div class="nav-container">
             <button [class.active]="filtroActual === 'todos'" (click)="setFiltro('todos')">{{ 'CARTA.TODOS' | translate }}</button>
@@ -47,8 +60,18 @@
     </div>
     <div class="modal-overlay" *ngIf="productoSeleccionado" (click)="cerrarModal()">
         <div class="modal-content-slim" (click)="$event.stopPropagation()">
-            <button class="btn-close-minimal" (click)="cerrarModal()">✕</button>
-            <div class="modal-hero-slim"><img [src]="productoSeleccionado.imagenUrl || 'assets/no-image.webp'" [alt]="productoSeleccionado.nombre" (error)="$event.target.src='assets/no-image.webp'"></div>
+            <button class="btn-close-minimal" type="button" aria-label="Cerrar detalle del producto" (click)="cerrarModal()">✕</button>
+            <div class="modal-hero-slim">
+                <img
+                    [src]="productoSeleccionado.imagenUrl || 'assets/no-image.webp'"
+                    [alt]="productoSeleccionado.nombre + ' de Illo Un Campero'"
+                    width="420"
+                    height="220"
+                    loading="eager"
+                    decoding="async"
+                    (error)="$event.target.src='assets/no-image.webp'"
+                >
+            </div>
             <div class="modal-body-slim">
                 <div class="header-info-slim">
                     <h2 class="product-title-slim">{{ productoSeleccionado.nombre }}</h2>
@@ -59,11 +82,11 @@
             </div>
             <div class="modal-footer-slim">
                 <div class="qty-control-slim">
-                    <button (click)="decrementar()">-</button>
+                    <button type="button" aria-label="Quitar una unidad" (click)="decrementar()">-</button>
                     <span>{{ cantidadSeleccionada }}</span>
-                    <button (click)="incrementar()">+</button>
+                    <button type="button" aria-label="Añadir una unidad" (click)="incrementar()">+</button>
                 </div>
-                <button class="btn-add-slim" (click)="agregarAlPedido()">
+                <button class="btn-add-slim" type="button" (click)="agregarAlPedido()">
                     {{ 'CARTA.ANADIR' | translate }} • {{ (productoSeleccionado.precio * cantidadSeleccionada) | number:'1.2-2' }}€
                 </button>
             </div>

@@ -6,11 +6,12 @@ import { ProductoService } from '../../services/producto.service';
 import { CarritoService } from '../../services/carrito.service';
 import { Producto } from '../../../model/producto.model';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-carta',
   standalone: true,
-  imports: [CommonModule, ProductoItemComponent, FormsModule, TranslateModule],
+  imports: [CommonModule, ProductoItemComponent, FormsModule, TranslateModule, RouterModule],
   templateUrl: './carta.html',
   styleUrls: ['./carta.css']
 })

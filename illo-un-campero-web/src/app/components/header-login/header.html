@@ -18,7 +18,7 @@
         <button class="btn-login" routerLink="/login">{{ 'NAV.INICIAR_SESION' | translate }}</button>
         <button class="btn-register" routerLink="/registro">{{ 'NAV.REGISTRARSE' | translate }}</button>
       </div>
-      <button class="hamburger-btn" (click)="toggleMenu()">
+      <button class="hamburger-btn" type="button" aria-label="Abrir menú de navegación" [attr.aria-expanded]="menuMovilAbierto" (click)="toggleMenu()">
         <span>{{ menuMovilAbierto ? '✕' : '☰' }}</span>
       </button>
     </div>
