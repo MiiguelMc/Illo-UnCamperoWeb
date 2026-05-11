@@ -7,13 +7,13 @@
         </div>
         <form (submit)="onLogin()">
             <div class="input-group">
-                <label>{{ 'LOGIN.EMAIL' | translate }}</label>
-                <input type="email" [(ngModel)]="email" name="email" [class.input-error]="emailError" placeholder="correo@ejemplo.com">
+                <label for="login-email">{{ 'LOGIN.EMAIL' | translate }}</label>
+                <input id="login-email" type="email" [(ngModel)]="email" name="email" [class.input-error]="emailError" placeholder="correo@ejemplo.com">
                 <span class="error-text" *ngIf="emailError">{{ emailError | translate }}</span>
             </div>
             <div class="input-group">
-                <label>{{ 'LOGIN.PASSWORD' | translate }}</label>
-                <input type="password" [(ngModel)]="password" name="password" [class.input-error]="passwordError" placeholder="********">
+                <label for="login-password">{{ 'LOGIN.PASSWORD' | translate }}</label>
+                <input id="login-password" type="password" [(ngModel)]="password" name="password" [class.input-error]="passwordError" placeholder="********">
                 <span class="error-text" *ngIf="passwordError">{{ passwordError | translate }}</span>
             </div>
             <button type="submit" class="btn-login">{{ 'LOGIN.BTN' | translate }}</button>
