@@ -27,7 +27,7 @@
         <div class="empty-state" *ngIf="pedidosPendientes().length === 0"><p>{{ 'COCINA.VACIO_PENDIENTES' | translate }}</p></div>
         <app-pedido-card-cocina *ngFor="let pedido of pedidosPendientes()" [pedido]="pedido"
           [accionTexto]="'COCINA.ACCION_COCINAR' | translate" [accionColor]="'#3498db'"
-          (onAccion)="cambiarEstado(pedido.id!, 'COCINANDO')"></app-pedido-card-cocina>
+          [disabled]="actualizando()" (onAccion)="cambiarEstado(pedido.id!, 'COCINANDO')"></app-pedido-card-cocina>
       </div>
     </div>
     <div class="kanban-column cocinando">
@@ -36,7 +36,7 @@
         <div class="empty-state" *ngIf="pedidosCocinando().length === 0"><p>{{ 'COCINA.VACIO_COCINANDO' | translate }}</p></div>
         <app-pedido-card-cocina *ngFor="let pedido of pedidosCocinando()" [pedido]="pedido"
           [accionTexto]="'COCINA.ACCION_ENVIAR' | translate" [accionColor]="'#1abc9c'"
-          (onAccion)="cambiarEstado(pedido.id!, 'REPARTO')"></app-pedido-card-cocina>
+          [disabled]="actualizando()" (onAccion)="cambiarEstado(pedido.id!, 'REPARTO')"></app-pedido-card-cocina>
       </div>
     </div>
     <div class="kanban-column reparto">
@@ -45,7 +45,7 @@
         <div class="empty-state" *ngIf="pedidosReparto().length === 0"><p>{{ 'COCINA.VACIO_REPARTO' | translate }}</p></div>
         <app-pedido-card-cocina *ngFor="let pedido of pedidosReparto()" [pedido]="pedido"
           [accionTexto]="'COCINA.ACCION_ENTREGADO' | translate" [accionColor]="'#27ae60'"
-          (onAccion)="cambiarEstado(pedido.id!, 'ENTREGADO')"></app-pedido-card-cocina>
+          [disabled]="actualizando()" (onAccion)="cambiarEstado(pedido.id!, 'ENTREGADO')"></app-pedido-card-cocina>
       </div>
     </div>
   </div>

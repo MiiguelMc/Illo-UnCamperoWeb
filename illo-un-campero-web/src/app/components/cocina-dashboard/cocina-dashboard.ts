@@ -26,6 +26,7 @@ export class CocinaDashboardComponent implements OnInit, OnDestroy {
   pedidosReparto    = signal<Pedido[]>([]);
   cargando = signal(true);
   error    = signal('');
+  actualizando = signal(false);
 
   private pollSub?: Subscription;
   private pedidosAnteriores = 0;
@@ -72,9 +73,17 @@ export class CocinaDashboardComponent implements OnInit, OnDestroy {
   }
 
   cambiarEstado(pedidoId: string, nuevoEstado: EstadoPedido) {
+    this.actualizando.set(true);
     this.pedidoService.actualizarEstadoPedido(pedidoId, nuevoEstado).subscribe({
-      next: () => this.cargarPedidos(true),
+      next: () => {
+        // Recargar inmediatamente después de la actualización
+        setTimeout(() => {
+          this.cargarPedidos(true);
+          this.actualizando.set(false);
+        }, 100);
+      },
       error: (err) => {
+        this.actualizando.set(false);
         if (err.status === 401 || err.status === 403) {
           this.router.navigate(['/login']);
         }

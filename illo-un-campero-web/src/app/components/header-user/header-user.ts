@@ -23,17 +23,30 @@ export class HeaderUserComponent {
   isMenuOpen = false;
   menuMovilAbierto = false;
   private usuarioActual: any = null;
+  isDarkMode = false;
 
   get idiomaActual() { return this.translate.currentLang || 'es'; }
 
   constructor() {
     this.user$.subscribe(user => this.usuarioActual = user);
+    this.isDarkMode = localStorage.getItem('illo_theme') === 'dark';
+    this.applyTheme();
   }
 
   cambiarIdioma() {
     const nuevo = this.idiomaActual === 'es' ? 'en' : 'es';
     this.translate.use(nuevo);
     localStorage.setItem('illo_idioma', nuevo);
+  }
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem('illo_theme', this.isDarkMode ? 'dark' : 'light');
+    this.applyTheme();
+  }
+
+  private applyTheme() {
+    document.documentElement.setAttribute('data-theme', this.isDarkMode ? 'dark' : 'light');
   }
 
   esAdmin(): boolean {
@@ -58,6 +71,13 @@ export class HeaderUserComponent {
   @HostListener('document:click', ['$event'])
   clickout(event: any) {
     if (!this.eRef.nativeElement.contains(event.target)) {
+      this.isMenuOpen = false;
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape' && this.isMenuOpen) {
       this.isMenuOpen = false;
     }
   }

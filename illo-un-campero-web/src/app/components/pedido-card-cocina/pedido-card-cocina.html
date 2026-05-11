@@ -28,5 +28,5 @@
       <span class="total-monto">{{ calcularTotal() | number:'1.2-2' }}€</span>
     </div>
   </div>
-  <button class="btn-accion" [style.background-color]="accionColor" (click)="ejecutarAccion()">{{ accionTexto }}</button>
+  <button class="btn-accion" [style.background-color]="accionColor" (click)="ejecutarAccion()" [disabled]="disabled">{{ accionTexto }}</button>
 </div>
