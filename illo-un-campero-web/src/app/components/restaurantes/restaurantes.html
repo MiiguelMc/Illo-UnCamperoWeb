@@ -33,9 +33,9 @@
                 <p class="hero-desc">{{ 'RESTAURANTES.DESC' | translate }}</p>
 
                 <div class="hero-trust-bar">
-                    <div class="trust-item"><span class="t-ico">⏱️</span> 30 min</div>
-                    <div class="trust-item"><span class="t-ico">📍</span> Teatinos</div>
-                    <div class="trust-item"><span class="t-ico">⭐</span> 4.9/5</div>
+                    <div class="trust-item">30 min</div>
+                    <div class="trust-item">Teatinos</div>
+                    <div class="trust-item">4.9/5</div>
                 </div>
 
                 <div class="hero-cta">
@@ -53,13 +53,13 @@
     <div class="container-centrado">
         <nav class="quick-chips">
             <a routerLink="/carta" class="chip active">
-                <span class="chip-emoji">🍔</span> {{ 'RESTAURANTES.CHIP_MENU' | translate }}
+                {{ 'RESTAURANTES.CHIP_MENU' | translate }}
             </a>
             <button type="button" class="chip" *ngIf="packs.length > 0" (click)="scrollTo('sec-packs')">
-                <span class="chip-emoji">📦</span> {{ 'RESTAURANTES.CHIP_PACKS' | translate }}
+                {{ 'RESTAURANTES.CHIP_PACKS' | translate }}
             </button>
             <button type="button" class="chip" *ngIf="ofertas.length > 0" (click)="scrollTo('sec-ofertas')">
-                <span class="chip-emoji">🔥</span> {{ 'RESTAURANTES.CHIP_OFERTAS' | translate }}
+                {{ 'RESTAURANTES.CHIP_OFERTAS' | translate }}
             </button>
         </nav>
     </div>
@@ -74,19 +74,16 @@
             <div class="steps-grid">
                 <div class="step-card">
                     <div class="step-number">01</div>
-                    <div class="step-icon">🍔</div>
                     <h3>{{ 'RESTAURANTES.PASOS.P1_T' | translate }}</h3>
                     <p>{{ 'RESTAURANTES.PASOS.P1_D' | translate }}</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">02</div>
-                    <div class="step-icon">👨‍🍳</div>
                     <h3>{{ 'RESTAURANTES.PASOS.P2_T' | translate }}</h3>
                     <p>{{ 'RESTAURANTES.PASOS.P2_D' | translate }}</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">03</div>
-                    <div class="step-icon">🛵</div>
                     <h3>{{ 'RESTAURANTES.PASOS.P3_T' | translate }}</h3>
                     <p>{{ 'RESTAURANTES.PASOS.P3_D' | translate }}</p>
                 </div>

@@ -16,7 +16,7 @@
     <div class="header-right">
       <div class="actions-wrapper">
         <button class="btn-idioma" (click)="cambiarIdioma()" aria-label="Cambiar idioma">{{ idiomaActual === 'es' ? 'EN' : 'ES' }}</button>
-        <button class="btn-theme" (click)="toggleTheme()" aria-label="Cambiar tema">{{ isDarkMode ? '☀️' : '🌙' }}</button>
+        <button class="btn-theme" (click)="toggleTheme()" aria-label="Cambiar tema">{{ isDarkMode ? 'Claro' : 'Oscuro' }}</button>
         <div class="user-pill-container desktop-only">
           <div class="user-pill" (click)="toggleMenu($event)" [class.active]="isMenuOpen" id="user-menu" aria-haspopup="true" aria-expanded="{{isMenuOpen}}">
             <span class="user-initial">{{ getInicial() }}</span>
@@ -56,19 +56,19 @@
         <!-- Nav principal -->
         <nav class="mob-nav">
           <a routerLink="/restaurantes" (click)="toggleMobileMenu()" routerLinkActive="mob-active" [routerLinkActiveOptions]="{exact:true}">
-            <span class="mob-icon">🏠</span> {{ 'NAV.INICIO' | translate }}
+            {{ 'NAV.INICIO' | translate }}
           </a>
           <a routerLink="/carta" (click)="toggleMobileMenu()" routerLinkActive="mob-active">
-            <span class="mob-icon">🍔</span> {{ 'NAV.LA_CARTA' | translate }}
+            {{ 'NAV.LA_CARTA' | translate }}
           </a>
           <a routerLink="/carrito" (click)="toggleMobileMenu()" routerLinkActive="mob-active">
-            <span class="mob-icon">🛒</span> {{ 'NAV.MI_PEDIDO' | translate }}
+            {{ 'NAV.MI_PEDIDO' | translate }}
           </a>
           <a routerLink="/mis-pedidos" (click)="toggleMobileMenu()" routerLinkActive="mob-active">
-            <span class="mob-icon">📋</span> {{ 'NAV.MIS_PEDIDOS' | translate }}
+            {{ 'NAV.MIS_PEDIDOS' | translate }}
           </a>
           <a routerLink="/perfil" (click)="toggleMobileMenu()" routerLinkActive="mob-active">
-            <span class="mob-icon">👤</span> {{ 'NAV.PERFIL' | translate }}
+            {{ 'NAV.PERFIL' | translate }}
           </a>
         </nav>
 
@@ -76,17 +76,17 @@
         <div class="mob-admin-section" *ngIf="esAdmin()">
           <span class="mob-section-label">Panel Admin</span>
           <a routerLink="/cocina" (click)="toggleMobileMenu()" routerLinkActive="mob-active" class="mob-admin-link">
-            <span class="mob-icon">🍳</span> {{ 'NAV.PANEL_COCINA' | translate }}
+            {{ 'NAV.PANEL_COCINA' | translate }}
           </a>
           <a routerLink="/perfil" (click)="toggleMobileMenu()" routerLinkActive="mob-active" class="mob-admin-link">
-            <span class="mob-icon">⚙️</span> {{ 'NAV.PANEL_ADMIN' | translate }}
+            {{ 'NAV.PANEL_ADMIN' | translate }}
           </a>
         </div>
 
         <!-- Footer -->
         <div class="mob-footer">
           <button class="mob-btn-idioma" (click)="cambiarIdioma()">
-            🌐 {{ idiomaActual === 'es' ? 'English' : 'Español' }}
+            {{ idiomaActual === 'es' ? 'English' : 'Español' }}
           </button>
           <button class="mob-btn-logout" (click)="logout()">
             {{ 'NAV.CERRAR_SESION' | translate }}
