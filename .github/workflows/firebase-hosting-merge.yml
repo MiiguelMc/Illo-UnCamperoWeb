@@ -13,7 +13,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install and Build
-        run: npm ci && npm run build
+        run: |
+          npm ci
+          sed -i "s|STRIPE_PUBLISHABLE_KEY_PLACEHOLDER|${{ secrets.STRIPE_PUBLISHABLE_KEY }}|g" src/environments/environment.prod.ts
+          sed -i "s|FIREBASE_API_KEY_PLACEHOLDER|${{ secrets.FIREBASE_API_KEY }}|g" src/environments/environment.prod.ts
+          sed -i "s|FIREBASE_APP_ID_PLACEHOLDER|${{ secrets.FIREBASE_APP_ID }}|g" src/environments/environment.prod.ts
+          npm run build
         working-directory: illo-un-campero-web
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
