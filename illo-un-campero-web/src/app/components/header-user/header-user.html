@@ -16,7 +16,7 @@
     <div class="header-right">
       <div class="actions-wrapper">
         <button class="btn-idioma" (click)="cambiarIdioma()" aria-label="Cambiar idioma">{{ idiomaActual === 'es' ? 'EN' : 'ES' }}</button>
-        <button class="btn-theme" (click)="toggleTheme()" aria-label="Cambiar tema">{{ isDarkMode ? 'Claro' : 'Oscuro' }}</button>
+        <button class="btn-theme" (click)="toggleTheme()" aria-label="Cambiar tema">{{ isDarkMode ? ('NAV.TEMA_CLARO' | translate) : ('NAV.TEMA_OSCURO' | translate) }}</button>
         <div class="user-pill-container desktop-only">
           <div class="user-pill" (click)="toggleMenu($event)" [class.active]="isMenuOpen" id="user-menu" aria-haspopup="true" aria-expanded="{{isMenuOpen}}">
             <span class="user-initial">{{ getInicial() }}</span>

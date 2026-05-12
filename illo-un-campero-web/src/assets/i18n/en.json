@@ -13,7 +13,9 @@
     "PANEL_ADMIN": "Admin Panel",
     "INICIAR_SESION": "Log in",
     "REGISTRARSE": "Sign up",
-    "CERRAR_SESION": "Log out"
+    "CERRAR_SESION": "Log out",
+    "TEMA_CLARO": "Light",
+    "TEMA_OSCURO": "Dark"
   },
   "CARRITO": {
     "TITULO": "Your Order",

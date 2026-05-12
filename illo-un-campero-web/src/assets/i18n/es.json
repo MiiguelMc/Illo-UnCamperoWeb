@@ -13,7 +13,9 @@
     "PANEL_ADMIN": "Panel de Administración",
     "INICIAR_SESION": "Iniciar sesión",
     "REGISTRARSE": "Registrarse",
-    "CERRAR_SESION": "Cerrar sesión"
+    "CERRAR_SESION": "Cerrar sesión",
+    "TEMA_CLARO": "Claro",
+    "TEMA_OSCURO": "Oscuro"
   },
   "CARRITO": {
     "TITULO": "Tu Pedido",
