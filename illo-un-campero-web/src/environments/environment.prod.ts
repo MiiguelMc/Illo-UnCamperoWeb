@@ -1,9 +1,13 @@
-// Sustituye los valores SUSTITUIR_* antes de hacer deploy a producción
 export const environment = {
   apiUrl: 'https://illo-uncamperobackend.onrender.com/api',
   siteUrl: 'https://illo-uncampero.web.app',
-  // Stripe: consigue la clave live en https://dashboard.stripe.com/apikeys
-  stripePublishableKey: 'pk_live_SUSTITUIR_POR_CLAVE_REAL',
-  // Cloudinary - solo el cloud name es público, el resto va en variables de entorno del backend
-  cloudinaryCloudName: 'SUSTITUIR_CLOUD_NAME',
+  stripePublishableKey: 'STRIPE_PUBLISHABLE_KEY_PLACEHOLDER',
+  firebase: {
+    apiKey: 'FIREBASE_API_KEY_PLACEHOLDER',
+    authDomain: 'illo-uncampero.firebaseapp.com',
+    projectId: 'illo-uncampero',
+    storageBucket: 'illo-uncampero.firebasestorage.app',
+    messagingSenderId: '478864200524',
+    appId: 'FIREBASE_APP_ID_PLACEHOLDER',
+  },
 };
