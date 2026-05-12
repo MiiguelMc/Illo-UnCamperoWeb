@@ -55,7 +55,6 @@ export class AuthService {
       rol: 'CLIENTE'
     });
 
-    // Llamada al backend solo para el email de bienvenida (best-effort)
     firstValueFrom(
       this.http.post(`${this.API_URL}/registro`, { uid, email, ...datosExtra })
     ).catch(() => {});

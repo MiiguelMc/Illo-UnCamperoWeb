@@ -12,11 +12,9 @@ import { CarritoService } from '../../services/carrito.service';
   styleUrls: ['./carrito.css']
 })
 export class CarritoComponent {
-  // Inyectamos el servicio que creamos antes
   public carritoService = inject(CarritoService);
   private router = inject(Router);
 
-  // Acceso directo a los datos del carrito
   items = this.carritoService.items;
   total = this.carritoService.totalPrecio;
 
@@ -30,7 +28,6 @@ export class CarritoComponent {
     img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='75' height='75' viewBox='0 0 75 75'%3E%3Crect width='75' height='75' rx='8' fill='%23f0f0f0'/%3E%3Ctext x='37.5' y='42' font-size='28' text-anchor='middle' fill='%23ccc'%3E%F0%9F%8D%94%3C/text%3E%3C/svg%3E";
   }
 
-  // Métodos para los botones de la lista
   aumentar(producto: any) {
     this.carritoService.agregar(producto, 1);
   }
@@ -43,7 +40,6 @@ export class CarritoComponent {
     this.carritoService.eliminar(producto);
   }
 
-  // Navegar a la página de confirmación de pedido
   irAConfirmarPedido() {
     if (this.items().length > 0) {
       this.router.navigate(['/confirmar-pedido']);
