@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, firstValueFrom, of } from 'rxjs';
-import { switchMap, catchError } from 'rxjs/operators';
+import { switchMap, catchError, take } from 'rxjs/operators';
 import {
   Auth,
   authState,
@@ -22,6 +22,9 @@ export class AuthService {
   private firestore = inject(Firestore);
 
   private API_URL = `${environment.apiUrl}/usuarios`;
+
+  /** Emite una vez en cuanto Firebase Auth conoce el estado (rápido, sin esperar al backend) */
+  readonly authReady$ = authState(this.auth).pipe(take(1));
 
   user$ = authState(this.auth).pipe(
     switchMap(fbUser => {

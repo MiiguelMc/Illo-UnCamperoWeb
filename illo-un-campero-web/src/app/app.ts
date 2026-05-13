@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
   authInitialized = false;
 
   constructor() {
-    this.user$.subscribe(() => {
+    // Marcar como inicializado en cuanto Firebase resuelve el estado de auth (sin esperar al backend)
+    this.authService.authReady$.subscribe(() => {
       this.authInitialized = true;
     });
   }
