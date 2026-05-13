@@ -57,7 +57,9 @@ export class AuthService {
 
     firstValueFrom(
       this.http.post(`${this.API_URL}/registro`, { uid, email, ...datosExtra })
-    ).catch(() => {});
+    ).catch((err) => {
+      console.error('Error al sincronizar usuario con el backend:', err);
+    });
 
     return credential;
   }

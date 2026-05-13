@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './guards/admin.guard';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -58,6 +59,7 @@ export const routes: Routes = [
   {
     path: 'perfil',
     loadComponent: () => import('./components/perfil/perfil').then((m) => m.PerfilComponent),
+    canActivate: [authGuard],
     data: {
       seo: {
         title: 'Mi perfil | Illo Un Campero',
@@ -87,6 +89,7 @@ export const routes: Routes = [
       import('./components/confirmar-pedido/confirmar-pedido').then(
         (m) => m.ConfirmarPedidoComponent,
       ),
+    canActivate: [authGuard],
     data: {
       seo: {
         title: 'Confirmar pedido | Illo Un Campero',
@@ -100,6 +103,7 @@ export const routes: Routes = [
     path: 'pedido-exitoso',
     loadComponent: () =>
       import('./components/pedido-exitoso/pedido-exitoso').then((m) => m.PedidoExitosoComponent),
+    canActivate: [authGuard],
     data: {
       seo: {
         title: 'Pedido confirmado | Illo Un Campero',
@@ -113,6 +117,7 @@ export const routes: Routes = [
     path: 'mis-pedidos',
     loadComponent: () =>
       import('./components/mis-pedidos/mis-pedidos').then((m) => m.MisPedidosComponent),
+    canActivate: [authGuard],
     data: {
       seo: {
         title: 'Mis pedidos | Illo Un Campero',
@@ -126,6 +131,7 @@ export const routes: Routes = [
     path: 'seguimiento/:id',
     loadComponent: () =>
       import('./components/seguimiento/seguimiento').then((m) => m.SeguimientoComponent),
+    canActivate: [authGuard],
     data: {
       seo: {
         title: 'Seguimiento del pedido | Illo Un Campero',
@@ -139,6 +145,7 @@ export const routes: Routes = [
     path: 'valorar/:id',
     loadComponent: () =>
       import('./components/seguimiento/valorar-pedido').then((m) => m.ValorarPedidoComponent),
+    canActivate: [authGuard],
     data: {
       seo: {
         title: 'Valorar pedido | Illo Un Campero',
