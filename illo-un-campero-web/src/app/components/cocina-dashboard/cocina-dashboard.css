@@ -1,0 +1,271 @@
+.cocina-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 1.5rem;
+}
+
+/* Header */
+.cocina-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.subtitulo {
+  margin: 0.25rem 0 0 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.header-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-refresh {
+  padding: 0.75rem 1.5rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-refresh:hover:not(:disabled) {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.btn-refresh:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auto-refresh-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #e8f5e9;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #2e7d32;
+}
+
+.dot-pulse {
+  width: 8px;
+  height: 8px;
+  background: #27ae60;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Estados de carga y error */
+.cargando-inicial {
+  text-align: center;
+  padding: 4rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #e74c3c;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-mensaje {
+  text-align: center;
+  padding: 2rem;
+  background: #fee;
+  border-radius: 10px;
+  color: #c0392b;
+  margin-bottom: 2rem;
+}
+
+.error-mensaje button {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Kanban Board */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .kanban-board {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Columnas Kanban */
+.kanban-column {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.column-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.badge {
+  background: #e74c3c;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.column-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 350px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Estados vacíos */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #999;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Colores por columna */
+.pendientes .column-header {
+  background: #fff9e6;
+}
+
+.pendientes .badge {
+  background: #f39c12;
+}
+
+.cocinando .column-header {
+  background: #e3f2fd;
+}
+
+.cocinando .badge {
+  background: #3498db;
+}
+
+.reparto .column-header {
+  background: #e8f5e9;
+}
+
+.reparto .badge {
+  background: #1abc9c;
+}
+
+/* Resumen footer */
+.resumen-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .resumen-footer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat .numero {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #e74c3c;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat .label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Scrollbar personalizado */
+.column-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.column-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.column-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.column-content::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

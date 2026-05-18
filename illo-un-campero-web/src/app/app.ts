@@ -1,17 +1,44 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router'; // IMPORTANTE: Hay que importar esto
+import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { TiendaService } from './services/tienda.service';
+import { Header } from './components/header-login/header';
+import { HeaderUserComponent } from './components/header-user/header-user';
+import { Footer } from './components/footer/footer';
+import { CookieBannerComponent } from './components/cookie-banner/cookie-banner';
+import { TranslateService } from '@ngx-translate/core';
+import { SeoService } from './services/seo.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet], // AÑADE RouterOutlet AQUÍ
-  template: `
-    <!-- Aquí puedes poner tu Navbar más adelante -->
-    <router-outlet></router-outlet>
-  `
+  imports: [CommonModule, RouterOutlet, Header, HeaderUserComponent, Footer, CookieBannerComponent],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class AppComponent { // La llamamos AppComponent (con "Component" al final)
-  public auth = inject(AuthService);
+export class AppComponent implements OnInit {
+  private authService = inject(AuthService);
+  private tiendaService = inject(TiendaService);
+  private translate = inject(TranslateService);
+  private seo = inject(SeoService);
+
+  user$ = this.authService.user$;
+  authInitialized = false;
+
+  constructor() {
+    // Marcar como inicializado en cuanto Firebase resuelve el estado de auth (sin esperar al backend)
+    this.authService.authReady$.subscribe(() => {
+      this.authInitialized = true;
+    });
+  }
+
+  ngOnInit() {
+    this.seo.init();
+    this.tiendaService.cargarEstado();
+    // Inicializar traducción
+    this.translate.setDefaultLang('es');
+    const savedLang = localStorage.getItem('illo_idioma') || 'es';
+    this.translate.use(savedLang);
+  }
 }

@@ -1,55 +1,42 @@
 <div class="login-screen">
     <div class="login-box">
         <div class="header-login">
-            <img src="logo.png" alt="Logo" class="logo">
-            <h1>Crea tu cuenta</h1>
-            <p>Completa tus datos para empezar</p>
+            <img src="assets/Nombre-Arqueado+Logo.webp" alt="Logo" class="logo">
+            <h1>{{ 'REGISTRO.TITULO' | translate }}</h1>
+            <p>{{ 'REGISTRO.SUBTITULO' | translate }}</p>
         </div>
-
         <form (submit)="onRegister()">
-            <!-- FILA NOMBRE Y APELLIDOS -->
             <div class="input-row">
                 <div class="input-group">
-                    <label>Nombre</label>
-                    <input type="text" [(ngModel)]="usuario.nombre" name="nombre" [class.input-error]="errores.nombre">
-                    <span class="error-text" *ngIf="errores.nombre">{{ errores.nombre }}</span>
+                    <label for="registro-nombre">{{ 'REGISTRO.NOMBRE' | translate }}</label>
+                    <input id="registro-nombre" type="text" [(ngModel)]="usuario.nombre" name="nombre" [class.input-error]="errores.nombre">
+                    <span class="error-text" *ngIf="errores.nombre">{{ errores.nombre | translate }}</span>
                 </div>
                 <div class="input-group">
-                    <label>Apellidos</label>
-                    <input type="text" [(ngModel)]="usuario.apellidos" name="apellidos"
-                        [class.input-error]="errores.apellidos">
-                    <span class="error-text" *ngIf="errores.apellidos">{{ errores.apellidos }}</span>
+                    <label for="registro-apellidos">{{ 'REGISTRO.APELLIDOS' | translate }}</label>
+                    <input id="registro-apellidos" type="text" [(ngModel)]="usuario.apellidos" name="apellidos" [class.input-error]="errores.apellidos">
+                    <span class="error-text" *ngIf="errores.apellidos">{{ errores.apellidos | translate }}</span>
                 </div>
             </div>
-
-            <!-- TELÉFONO -->
             <div class="input-group">
-                <label>Teléfono</label>
-                <input type="text" [(ngModel)]="usuario.telefono" name="telefono" placeholder="Ej: 600123456"
-                    [class.input-error]="errores.telefono">
-                <span class="error-text" *ngIf="errores.telefono">{{ errores.telefono }}</span>
+                <label for="registro-telefono">{{ 'REGISTRO.TELEFONO' | translate }}</label>
+                <input id="registro-telefono" type="text" [(ngModel)]="usuario.telefono" name="telefono" placeholder="Ej: 600123456" [class.input-error]="errores.telefono">
+                <span class="error-text" *ngIf="errores.telefono">{{ errores.telefono | translate }}</span>
             </div>
-
-            <!-- EMAIL -->
             <div class="input-group">
-                <label>Email</label>
-                <input type="email" [(ngModel)]="usuario.email" name="email" placeholder="correo@ejemplo.com"
-                    [class.input-error]="errores.email">
-                <span class="error-text" *ngIf="errores.email">{{ errores.email }}</span>
+                <label for="registro-email">{{ 'REGISTRO.EMAIL' | translate }}</label>
+                <input id="registro-email" type="email" [(ngModel)]="usuario.email" name="email" placeholder="correo@ejemplo.com" [class.input-error]="errores.email">
+                <span class="error-text" *ngIf="errores.email">{{ errores.email | translate }}</span>
             </div>
-
-            <!-- CONTRASEÑA -->
             <div class="input-group">
-                <label>Contraseña</label>
-                <input type="password" [(ngModel)]="usuario.password" name="password" placeholder="Mín. 6 caracteres"
-                    [class.input-error]="errores.password">
-                <span class="error-text" *ngIf="errores.password">{{ errores.password }}</span>
+                <label for="registro-password">{{ 'REGISTRO.PASSWORD' | translate }}</label>
+                <input id="registro-password" type="password" [(ngModel)]="usuario.password" name="password" [placeholder]="'REGISTRO.PASSWORD_PLACEHOLDER' | translate" [class.input-error]="errores.password">
+                <span class="error-text" *ngIf="errores.password">{{ errores.password | translate }}</span>
             </div>
-
-            <button type="submit" class="btn-login">Registrarse</button>
-
+            <span class="error-text error-text-bloque" *ngIf="errores.generico">{{ errores.generico | translate }}</span>
+            <button type="submit" class="btn-login">{{ 'REGISTRO.BTN' | translate }}</button>
             <p class="footer-text">
-                ¿Ya tienes cuenta? <span class="link" routerLink="/login">Inicia sesión</span>
+                {{ 'REGISTRO.YA_CUENTA' | translate }} <span class="link" routerLink="/login">{{ 'REGISTRO.INICIA' | translate }}</span>
             </p>
         </form>
     </div>

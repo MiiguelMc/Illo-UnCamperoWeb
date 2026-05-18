@@ -1,0 +1,32 @@
+<div class="pedido-card" [class.urgente]="esUrgente()">
+  <div class="card-header">
+    <div class="pedido-info">
+      <h3 class="pedido-numero">{{ 'CARD.PEDIDO' | translate }} #{{ (pedido.id || '........').substring(0, 8).toUpperCase() }}</h3>
+      <p class="pedido-hora">{{ formatearHora(pedido.fecha) }}</p>
+    </div>
+    <div class="tiempo-badge" [class.urgente]="esUrgente()">{{ tiempoTranscurrido() }}</div>
+  </div>
+  <div class="cliente-info">
+    <p class="cliente-nombre">{{ pedido.nombreCliente || ('CARD.CLIENTE' | translate) }}</p>
+    <p class="cliente-direccion" *ngIf="pedido.direccion">{{ pedido.direccion }}</p>
+  </div>
+  <div class="productos-lista">
+    <div class="producto-item" *ngFor="let item of pedido.productos">
+      <span class="cantidad-badge">{{ item.cantidad }}x</span>
+      <div class="producto-detalles">
+        <p class="producto-nombre">{{ item.nombre }}</p>
+        <p class="producto-notas" *ngIf="item.notas">{{ item.notas }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="notas-generales" *ngIf="pedido.notasGenerales">
+    <p><strong>{{ 'CARD.NOTAS' | translate }}</strong> {{ pedido.notasGenerales }}</p>
+  </div>
+  <div class="card-footer">
+    <div class="total">
+      <span class="total-label">{{ 'CARD.TOTAL' | translate }}</span>
+      <span class="total-monto">{{ calcularTotal() | number:'1.2-2' }}€</span>
+    </div>
+  </div>
+  <button class="btn-accion" [style.background-color]="accionColor" (click)="ejecutarAccion()" [disabled]="disabled">{{ accionTexto }}</button>
+</div>

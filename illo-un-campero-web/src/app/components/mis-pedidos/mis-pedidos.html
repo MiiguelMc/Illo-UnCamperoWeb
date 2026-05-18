@@ -1,0 +1,98 @@
+<div class="mis-pedidos-container">
+    <div class="header-pedidos">
+        <h1>{{ 'PEDIDOS.TITULO' | translate }}</h1>
+        <button routerLink="/restaurantes" class="btn-volver">{{ 'PEDIDOS.VOLVER' | translate }}</button>
+    </div>
+    <div class="cargando" *ngIf="cargando()">
+        <div class="spinner"></div>
+        <p>{{ 'PEDIDOS.CARGANDO' | translate }}</p>
+    </div>
+    <div class="error-mensaje" *ngIf="error() && !cargando()">
+        <p>{{ error() }}</p>
+        <button routerLink="/login" class="btn-login">{{ 'PEDIDOS.BTN_LOGIN' | translate }}</button>
+    </div>
+    <div class="sin-pedidos" *ngIf="!cargando() && !error() && pedidos().length === 0">
+        <h2>{{ 'PEDIDOS.VACIO_TITULO' | translate }}</h2>
+        <p>{{ 'PEDIDOS.VACIO_DESC' | translate }}</p>
+        <button routerLink="/carta" class="btn-pedir">{{ 'PEDIDOS.VACIO_BTN' | translate }}</button>
+    </div>
+    <div class="lista-pedidos" *ngIf="!cargando() && !error() && pedidos().length > 0">
+        <div class="pedido-card" *ngFor="let pedido of pedidos()">
+            <div class="pedido-header">
+                <div class="info-basica">
+                    <h3>{{ 'PEDIDOS.PEDIDO' | translate }} #{{ idCorto(pedido.id!) }}</h3>
+                    <p class="fecha">{{ formatearFecha(pedido.fecha) }}</p>
+                </div>
+                <div class="estado-badge" [style.background-color]="getEstadoColor(pedido.estado)">{{ pedido.estado }}</div>
+            </div>
+            <div class="pedido-items">
+                <div class="item" *ngFor="let item of pedido.productos">
+                    <div class="item-detalles">
+                        <p class="nombre">{{ item.nombre }}</p>
+                        <p class="cantidad-precio">{{ item.cantidad }}x {{ item.precioUnidad | number:'1.2-2' }}€</p>
+                    </div>
+                    <p class="subtotal">{{ (item.precioUnidad * item.cantidad) | number:'1.2-2' }}€</p>
+                </div>
+            </div>
+            <div class="pedido-footer">
+                <div class="info-entrega">
+                    <p><strong>{{ 'PEDIDOS.DIRECCION' | translate }}</strong> {{ pedido.direccion }}</p>
+                    <p *ngIf="pedido.metodoPago"><strong>{{ 'PEDIDOS.PAGO' | translate }}</strong> {{ pedido.metodoPago }}</p>
+                </div>
+                <div class="total-y-acciones">
+                    <p class="total-pedido">
+                        <strong>{{ 'PEDIDOS.TOTAL' | translate }}</strong>
+                        <span class="monto">{{ pedido.total | number:'1.2-2' }}€</span>
+                    </p>
+                    <div class="botones-pedido">
+                        <button *ngIf="puedeRastrear(pedido.estado)" class="btn-seguimiento" (click)="verSeguimiento(pedido.id!)">{{ 'PEDIDOS.SEGUIMIENTO' | translate }}</button>
+                        <button *ngIf="puedeValorar(pedido)" class="btn-valorar" (click)="abrirModalValorar(pedido)">{{ 'PEDIDOS.VALORAR' | translate }}</button>
+                        <button *ngIf="pedido.estado === 'ENTREGADO' || pedido.estado === 'CANCELADO'" class="btn-repetir" (click)="repetirPedido(pedido)">{{ 'PEDIDOS.REPETIR' | translate }}</button>
+                        <button *ngIf="pedido.estado === 'PENDIENTE'" class="btn-cancelar" (click)="cancelarPedido(pedido.id!)">{{ 'PEDIDOS.CANCELAR' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de valoración -->
+<div class="modal-overlay" *ngIf="pedidoAValorar()" (click)="cerrarModalValorar()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+        <div *ngIf="!exitoValoracion()">
+            <h2>{{ 'VALORAR.TITULO' | translate }}</h2>
+            <p class="modal-pedido-id">{{ 'PEDIDOS.PEDIDO' | translate }} #{{ idCorto(pedidoAValorar()!.id!) }}</p>
+            <div class="modal-estrellas">
+                <button *ngFor="let n of estrellasArray()"
+                    class="estrella" [class.activa]="n <= puntuacionModal()"
+                    (click)="setPuntuacion(n)" type="button">★</button>
+            </div>
+            <p class="modal-puntuacion-texto">
+                <span *ngIf="puntuacionModal() === 0">{{ 'VALORAR.TOCA' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 1">{{ 'VALORAR.MUY_MALO' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 2">{{ 'VALORAR.MALO' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 3">{{ 'VALORAR.REGULAR' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 4">{{ 'VALORAR.BUENO' | translate }}</span>
+                <span *ngIf="puntuacionModal() === 5">{{ 'VALORAR.EXCELENTE' | translate }}</span>
+            </p>
+            <textarea class="modal-comentario" [(ngModel)]="comentarioModal" rows="3"
+                [placeholder]="'VALORAR.PLACEHOLDER' | translate"
+                [disabled]="enviandoValoracion()"></textarea>
+            <p class="modal-error" *ngIf="errorValoracion()">{{ errorValoracion() }}</p>
+            <div class="modal-acciones">
+                <button class="btn-omitir" (click)="cerrarModalValorar()" [disabled]="enviandoValoracion()">
+                    {{ 'VALORAR.OMITIR' | translate }}
+                </button>
+                <button class="btn-enviar-valoracion" (click)="enviarValoracion()"
+                    [disabled]="enviandoValoracion() || puntuacionModal() === 0">
+                    {{ enviandoValoracion() ? ('VALORAR.ENVIANDO' | translate) : ('VALORAR.ENVIAR' | translate) }}
+                </button>
+            </div>
+        </div>
+        <div class="modal-exito" *ngIf="exitoValoracion()">
+            <div class="exito-check">✓</div>
+            <h3>{{ 'VALORAR.EXITO_TITULO' | translate }}</h3>
+            <p>{{ 'VALORAR.EXITO_DESC' | translate }}</p>
+        </div>
+    </div>
+</div>

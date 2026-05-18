@@ -1,0 +1,335 @@
+.confirmar-pedido-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.header-confirmacion { margin-bottom: 1.5rem; }
+
+.btn-volver {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 0.75rem;
+  display: block;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+.btn-volver:hover { color: #c0392b; }
+
+.header-confirmacion h1 { font-size: 1.8rem; color: #333; margin: 0; }
+
+/* Tienda cerrada */
+.tienda-cerrada {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+.tienda-cerrada h2 { color: #333; font-size: 1.5rem; margin-bottom: 12px; }
+.tienda-cerrada p { color: #666; margin-bottom: 24px; }
+.tienda-cerrada button {
+  padding: 12px 28px;
+  background: #f39200;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Layout */
+.contenido-confirmacion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 768px) { .contenido-confirmacion { grid-template-columns: 1fr; } }
+
+.resumen-pedido {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.resumen-pedido h2, .datos-entrega h2 {
+  font-size: 1.2rem; margin: 0 0 1.25rem; color: #333; font-weight: 700;
+}
+
+.items-lista { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.25rem; }
+
+.item-resumen {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: white; padding: 0.75rem; border-radius: 8px;
+}
+.item-resumen img { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; }
+.item-info { flex: 1; }
+.item-info h3 { font-size: 0.9rem; margin: 0 0 3px; color: #333; }
+.cantidad-precio { font-size: 0.8rem; color: #666; margin: 0; }
+.item-subtotal { font-weight: 700; color: #e74c3c; font-size: 0.95rem; white-space: nowrap; }
+
+/* ---- CUPÓN ---- */
+.cupon-section {
+  padding: 14px 0;
+  border-top: 1px solid #e0e0e0;
+  margin-bottom: 12px;
+}
+
+.cupon-form { display: flex; gap: 8px; }
+
+.cupon-form input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  text-transform: uppercase;
+  transition: border-color 0.2s;
+}
+.cupon-form input:focus { outline: none; border-color: #f39200; }
+.cupon-form input:disabled { background: #f5f5f5; cursor: not-allowed; }
+
+.btn-cupon {
+  padding: 10px 18px;
+  background: #0d1117;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.btn-cupon:hover:not(:disabled) { background: #333; }
+.btn-cupon:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.cupon-aplicado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #d4edda;
+  border: 1px solid #27ae60;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.cupon-tag { font-weight: 700; color: #155724; font-size: 0.9rem; }
+
+.btn-quitar-cupon {
+  background: none;
+  border: none;
+  color: #155724;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 4px;
+  line-height: 1;
+  transition: 0.2s;
+}
+.btn-quitar-cupon:hover { color: #c0392b; }
+
+.error-cupon { color: #e74c3c; font-size: 0.82rem; margin-top: 6px; margin-bottom: 0; }
+
+/* Totales */
+.totales { border-top: 1px solid #ddd; padding-top: 12px; }
+
+.linea-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: #666;
+  padding: 3px 0;
+}
+.descuento-linea { color: #27ae60; font-weight: 700; }
+
+.total-pedido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 2px solid #ddd;
+  margin-top: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+}
+.monto-total { color: #e74c3c; font-size: 1.3rem; }
+
+/* Formulario entrega */
+.datos-entrega {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.alert-error {
+  background: #fee;
+  border-left: 4px solid #e74c3c;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: 4px;
+  color: #c0392b;
+  font-size: 0.875rem;
+}
+
+.form-confirmacion { display: flex; flex-direction: column; gap: 1.1rem; }
+.form-group { display: flex; flex-direction: column; }
+.form-group label { font-weight: 600; margin-bottom: 0.4rem; color: #333; font-size: 0.85rem; }
+
+.form-group input,
+.form-group textarea {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus { outline: none; border-color: #e74c3c; }
+.form-group input:disabled,
+.form-group textarea:disabled { background: #f5f5f5; cursor: not-allowed; color: #999; }
+.form-group textarea { resize: vertical; min-height: 75px; }
+
+/* ---- Selector de método de pago ---- */
+.metodos-pago {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.metodo-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  background: white;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  user-select: none;
+}
+.metodo-card:hover:not(.deshabilitado) {
+  border-color: #bbb;
+  background: #fafafa;
+}
+.metodo-card.seleccionado {
+  border-color: #e74c3c;
+  background: #fff8f7;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.08);
+}
+.metodo-card.deshabilitado { opacity: 0.6; cursor: not-allowed; }
+
+.metodo-icono {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #555;
+  transition: background 0.2s, color 0.2s;
+}
+.metodo-card.seleccionado .metodo-icono {
+  background: #fde8e6;
+  color: #e74c3c;
+}
+
+.metodo-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.metodo-nombre {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+}
+.metodo-desc {
+  font-size: 0.78rem;
+  color: #888;
+}
+
+.metodo-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+.metodo-radio.activo {
+  border-color: #e74c3c;
+  background: #e74c3c;
+  box-shadow: inset 0 0 0 3px white;
+}
+
+.botones-accion { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+
+.btn-cancelar, .btn-confirmar {
+  flex: 1; padding: 0.9rem;
+  border: none; border-radius: 8px;
+  font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; transition: 0.2s; font-family: inherit;
+}
+.btn-cancelar { background: #f1f1f1; color: #666; }
+.btn-cancelar:hover:not(:disabled) { background: #e0e0e0; }
+.btn-confirmar { background: #e74c3c; color: white; }
+.btn-confirmar:hover:not(:disabled) { background: #c0392b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(231,76,60,0.3); }
+.btn-confirmar:disabled, .btn-cancelar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---- Stripe ---- */
+.stripe-wrapper {
+  background: #fafafa;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeInStripe 0.2s ease;
+}
+@keyframes fadeInStripe { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+.stripe-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #27ae60;
+}
+
+.stripe-card-container {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  transition: border-color 0.2s;
+}
+.stripe-card-container:focus-within { border-color: #e74c3c; }
+
+.stripe-test-info {
+  font-size: 0.76rem;
+  color: #888;
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.02em;
+}
+
+.error-stripe {
+  color: #e74c3c;
+  font-size: 0.82rem;
+  margin: 0;
+}

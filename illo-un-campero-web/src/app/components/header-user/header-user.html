@@ -1,0 +1,99 @@
+<nav class="main-header anim-entrance">
+  <div class="header-container">
+    <div class="header-left">
+      <a routerLink="/restaurantes" class="logo-box" (click)="menuMovilAbierto = false">
+        <img src="assets/LogoHeader.webp" width="202" height="52" alt="Illo Un Campero">
+      </a>
+    </div>
+    <div class="header-center desktop-only">
+      <ul class="nav-menu">
+        <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'NAV.INICIO' | translate }}</a></li>
+        <li><a routerLink="/carta" routerLinkActive="active">{{ 'NAV.CARTA' | translate }}</a></li>
+        <li><a routerLink="/carrito" routerLinkActive="active">{{ 'NAV.TU_PEDIDO' | translate }}</a></li>
+        <li *ngIf="esAdmin()"><a routerLink="/cocina" routerLinkActive="active" class="nav-link-admin">{{ 'NAV.COCINA' | translate }}</a></li>
+      </ul>
+    </div>
+    <div class="header-right">
+      <div class="actions-wrapper">
+        <button class="btn-idioma" (click)="cambiarIdioma()" aria-label="Cambiar idioma">{{ idiomaActual === 'es' ? 'EN' : 'ES' }}</button>
+        <button class="btn-theme" (click)="toggleTheme()" aria-label="Cambiar tema">{{ isDarkMode ? ('NAV.TEMA_CLARO' | translate) : ('NAV.TEMA_OSCURO' | translate) }}</button>
+        <div class="user-pill-container desktop-only">
+          <div class="user-pill" (click)="toggleMenu($event)" [class.active]="isMenuOpen" id="user-menu" aria-haspopup="true" aria-expanded="{{isMenuOpen}}">
+            <span class="user-initial">{{ getInicial() }}</span>
+            <span class="user-name">{{ (user$ | async)?.nombre }}</span>
+          </div>
+          <div class="dropdown-fancy" *ngIf="isMenuOpen" role="menu" aria-labelledby="user-menu">
+            <a routerLink="/perfil" (click)="isMenuOpen = false" role="menuitem">{{ 'NAV.PERFIL' | translate }}</a>
+            <a routerLink="/mis-pedidos" (click)="isMenuOpen = false" role="menuitem">{{ 'NAV.MIS_PEDIDOS' | translate }}</a>
+            <a *ngIf="esAdmin()" routerLink="/cocina" (click)="isMenuOpen = false" class="link-admin" role="menuitem">{{ 'NAV.PANEL_COCINA' | translate }}</a>
+            <a *ngIf="esAdmin()" routerLink="/perfil" (click)="isMenuOpen = false" class="link-admin" role="menuitem">{{ 'NAV.PANEL_ADMIN' | translate }}</a>
+            <hr class="dropdown-divider">
+            <a class="logout-link" (click)="logout()" role="menuitem">{{ 'NAV.CERRAR_SESION' | translate }}</a>
+          </div>
+        </div>
+        <a class="cart-pill" routerLink="/carrito" (click)="menuMovilAbierto = false">
+          <img src="assets/carro.webp" class="cart-img" width="32" height="32" alt="Carrito">
+          <span class="cart-amount">{{ carritoService.totalPrecio() | number:'1.2-2' }}€</span>
+        </a>
+        <button class="hamburger-btn mobile-only" type="button" aria-label="Abrir menú de navegación" [attr.aria-expanded]="menuMovilAbierto" (click)="toggleMobileMenu()" [class.active]="menuMovilAbierto">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-overlay" *ngIf="menuMovilAbierto">
+      <div class="mobile-overlay-inner">
+
+        <!-- Cabecera usuario -->
+        <div class="mob-user-header">
+          <span class="mob-avatar">{{ getInicial() }}</span>
+          <div class="mob-user-info">
+            <span class="mob-user-name">{{ (user$ | async)?.nombre }}</span>
+            <span class="mob-user-role" *ngIf="esAdmin()">Administrador</span>
+          </div>
+          <button class="mob-close-btn" (click)="toggleMobileMenu()">✕</button>
+        </div>
+
+        <!-- Nav principal -->
+        <nav class="mob-nav">
+          <a routerLink="/restaurantes" (click)="toggleMobileMenu()" routerLinkActive="mob-active" [routerLinkActiveOptions]="{exact:true}">
+            {{ 'NAV.INICIO' | translate }}
+          </a>
+          <a routerLink="/carta" (click)="toggleMobileMenu()" routerLinkActive="mob-active">
+            {{ 'NAV.LA_CARTA' | translate }}
+          </a>
+          <a routerLink="/carrito" (click)="toggleMobileMenu()" routerLinkActive="mob-active">
+            {{ 'NAV.MI_PEDIDO' | translate }}
+          </a>
+          <a routerLink="/mis-pedidos" (click)="toggleMobileMenu()" routerLinkActive="mob-active">
+            {{ 'NAV.MIS_PEDIDOS' | translate }}
+          </a>
+          <a routerLink="/perfil" (click)="toggleMobileMenu()" routerLinkActive="mob-active">
+            {{ 'NAV.PERFIL' | translate }}
+          </a>
+        </nav>
+
+        <!-- Sección admin (solo si es admin) -->
+        <div class="mob-admin-section" *ngIf="esAdmin()">
+          <span class="mob-section-label">Panel Admin</span>
+          <a routerLink="/cocina" (click)="toggleMobileMenu()" routerLinkActive="mob-active" class="mob-admin-link">
+            {{ 'NAV.PANEL_COCINA' | translate }}
+          </a>
+          <a routerLink="/perfil" (click)="toggleMobileMenu()" routerLinkActive="mob-active" class="mob-admin-link">
+            {{ 'NAV.PANEL_ADMIN' | translate }}
+          </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="mob-footer">
+          <button class="mob-btn-idioma" (click)="cambiarIdioma()">
+            {{ idiomaActual === 'es' ? 'English' : 'Español' }}
+          </button>
+          <button class="mob-btn-logout" (click)="logout()">
+            {{ 'NAV.CERRAR_SESION' | translate }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>

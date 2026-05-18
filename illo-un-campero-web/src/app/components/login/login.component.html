@@ -1,35 +1,25 @@
 <div class="login-screen">
     <div class="login-box">
         <div class="header-login">
-            <img src="logo.png" alt="Logo" class="logo">
-            <h1>¡Hola de nuevo!</h1>
-            <p>Entra para pedir tu campero favorito</p>
+            <img src="assets/Nombre-Arqueado+Logo.webp" alt="Logo" class="logo">
+            <h1>{{ 'LOGIN.TITULO' | translate }}</h1>
+            <p>{{ 'LOGIN.SUBTITULO' | translate }}</p>
         </div>
-
         <form (submit)="onLogin()">
-            <!-- CAMPO EMAIL -->
             <div class="input-group">
-                <label>Email</label>
-                <input type="email" [(ngModel)]="email" name="email" [class.input-error]="emailError"
-                    placeholder="correo@ejemplo.com">
-                <!-- Mensaje de error email -->
-                <span class="error-text" *ngIf="emailError">{{ emailError }}</span>
+                <label for="login-email">{{ 'LOGIN.EMAIL' | translate }}</label>
+                <input id="login-email" type="email" [(ngModel)]="email" name="email" [class.input-error]="emailError" placeholder="correo@ejemplo.com">
+                <span class="error-text" *ngIf="emailError">{{ emailError | translate }}</span>
             </div>
-
-            <!-- CAMPO CONTRASEÑA -->
             <div class="input-group">
-                <label>Contraseña</label>
-                <input type="password" [(ngModel)]="password" name="password" [class.input-error]="passwordError"
-                    placeholder="********">
-                <!-- Mensaje de error contraseña -->
-                <span class="error-text" *ngIf="passwordError">{{ passwordError }}</span>
+                <label for="login-password">{{ 'LOGIN.PASSWORD' | translate }}</label>
+                <input id="login-password" type="password" [(ngModel)]="password" name="password" [class.input-error]="passwordError" placeholder="********">
+                <span class="error-text" *ngIf="passwordError">{{ passwordError | translate }}</span>
             </div>
-
-            <button type="submit" class="btn-login">Iniciar Sesión</button>
-
+            <button type="submit" class="btn-login">{{ 'LOGIN.BTN' | translate }}</button>
             <p class="footer-text">
-                ¿No tienes cuenta?
-                <span class="link" routerLink="/registro">Regístrate</span>
+                {{ 'LOGIN.SIN_CUENTA' | translate }}
+                <span class="link" routerLink="/registro">{{ 'LOGIN.REGISTRATE' | translate }}</span>
             </p>
         </form>
     </div>

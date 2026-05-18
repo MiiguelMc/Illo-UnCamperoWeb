@@ -1,13 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -16,40 +18,39 @@ export class LoginComponent implements OnInit {
   password = '';
   emailError = '';
   passwordError = '';
-  infoMessage = '';
 
   private authService = inject(AuthService);
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
 
   ngOnInit() {
-    if (this.route.snapshot.queryParams['sinVerificar']) {
-      this.infoMessage = 'Verifica tu correo electrónico antes de continuar. Revisa tu bandeja de entrada.';
-    }
+    this.authService.user$.pipe(take(1)).subscribe(user => {
+      if (user) this.router.navigate(['/restaurantes']);
+    });
   }
 
   async onLogin() {
     this.emailError = '';
     this.passwordError = '';
-    this.infoMessage = '';
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
-      this.emailError = 'Introduce un correo válido (ejemplo@correo.com)';
+      this.emailError = 'LOGIN.ERR_EMAIL';
       return;
     }
 
     try {
-      const credenciales = await this.authService.login(this.email, this.password);
-      if (!credenciales.user.emailVerified) {
-        await this.authService.logout();
-        this.infoMessage = 'Verifica tu correo electrónico antes de continuar. Revisa tu bandeja de entrada.';
-        return;
-      }
+      await this.authService.login(this.email, this.password);
       this.router.navigate(['/restaurantes']);
     } catch (error: any) {
       this.password = '';
-      this.passwordError = 'Credenciales incorrectas. Revisa tu correo y contraseña.';
+      const code = error?.code || '';
+      if (code === 'auth/user-not-found' || code === 'auth/invalid-email') {
+        this.emailError = 'LOGIN.ERR_NOT_FOUND';
+      } else if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+        this.passwordError = 'LOGIN.ERR_CREDENCIALES';
+      } else {
+        this.passwordError = 'LOGIN.ERR_GENERIC';
+      }
     }
   }
 }
