@@ -3,16 +3,16 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #f4f5f7;
+    background: var(--gris-fondo);
     padding: 20px;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-main);
 }
 
 .login-box {
     background: white;
-    padding: 40px 36px;
+    padding: var(--space-8) 36px;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-login);
     width: 100%;
     max-width: 400px;
     text-align: center;
@@ -29,12 +29,12 @@
 h1 {
     font-size: 1.55rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin-bottom: 6px;
 }
 
 .login-box p {
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.875rem;
     margin-bottom: 28px;
 }
@@ -55,8 +55,8 @@ label {
 input {
     width: 100%;
     padding: 11px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-input);
     box-sizing: border-box;
     font-size: 0.9rem;
     font-family: inherit;
@@ -65,17 +65,17 @@ input {
 }
 
 input:focus {
-    border-color: #f39200;
+    border-color: var(--naranja-illo);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(243, 146, 0, 0.1);
+    box-shadow: var(--shadow-focus);
 }
 
 .input-error {
-    border-color: #e74c3c;
+    border-color: var(--color-error);
 }
 
 .error-text {
-    color: #e74c3c;
+    color: var(--color-error);
     font-size: 0.78rem;
     margin-top: 4px;
     display: block;
@@ -84,10 +84,10 @@ input:focus {
 .btn-login {
     width: 100%;
     padding: 13px;
-    background: #f39200;
+    background: var(--naranja-illo);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-input);
     font-weight: 700;
     font-size: 0.95rem;
     font-family: inherit;
@@ -97,7 +97,7 @@ input:focus {
 }
 
 .btn-login:hover:not(:disabled) {
-    background: #d88200;
+    background: var(--naranja-dark);
     transform: translateY(-1px);
 }
 
@@ -109,11 +109,11 @@ input:focus {
 .footer-text {
     margin-top: 24px;
     font-size: 0.85rem;
-    color: #888;
+    color: var(--text-muted);
 }
 
 .link {
-    color: #f39200;
+    color: var(--naranja-illo);
     font-weight: 700;
     cursor: pointer;
     text-decoration: none;
