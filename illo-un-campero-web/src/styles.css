@@ -1,20 +1,86 @@
 :root {
-    --naranja-illo: #F39200;
-    --verde-illo: #008445;
-    --azul-oscuro: #0A0E21;
-    --gris-claro: #EAEAEA;
-    --background-color: #ffffff;
-    --text-color: #000000;
-    --card-background: #f9f9f9;
-    --border-color: #ddd;
-  }
+  /* === Marca === */
+  --naranja-illo: #F39200;
+  --naranja-dark: #D88200;
+  --naranja-tint: rgba(243, 146, 0, 0.08);
+  --naranja-ultra-light: rgba(243, 146, 0, 0.1);
+  --naranja-glow: rgba(243, 146, 0, 0.25);
+  --verde-illo: #008445;
+  --negro-illo: #0d1117;
 
-  [data-theme="dark"] {
-    --background-color: #121212;
-    --text-color: #ffffff;
-    --card-background: #1e1e1e;
-    --border-color: #333;
-  }
+  /* === Superficies === */
+  --background-color: #ffffff;
+  --card-background: #f9f9f9;
+  --gris-claro: #EAEAEA;
+  --gris-carta: #fcfcfc;
+  --gris-fondo: #f4f5f7;
+  --gris-cantidad: #f8f8f8;
+
+  /* === Texto === */
+  --text-color: #000000;
+  --text-primary: #1a1a1a;
+  --text-secondary: #667085;
+  --text-muted: #888;
+  --text-footer: #c9d1d9;
+  --text-footer-muted: #8b949e;
+
+  /* === Bordes === */
+  --border-color: #ddd;
+  --border-separator: #f0f0f0;
+  --border-footer: #21262d;
+
+  /* === Semánticos === */
+  --color-error: #e74c3c;
+  --color-error-hover: #c0392b;
+  --color-error-tint: rgba(231, 76, 60, 0.08);
+
+  /* === Radios === */
+  --radius-pill: 50px;
+  --radius-modal: 25px;
+  --radius-card: 15px;
+  --radius-card-sm: 12px;
+  --radius-input: 8px;
+  --radius-image: 10px;
+
+  /* === Sombras === */
+  --shadow-micro: 0 2px 8px rgba(0, 0, 0, 0.07);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-header: 0 2px 20px rgba(0, 0, 0, 0.06);
+  --shadow-dropdown: 0 12px 35px rgba(0, 0, 0, 0.12);
+  --shadow-modal: 0 20px 50px rgba(0, 0, 0, 0.3);
+  --shadow-login: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-focus: 0 0 0 3px rgba(243, 146, 0, 0.10);
+  --shadow-cta-hover: 0 8px 20px rgba(243, 146, 0, 0.20);
+  --shadow-nav-active: 0 5px 15px rgba(243, 146, 0, 0.25);
+
+  /* === Espaciado === */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 30px;
+  --space-8: 40px;
+  --space-9: 60px;
+
+  /* === Tipografía === */
+  --font-main: 'Poppins', Arial, sans-serif;
+}
+
+[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #888;
+  --card-background: #1e1e1e;
+  --border-color: #333;
+  --border-separator: #2a2a2a;
+  --gris-fondo: #181818;
+  --gris-carta: #1a1a1a;
+}
 
   /* src/styles.css */
 
