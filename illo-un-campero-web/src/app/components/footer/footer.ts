@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule, TranslateModule],
   templateUrl: './footer.html',
-  styleUrl: './footer.css',
+  styleUrls: ['./footer.css']
 })
-export class Footer {
-
-}
+export class Footer {}

@@ -1,0 +1,21 @@
+<div class="pedido-exitoso-container">
+  <div class="success-card">
+    <div class="icon-success">✓</div>
+    <h1>{{ 'EXITOSO.TITULO' | translate }}</h1>
+    <p class="mensaje-principal">{{ 'EXITOSO.MSG' | translate }}</p>
+    <div class="info-pedido" *ngIf="pedidoId()">
+      <p class="numero-pedido"><strong>{{ 'EXITOSO.NUMERO' | translate }}</strong> #{{ pedidoId() }}</p>
+    </div>
+    <div class="mensaje-secundario">
+      <p>{{ 'EXITOSO.MSG2' | translate }}</p>
+    </div>
+    <div class="botones-accion">
+      <button class="btn-primario" (click)="verMisPedidos()">{{ 'EXITOSO.VER_PEDIDOS' | translate }}</button>
+      <button class="btn-secundario" (click)="irARestaurantes()">{{ 'EXITOSO.VOLVER' | translate }}</button>
+    </div>
+    <div class="info-adicional">
+      <p><strong>{{ 'EXITOSO.TIEMPO' | translate }}</strong> {{ 'EXITOSO.TIEMPO_VALOR' | translate }}</p>
+      <p>{{ 'EXITOSO.CONTACTO' | translate }}</p>
+    </div>
+  </div>
+</div>

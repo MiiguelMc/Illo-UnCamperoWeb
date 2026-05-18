@@ -1,2 +1,17 @@
+@if (authInitialized) {
+  @if (user$ | async; as user) {
+    <app-header-user></app-header-user>
+  } @else {
+    <app-header></app-header>
+  }
+} @else {
+  <!-- Aquí podrías poner un spinner de carga o nada -->
+  <div class="loading-bar"></div>
+}
 
-<router-outlet />
+<main class="content-wrapper">
+  <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>
+<app-cookie-banner></app-cookie-banner>

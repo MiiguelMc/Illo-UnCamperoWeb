@@ -1,0 +1,85 @@
+import { Component, OnInit, inject } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { ProductoItemComponent } from '../producto-item/producto-item';
+import { ProductoService } from '../../services/producto.service';
+import { CarritoService } from '../../services/carrito.service';
+import { Producto } from '../../../model/producto.model';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-carta',
+  standalone: true,
+  imports: [CommonModule, ProductoItemComponent, FormsModule, TranslateModule, RouterModule],
+  templateUrl: './carta.html',
+  styleUrls: ['./carta.css']
+})
+export class CartaComponent implements OnInit {
+  private productoService = inject(ProductoService);
+  private carritoService = inject(CarritoService);
+
+  productos: Producto[] = [];
+  productoSeleccionado: Producto | null = null;
+  cantidadSeleccionada: number = 1;
+  filtroActual: string = 'todos';
+  textoBusqueda: string = '';
+
+  subCamperos = ['Vegano', 'Vegetariano', 'Carnívoro', 'Pan de Pizza', 'Mini', 'De To La Vía'];
+  subEntrantes = ['Ensalada', 'Patata', 'Croqueta', 'Variante'];
+
+  ngOnInit(): void {
+    this.productoService.obtenerProductos().subscribe({
+      next: (res) => { this.productos = (res || []).filter(p => p?.disponible !== false); },
+      error: (err) => console.error('Error al cargar los productos:', err)
+    });
+  }
+
+  setFiltro(categoria: string) {
+    this.filtroActual = categoria;
+    this.textoBusqueda = '';
+  }
+
+  abrirModal(p: Producto) {
+    this.productoSeleccionado = p;
+    this.cantidadSeleccionada = 1;
+    document.body.style.overflow = 'hidden';
+  }
+
+  cerrarModal() {
+    this.productoSeleccionado = null;
+    document.body.style.overflow = 'auto';
+  }
+
+  incrementar() { this.cantidadSeleccionada++; }
+  decrementar() { if (this.cantidadSeleccionada > 1) this.cantidadSeleccionada--; }
+
+  agregarAlPedido() {
+    if (this.productoSeleccionado) {
+      this.carritoService.agregar(this.productoSeleccionado, this.cantidadSeleccionada);
+      this.cerrarModal();
+    }
+  }
+
+  filtrarProductos(lista: Producto[]): Producto[] {
+    return lista.filter(p =>
+      p.nombre.toLowerCase().includes(this.textoBusqueda.toLowerCase())
+    );
+  }
+
+  getPorCategoria(nombreCat: string): Producto[] {
+    const filtrados = this.productos.filter(p =>
+      p.categoria?.toLowerCase().trim().includes(nombreCat.toLowerCase().trim())
+    );
+    return this.filtrarProductos(filtrados);
+  }
+
+  getPorSubcategoria(cat: string, subKeyword: string): Producto[] {
+    const filtrados = this.productos.filter(p => {
+      const coincideCat = p.categoria?.toLowerCase().includes(cat.toLowerCase());
+      const texto = ((p.subcategoria || '') + ' ' + (p.nombre || '')).toLowerCase();
+      return coincideCat && texto.includes(subKeyword.toLowerCase());
+    });
+    return this.filtrarProductos(filtrados);
+  }
+}
