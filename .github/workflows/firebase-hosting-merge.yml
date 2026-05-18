@@ -28,3 +28,5 @@ jobs:
           channelId: live
           projectId: illo-uncampero
           entryPoint: illo-un-campero-web
+        env:
+          FIREBASE_JSON: firebase.json
