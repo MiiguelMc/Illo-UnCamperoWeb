@@ -140,9 +140,13 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   z-index: 8000;
-  padding: 4px;
+  padding: 10px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .hamburger-btn .bar { width: 28px; height: 2.5px; background: var(--text-secondary); border-radius: 10px; transition: 0.3s; }
 .hamburger-btn.active .bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); background: var(--naranja-illo); }
@@ -154,6 +158,15 @@
   .mobile-only  { display: flex !important; }
   .btn-idioma, .btn-theme { display: none !important; }
 
+  /* Layout móvil: quitar grid rígido, usar flex simple */
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  .header-left { flex: none; }
+  .header-right { flex: none; }
+  .actions-wrapper { gap: 10px; }
   /* ── Overlay ── */
   .mobile-overlay {
     position: fixed; inset: 0;
@@ -307,12 +320,13 @@
 
 /* === Responsive fino para iPhone 13 (390px) === */
 @media (max-width: 480px) {
-  .main-header { height: 65px; }
-  .header-container { padding: 0 10px; gap: 6px; }
-  .logo-box img { height: 36px; width: auto; }
-  .cart-pill { padding: 7px 12px; gap: 5px; }
-  .cart-amount { font-size: 0.8rem; }
-  .cart-img { height: 15px; }
-  .hamburger-btn { padding: 10px; }
-  .hamburger-btn .bar { width: 24px; }
+  .main-header { height: 64px; }
+  .header-container { padding: 0 14px; }
+  .logo-box img { height: 38px; }
+  .cart-pill { padding: 7px 14px; gap: 6px; border-radius: 30px; }
+  .cart-amount { font-size: 0.82rem; }
+  .cart-img { height: 14px; }
+  .actions-wrapper { gap: 8px; }
+  .hamburger-btn { padding: 8px; }
+  .hamburger-btn .bar { width: 22px; height: 2px; }
 }

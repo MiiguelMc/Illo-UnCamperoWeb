@@ -122,7 +122,12 @@
 
 @media (max-width: 1000px) {
   .header-center, .actions-wrapper { display: none; }
-  .hamburger-btn { display: block; }
+  .hamburger-btn { display: flex; align-items: center; justify-content: center; }
+
+  /* Quitar flex:1 en móvil para que el logo ocupe su ancho natural */
+  .header-left { flex: none; }
+  .header-right { flex: none; }
+  .header-container { padding: 0 20px; }
 
   .mobile-overlay {
     display: flex;
@@ -150,14 +155,14 @@
 }
 
 @media (max-width: 480px) {
-  .header-container { padding: 0 10px; }
-  .logo-box img { height: 36px; width: auto; }
-  .main-header { height: 65px; }
-  .mobile-overlay.open { height: calc(100vh - 65px); padding: 30px 0; }
-  .mobile-overlay { top: 65px; }
+  .main-header { height: 64px; }
+  .header-container { padding: 0 16px; }
+  .logo-box img { height: 38px; }
+  .mobile-overlay { top: 64px; }
+  .mobile-overlay.open { height: calc(100vh - 64px); padding: 30px 0; }
   .mobile-nav a { font-size: 1.3rem; }
   .mobile-nav li { margin-bottom: 18px; }
-  .hamburger-btn { font-size: 2rem; padding: 10px; }
+  .hamburger-btn { font-size: 1.8rem; padding: 8px; }
 }
 /* Añadir al final de header-user.css y header-login.css */
 .btn-idioma {
