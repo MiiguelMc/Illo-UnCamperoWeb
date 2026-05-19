@@ -1,5 +1,5 @@
 .perfil-wrapper {
-  background-color: #f4f5f7;
+  background-color: var(--gris-fondo);
   min-height: calc(100vh - 85px);
   padding: 40px 20px;
   font-family: 'Poppins', sans-serif;
@@ -11,7 +11,7 @@
   margin: 0 auto 20px;
   display: flex;
   gap: 8px;
-  background: white;
+  background: var(--card-background);
   padding: 6px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -25,7 +25,7 @@
   font-size: 0.9rem;
   cursor: pointer;
   background: transparent;
-  color: #666;
+  color: var(--text-secondary);
   transition: 0.2s;
   font-family: inherit;
 }
@@ -33,14 +33,14 @@
 
 /* ---- PERFIL CARD ---- */
 .perfil-card {
-  background: white;
+  background: var(--card-background);
   max-width: 860px;
   margin: 0 auto;
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
-.perfil-card h1 { color: #0d1117; font-size: 1.5rem; font-weight: 700; margin-bottom: 32px; }
+.perfil-card h1 { color: var(--text-primary); font-size: 1.5rem; font-weight: 700; margin-bottom: 32px; }
 
 .section { margin-bottom: 36px; }
 .section h3 {
@@ -51,14 +51,14 @@
 
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group label { font-weight: 600; font-size: 0.82rem; color: #555; }
+.form-group label { font-weight: 600; font-size: 0.82rem; color: var(--text-secondary); }
 .form-group input {
-  padding: 11px 14px; border: 1px solid #e0e0e0;
+  padding: 11px 14px; border: 1px solid var(--border-color);
   border-radius: 8px; font-size: 0.9rem; font-family: inherit;
-  transition: 0.2s; background: #fafafa;
+  transition: 0.2s; background: var(--gris-fondo); color: var(--text-primary);
 }
-.form-group input:focus { outline: none; border-color: #f39200; background: white; }
-.form-group input:disabled { background: #f0f0f0; color: #999; cursor: not-allowed; }
+.form-group input:focus { outline: none; border-color: #f39200; background: var(--card-background); }
+.form-group input:disabled { background: var(--gris-claro); color: var(--text-muted); cursor: not-allowed; }
 .field-error { font-size: 0.78rem; color: #e74c3c; }
 
 .actions { display: flex; justify-content: flex-end; margin-top: 8px; }
@@ -71,9 +71,9 @@
 .btn-primary:hover:not(:disabled) { background: #d88200; transform: translateY(-1px); }
 .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
 
-.security p { color: #777; font-size: 0.9rem; margin-bottom: 14px; line-height: 1.6; }
+.security p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px; line-height: 1.6; }
 .btn-secondary {
-  background: white; color: #0d1117; border: 2px solid #0d1117;
+  background: var(--card-background); color: var(--text-primary); border: 2px solid var(--text-primary);
   padding: 10px 24px; border-radius: 8px; font-weight: 700;
   cursor: pointer; transition: 0.2s; font-family: inherit; font-size: 0.9rem;
 }
@@ -95,17 +95,17 @@
 
 .admin-subnav { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
 .admin-subnav button {
-  padding: 8px 20px; border: 1px solid #ddd; border-radius: 8px;
-  background: white; font-weight: 600; font-size: 0.85rem;
-  cursor: pointer; color: #555; transition: 0.2s; font-family: inherit;
+  padding: 8px 20px; border: 1px solid var(--border-color); border-radius: 8px;
+  background: var(--card-background); font-weight: 600; font-size: 0.85rem;
+  cursor: pointer; color: var(--text-secondary); transition: 0.2s; font-family: inherit;
 }
 .admin-subnav button.active { background: #0d1117; color: white; border-color: #0d1117; }
 
 .admin-content {
-  background: white; border-radius: 16px;
+  background: var(--card-background); border-radius: 16px;
   padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
-.admin-content h2 { font-size: 1.2rem; font-weight: 700; color: #0d1117; margin-bottom: 24px; }
+.admin-content h2 { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 24px; }
 
 .admin-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .admin-section-header h2 { margin: 0; }

@@ -15,7 +15,8 @@
     "REGISTRARSE": "Registrarse",
     "CERRAR_SESION": "Cerrar sesión",
     "TEMA_CLARO": "Claro",
-    "TEMA_OSCURO": "Oscuro"
+    "TEMA_OSCURO": "Oscuro",
+    "ADMINISTRADOR": "Administrador"
   },
   "CARRITO": {
     "TITULO": "Tu Pedido",
@@ -104,7 +105,10 @@
     "LUN_VIE": "Lunes – Viernes",
     "SABADOS": "Sábados",
     "DOMINGOS": "Domingos",
-    "COPYRIGHT": "© 2026 Illo, Un Campero · Todos los derechos reservados"
+    "COPYRIGHT": "© 2026 Illo, Un Campero · Todos los derechos reservados",
+    "LINK_CONTACTO": "Contacto",
+    "LINK_PRIVACIDAD": "Privacidad",
+    "LINK_AVISO_LEGAL": "Aviso legal"
   },
   "GESTION": {
     "TITULO": "Gestión de productos",
@@ -394,5 +398,86 @@
   },
   "IDIOMA": {
     "CAMBIAR_A": "EN"
+  },
+  "PRODUCTO": {
+    "OFERTA": "Oferta"
+  },
+  "CONTACTO_PAGE": {
+    "BREADCRUMB_INICIO": "Inicio",
+    "BREADCRUMB": "Contacto",
+    "EYEBROW": "Atención al cliente",
+    "TITULO": "Contacto de Illo Un Campero",
+    "LEAD": "Estamos en Teatinos, Málaga. Puedes contactar con nosotros para dudas sobre pedidos, alérgenos, zonas de reparto, incidencias o información del restaurante.",
+    "DATOS_TITULO": "Datos de contacto",
+    "TELEFONO": "Teléfono:",
+    "EMAIL": "Email:",
+    "DIRECCION": "Dirección:",
+    "HORARIO_TITULO": "Horario",
+    "LUN_VIE": "Lunes a viernes: 12:00 - 23:30",
+    "SABADOS": "Sábados: 12:00 - 00:30",
+    "DOMINGOS": "Domingos: 13:00 - 23:00",
+    "REPARTO_TITULO": "Zonas de reparto",
+    "REPARTO_DESC": "Repartimos en Teatinos, Colonia Santa Inés y alrededores de la Universidad de Málaga. Si tienes dudas sobre tu dirección, llámanos antes de confirmar el pedido.",
+    "VER_CARTA": "Ver carta y pedir online"
+  },
+  "PRIVACIDAD_PAGE": {
+    "TITULO": "Política de Privacidad y Cookies",
+    "FECHA": "Última actualización: mayo de 2026",
+    "S1_T": "1. Responsable del tratamiento",
+    "S1_P": "<strong>Illo, Un Campero</strong> es el responsable del tratamiento de los datos personales recogidos a través de esta aplicación web.",
+    "S2_T": "2. Datos que recogemos",
+    "S2_L1": "Nombre, dirección de correo electrónico y teléfono al registrarte.",
+    "S2_L2": "Dirección de entrega en cada pedido.",
+    "S2_L3": "Historial de pedidos y valoraciones realizadas.",
+    "S2_L4": "Token de dispositivo para notificaciones push (FCM).",
+    "S3_T": "3. Finalidad del tratamiento",
+    "S3_L1": "Gestionar tu cuenta y pedidos.",
+    "S3_L2": "Enviarte confirmaciones de pedido y comunicaciones relacionadas con tu cuenta.",
+    "S3_L3": "Enviarte notificaciones push sobre el estado de tu pedido.",
+    "S3_L4": "Procesar pagos de forma segura a través de Stripe.",
+    "S4_T": "4. Base legal",
+    "S4_P": "El tratamiento se basa en la ejecución del contrato de compra-venta (Art. 6.1.b RGPD) y el consentimiento del usuario para notificaciones y comunicaciones comerciales (Art. 6.1.a RGPD).",
+    "S5_T": "5. Servicios de terceros",
+    "S5_L1": "<strong>Firebase (Google LLC):</strong> autenticación, base de datos y notificaciones push. Transferencia de datos a EE.UU. bajo cláusulas contractuales tipo.",
+    "S5_L2": "<strong>Stripe Inc.:</strong> procesamiento de pagos. Stripe no almacena datos de tarjeta en nuestros servidores.",
+    "S5_L3": "<strong>Render Inc.:</strong> alojamiento del servidor backend.",
+    "S6_T": "6. Cookies",
+    "S6_P": "Esta aplicación utiliza:",
+    "S6_L1": "<strong>Cookies de sesión de Firebase:</strong> necesarias para mantener tu sesión iniciada.",
+    "S6_L2": "<strong>localStorage:</strong> para guardar preferencias de idioma y aceptación de cookies.",
+    "S6_P2": "No utilizamos cookies de publicidad ni de seguimiento de terceros.",
+    "S7_T": "7. Tus derechos (RGPD)",
+    "S7_P": "Puedes ejercer los siguientes derechos:",
+    "S7_L1": "<strong>Acceso:</strong> solicitar una copia de tus datos personales.",
+    "S7_L2": "<strong>Rectificación:</strong> corregir datos inexactos desde tu perfil.",
+    "S7_L3": "<strong>Supresión:</strong> eliminar tu cuenta y todos tus datos desde la sección de perfil.",
+    "S7_L4": "<strong>Portabilidad:</strong> solicitar tus datos en formato estructurado.",
+    "S7_L5": "<strong>Oposición:</strong> oponerte al tratamiento en cualquier momento.",
+    "S7_P2": "Para ejercer estos derechos, contacta con nosotros a través del correo indicado en la aplicación.",
+    "S8_T": "8. Conservación de datos",
+    "S8_P": "Los datos se conservan mientras mantengas tu cuenta activa. Al eliminar tu cuenta, todos los datos personales son borrados de forma permanente.",
+    "S9_T": "9. Menores",
+    "S9_P": "Este servicio no está dirigido a menores de 14 años. No recogemos conscientemente datos de menores de esa edad."
+  },
+  "LEGAL_PAGE": {
+    "BREADCRUMB_INICIO": "Inicio",
+    "BREADCRUMB": "Aviso legal",
+    "TITULO": "Aviso legal",
+    "FECHA": "Última actualización: mayo de 2026",
+    "S1_T": "1. Titular del sitio web",
+    "S1_P": "Este sitio web pertenece a <strong>Illo Un Campero</strong>, restaurante de camperos malagueños ubicado en Calle Camperos, 21, 29010 Málaga.",
+    "S2_T": "2. Datos de contacto",
+    "S2_L1": "Email:",
+    "S2_L2": "Teléfono:",
+    "S2_L3": "Zona de actividad: Teatinos, Málaga y alrededores.",
+    "S3_T": "3. Uso del sitio",
+    "S3_P": "La web permite consultar la carta, crear una cuenta, realizar pedidos online y consultar el estado de los pedidos. El usuario se compromete a facilitar datos veraces y a usar el servicio conforme a la ley.",
+    "S4_T": "4. Propiedad intelectual",
+    "S4_P": "Los textos, imágenes, logotipos y elementos gráficos de esta web pertenecen a Illo Un Campero o se utilizan con autorización. No está permitida su reproducción sin consentimiento.",
+    "S5_T": "5. Responsabilidad",
+    "S5_P": "Trabajamos para mantener la información actualizada, pero los precios, disponibilidad de productos y horarios pueden cambiar. La información válida para cada pedido será la mostrada durante el proceso de compra.",
+    "S6_T": "6. Privacidad y cookies",
+    "S6_P": "Puedes consultar cómo tratamos los datos personales en nuestra",
+    "S6_LINK": "política de privacidad y cookies"
   }
 }

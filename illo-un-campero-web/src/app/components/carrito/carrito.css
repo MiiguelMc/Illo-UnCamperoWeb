@@ -59,7 +59,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: white;
+  background: var(--card-background);
   border-radius: var(--radius-card-sm);
   box-shadow: var(--shadow-micro);
   transition: box-shadow 0.2s;
@@ -101,7 +101,7 @@
   width: 32px;
   height: 32px;
   border: 1.5px solid var(--naranja-illo);
-  background: white;
+  background: var(--card-background);
   color: var(--naranja-illo);
   border-radius: 50%;
   cursor: pointer;
@@ -144,7 +144,7 @@
 .btn-borrar:hover { color: var(--color-error); }
 
 .resumen-pago {
-  background: #f8f9fa;
+  background: var(--gris-fondo);
   padding: 1.75rem;
   border-radius: 12px;
   display: flex;
@@ -162,7 +162,7 @@
   font-size: 1.3rem;
   font-weight: 700;
   padding: 0.85rem 0;
-  border-top: 2px solid #e0e0e0;
+  border-top: 2px solid var(--border-color);
   color: var(--text-primary);
 }
 
@@ -194,8 +194,8 @@
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  background: white;
-  color: #555;
+  background: var(--card-background);
+  color: var(--text-secondary);
   text-decoration: none;
   text-align: center;
   display: block;

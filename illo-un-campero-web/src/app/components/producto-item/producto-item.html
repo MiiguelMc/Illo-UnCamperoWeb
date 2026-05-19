@@ -1,5 +1,5 @@
 <div class="producto-card">
-  <span class="badge-oferta" *ngIf="producto.esOferta">Oferta</span>
+  <span class="badge-oferta" *ngIf="producto.esOferta">{{ 'PRODUCTO.OFERTA' | translate }}</span>
   <div class="info-container">
     <div class="texto-principal">
       <h3 class="nombre">{{ producto.nombre }}</h3>

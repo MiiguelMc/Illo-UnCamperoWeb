@@ -20,7 +20,7 @@
 
 .producto-card {
   position: relative;
-  background: white;
+  background: var(--card-background);
   border-radius: var(--radius-card);
   padding: 15px 20px;
   display: flex;
@@ -51,12 +51,12 @@
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0 0 4px 0;
-  color: #222;
+  color: var(--text-primary);
 }
 
 .descripcion {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--text-secondary);
   margin: 0;
   /* Cortamos el texto si es muy largo para no romper la tarjeta */
   display: -webkit-box;
@@ -75,7 +75,7 @@
 .precio {
   font-weight: 800;
   font-size: 1rem;
-  color: #333;
+  color: var(--text-primary);
 }
 .selector-tarjeta {
     display: flex;
@@ -86,7 +86,7 @@
 .btn-circular {
     width: 30px;
     height: 30px;
-    background: white;
+    background: var(--card-background);
     border: 1.5px solid var(--naranja-illo); /* Naranja corporativo */
     border-radius: 50%;
     color: var(--naranja-illo);
@@ -107,7 +107,7 @@
 
 .cantidad-texto {
     font-weight: 800;
-    color: #222;
+    color: var(--text-primary);
     font-size: 1.1rem;
     min-width: 15px;
     text-align: center;

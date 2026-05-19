@@ -48,7 +48,7 @@
           <span class="mob-avatar">{{ getInicial() }}</span>
           <div class="mob-user-info">
             <span class="mob-user-name">{{ (user$ | async)?.nombre }}</span>
-            <span class="mob-user-role" *ngIf="esAdmin()">Administrador</span>
+            <span class="mob-user-role" *ngIf="esAdmin()">{{ 'NAV.ADMINISTRADOR' | translate }}</span>
           </div>
           <button class="mob-close-btn" (click)="toggleMobileMenu()">✕</button>
         </div>
@@ -74,7 +74,7 @@
 
         <!-- Sección admin (solo si es admin) -->
         <div class="mob-admin-section" *ngIf="esAdmin()">
-          <span class="mob-section-label">Panel Admin</span>
+          <span class="mob-section-label">{{ 'NAV.PANEL_ADMIN' | translate }}</span>
           <a routerLink="/cocina" (click)="toggleMobileMenu()" routerLinkActive="mob-active" class="mob-admin-link">
             {{ 'NAV.PANEL_COCINA' | translate }}
           </a>

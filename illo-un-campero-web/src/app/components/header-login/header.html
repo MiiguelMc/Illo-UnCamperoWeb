@@ -15,6 +15,7 @@
     <div class="header-right">
       <div class="actions-wrapper">
         <button class="btn-idioma" (click)="cambiarIdioma()">{{ 'IDIOMA.CAMBIAR_A' | translate }}</button>
+        <button class="btn-theme" (click)="toggleTheme()" aria-label="Cambiar tema">{{ isDarkMode ? ('NAV.TEMA_CLARO' | translate) : ('NAV.TEMA_OSCURO' | translate) }}</button>
         <button class="btn-login" routerLink="/login">{{ 'NAV.INICIAR_SESION' | translate }}</button>
         <button class="btn-register" routerLink="/registro">{{ 'NAV.REGISTRARSE' | translate }}</button>
       </div>

@@ -1,12 +1,13 @@
 import { Component, Input, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { Producto } from '../../../model/producto.model';
 import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-producto-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './producto-item.html',
   styleUrls: ['./producto-item.css']
 })

@@ -15,7 +15,8 @@
     "REGISTRARSE": "Sign up",
     "CERRAR_SESION": "Log out",
     "TEMA_CLARO": "Light",
-    "TEMA_OSCURO": "Dark"
+    "TEMA_OSCURO": "Dark",
+    "ADMINISTRADOR": "Administrator"
   },
   "CARRITO": {
     "TITULO": "Your Order",
@@ -104,7 +105,10 @@
     "LUN_VIE": "Monday – Friday",
     "SABADOS": "Saturdays",
     "DOMINGOS": "Sundays",
-    "COPYRIGHT": "© 2026 Illo, Un Campero · All rights reserved"
+    "COPYRIGHT": "© 2026 Illo, Un Campero · All rights reserved",
+    "LINK_CONTACTO": "Contact",
+    "LINK_PRIVACIDAD": "Privacy",
+    "LINK_AVISO_LEGAL": "Legal notice"
   },
   "GESTION": {
     "TITULO": "Product management",
@@ -394,5 +398,86 @@
   },
   "IDIOMA": {
     "CAMBIAR_A": "ES"
+  },
+  "PRODUCTO": {
+    "OFERTA": "Deal"
+  },
+  "CONTACTO_PAGE": {
+    "BREADCRUMB_INICIO": "Home",
+    "BREADCRUMB": "Contact",
+    "EYEBROW": "Customer support",
+    "TITULO": "Contact Illo Un Campero",
+    "LEAD": "We are in Teatinos, Málaga. You can contact us for questions about orders, allergens, delivery areas, issues or restaurant information.",
+    "DATOS_TITULO": "Contact details",
+    "TELEFONO": "Phone:",
+    "EMAIL": "Email:",
+    "DIRECCION": "Address:",
+    "HORARIO_TITULO": "Opening hours",
+    "LUN_VIE": "Monday to Friday: 12:00 - 23:30",
+    "SABADOS": "Saturdays: 12:00 - 00:30",
+    "DOMINGOS": "Sundays: 13:00 - 23:00",
+    "REPARTO_TITULO": "Delivery areas",
+    "REPARTO_DESC": "We deliver to Teatinos, Colonia Santa Inés and around the University of Málaga. If you have doubts about your address, call us before confirming your order.",
+    "VER_CARTA": "View menu and order online"
+  },
+  "PRIVACIDAD_PAGE": {
+    "TITULO": "Privacy Policy and Cookies",
+    "FECHA": "Last updated: May 2026",
+    "S1_T": "1. Data controller",
+    "S1_P": "<strong>Illo, Un Campero</strong> is the controller of the personal data collected through this web application.",
+    "S2_T": "2. Data we collect",
+    "S2_L1": "Name, email address and phone number when you register.",
+    "S2_L2": "Delivery address for each order.",
+    "S2_L3": "Order history and submitted ratings.",
+    "S2_L4": "Device token for push notifications (FCM).",
+    "S3_T": "3. Purpose of processing",
+    "S3_L1": "Manage your account and orders.",
+    "S3_L2": "Send you order confirmations and account-related communications.",
+    "S3_L3": "Send you push notifications about your order status.",
+    "S3_L4": "Process payments securely through Stripe.",
+    "S4_T": "4. Legal basis",
+    "S4_P": "Processing is based on the execution of the purchase contract (Art. 6.1.b GDPR) and user consent for notifications and commercial communications (Art. 6.1.a GDPR).",
+    "S5_T": "5. Third-party services",
+    "S5_L1": "<strong>Firebase (Google LLC):</strong> authentication, database and push notifications. Data transfer to the US under standard contractual clauses.",
+    "S5_L2": "<strong>Stripe Inc.:</strong> payment processing. Stripe does not store card data on our servers.",
+    "S5_L3": "<strong>Render Inc.:</strong> backend server hosting.",
+    "S6_T": "6. Cookies",
+    "S6_P": "This application uses:",
+    "S6_L1": "<strong>Firebase session cookies:</strong> necessary to keep your session active.",
+    "S6_L2": "<strong>localStorage:</strong> to save language preferences and cookie acceptance.",
+    "S6_P2": "We do not use advertising or third-party tracking cookies.",
+    "S7_T": "7. Your rights (GDPR)",
+    "S7_P": "You can exercise the following rights:",
+    "S7_L1": "<strong>Access:</strong> request a copy of your personal data.",
+    "S7_L2": "<strong>Rectification:</strong> correct inaccurate data from your profile.",
+    "S7_L3": "<strong>Erasure:</strong> delete your account and all your data from the profile section.",
+    "S7_L4": "<strong>Portability:</strong> request your data in a structured format.",
+    "S7_L5": "<strong>Objection:</strong> object to processing at any time.",
+    "S7_P2": "To exercise these rights, contact us via the email provided in the application.",
+    "S8_T": "8. Data retention",
+    "S8_P": "Data is retained as long as your account is active. When you delete your account, all personal data is permanently erased.",
+    "S9_T": "9. Minors",
+    "S9_P": "This service is not intended for children under 14 years of age. We do not knowingly collect data from minors."
+  },
+  "LEGAL_PAGE": {
+    "BREADCRUMB_INICIO": "Home",
+    "BREADCRUMB": "Legal notice",
+    "TITULO": "Legal notice",
+    "FECHA": "Last updated: May 2026",
+    "S1_T": "1. Website owner",
+    "S1_P": "This website belongs to <strong>Illo Un Campero</strong>, a Malaga-style campero sandwich restaurant located at Calle Camperos, 21, 29010 Málaga.",
+    "S2_T": "2. Contact details",
+    "S2_L1": "Email:",
+    "S2_L2": "Phone:",
+    "S2_L3": "Area of activity: Teatinos, Málaga and surroundings.",
+    "S3_T": "3. Use of the site",
+    "S3_P": "The website allows you to browse the menu, create an account, place online orders and check order status. Users agree to provide truthful information and to use the service in accordance with the law.",
+    "S4_T": "4. Intellectual property",
+    "S4_P": "Texts, images, logos and graphic elements on this website belong to Illo Un Campero or are used with permission. Reproduction without consent is not allowed.",
+    "S5_T": "5. Liability",
+    "S5_P": "We work to keep information up to date, but prices, product availability and opening hours may change. The valid information for each order will be that shown during the checkout process.",
+    "S6_T": "6. Privacy and cookies",
+    "S6_P": "You can learn how we process personal data in our",
+    "S6_LINK": "privacy policy and cookies"
   }
 }

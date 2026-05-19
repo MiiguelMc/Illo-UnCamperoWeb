@@ -1,6 +1,6 @@
 .cocina-container {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: var(--gris-fondo);
   padding: 1.5rem;
 }
 
@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: var(--card-background);
   padding: 1.5rem 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -19,12 +19,12 @@
 .header-left h1 {
   margin: 0;
   font-size: 2rem;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .subtitulo {
   margin: 0.25rem 0 0 0;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.95rem;
 }
 
@@ -135,7 +135,7 @@
 
 /* Columnas Kanban */
 .kanban-column {
-  background: white;
+  background: var(--card-background);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   min-height: 400px;
@@ -148,13 +148,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 1.5rem;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--border-separator);
 }
 
 .column-header h2 {
   margin: 0;
   font-size: 1.2rem;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .badge {
@@ -180,7 +180,7 @@
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .empty-state p {
@@ -218,7 +218,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  background: white;
+  background: var(--card-background);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);

@@ -154,7 +154,7 @@
     width: 480px;
     max-width: 95vw;
     height: 100vh;
-    background: white;
+    background: var(--card-background);
     z-index: 101;
     box-shadow: -8px 0 32px rgba(0,0,0,0.15);
     overflow-y: auto;
@@ -218,7 +218,7 @@
 .form-group textarea:focus {
     outline: none;
     border-color: #f39200;
-    background: white;
+    background: var(--card-background);
 }
 
 .err { font-size: 0.75rem; color: #e74c3c; }
@@ -231,12 +231,13 @@
 
 .btn-cancel {
     flex: 1; padding: 11px;
-    background: white; border: 1px solid #ddd;
+    background: var(--card-background); border: 1px solid var(--border-color);
     border-radius: 8px; font-weight: 600;
     cursor: pointer; transition: 0.2s;
+    color: var(--text-primary);
 }
 
-.btn-cancel:hover:not(:disabled) { background: #f4f5f7; }
+.btn-cancel:hover:not(:disabled) { background: var(--gris-fondo); }
 
 .btn-save {
     flex: 2; padding: 11px;

@@ -1,51 +1,37 @@
 <main class="legal-page">
   <nav class="breadcrumb" aria-label="Migas de pan">
-    <a routerLink="/restaurantes">Inicio</a>
+    <a routerLink="/restaurantes">{{ 'LEGAL_PAGE.BREADCRUMB_INICIO' | translate }}</a>
     <span aria-hidden="true">/</span>
-    <span>Aviso legal</span>
+    <span>{{ 'LEGAL_PAGE.BREADCRUMB' | translate }}</span>
   </nav>
 
   <article class="legal-card">
-    <h1>Aviso legal</h1>
-    <p class="updated">Última actualización: mayo de 2026</p>
+    <h1>{{ 'LEGAL_PAGE.TITULO' | translate }}</h1>
+    <p class="updated">{{ 'LEGAL_PAGE.FECHA' | translate }}</p>
 
-    <h2>1. Titular del sitio web</h2>
-    <p>
-      Este sitio web pertenece a <strong>Illo Un Campero</strong>, restaurante de camperos
-      malagueños ubicado en Calle Camperos, 21, 29010 Málaga.
-    </p>
+    <h2>{{ 'LEGAL_PAGE.S1_T' | translate }}</h2>
+    <p [innerHTML]="'LEGAL_PAGE.S1_P' | translate"></p>
 
-    <h2>2. Datos de contacto</h2>
+    <h2>{{ 'LEGAL_PAGE.S2_T' | translate }}</h2>
     <ul>
-      <li>Email: <a href="mailto:info@illouncampero.es">info@illouncampero.es</a></li>
-      <li>Teléfono: <a href="tel:+34600000000">600 000 000</a></li>
-      <li>Zona de actividad: Teatinos, Málaga y alrededores.</li>
+      <li>{{ 'LEGAL_PAGE.S2_L1' | translate }} <a href="mailto:info@illouncampero.es">info&#64;illouncampero.es</a></li>
+      <li>{{ 'LEGAL_PAGE.S2_L2' | translate }} <a href="tel:+34600000000">600 000 000</a></li>
+      <li>{{ 'LEGAL_PAGE.S2_L3' | translate }}</li>
     </ul>
 
-    <h2>3. Uso del sitio</h2>
-    <p>
-      La web permite consultar la carta, crear una cuenta, realizar pedidos online y consultar
-      el estado de los pedidos. El usuario se compromete a facilitar datos veraces y a usar el
-      servicio conforme a la ley.
-    </p>
+    <h2>{{ 'LEGAL_PAGE.S3_T' | translate }}</h2>
+    <p>{{ 'LEGAL_PAGE.S3_P' | translate }}</p>
 
-    <h2>4. Propiedad intelectual</h2>
-    <p>
-      Los textos, imágenes, logotipos y elementos gráficos de esta web pertenecen a Illo Un Campero
-      o se utilizan con autorización. No está permitida su reproducción sin consentimiento.
-    </p>
+    <h2>{{ 'LEGAL_PAGE.S4_T' | translate }}</h2>
+    <p>{{ 'LEGAL_PAGE.S4_P' | translate }}</p>
 
-    <h2>5. Responsabilidad</h2>
-    <p>
-      Trabajamos para mantener la información actualizada, pero los precios, disponibilidad de
-      productos y horarios pueden cambiar. La información válida para cada pedido será la mostrada
-      durante el proceso de compra.
-    </p>
+    <h2>{{ 'LEGAL_PAGE.S5_T' | translate }}</h2>
+    <p>{{ 'LEGAL_PAGE.S5_P' | translate }}</p>
 
-    <h2>6. Privacidad y cookies</h2>
+    <h2>{{ 'LEGAL_PAGE.S6_T' | translate }}</h2>
     <p>
-      Puedes consultar cómo tratamos los datos personales en nuestra
-      <a routerLink="/privacidad">política de privacidad y cookies</a>.
+      {{ 'LEGAL_PAGE.S6_P' | translate }}
+      <a routerLink="/privacidad">{{ 'LEGAL_PAGE.S6_LINK' | translate }}</a>.
     </p>
   </article>
 </main>
