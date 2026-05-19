@@ -55,10 +55,11 @@
 }
 
 .card-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 60px 1fr auto auto auto;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.75rem;
+  padding: 0.85rem;
   background: var(--card-background);
   border-radius: var(--radius-card-sm);
   box-shadow: var(--shadow-micro);
@@ -67,15 +68,15 @@
 .card-item:hover { box-shadow: var(--shadow-card-hover); }
 
 .card-item img {
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border-radius: var(--radius-input);
-  flex-shrink: 0;
 }
 
 .detalles {
-  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .detalles h3 {
@@ -206,4 +207,22 @@
 @media (max-width: 768px) {
   .carrito-contenido { grid-template-columns: 1fr; }
   .resumen-pago { position: static; }
+  .card-item {
+    grid-template-columns: 50px 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.5rem;
+  }
+  .card-item img {
+    width: 50px;
+    height: 50px;
+    grid-row: span 2;
+  }
+  .detalles { grid-column: 2 / -1; }
+  .controles { grid-column: 2; }
+  .subtotal { justify-self: end; }
+  .btn-borrar {
+    grid-row: 1;
+    grid-column: 3;
+    justify-self: end;
+  }
 }

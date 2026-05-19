@@ -5,7 +5,6 @@ export interface Producto {
     precio: number;
     categoria: string;
     subcategoria: string;
-    imagen?: string; 
     imagenUrl?: string; 
     disponible?: boolean;
     esOferta?: boolean;
