@@ -333,3 +333,19 @@
   font-size: 0.82rem;
   margin: 0;
 }
+
+/* === Responsive móvil fino (iPhone 13 = 390px) === */
+@media (max-width: 480px) {
+  .confirmar-pedido-container { padding: 0 0.5rem; margin-top: 1rem; }
+  .header-confirmacion h1 { font-size: 1.4rem; }
+  .resumen-pedido { padding: 1rem; }
+  .datos-entrega { padding: 1rem; }
+  .botones-accion { flex-direction: column; }
+  .btn-cancelar, .btn-confirmar { width: 100%; }
+  .total-pedido { font-size: 1rem; }
+  .monto-total { font-size: 1.15rem; }
+  .cupon-form { flex-direction: column; }
+  .btn-cupon { width: 100%; }
+  .metodo-card { padding: 10px 12px; }
+  .tienda-cerrada { padding: 2rem 1rem; }
+}

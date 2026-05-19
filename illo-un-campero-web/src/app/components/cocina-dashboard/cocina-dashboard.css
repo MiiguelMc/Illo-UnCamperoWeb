@@ -235,6 +235,9 @@
     align-items: flex-start;
   }
   .header-left h1 { font-size: 1.4rem; }
+  .cocina-container { padding: 0.75rem; }
+  .header-right { flex-wrap: wrap; width: 100%; }
+  .btn-refresh, .btn-link { width: 100%; text-align: center; }
 }
 
 .stat {

@@ -146,6 +146,16 @@
 
   .mobile-buttons { display: flex; flex-direction: column; gap: 15px; width: 85%; }
 }
+
+@media (max-width: 420px) {
+  .header-container { padding: 0 12px; }
+  .logo-box img { height: 40px; }
+  .main-header { height: 70px; }
+  .mobile-overlay.open { height: calc(100vh - 70px); padding: 30px 0; }
+  .mobile-overlay { top: 70px; }
+  .mobile-nav a { font-size: 1.3rem; }
+  .mobile-nav li { margin-bottom: 18px; }
+}
 /* Añadir al final de header-user.css y header-login.css */
 .btn-idioma {
   background: transparent;

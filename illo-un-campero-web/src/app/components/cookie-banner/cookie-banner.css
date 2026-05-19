@@ -62,4 +62,6 @@
     .btn-aceptar {
         width: 100%;
     }
+    .cookie-banner { padding: 12px 14px; }
+    .cookie-content p { font-size: 13px; min-width: unset; }
 }

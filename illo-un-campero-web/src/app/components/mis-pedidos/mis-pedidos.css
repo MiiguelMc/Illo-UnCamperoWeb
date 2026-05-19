@@ -334,3 +334,24 @@
 }
 .modal-exito h3 { color: #1a1a1a; margin: 0 0 0.5rem; }
 .modal-exito p { color: #666; margin: 0; }
+
+/* === Responsive móvil fino (iPhone 13 = 390px) === */
+@media (max-width: 480px) {
+  .mis-pedidos-container { padding: 0 0.5rem; margin-top: 1rem; }
+  .header-pedidos h1 { font-size: 1.5rem; }
+  .pedido-header { padding: 1rem; }
+  .pedido-items { padding: 1rem; }
+  .pedido-footer { padding: 1rem; gap: 1rem; }
+  .info-basica h3 { font-size: 1rem; }
+  .botones-pedido { width: 100%; }
+  .btn-seguimiento, .btn-valorar, .btn-repetir, .btn-cancelar {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+  }
+  .total-pedido .monto { font-size: 1.2rem; }
+  .modal-card { padding: 1.25rem; max-width: 95vw; }
+  .modal-acciones { flex-direction: column; }
+  .btn-omitir, .btn-enviar-valoracion { width: 100%; text-align: center; }
+  .sin-pedidos { padding: 2rem 1rem; }
+}

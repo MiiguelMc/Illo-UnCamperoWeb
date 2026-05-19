@@ -107,4 +107,8 @@
   .footer-container {
     grid-template-columns: 1fr;
   }
+  .main-footer { padding: var(--space-8) 0 var(--space-5); }
+  .footer-container { padding: 0 var(--space-4); gap: var(--space-5); }
+  .footer-logo { height: 44px; }
+  .footer-bottom { margin-top: 30px; }
 }

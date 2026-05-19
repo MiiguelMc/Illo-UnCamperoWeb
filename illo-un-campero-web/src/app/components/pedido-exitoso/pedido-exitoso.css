@@ -163,5 +163,9 @@
   .btn-primario,
   .btn-secundario {
     width: 100%;
+    min-width: unset;
   }
+
+  .pedido-exitoso-container { padding: 1rem 0.75rem; }
+  .icon-success { width: 72px; height: 72px; font-size: 2.2rem; }
 }

@@ -203,10 +203,25 @@
     .hero-inner { padding: 0 30px; }
     .steps-grid, .reviews-grid, .info-grid { grid-template-columns: 1fr; height: auto; }
     .hero-bg { background-position: 80% center; }
+    .hero-cta { flex-direction: column; gap: 10px; }
+    .btn-pedir, .btn-secundario { text-align: center; justify-content: center; }
+    .hero-trust-bar { flex-wrap: wrap; gap: 8px; }
 }
 
 @media (max-width: 480px) {
     .hero h1 { font-size: 1.8rem; }
     .hero-inner { padding: 0 16px; }
-    .pack-card { min-width: min(300px, 85vw); }
+    .hero-desc { font-size: 0.95rem; }
+    .btn-pedir { padding: 14px 24px; font-size: 0.95rem; }
+    .btn-secundario { padding: 14px 20px; font-size: 0.95rem; }
+    .pack-card { min-width: min(300px, 85vw); padding: 20px; }
+    .oferta-card { min-width: min(280px, 85vw); }
+    .section-header h2 { font-size: 1.5rem; }
+    .seo-content h2 { font-size: 1.4rem; }
+    .step-card { padding: 24px 16px; }
+    .review-bubble { padding: 20px; }
+    .review-bubble p { font-size: 0.95rem; }
+    .aviso-cerrado { flex-direction: column; text-align: center; padding: 14px; gap: 10px; }
+    .container-centrado { padding: 0 12px; }
+    .badge-promo { font-size: 0.72rem; padding: 6px 12px; }
 }

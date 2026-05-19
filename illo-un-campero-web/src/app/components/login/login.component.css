@@ -120,3 +120,11 @@ input:focus {
 }
 
 .link:hover { text-decoration: underline; }
+
+/* === Responsive móvil === */
+@media (max-width: 480px) {
+    .login-screen { padding: 16px 12px; }
+    .login-box { padding: 28px 20px; }
+    h1 { font-size: 1.3rem; }
+    .btn-login { padding: 14px; }
+}

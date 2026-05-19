@@ -303,3 +303,15 @@
   transition: 0.2s;
 }
 .btn-idioma-mobile:hover { background: var(--gris-fondo); }
+
+/* === Responsive fino para iPhone 13 (390px) === */
+@media (max-width: 420px) {
+  .main-header { height: 70px; }
+  .header-container { padding: 0 12px; gap: 8px; }
+  .logo-box img { height: 40px; }
+  .cart-pill { padding: 7px 14px; gap: 6px; }
+  .cart-amount { font-size: 0.85rem; }
+  .user-pill { padding: 6px 12px; gap: 8px; }
+  .user-name { font-size: 0.82rem; }
+  .user-initial { width: 24px; height: 24px; font-size: 0.75rem; }
+}

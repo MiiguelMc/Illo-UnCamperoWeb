@@ -162,3 +162,14 @@ h1 {
 
 .exito-card h2 { color: #27ae60; font-size: 1.3rem; margin-bottom: 8px; }
 .exito-card p { color: #888; font-size: 0.9rem; }
+
+/* === Responsive móvil === */
+@media (max-width: 480px) {
+    .valorar-wrapper { padding: 20px 12px; }
+    .valorar-card, .exito-card { padding: 32px 20px; }
+    .exito-card { padding: 40px 20px; }
+    .estrella { font-size: 2.2rem; }
+    h1 { font-size: 1.25rem; }
+    .acciones { flex-direction: column; }
+    .btn-omitir, .btn-enviar { flex: unset; width: 100%; }
+}

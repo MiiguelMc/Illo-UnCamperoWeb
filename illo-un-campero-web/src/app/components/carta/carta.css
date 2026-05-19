@@ -276,4 +276,21 @@
     .productos-grid { grid-template-columns: 1fr; gap: 15px; }
     .carta-container { padding: 20px 15px; }
     .modal-hero-slim { height: 180px; }
+    .modal-content-slim { max-width: 95vw; border-radius: 20px; }
+    .modal-overlay { padding: 10px; }
+}
+
+@media (max-width: 420px) {
+    .carta-hero { height: 160px; }
+    .hero-overlay h1 { font-size: 1.6rem; }
+    .carta-intro h2 { font-size: 1.15rem; }
+    .carta-intro { padding: 24px 12px 8px; }
+    .titulo-categoria { font-size: 1.35rem; }
+    .carta-container { padding: 16px 10px; }
+    .nav-container button { padding: 7px 14px; font-size: 0.85rem; }
+    .modal-body-slim { padding: 18px 18px 8px; }
+    .modal-footer-slim { padding: 12px 18px 24px; }
+    .product-title-slim { font-size: 1.2rem; }
+    .modal-hero-slim { height: 150px; }
+    .search-container input { padding: 12px 40px 12px 18px; }
 }

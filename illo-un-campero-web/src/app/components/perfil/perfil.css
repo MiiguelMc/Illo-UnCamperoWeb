@@ -295,3 +295,18 @@
   .perfil-tabs { width: 100%; }
   .perfil-tabs button { flex: 1; font-size: 0.82rem; padding: 10px 8px; }
 }
+
+@media (max-width: 420px) {
+  .perfil-wrapper { padding: 20px 8px; }
+  .perfil-card { padding: 20px 12px; }
+  .perfil-card h1 { font-size: 1.25rem; }
+  .admin-content { padding: 16px 10px; }
+  .top-item { grid-template-columns: 24px 1fr 50px; }
+  .top-barra-wrap { display: none; }
+  .cambiar-estado { padding: 10px 12px; }
+  .estado-botones { gap: 4px; }
+  .btn-estado { padding: 5px 8px; font-size: 0.72rem; }
+  .confirmar-acciones { flex-direction: column; }
+  .stats-filtro { flex-direction: column; align-items: stretch; }
+  .cupon-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

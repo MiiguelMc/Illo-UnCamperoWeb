@@ -309,4 +309,9 @@
     .paso-label { font-size: 0.65rem; }
     .paso-circulo { width: 28px; height: 28px; }
     .barra-linea { top: 14px; }
+    .seguimiento-wrapper { padding: 20px 10px; }
+    .seguimiento-header h1 { font-size: 1.2rem; }
+    .valorar-section { padding: 20px 16px; }
+    .cancelado-box { padding: 32px 16px; }
+    .cancelado-box h2 { font-size: 1.1rem; }
 }
