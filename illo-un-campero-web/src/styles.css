@@ -137,10 +137,11 @@ html {
     font-size: 16px !important;
   }
 
-  /* Tap targets mínimos de 44px para accesibilidad */
-  button, a, [role="button"] {
+  /* Tap targets mínimos de 44px para accesibilidad (solo botones de acción, no nav) */
+  .btn-login, .btn-register, .btn-confirmar, .btn-cancelar,
+  .btn-volver, .btn-pedir, .btn-seguimiento, .btn-valorar,
+  .btn-repetir, .btn-enviar, .btn-omitir, .btn-aceptar {
     min-height: 44px;
-    min-width: 44px;
   }
 
   /* Mejor scroll en contenedores */
