@@ -64,7 +64,7 @@
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: url("/assets/Foto-Banner.webp") center/cover;
+    background: url("https://res.cloudinary.com/dp9u7piam/image/upload/v1779177109/Foto-Banner_kdxd67.png") center/cover;
     transition: transform 0.5s ease;
 }
 .hero:hover .hero-bg { transform: scale(1.05); }

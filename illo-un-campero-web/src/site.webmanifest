@@ -10,9 +10,9 @@
   "theme_color": "#F39200",
   "icons": [
     {
-      "src": "assets/LogoFondoBlanco.webp",
+      "src": "https://res.cloudinary.com/dp9u7piam/image/upload/v1779177111/LogoFondoBlanco_lufdqm.png",
       "sizes": "512x512",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
     }
   ]

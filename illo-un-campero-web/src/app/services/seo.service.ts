@@ -19,7 +19,7 @@ const DEFAULT_SEO: SeoData = {
   description:
     'Pide camperos malagueños, entrantes, bebidas y postres en Teatinos, Málaga. Carta online de Illo Un Campero, entrega rápida y seguimiento del pedido.',
   path: '/restaurantes',
-  image: '/assets/LogoFondoBlanco.webp',
+  image: 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177111/LogoFondoBlanco_lufdqm.png',
   robots: 'index, follow, max-image-preview:large',
   keywords:
     'camperos Teatinos, campero malagueño, comida a domicilio Málaga, Illo Un Campero, carta camperos',
@@ -55,7 +55,8 @@ export class SeoService {
 
   private apply(seo: SeoData): void {
     const canonicalUrl = `${this.siteUrl}${seo.path}`;
-    const imageUrl = `${this.siteUrl}${seo.image ?? DEFAULT_SEO.image}`;
+    const img = seo.image ?? DEFAULT_SEO.image!;
+    const imageUrl = img.startsWith('http') ? img : `${this.siteUrl}${img}`;
 
     this.title.setTitle(seo.title);
     this.meta.updateTag({ name: 'description', content: seo.description });
@@ -89,7 +90,7 @@ export class SeoService {
       '@id': `${this.siteUrl}/#organization`,
       name: 'Illo Un Campero',
       url: this.siteUrl,
-      logo: `${this.siteUrl}/assets/LogoHeader.webp`,
+      logo: 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/LogoHeader_basmhq.webp',
       email: 'info@illouncampero.es',
       telephone: '+34600000000',
       sameAs: ['https://instagram.com', 'https://tiktok.com'],
@@ -111,8 +112,8 @@ export class SeoService {
       '@id': `${this.siteUrl}/#restaurant`,
       name: 'Illo Un Campero',
       url: this.siteUrl,
-      image: `${this.siteUrl}/assets/LogoFondoBlanco.webp`,
-      logo: `${this.siteUrl}/assets/LogoHeader.webp`,
+      image: 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177111/LogoFondoBlanco_lufdqm.png',
+      logo: 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/LogoHeader_basmhq.webp',
       description:
         'Restaurante de camperos malagueños a domicilio en Teatinos, Málaga, con carta online, entrantes, bebidas y postres.',
       servesCuisine: ['Camperos malagueños', 'Bocadillos', 'Comida rápida'],

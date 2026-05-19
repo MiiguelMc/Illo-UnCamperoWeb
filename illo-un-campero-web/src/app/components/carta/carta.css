@@ -21,7 +21,7 @@
 
 /* HERO HEADER */
 .carta-hero {
-    background-image: url('/assets/Foto-Banner.webp');
+    background-image: url('https://res.cloudinary.com/dp9u7piam/image/upload/v1779177109/Foto-Banner_kdxd67.png');
     background-size: cover;
     background-position: center;
     height: 300px;

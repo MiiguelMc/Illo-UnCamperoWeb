@@ -24,13 +24,13 @@
 
   <div class="img-container">
     <img
-      [src]="producto.imagen || producto.imagenUrl || 'assets/placeholder-food.webp'"
+      [src]="producto.imagen || producto.imagenUrl || 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177108/placeholder-food_dbwlzf.webp'"
       [alt]="producto.nombre + ' de Illo Un Campero'"
       width="320"
       height="220"
       loading="lazy"
       decoding="async"
-      (error)="$event.target.src='assets/placeholder-food.webp'"
+      (error)="$event.target.src='https://res.cloudinary.com/dp9u7piam/image/upload/v1779177108/placeholder-food_dbwlzf.webp'"
     >
   </div>
 </div>

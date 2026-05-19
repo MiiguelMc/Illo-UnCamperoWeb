@@ -13,7 +13,7 @@
             <h2>{{ 'CONF.RESUMEN' | translate }}</h2>
             <div class="items-lista">
                 <div class="item-resumen" *ngFor="let item of items()">
-                    <img [src]="item.producto.imagen || item.producto.imagenUrl || 'assets/no-image.webp'" [alt]="item.producto.nombre" (error)="$event.target.src='assets/no-image.webp'">
+                    <img [src]="item.producto.imagen || item.producto.imagenUrl || 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/no-image_kz4f3m.webp'" [alt]="item.producto.nombre" (error)="$event.target.src='https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/no-image_kz4f3m.webp'">
                     <div class="item-info">
                         <h3>{{ item.producto.nombre }}</h3>
                         <p>{{ item.cantidad }}x {{ item.producto.precio | number:'1.2-2' }}€</p>

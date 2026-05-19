@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="header-left">
       <a routerLink="/restaurantes" class="logo-box" (click)="menuMovilAbierto = false">
-        <img src="assets/LogoHeader.webp" width="202" height="52" alt="Illo Un Campero">
+        <img src="https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/LogoHeader_basmhq.webp" width="202" height="52" alt="Illo Un Campero">
       </a>
     </div>
     <div class="header-center desktop-only">
@@ -32,7 +32,7 @@
           </div>
         </div>
         <a class="cart-pill" routerLink="/carrito" (click)="menuMovilAbierto = false">
-          <img src="assets/carro.webp" class="cart-img" width="32" height="32" alt="Carrito">
+          <img src="https://res.cloudinary.com/dp9u7piam/image/upload/v1779177108/carro_lf8obr.webp" class="cart-img" width="32" height="32" alt="Carrito">
           <span class="cart-amount">{{ carritoService.totalPrecio() | number:'1.2-2' }}€</span>
         </a>
         <button class="hamburger-btn mobile-only" type="button" aria-label="Abrir menú de navegación" [attr.aria-expanded]="menuMovilAbierto" (click)="toggleMobileMenu()" [class.active]="menuMovilAbierto">
