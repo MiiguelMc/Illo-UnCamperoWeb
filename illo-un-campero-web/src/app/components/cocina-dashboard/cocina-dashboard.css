@@ -228,6 +228,13 @@
   .resumen-footer {
     grid-template-columns: repeat(2, 1fr);
   }
+  .cocina-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: flex-start;
+  }
+  .header-left h1 { font-size: 1.4rem; }
 }
 
 .stat {

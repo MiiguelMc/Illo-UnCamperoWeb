@@ -204,3 +204,9 @@
     .steps-grid, .reviews-grid, .info-grid { grid-template-columns: 1fr; height: auto; }
     .hero-bg { background-position: 80% center; }
 }
+
+@media (max-width: 480px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero-inner { padding: 0 16px; }
+    .pack-card { min-width: min(300px, 85vw); }
+}

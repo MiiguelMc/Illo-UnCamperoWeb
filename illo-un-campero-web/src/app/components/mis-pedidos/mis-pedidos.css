@@ -228,6 +228,7 @@
   .total-y-acciones { width: 100%; align-items: flex-start; }
   .botones-pedido { justify-content: flex-start; }
   .header-pedidos { flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .pedido-header { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
 }
 
 /* ---- Modal de valoración ---- */

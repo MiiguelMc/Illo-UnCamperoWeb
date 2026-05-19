@@ -255,3 +255,25 @@
 }
 
 .btn-add-slim:hover { transform: translateY(-2px); background: #e68a00; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .carta-hero { height: 200px; }
+    .hero-overlay h1 { font-size: 2rem; }
+    .carta-intro h2 { font-size: 1.3rem; }
+    .titulo-categoria { font-size: 1.6rem; }
+    .titulo-subcategoria { font-size: 1.2rem; }
+    .nav-container {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 15px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .nav-container button {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .productos-grid { grid-template-columns: 1fr; gap: 15px; }
+    .carta-container { padding: 20px 15px; }
+    .modal-hero-slim { height: 180px; }
+}
