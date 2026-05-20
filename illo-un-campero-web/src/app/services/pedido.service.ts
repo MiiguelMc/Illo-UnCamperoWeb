@@ -31,18 +31,12 @@ export class PedidoService {
     return this.http.get<Pedido[]>(`${this.API_URL}/activos`);
   }
 
-  obtenerEstadisticasHoy(): Observable<{ totalDinero: number; totalPedidos: number }> {
-    return this.http.get<{ totalDinero: number; totalPedidos: number }>(
-      `${this.API_URL}/estadisticas/hoy`
-    );
-  }
-
-  obtenerEstadisticasResumen(desde?: number, hasta?: number): Observable<{ totalDinero: number; totalPedidos: number }> {
+  obtenerEstadisticasHoy(desde?: number, hasta?: number): Observable<{ totalDinero: number; totalPedidos: number }> {
     let params = '';
     if (desde) params += `?desde=${desde}`;
     if (hasta) params += `${params ? '&' : '?'}hasta=${hasta}`;
     return this.http.get<{ totalDinero: number; totalPedidos: number }>(
-      `${this.API_URL}/estadisticas/resumen${params}`
+      `${this.API_URL}/estadisticas/hoy${params}`
     );
   }
 

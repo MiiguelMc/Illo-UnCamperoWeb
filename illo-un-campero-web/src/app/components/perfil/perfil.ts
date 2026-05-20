@@ -140,7 +140,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
         const desde = this.filtroDesde ? new Date(this.filtroDesde).setHours(0, 0, 0, 0) : undefined;
         const hasta = this.filtroHasta ? new Date(this.filtroHasta).setHours(23, 59, 59, 999) : undefined;
 
-        this.pedidoService.obtenerEstadisticasResumen(desde, hasta).subscribe({
+        this.pedidoService.obtenerEstadisticasHoy(desde, hasta).subscribe({
             next: (datos) => this.estadisticas.set(datos),
             error: () => this.estadisticas.set(null)
         });
