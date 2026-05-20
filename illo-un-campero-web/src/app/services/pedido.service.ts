@@ -37,6 +37,15 @@ export class PedidoService {
     );
   }
 
+  obtenerEstadisticasResumen(desde?: number, hasta?: number): Observable<{ totalDinero: number; totalPedidos: number }> {
+    let params = '';
+    if (desde) params += `?desde=${desde}`;
+    if (hasta) params += `${params ? '&' : '?'}hasta=${hasta}`;
+    return this.http.get<{ totalDinero: number; totalPedidos: number }>(
+      `${this.API_URL}/estadisticas/resumen${params}`
+    );
+  }
+
   obtenerTodosPedidosAdmin(desde?: number, hasta?: number): Observable<Pedido[]> {
     let params = '';
     if (desde) params += `?desde=${desde}`;
