@@ -1,12 +1,13 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, interval } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
-export class TiendaService {
+export class TiendaService implements OnDestroy {
   private http = inject(HttpClient);
   private API_URL = `${environment.apiUrl}/tienda`;
+  private pollSub?: Subscription;
 
   tiendaAbierta = signal<boolean>(true);
   cargando = signal<boolean>(true);
@@ -24,7 +25,22 @@ export class TiendaService {
     });
   }
 
+  /** Inicia polling cada 60s para mantener el estado sincronizado */
+  iniciarPolling() {
+    this.detenerPolling();
+    this.pollSub = interval(60000).subscribe(() => this.cargarEstado());
+  }
+
+  detenerPolling() {
+    this.pollSub?.unsubscribe();
+    this.pollSub = undefined;
+  }
+
   cambiarEstado(abierta: boolean): Observable<{ abierta: boolean }> {
     return this.http.patch<{ abierta: boolean }>(`${this.API_URL}/estado`, { abierta });
+  }
+
+  ngOnDestroy() {
+    this.detenerPolling();
   }
 }

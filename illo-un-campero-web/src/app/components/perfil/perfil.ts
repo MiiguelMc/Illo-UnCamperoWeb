@@ -236,10 +236,14 @@ export class PerfilComponent implements OnInit, OnDestroy {
             const datosActualizados: Usuario = { ...this.usuario, ...this.profileForm.getRawValue() };
             this.authService.updateUserData(this.usuario.uid, datosActualizados).subscribe({
                 next: () => {
+                    this.usuario = datosActualizados;
                     this.mensaje = 'Perfil actualizado correctamente.';
                     setTimeout(() => this.mensaje = '', 3000);
                 },
-                error: () => { this.mensajeError = 'Error al guardar los cambios.'; }
+                error: (err) => {
+                    const msg = typeof err?.error === 'string' ? err.error : err?.error?.message;
+                    this.mensajeError = msg || 'Error al guardar los cambios.';
+                }
             });
         } else {
             this.mensajeError = 'Revisa los campos del formulario.';

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Pedido, CrearPedidoDTO, EstadoPedido } from '../../model/pedido.model';
 import { CarritoService } from './carrito.service';
 import { Producto } from '../../model/producto.model';
@@ -16,7 +17,8 @@ export class PedidoService {
   private API_URL = `${environment.apiUrl}/pedidos`;
 
   crearPedido(pedidoDTO: CrearPedidoDTO): Observable<string> {
-    return this.http.post(`${this.API_URL}/realizar-pedido`, pedidoDTO, { responseType: 'text' });
+    return this.http.post<{ id: string }>(`${this.API_URL}/realizar-pedido`, pedidoDTO)
+      .pipe(map(res => res.id));
   }
 
   obtenerPedidosUsuario(): Observable<Pedido[]> {
@@ -62,7 +64,7 @@ export class PedidoService {
   }
 
   cancelarPedido(id: string): Observable<string> {
-    return this.actualizarEstadoPedido(id, 'CANCELADO');
+    return this.http.post(`${this.API_URL}/${id}/cancelar`, {}, { responseType: 'text' });
   }
 
   repetirPedido(pedido: Pedido): void {

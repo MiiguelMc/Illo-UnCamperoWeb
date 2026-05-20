@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -28,7 +28,7 @@ type PackDef = {
   templateUrl: './restaurantes.html',
   styleUrls: ['./restaurantes.css']
 })
-export class RestauranteComponent implements OnInit {
+export class RestauranteComponent implements OnInit, OnDestroy {
   private productoService = inject(ProductoService);
   private carritoService = inject(CarritoService);
   private authService = inject(AuthService);
@@ -78,6 +78,8 @@ export class RestauranteComponent implements OnInit {
   ];
 
   ngOnInit() {
+    this.tienda.cargarEstado();
+    this.tienda.iniciarPolling();
     this.productoService.obtenerProductos().subscribe({
       next: (productos) => {
         const disponibles = productos.filter(p => p?.disponible !== false);
@@ -159,5 +161,9 @@ export class RestauranteComponent implements OnInit {
   private includesAny(p: Producto, keywords: string[]): boolean {
     const text = `${p?.nombre || ''} ${p?.descripcion || ''} ${p?.subcategoria || ''}`.toLowerCase();
     return keywords.some(k => text.includes(k));
+  }
+
+  ngOnDestroy() {
+    this.tienda.detenerPolling();
   }
 }

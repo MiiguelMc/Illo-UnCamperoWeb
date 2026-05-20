@@ -291,6 +291,7 @@
     "VER_MENU": "View Menu",
     "PEDIR_AHORA": "Order now",
     "CERRADO_AVISO": "We're closed right now. Come back later or browse the menu.",
+    "CERRADO_DESC": "You can browse our menu in the meantime.",
     "CHIP_MENU": "Full menu",
     "CHIP_PACKS": "Packs",
     "CHIP_OFERTAS": "Deals",
