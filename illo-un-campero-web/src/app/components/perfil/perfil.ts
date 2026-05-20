@@ -140,10 +140,27 @@ export class PerfilComponent implements OnInit, OnDestroy {
         const desde = this.filtroDesde ? new Date(this.filtroDesde).setHours(0, 0, 0, 0) : undefined;
         const hasta = this.filtroHasta ? new Date(this.filtroHasta).setHours(23, 59, 59, 999) : undefined;
 
-        this.pedidoService.obtenerEstadisticasHoy(desde, hasta).subscribe({
-            next: (datos) => this.estadisticas.set(datos),
-            error: () => this.estadisticas.set(null)
-        });
+        if (desde || hasta) {
+            this.pedidoService.obtenerTodosPedidosAdmin(desde, hasta).subscribe({
+                next: (pedidos) => {
+                    let totalDinero = 0;
+                    let totalPedidos = 0;
+                    for (const p of pedidos) {
+                        if (p.estado !== 'CANCELADO') {
+                            totalDinero += p.total;
+                            totalPedidos++;
+                        }
+                    }
+                    this.estadisticas.set({ totalDinero, totalPedidos });
+                },
+                error: () => this.estadisticas.set(null)
+            });
+        } else {
+            this.pedidoService.obtenerEstadisticasHoy().subscribe({
+                next: (datos) => this.estadisticas.set(datos),
+                error: () => this.estadisticas.set(null)
+            });
+        }
 
         this.pedidoService.obtenerTopProductos(desde, hasta).subscribe({
             next: (lista) => this.topProductos.set(lista),
