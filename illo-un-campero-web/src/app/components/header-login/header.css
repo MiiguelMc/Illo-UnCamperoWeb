@@ -89,29 +89,33 @@
 }
 
 /* BOTONES PC */
-.actions-wrapper { display: flex; gap: 12px; }
+.actions-wrapper { display: flex; align-items: center; gap: 10px; }
 
 .btn-login {
   background: var(--negro-illo);
   color: white;
   border: none;
-  padding: 11px 24px;
+  padding: 9px 20px;
   border-radius: var(--radius-pill);
   font-weight: 700;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: 0.3s;
+  font-family: inherit;
 }
 
 .btn-register {
   background: var(--card-background);
   color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  padding: 11px 24px;
+  border: 1.5px solid var(--border-color);
+  padding: 9px 20px;
   border-radius: var(--radius-pill);
   font-weight: 700;
+  font-size: 0.85rem;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   transition: 0.3s;
+  font-family: inherit;
 }
 
 .btn-login:hover, .btn-register:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -164,34 +168,22 @@
   .mobile-nav li { margin-bottom: 18px; }
   .hamburger-btn { font-size: 1.8rem; padding: 8px; }
 }
-/* Añadir al final de header-user.css y header-login.css */
-.btn-idioma {
-  background: transparent;
-  border: 1.5px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: 0.2s;
-  font-family: inherit;
-}
-.btn-idioma:hover { background: var(--naranja-tint); border-color: var(--naranja-illo); }
+/* Botones idioma y tema */
+.btn-idioma,
 .btn-theme {
   background: transparent;
   border: 1.5px solid var(--border-color);
   color: var(--text-primary);
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.78rem;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   transition: 0.2s;
   font-family: inherit;
 }
+.btn-idioma:hover,
 .btn-theme:hover { background: var(--naranja-tint); border-color: var(--naranja-illo); }
 .btn-idioma-mobile {
   background: var(--card-background);
