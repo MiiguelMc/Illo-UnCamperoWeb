@@ -25,7 +25,7 @@ try {
 const content = `export const environment = {
   apiUrl: 'https://illo-uncamperobackend.onrender.com/api',
   siteUrl: 'https://illo-uncampero.web.app',
-  stripePublishableKey: '${stripeKey}',
+  stripePublishableKey: ${JSON.stringify(stripeKey)},
   firebase: ${JSON.stringify(firebase, null, 2)}
 };
 `;
