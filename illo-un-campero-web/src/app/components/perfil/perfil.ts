@@ -75,7 +75,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
             nombre: ['', [Validators.required, Validators.minLength(3)]],
             email: [{ value: '', disabled: true }],
             telefono: ['', [Validators.required, Validators.pattern(/^[6-9]\d{8}$/)]],
-            direccion: ['', [Validators.required]]
+            direccion: ['']
         });
     }
 
