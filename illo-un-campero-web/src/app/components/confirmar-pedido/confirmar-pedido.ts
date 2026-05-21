@@ -244,6 +244,12 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
                 this.cargando.set(false);
                 return;
             }
+            // 3. Confirmar el pago en el backend (cambia PENDIENTE_PAGO → PENDIENTE)
+            try {
+                await firstValueFrom(this.pedidoService.confirmarPago(pedidoId));
+            } catch {
+                // El webhook de Stripe también lo hará, no bloqueamos al usuario
+            }
         }
 
         this.carritoService.vaciar();

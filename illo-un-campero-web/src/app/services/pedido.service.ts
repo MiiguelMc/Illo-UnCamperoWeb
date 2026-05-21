@@ -67,6 +67,10 @@ export class PedidoService {
     return this.http.post(`${this.API_URL}/${id}/cancelar`, {}, { responseType: 'text' });
   }
 
+  confirmarPago(id: string): Observable<string> {
+    return this.http.post(`${this.API_URL}/${id}/confirmar-pago`, {}, { responseType: 'text' });
+  }
+
   repetirPedido(pedido: Pedido): void {
     this.carritoService.vaciar();
     pedido.productos.forEach(item => {
