@@ -284,7 +284,8 @@ export class ConfirmarPedidoComponent implements OnInit, OnDestroy {
             }
 
             return true;
-        } catch {
+        } catch (err: any) {
+            console.error('Error Stripe/crear-intent:', err?.status, err?.error || err);
             this.error.set('Error al conectar con el sistema de pago. Inténtalo de nuevo.');
             return false;
         }
