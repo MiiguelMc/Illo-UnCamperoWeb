@@ -1,0 +1,129 @@
+<div class="confirmar-pedido-container">
+    <div class="header-confirmacion">
+        <button class="btn-volver" (click)="volver()">{{ 'CONF.VOLVER' | translate }}</button>
+        <h1>{{ 'CONF.TITULO' | translate }}</h1>
+    </div>
+    <div class="tienda-cerrada" *ngIf="!tiendaAbierta()">
+        <h2>{{ 'CONF.CERRADO_TITULO' | translate }}</h2>
+        <p>{{ 'CONF.CERRADO_DESC' | translate }}</p>
+        <button routerLink="/carta">{{ 'CONF.VER_CARTA' | translate }}</button>
+    </div>
+    <div class="contenido-confirmacion" *ngIf="tiendaAbierta()">
+        <div class="resumen-pedido">
+            <h2>{{ 'CONF.RESUMEN' | translate }}</h2>
+            <div class="items-lista">
+                <div class="item-resumen" *ngFor="let item of items()">
+                    <img [src]="item.producto.imagenUrl || 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/no-image_kz4f3m.webp'" [alt]="item.producto.nombre" (error)="$event.target.src='https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/no-image_kz4f3m.webp'">
+                    <div class="item-info">
+                        <h3>{{ item.producto.nombre }}</h3>
+                        <p>{{ item.cantidad }}x {{ item.producto.precio | number:'1.2-2' }}€</p>
+                    </div>
+                    <div class="item-subtotal">{{ (item.producto.precio * item.cantidad) | number:'1.2-2' }}€</div>
+                </div>
+            </div>
+            <div class="cupon-section">
+                <div class="cupon-aplicado" *ngIf="cuponAplicado()?.valido">
+                    <span class="cupon-tag">{{ cuponAplicado()!.codigo }} — {{ cuponAplicado()!.descuento }}%</span>
+                    <button class="btn-quitar-cupon" (click)="quitarCupon()">✕</button>
+                </div>
+                <div class="cupon-form" *ngIf="!cuponAplicado()?.valido">
+                    <input type="text" [(ngModel)]="codigoCupon" [placeholder]="'CONF.CUPON_PLACEHOLDER' | translate"
+                        [disabled]="validandoCupon()" (keydown.enter)="aplicarCupon()">
+                    <button class="btn-cupon" (click)="aplicarCupon()" [disabled]="validandoCupon() || !codigoCupon.trim()">
+                        {{ validandoCupon() ? '...' : ('CONF.APLICAR' | translate) }}
+                    </button>
+                </div>
+                <p class="error-cupon" *ngIf="errorCupon()">{{ errorCupon() }}</p>
+            </div>
+            <div class="totales">
+                <div class="linea-total" *ngIf="cuponAplicado()?.valido">
+                    <span>{{ 'CONF.SUBTOTAL' | translate }}</span><span>{{ totalSinDescuento() | number:'1.2-2' }}€</span>
+                </div>
+                <div class="linea-total descuento-linea" *ngIf="cuponAplicado()?.valido">
+                    <span>{{ 'CONF.DESCUENTO' | translate }} ({{ cuponAplicado()!.descuento }}%)</span>
+                    <span>-{{ descuento | number:'1.2-2' }}€</span>
+                </div>
+                <div class="total-pedido">
+                    <span>{{ 'CONF.TOTAL' | translate }}</span>
+                    <span class="monto-total">{{ totalFinal | number:'1.2-2' }}€</span>
+                </div>
+            </div>
+        </div>
+        <div class="datos-entrega">
+            <h2>{{ 'CONF.ENTREGA_TITULO' | translate }}</h2>
+            <div class="alert-error" *ngIf="error()">{{ error() }}</div>
+            <div class="form-confirmacion">
+                <div class="form-group">
+                    <label>{{ 'CONF.DIR_LABEL' | translate }}</label>
+                    <input type="text" [(ngModel)]="direccionEntrega" [placeholder]="'CONF.DIR_PLACEHOLDER' | translate" [disabled]="cargando()">
+                </div>
+                <div class="form-group">
+                    <label>{{ 'CONF.TEL_LABEL' | translate }}</label>
+                    <input type="tel" [(ngModel)]="telefonoContacto" [placeholder]="'CONF.TEL_PLACEHOLDER' | translate" [disabled]="cargando()">
+                </div>
+                <div class="form-group">
+                    <label>{{ 'CONF.PAGO_LABEL' | translate }}</label>
+                    <div class="metodos-pago">
+
+                        <!-- Efectivo -->
+                        <div class="metodo-card" [class.seleccionado]="metodoPago === 'EFECTIVO'"
+                             [class.deshabilitado]="cargando()" (click)="seleccionarMetodo('EFECTIVO')">
+                            <div class="metodo-icono">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                    <rect x="2" y="6" width="20" height="13" rx="2" stroke-linejoin="round"/>
+                                    <circle cx="12" cy="12.5" r="2.5"/>
+                                    <path stroke-linecap="round" d="M6 9.5h.01M18 15.5h.01"/>
+                                </svg>
+                            </div>
+                            <div class="metodo-info">
+                                <span class="metodo-nombre">{{ 'CONF.METODO_EFECTIVO' | translate }}</span>
+                                <span class="metodo-desc">{{ 'CONF.METODO_EFECTIVO_DESC' | translate }}</span>
+                            </div>
+                            <div class="metodo-radio" [class.activo]="metodoPago === 'EFECTIVO'"></div>
+                        </div>
+
+                        <!-- Tarjeta -->
+                        <div class="metodo-card" [class.seleccionado]="metodoPago === 'TARJETA'"
+                             [class.deshabilitado]="cargando()" (click)="seleccionarMetodo('TARJETA')">
+                            <div class="metodo-icono">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                    <rect x="2" y="5" width="20" height="14" rx="2"/>
+                                    <path stroke-linecap="round" d="M2 10h20"/>
+                                    <path stroke-linecap="round" stroke-width="2.5" d="M6 15h4"/>
+                                </svg>
+                            </div>
+                            <div class="metodo-info">
+                                <span class="metodo-nombre">{{ 'CONF.METODO_TARJETA' | translate }}</span>
+                                <span class="metodo-desc">{{ 'CONF.METODO_TARJETA_DESC' | translate }}</span>
+                            </div>
+                            <div class="metodo-radio" [class.activo]="metodoPago === 'TARJETA'"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campo de tarjeta de Stripe (aparece al seleccionar TARJETA) -->
+                <div class="stripe-wrapper" *ngIf="metodoPago === 'TARJETA'">
+                    <div class="stripe-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>{{ 'CONF.PAGO_SEGURO' | translate }}</span>
+                    </div>
+                    <div id="stripe-card-element" class="stripe-card-container"></div>
+                    <p class="stripe-test-info">{{ 'CONF.STRIPE_TEST' | translate }}</p>
+                    <p class="error-stripe" *ngIf="errorStripe()">{{ errorStripe() }}</p>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ 'CONF.NOTAS_LABEL' | translate }}</label>
+                    <textarea [(ngModel)]="notas" rows="3" [placeholder]="'CONF.NOTAS_PLACEHOLDER' | translate" [disabled]="cargando()"></textarea>
+                </div>
+                <div class="botones-accion">
+                    <button class="btn-cancelar" (click)="volver()" [disabled]="cargando()">{{ 'CONF.CANCELAR' | translate }}</button>
+                    <button class="btn-confirmar" (click)="confirmarPedido()"
+                        [disabled]="cargando() || (metodoPago === 'TARJETA' && !stripeListoParaPagar())">
+                        {{ cargando() ? ('CONF.PROCESANDO' | translate) : ('CONF.BTN' | translate) }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

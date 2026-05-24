@@ -1,18 +1,15 @@
-import { Injectable, inject } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, user } from '@angular/fire/auth';
+import { TestBed } from '@angular/core/testing';
+import { AuthService } from './auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthService {
-  private auth = inject(Auth);
-  user$ = user(this.auth);
+describe('AuthService', () => {
+  let service: AuthService;
 
-  login(email: string, pass: string) {
-    return signInWithEmailAndPassword(this.auth, email, pass);
-  }
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(AuthService);
+  });
 
-  logout() {
-    return signOut(this.auth);
-  }
-}
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

@@ -1,0 +1,58 @@
+<div class="cocina-container">
+  <div class="cocina-header">
+    <div class="header-left">
+      <h1>{{ 'COCINA.TITULO' | translate }}</h1>
+      <p class="subtitulo">{{ 'COCINA.SUBTITULO' | translate }}</p>
+    </div>
+    <div class="header-right">
+      <button class="btn-refresh" (click)="refrescarManual()" [disabled]="cargando()">
+        <span *ngIf="!cargando()">{{ 'COCINA.ACTUALIZAR' | translate }}</span>
+        <span *ngIf="cargando()">{{ 'COCINA.CARGANDO' | translate }}</span>
+      </button>
+      <div class="auto-refresh-indicator">
+        <span class="dot-pulse"></span>{{ 'COCINA.AUTO_REFRESH' | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="cargando-inicial" *ngIf="cargando() && pedidosPendientes().length === 0">
+    <div class="spinner"></div><p>{{ 'COCINA.CARGANDO_PEDIDOS' | translate }}</p>
+  </div>
+  <div class="error-mensaje" *ngIf="error()">
+    <p>{{ error() }}</p><button (click)="refrescarManual()">{{ 'COCINA.REINTENTAR' | translate }}</button>
+  </div>
+  <div class="kanban-board" *ngIf="!cargando() || pedidosPendientes().length > 0">
+    <div class="kanban-column pendientes">
+      <div class="column-header"><h2>{{ 'COCINA.PENDIENTES' | translate }}</h2><span class="badge">{{ pedidosPendientes().length }}</span></div>
+      <div class="column-content">
+        <div class="empty-state" *ngIf="pedidosPendientes().length === 0"><p>{{ 'COCINA.VACIO_PENDIENTES' | translate }}</p></div>
+        <app-pedido-card-cocina *ngFor="let pedido of pedidosPendientes()" [pedido]="pedido"
+          [accionTexto]="'COCINA.ACCION_COCINAR' | translate" [accionColor]="'#3498db'"
+          [disabled]="actualizando()" (onAccion)="cambiarEstado(pedido.id!, 'COCINANDO')"></app-pedido-card-cocina>
+      </div>
+    </div>
+    <div class="kanban-column cocinando">
+      <div class="column-header"><h2>{{ 'COCINA.COCINANDO' | translate }}</h2><span class="badge">{{ pedidosCocinando().length }}</span></div>
+      <div class="column-content">
+        <div class="empty-state" *ngIf="pedidosCocinando().length === 0"><p>{{ 'COCINA.VACIO_COCINANDO' | translate }}</p></div>
+        <app-pedido-card-cocina *ngFor="let pedido of pedidosCocinando()" [pedido]="pedido"
+          [accionTexto]="'COCINA.ACCION_ENVIAR' | translate" [accionColor]="'#1abc9c'"
+          [disabled]="actualizando()" (onAccion)="cambiarEstado(pedido.id!, 'REPARTO')"></app-pedido-card-cocina>
+      </div>
+    </div>
+    <div class="kanban-column reparto">
+      <div class="column-header"><h2>{{ 'COCINA.REPARTO' | translate }}</h2><span class="badge">{{ pedidosReparto().length }}</span></div>
+      <div class="column-content">
+        <div class="empty-state" *ngIf="pedidosReparto().length === 0"><p>{{ 'COCINA.VACIO_REPARTO' | translate }}</p></div>
+        <app-pedido-card-cocina *ngFor="let pedido of pedidosReparto()" [pedido]="pedido"
+          [accionTexto]="'COCINA.ACCION_ENTREGADO' | translate" [accionColor]="'#27ae60'"
+          [disabled]="actualizando()" (onAccion)="cambiarEstado(pedido.id!, 'ENTREGADO')"></app-pedido-card-cocina>
+      </div>
+    </div>
+  </div>
+  <div class="resumen-footer">
+    <div class="stat"><span class="numero">{{ pedidosPendientes().length + pedidosCocinando().length + pedidosReparto().length }}</span><span class="label">{{ 'COCINA.PEDIDOS_ACTIVOS' | translate }}</span></div>
+    <div class="stat"><span class="numero">{{ pedidosPendientes().length }}</span><span class="label">{{ 'COCINA.POR_EMPEZAR' | translate }}</span></div>
+    <div class="stat"><span class="numero">{{ pedidosCocinando().length }}</span><span class="label">{{ 'COCINA.EN_COCINA' | translate }}</span></div>
+    <div class="stat"><span class="numero">{{ pedidosReparto().length }}</span><span class="label">{{ 'COCINA.EN_CAMINO' | translate }}</span></div>
+  </div>
+</div>

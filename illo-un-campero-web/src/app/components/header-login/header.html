@@ -1,0 +1,39 @@
+<nav class="main-header">
+  <div class="header-container">
+    <div class="header-left">
+      <a routerLink="/restaurantes" class="logo-box" (click)="menuMovilAbierto = false">
+        <img src="https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/LogoHeader_basmhq.webp" width="202" height="52" alt="Illo Logo">
+      </a>
+    </div>
+    <div class="header-center">
+      <ul class="nav-menu">
+        <li><a routerLink="/restaurantes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'NAV.INICIO' | translate }}</a></li>
+        <li><a routerLink="/carta" routerLinkActive="active">{{ 'NAV.CARTA' | translate }}</a></li>
+        <li><a (click)="comprobarPedido()" class="nav-link-btn">{{ 'NAV.TU_PEDIDO' | translate }}</a></li>
+      </ul>
+    </div>
+    <div class="header-right">
+      <div class="actions-wrapper">
+        <button class="btn-idioma" (click)="cambiarIdioma()">{{ 'IDIOMA.CAMBIAR_A' | translate }}</button>
+        <button class="btn-theme" (click)="toggleTheme()" aria-label="Cambiar tema">{{ isDarkMode ? ('NAV.TEMA_CLARO' | translate) : ('NAV.TEMA_OSCURO' | translate) }}</button>
+        <button class="btn-login" routerLink="/login">{{ 'NAV.INICIAR_SESION' | translate }}</button>
+        <button class="btn-register" routerLink="/registro">{{ 'NAV.REGISTRARSE' | translate }}</button>
+      </div>
+      <button class="hamburger-btn" type="button" aria-label="Abrir menú de navegación" [attr.aria-expanded]="menuMovilAbierto" (click)="toggleMenu()">
+        <span>{{ menuMovilAbierto ? '✕' : '☰' }}</span>
+      </button>
+    </div>
+    <div class="mobile-overlay" [class.open]="menuMovilAbierto">
+      <ul class="mobile-nav">
+        <li><a routerLink="/restaurantes" (click)="toggleMenu()" routerLinkActive="active">{{ 'NAV.INICIO' | translate }}</a></li>
+        <li><a routerLink="/carta" (click)="toggleMenu()" routerLinkActive="active">{{ 'NAV.CARTA' | translate }}</a></li>
+        <li><a (click)="comprobarPedido(); toggleMenu()" class="nav-link-btn">{{ 'NAV.TU_PEDIDO' | translate }}</a></li>
+      </ul>
+      <div class="mobile-buttons">
+        <button class="btn-idioma-mobile" (click)="cambiarIdioma()">{{ idiomaActual === 'es' ? 'English' : 'Español' }}</button>
+        <button class="btn-login" (click)="toggleMenu()" routerLink="/login">{{ 'NAV.INICIAR_SESION' | translate }}</button>
+        <button class="btn-register" (click)="toggleMenu()" routerLink="/registro">{{ 'NAV.REGISTRARSE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</nav>

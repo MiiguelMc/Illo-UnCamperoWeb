@@ -1,0 +1,40 @@
+<main class="trust-page">
+  <nav class="breadcrumb" aria-label="Migas de pan">
+    <a routerLink="/restaurantes">{{ 'CONTACTO_PAGE.BREADCRUMB_INICIO' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span>{{ 'CONTACTO_PAGE.BREADCRUMB' | translate }}</span>
+  </nav>
+
+  <section class="trust-card" aria-labelledby="contacto-title">
+    <span class="eyebrow">{{ 'CONTACTO_PAGE.EYEBROW' | translate }}</span>
+    <h1 id="contacto-title">{{ 'CONTACTO_PAGE.TITULO' | translate }}</h1>
+    <p class="lead">{{ 'CONTACTO_PAGE.LEAD' | translate }}</p>
+
+    <div class="contact-grid">
+      <article>
+        <h2>{{ 'CONTACTO_PAGE.DATOS_TITULO' | translate }}</h2>
+        <ul>
+          <li><strong>{{ 'CONTACTO_PAGE.TELEFONO' | translate }}</strong> <a href="tel:+34600000000">600 000 000</a></li>
+          <li><strong>{{ 'CONTACTO_PAGE.EMAIL' | translate }}</strong> <a href="mailto:info@illouncampero.es">info&#64;illouncampero.es</a></li>
+          <li><strong>{{ 'CONTACTO_PAGE.DIRECCION' | translate }}</strong> Calle Camperos, 21, 29010 Málaga</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>{{ 'CONTACTO_PAGE.HORARIO_TITULO' | translate }}</h2>
+        <ul>
+          <li>{{ 'CONTACTO_PAGE.LUN_VIE' | translate }}</li>
+          <li>{{ 'CONTACTO_PAGE.SABADOS' | translate }}</li>
+          <li>{{ 'CONTACTO_PAGE.DOMINGOS' | translate }}</li>
+        </ul>
+      </article>
+    </div>
+
+    <section aria-labelledby="reparto-title" class="info-block">
+      <h2 id="reparto-title">{{ 'CONTACTO_PAGE.REPARTO_TITULO' | translate }}</h2>
+      <p>{{ 'CONTACTO_PAGE.REPARTO_DESC' | translate }}</p>
+    </section>
+
+    <a class="primary-link" routerLink="/carta">{{ 'CONTACTO_PAGE.VER_CARTA' | translate }}</a>
+  </section>
+</main>

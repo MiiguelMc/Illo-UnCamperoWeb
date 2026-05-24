@@ -1,18 +1,19 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule],
   templateUrl: './registro.html',
   styleUrls: ['./registro.css']
 })
-export class RegistroComponent {
-  // Modelo de datos
+export class RegistroComponent implements OnInit {
   usuario = {
     nombre: '',
     apellidos: '',
@@ -21,63 +22,80 @@ export class RegistroComponent {
     password: ''
   };
 
-  // Objeto para almacenar los mensajes de error por campo
   errores = {
     nombre: '',
     apellidos: '',
     telefono: '',
     email: '',
-    password: ''
+    password: '',
+    generico: ''
   };
 
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  ngOnInit() {
+    this.authService.user$.pipe(take(1)).subscribe(user => {
+      if (user) this.router.navigate(['/restaurantes']);
+    });
+  }
+
   async onRegister() {
-    // 1. Limpiamos todos los errores antes de empezar la validación
-    this.errores = { nombre: '', apellidos: '', telefono: '', email: '', password: '' };
+    this.errores = {
+      nombre: '',
+      apellidos: '',
+      telefono: '',
+      email: '',
+      password: '',
+      generico: ''
+    };
     let hayErrores = false;
 
-    // --- VALIDACIONES ---
+    if (!this.usuario.nombre.trim()) {
+      this.errores.nombre = 'REGISTRO.ERR_NOMBRE';
+      hayErrores = true;
+    }
+    if (!this.usuario.apellidos.trim()) {
+      this.errores.apellidos = 'REGISTRO.ERR_APELLIDOS';
+      hayErrores = true;
+    }
 
-    // Nombre y Apellidos (Que no estén vacíos)
-    if (!this.usuario.nombre.trim()) { this.errores.nombre = 'El nombre es obligatorio.'; hayErrores = true; }
-    if (!this.usuario.apellidos.trim()) { this.errores.apellidos = 'Los apellidos son obligatorios.'; hayErrores = true; }
-
-    // Teléfono (Exactamente 9 números)
     const telPattern = /^[0-9]{9}$/;
     if (!telPattern.test(this.usuario.telefono)) {
-      this.errores.telefono = 'El teléfono debe tener 9 dígitos numéricos.';
+      this.errores.telefono = 'REGISTRO.ERR_TELEFONO';
       hayErrores = true;
     }
 
-    // Email (Formato válido)
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.usuario.email)) {
-      this.errores.email = 'Introduce un correo electrónico válido.';
+      this.errores.email = 'REGISTRO.ERR_EMAIL';
       hayErrores = true;
     }
 
-    // Contraseña (Mínimo 6 caracteres para Firebase)
     if (this.usuario.password.length < 6) {
-      this.errores.password = 'La contraseña debe tener al menos 6 caracteres.';
-      this.usuario.password = ''; // Limpiamos el campo por seguridad
+      this.errores.password = 'REGISTRO.ERR_PASSWORD';
+      this.usuario.password = '';
       hayErrores = true;
     }
 
-    // Si hay algún error, no continuamos
     if (hayErrores) return;
 
-    // 2. Si todo es válido, procedemos al registro en Firebase
     try {
-      await this.authService.register(this.usuario);
-      alert('¡Cuenta creada con éxito! Bienvenido a Illo Un Campero.');
+      await this.authService.register(
+        this.usuario.email,
+        this.usuario.password,
+        {
+          nombre: this.usuario.nombre,
+          apellidos: this.usuario.apellidos,
+          telefono: this.usuario.telefono
+        }
+      );
       this.router.navigate(['/restaurantes']);
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
-        this.errores.email = 'Este correo ya está registrado.';
+        this.errores.email = 'REGISTRO.ERR_DUPLICADO';
       } else {
-        alert('Error inesperado: ' + error.message);
+        this.errores.generico = 'REGISTRO.ERR_GENERIC';
       }
     }
   }

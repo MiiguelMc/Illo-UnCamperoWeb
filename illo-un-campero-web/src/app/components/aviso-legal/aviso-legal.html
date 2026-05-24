@@ -1,0 +1,37 @@
+<main class="legal-page">
+  <nav class="breadcrumb" aria-label="Migas de pan">
+    <a routerLink="/restaurantes">{{ 'LEGAL_PAGE.BREADCRUMB_INICIO' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span>{{ 'LEGAL_PAGE.BREADCRUMB' | translate }}</span>
+  </nav>
+
+  <article class="legal-card">
+    <h1>{{ 'LEGAL_PAGE.TITULO' | translate }}</h1>
+    <p class="updated">{{ 'LEGAL_PAGE.FECHA' | translate }}</p>
+
+    <h2>{{ 'LEGAL_PAGE.S1_T' | translate }}</h2>
+    <p [innerHTML]="'LEGAL_PAGE.S1_P' | translate"></p>
+
+    <h2>{{ 'LEGAL_PAGE.S2_T' | translate }}</h2>
+    <ul>
+      <li>{{ 'LEGAL_PAGE.S2_L1' | translate }} <a href="mailto:info@illouncampero.es">info&#64;illouncampero.es</a></li>
+      <li>{{ 'LEGAL_PAGE.S2_L2' | translate }} <a href="tel:+34600000000">600 000 000</a></li>
+      <li>{{ 'LEGAL_PAGE.S2_L3' | translate }}</li>
+    </ul>
+
+    <h2>{{ 'LEGAL_PAGE.S3_T' | translate }}</h2>
+    <p>{{ 'LEGAL_PAGE.S3_P' | translate }}</p>
+
+    <h2>{{ 'LEGAL_PAGE.S4_T' | translate }}</h2>
+    <p>{{ 'LEGAL_PAGE.S4_P' | translate }}</p>
+
+    <h2>{{ 'LEGAL_PAGE.S5_T' | translate }}</h2>
+    <p>{{ 'LEGAL_PAGE.S5_P' | translate }}</p>
+
+    <h2>{{ 'LEGAL_PAGE.S6_T' | translate }}</h2>
+    <p>
+      {{ 'LEGAL_PAGE.S6_P' | translate }}
+      <a routerLink="/privacidad">{{ 'LEGAL_PAGE.S6_LINK' | translate }}</a>.
+    </p>
+  </article>
+</main>

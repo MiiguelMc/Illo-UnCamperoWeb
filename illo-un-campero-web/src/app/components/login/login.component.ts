@@ -1,17 +1,19 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email = '';
   password = '';
   emailError = '';
@@ -20,15 +22,19 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  ngOnInit() {
+    this.authService.user$.pipe(take(1)).subscribe(user => {
+      if (user) this.router.navigate(['/restaurantes']);
+    });
+  }
+
   async onLogin() {
     this.emailError = '';
     this.passwordError = '';
 
-    // VALIDACIÓN DE FORMATO DE CORREO (Regex)
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
     if (!emailPattern.test(this.email)) {
-      this.emailError = 'Introduce un correo válido (ejemplo@correo.com)';
+      this.emailError = 'LOGIN.ERR_EMAIL';
       return;
     }
 
@@ -36,14 +42,14 @@ export class LoginComponent {
       await this.authService.login(this.email, this.password);
       this.router.navigate(['/restaurantes']);
     } catch (error: any) {
-      this.password = ''; // Limpiamos contraseña en caso de fallo
-      
-      if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
-        this.passwordError = 'Contraseña incorrecta o usuario no encontrado.';
-      } else if (error.code === 'auth/user-not-found') {
-        this.emailError = 'Este correo no está registrado.';
+      this.password = '';
+      const code = error?.code || '';
+      if (code === 'auth/user-not-found' || code === 'auth/invalid-email') {
+        this.emailError = 'LOGIN.ERR_NOT_FOUND';
+      } else if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+        this.passwordError = 'LOGIN.ERR_CREDENCIALES';
       } else {
-        this.emailError = 'Error al iniciar sesión. Revisa tus datos.';
+        this.passwordError = 'LOGIN.ERR_GENERIC';
       }
     }
   }

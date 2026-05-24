@@ -1,48 +1,205 @@
-<app-header></app-header>
+<main class="home">
+    <nav class="breadcrumb container-centrado" aria-label="Migas de pan">
+        <a routerLink="/restaurantes">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span>Camperos en Teatinos</span>
+    </nav>
 
-<main class="content">
-    <!-- HERO BANNER -->
-    <section class="hero-section">
-        <div class="hero-text">
-            <h2>Cena con tu colegas,</h2>
-            <h2 class="highlight">cena divertida</h2>
-            <div class="promo-input">
-                <input type="text" placeholder="Código promocional">
-                <button>Buscar</button>
+    <!-- Aviso de cerrado optimizado -->
+    <div class="container-centrado" *ngIf="!tienda.cargando() && !tienda.tiendaAbierta()">
+        <div class="aviso-cerrado">
+            <span class="aviso-cerrado-ico">🌙</span>
+            <div class="aviso-texto">
+                <strong>{{ 'RESTAURANTES.CERRADO_AVISO' | translate }}</strong>
+                <!-- Si no tienes esta clave en el i18n, puedes borrar la línea de abajo -->
+                <span>{{ 'RESTAURANTES.CERRADO_DESC' | translate }}</span> 
             </div>
         </div>
-        <div class="hero-image">
-            <img src="assets/girl-pizza.png" alt="Promo Pizza"> <!-- Necesitas esta imagen -->
-        </div>
-    </section>
+    </div>
 
-    <!-- CATEGORIES -->
-    <section class="categories-nav">
-        <button class="cat-item active">Hamburguesas</button>
-        <button class="cat-item">Patatas</button>
-        <button class="cat-item">Ensalada</button>
-        <button class="cat-item">Bebidas</button>
-        <button class="cat-item">Pizzas</button>
-    </section>
+    <!-- Hero: Impacto visual total -->
+    <section class="hero" aria-labelledby="home-titulo">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-gradient" aria-hidden="true"></div>
+        <div class="hero-inner">
+            <div class="hero-content">
+                <span class="badge-promo">
+                    <span class="dot"></span> {{ 'RESTAURANTES.PROMO' | translate }}
+                </span>
+                <h1 id="home-titulo">
+                    {{ 'RESTAURANTES.TITULO' | translate }}
+                    <span class="highlight-text">{{ 'RESTAURANTES.HIGHLIGHT' | translate }}</span>
+                </h1>
+                <p class="hero-desc">{{ 'RESTAURANTES.DESC' | translate }}</p>
 
-    <!-- MENU SECTION: BURGERS -->
-    <section class="menu-group">
-        <h3>Burgers</h3>
-        <div class="product-grid">
-            <!-- Card de ejemplo (esto se repetirá con un *ngFor) -->
-            <div class="food-card" *ngFor="let burger of burgers">
-                <div class="card-info">
-                    <h4>{{burger.name}}</h4>
-                    <p>{{burger.description}}</p>
-                    <span class="price">GBP {{burger.price}}</span>
+                <div class="hero-trust-bar">
+                    <div class="trust-item">30 min</div>
+                    <div class="trust-item">Teatinos</div>
+                    <div class="trust-item">4.9/5</div>
                 </div>
-                <div class="card-image">
-                    <img [src]="burger.image" alt="Burger">
-                    <button class="add-btn">+</button>
+
+                <div class="hero-cta">
+                    <a routerLink="/carta" class="btn-pedir">
+                        {{ 'RESTAURANTES.PEDIR_AHORA' | translate }}
+                        <span class="arrow">→</span>
+                    </a>
+                    <a routerLink="/carta" class="btn-secundario">{{ 'RESTAURANTES.VER_MENU' | translate }}</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Navegación rápida (Chips) -->
+    <div class="container-centrado">
+        <nav class="quick-chips">
+            <a routerLink="/carta" class="chip active">
+                {{ 'RESTAURANTES.CHIP_MENU' | translate }}
+            </a>
+            <button type="button" class="chip" *ngIf="packs.length > 0" (click)="scrollTo('sec-packs')">
+                {{ 'RESTAURANTES.CHIP_PACKS' | translate }}
+            </button>
+            <button type="button" class="chip" *ngIf="ofertas.length > 0" (click)="scrollTo('sec-ofertas')">
+                {{ 'RESTAURANTES.CHIP_OFERTAS' | translate }}
+            </button>
+        </nav>
+    </div>
+
+    <!-- SECCIÓN PASOS -->
+    <section class="steps-section">
+        <div class="container-centrado">
+            <div class="section-header centered">
+                <span class="pre-title">{{ 'RESTAURANTES.PASOS.LABEL' | translate }}</span>
+                <h2>{{ 'RESTAURANTES.PASOS.TITULO' | translate }}</h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>{{ 'RESTAURANTES.PASOS.P1_T' | translate }}</h3>
+                    <p>{{ 'RESTAURANTES.PASOS.P1_D' | translate }}</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>{{ 'RESTAURANTES.PASOS.P2_T' | translate }}</h3>
+                    <p>{{ 'RESTAURANTES.PASOS.P2_D' | translate }}</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>{{ 'RESTAURANTES.PASOS.P3_T' | translate }}</h3>
+                    <p>{{ 'RESTAURANTES.PASOS.P3_D' | translate }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-centrado seo-content" aria-labelledby="seo-teatinos-title">
+        <span class="pre-title">Camperos malagueños en Málaga</span>
+        <h2 id="seo-teatinos-title">Comida a domicilio en Teatinos hecha al momento</h2>
+        <p>
+            En Illo Un Campero preparamos camperos malagueños con pan crujiente, ingredientes frescos
+            y reparto en Teatinos, Colonia Santa Inés y la zona universitaria de Málaga. Nuestra carta
+            está pensada para pedir rápido: camperos clásicos, mini camperos, entrantes para compartir,
+            bebidas frías y postres.
+        </p>
+        <p>
+            Si buscas un campero cerca de la Universidad de Málaga, puedes revisar la carta online,
+            añadir tus favoritos al pedido y seguir el estado hasta la entrega.
+        </p>
+    </section>
+
+    <!-- Packs (CORREGIDO: Eliminado pack.popular para evitar error TS) -->
+    <section class="container-centrado" id="sec-packs" *ngIf="packs.length > 0">
+        <div class="section-header">
+            <div>
+                <span class="pre-title">{{ 'RESTAURANTES.PACKS.LABEL' | translate }}</span>
+                <h2>{{ 'RESTAURANTES.PACKS.TITULO' | translate }}</h2>
+            </div>
+        </div>
+        <div class="cards-scroll-container">
+            <div class="pack-card" *ngFor="let pack of packs" (click)="agregarPack(pack, $event)">
+                <div class="pack-content">
+                    <h3>{{ pack.titleKey | translate }}</h3>
+                    <p>{{ pack.descKey | translate }}</p>
+                </div>
+                <div class="pack-price-row">
+                    <span class="price" *ngIf="precioPack(pack)">{{ precioPack(pack) | number:'1.2-2' }}€</span>
+                    <button class="btn-add-circle">+</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ofertas -->
+    <section class="container-centrado section-spacing" id="sec-ofertas" *ngIf="ofertas.length > 0">
+        <div class="section-header">
+            <div>
+                <span class="pre-title red">Solo hoy</span>
+                <h2>{{ 'RESTAURANTES.OFERTAS' | translate }}</h2>
+            </div>
+        </div>
+        <div class="cards-scroll-container">
+            <div class="oferta-card" *ngFor="let p of ofertas">
+                <div class="oferta-info">
+                    <h3>{{ p.nombre }}</h3>
+                    <p>{{ p.descripcion }}</p>
+                </div>
+                <div class="oferta-action">
+                    <span class="price-big">{{ p.precio | number:'1.2-2' }}€</span>
+                    <div class="stepper" *ngIf="cantidadEnCarrito(p) > 0">
+                        <button (click)="quitarOferta(p, $event)">−</button>
+                        <span>{{ cantidadEnCarrito(p) }}</span>
+                        <button (click)="agregarOferta(p, $event)">+</button>
+                    </div>
+                    <button class="btn-anadir" *ngIf="cantidadEnCarrito(p) === 0" (click)="agregarOferta(p, $event)">
+                        {{ 'RESTAURANTES.ANADIR' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reseñas -->
+    <section class="reviews-section">
+        <div class="container-centrado">
+            <div class="section-header centered">
+                <h2>{{ 'RESTAURANTES.RESEÑAS.TITULO' | translate }}</h2>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-bubble">
+                    <div class="stars">★★★★★</div>
+                    <p>"{{ 'RESTAURANTES.RESEÑAS.R1_T' | translate }}"</p>
+                    <div class="user-meta">{{ 'RESTAURANTES.RESEÑAS.R1_U' | translate }}</div>
+                </div>
+                <div class="review-bubble">
+                    <div class="stars">★★★★★</div>
+                    <p>"{{ 'RESTAURANTES.RESEÑAS.R2_T' | translate }}"</p>
+                    <div class="user-meta">{{ 'RESTAURANTES.RESEÑAS.R2_U' | translate }}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ & MAPA -->
+    <section class="container-centrado footer-info">
+        <div class="info-grid">
+            <div class="faq-box">
+                <h2>{{ 'RESTAURANTES.FAQ.TITULO' | translate }}</h2>
+                <details class="faq-item" open>
+                    <summary>{{ 'RESTAURANTES.FAQ.Q1' | translate }}</summary>
+                    <div class="content">{{ 'RESTAURANTES.FAQ.A1' | translate }}</div>
+                </details>
+                <details class="faq-item">
+                    <summary>{{ 'RESTAURANTES.FAQ.Q2' | translate }}</summary>
+                    <div class="content">{{ 'RESTAURANTES.FAQ.A2' | translate }}</div>
+                </details>
+            </div>
+
+            <div class="map-box">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3198.2435422849924!2d-4.478441024365777!3d36.71661267232252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f7396695b76b%3A0x6a123f1f7d566373!2sTeatinos%2C%20M%C3%A1laga!5e0!3m2!1ses!2ses!4v1710000000000!5m2!1ses!2ses" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
 </main>
-
-<app-footer></app-footer>

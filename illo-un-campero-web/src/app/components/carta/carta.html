@@ -1,0 +1,95 @@
+<div class="carta-page">
+    <nav class="breadcrumb" aria-label="Migas de pan">
+        <a routerLink="/restaurantes">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span>Carta</span>
+    </nav>
+    <div class="carta-hero">
+        <div class="hero-overlay">
+            <h1>{{ 'CARTA.TITULO' | translate }}</h1>
+            <p>{{ 'CARTA.SUBTITULO' | translate }}</p>
+            <div class="search-container">
+                <label class="sr-only" for="buscar-producto">Buscar en la carta</label>
+                <input id="buscar-producto" type="search" [(ngModel)]="textoBusqueda" [placeholder]="'CARTA.BUSCAR' | translate" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <section class="carta-intro" aria-labelledby="carta-intro-title">
+        <h2 id="carta-intro-title">Carta online de camperos malagueños en Teatinos</h2>
+        <p>
+            Elige entre camperos, mini camperos, entrantes, patatas, bebidas y postres. Todos los
+            productos se preparan al momento para entregar en Teatinos y alrededores de Málaga.
+        </p>
+    </section>
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <button [class.active]="filtroActual === 'todos'" (click)="setFiltro('todos')">{{ 'CARTA.TODOS' | translate }}</button>
+            <button [class.active]="filtroActual === 'entrantes'" (click)="setFiltro('entrantes')">{{ 'CARTA.ENTRANTES' | translate }}</button>
+            <button [class.active]="filtroActual === 'camperos'" (click)="setFiltro('camperos')">{{ 'CARTA.CAMPEROS' | translate }}</button>
+            <button [class.active]="filtroActual === 'postres'" (click)="setFiltro('postres')">{{ 'CARTA.POSTRES' | translate }}</button>
+            <button [class.active]="filtroActual === 'bebidas'" (click)="setFiltro('bebidas')">{{ 'CARTA.BEBIDAS' | translate }}</button>
+        </div>
+    </nav>
+    <div class="carta-container">
+        <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'entrantes') && getPorCategoria('Entrante').length > 0">
+            <h2 class="titulo-categoria">{{ 'CARTA.SEC_ENTRANTES' | translate }}</h2>
+            <ng-container *ngFor="let sub of subEntrantes">
+                <div class="sub-bloque" *ngIf="getPorSubcategoria('Entrante', sub).length > 0">
+                    <h3 class="titulo-subcategoria">{{ sub === 'Patata' ? 'Patatas' : sub }}</h3>
+                    <div class="productos-grid"><app-producto-item *ngFor="let p of getPorSubcategoria('Entrante', sub)" [producto]="p" (click)="abrirModal(p)"></app-producto-item></div>
+                </div>
+            </ng-container>
+        </section>
+        <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'camperos') && getPorCategoria('Campero').length > 0">
+            <h2 class="titulo-categoria">{{ 'CARTA.SEC_CAMPEROS' | translate }}</h2>
+            <ng-container *ngFor="let sub of subCamperos">
+                <div class="sub-bloque" *ngIf="getPorSubcategoria('Campero', sub).length > 0">
+                    <h3 class="titulo-subcategoria">{{ sub === 'Mini' ? 'Mini Camperos' : sub }}</h3>
+                    <div class="productos-grid"><app-producto-item *ngFor="let p of getPorSubcategoria('Campero', sub)" [producto]="p" (click)="abrirModal(p)"></app-producto-item></div>
+                </div>
+            </ng-container>
+        </section>
+        <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'postres') && getPorCategoria('Postre').length > 0">
+            <h2 class="titulo-categoria">{{ 'CARTA.SEC_POSTRES' | translate }}</h2>
+            <div class="productos-grid"><app-producto-item *ngFor="let p of getPorCategoria('Postre')" [producto]="p" (click)="abrirModal(p)"></app-producto-item></div>
+        </section>
+        <section class="seccion-menu" *ngIf="(filtroActual === 'todos' || filtroActual === 'bebidas') && getPorCategoria('Bebida').length > 0">
+            <h2 class="titulo-categoria">{{ 'CARTA.SEC_BEBIDAS' | translate }}</h2>
+            <div class="productos-grid"><app-producto-item *ngFor="let p of getPorCategoria('Bebida')" [producto]="p" (click)="abrirModal(p)"></app-producto-item></div>
+        </section>
+    </div>
+    <div class="modal-overlay" *ngIf="productoSeleccionado" (click)="cerrarModal()">
+        <div class="modal-content-slim" (click)="$event.stopPropagation()">
+            <button class="btn-close-minimal" type="button" aria-label="Cerrar detalle del producto" (click)="cerrarModal()">✕</button>
+            <div class="modal-hero-slim">
+                <img
+                    [src]="productoSeleccionado.imagenUrl || 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/no-image_kz4f3m.webp'"
+                    [alt]="productoSeleccionado.nombre + ' de Illo Un Campero'"
+                    width="420"
+                    height="220"
+                    loading="eager"
+                    decoding="async"
+                    (error)="$event.target.src='https://res.cloudinary.com/dp9u7piam/image/upload/v1779177113/no-image_kz4f3m.webp'"
+                >
+            </div>
+            <div class="modal-body-slim">
+                <div class="header-info-slim">
+                    <h2 class="product-title-slim">{{ productoSeleccionado.nombre }}</h2>
+                    <span class="price-badge-slim">{{ productoSeleccionado.precio | number:'1.2-2' }}€</span>
+                </div>
+                <div class="divider-slim"></div>
+                <p class="product-desc-slim">{{ productoSeleccionado.descripcion }}</p>
+            </div>
+            <div class="modal-footer-slim">
+                <div class="qty-control-slim">
+                    <button type="button" aria-label="Quitar una unidad" (click)="decrementar()">-</button>
+                    <span>{{ cantidadSeleccionada }}</span>
+                    <button type="button" aria-label="Añadir una unidad" (click)="incrementar()">+</button>
+                </div>
+                <button class="btn-add-slim" type="button" (click)="agregarAlPedido()">
+                    {{ 'CARTA.ANADIR' | translate }} • {{ (productoSeleccionado.precio * cantidadSeleccionada) | number:'1.2-2' }}€
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "name": "Illo Un Campero",
+  "short_name": "Illo Campero",
+  "description": "Camperos malagueños a domicilio en Teatinos, Málaga.",
+  "lang": "es",
+  "start_url": "/restaurantes",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#F39200",
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dp9u7piam/image/upload/v1779177111/LogoFondoBlanco_lufdqm.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

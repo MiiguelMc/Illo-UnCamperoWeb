@@ -1,0 +1,171 @@
+.pedido-exitoso-container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.success-card {
+  background: var(--card-background);
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icon-success {
+  width: 100px;
+  height: 100px;
+  background: #27ae60;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  font-size: 3rem;
+  color: white;
+  animation: scaleIn 0.6s ease-out 0.2s both;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.success-card h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.mensaje-principal {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.info-pedido {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.numero-pedido {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0;
+}
+
+.numero-pedido strong {
+  color: #e74c3c;
+}
+
+.mensaje-secundario {
+  margin-bottom: 2rem;
+}
+
+.mensaje-secundario p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.botones-accion {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-primario,
+.btn-secundario {
+  flex: 1;
+  min-width: 200px;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primario {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-primario:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+}
+
+.btn-secundario {
+  background: #ecf0f1;
+  color: #333;
+}
+
+.btn-secundario:hover {
+  background: #bdc3c7;
+  transform: translateY(-2px);
+}
+
+.info-adicional {
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+}
+
+.info-adicional p {
+  color: #666;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.info-adicional strong {
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .success-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .success-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .botones-accion {
+    flex-direction: column;
+  }
+
+  .btn-primario,
+  .btn-secundario {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .pedido-exitoso-container { padding: 1rem 0.75rem; }
+  .icon-success { width: 72px; height: 72px; font-size: 2.2rem; }
+}

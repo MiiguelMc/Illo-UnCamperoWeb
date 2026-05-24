@@ -1,0 +1,36 @@
+<div class="producto-card">
+  <span class="badge-oferta" *ngIf="producto.esOferta">{{ 'PRODUCTO.OFERTA' | translate }}</span>
+  <div class="info-container">
+    <div class="texto-principal">
+      <h3 class="nombre">{{ producto.nombre }}</h3>
+      <p class="descripcion">{{ producto.descripcion }}</p>
+    </div>
+
+    <div class="precio-row">
+      <span class="precio">€ {{ producto.precio | number:'1.2-2' }}</span>
+      
+      <div class="selector-tarjeta">
+        <!-- Botón menos (solo aparece si hay cantidad) -->
+        <button class="btn-circular" type="button" *ngIf="cantidadEnCarrito() > 0" [attr.aria-label]="'Quitar ' + producto.nombre" (click)="restar($event)">-</button>
+        
+        <!-- Cantidad central -->
+        <span class="cantidad-texto" *ngIf="cantidadEnCarrito() > 0">{{ cantidadEnCarrito() }}</span>
+        
+        <!-- Botón más (el círculo naranja de tu foto) -->
+        <button class="btn-circular" type="button" [attr.aria-label]="'Añadir ' + producto.nombre" (click)="sumar($event)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="img-container">
+    <img
+      [src]="producto.imagenUrl || 'https://res.cloudinary.com/dp9u7piam/image/upload/v1779177108/placeholder-food_dbwlzf.webp'"
+      [alt]="producto.nombre + ' de Illo Un Campero'"
+      width="320"
+      height="220"
+      loading="lazy"
+      decoding="async"
+      (error)="$event.target.src='https://res.cloudinary.com/dp9u7piam/image/upload/v1779177108/placeholder-food_dbwlzf.webp'"
+    >
+  </div>
+</div>
