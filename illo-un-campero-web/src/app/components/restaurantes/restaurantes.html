@@ -145,11 +145,11 @@
                 <div class="oferta-action">
                     <span class="price-big">{{ p.precio | number:'1.2-2' }}€</span>
                     <div class="stepper" *ngIf="cantidadEnCarrito(p) > 0">
-                        <button (click)="quitarOferta(p, $event)">−</button>
+                        <button type="button" (click)="quitarOferta(p, $event)">−</button>
                         <span>{{ cantidadEnCarrito(p) }}</span>
-                        <button (click)="agregarOferta(p, $event)">+</button>
+                        <button type="button" (click)="agregarOferta(p, $event)">+</button>
                     </div>
-                    <button class="btn-anadir" *ngIf="cantidadEnCarrito(p) === 0" (click)="agregarOferta(p, $event)">
+                    <button type="button" class="btn-anadir" *ngIf="cantidadEnCarrito(p) === 0" (click)="agregarOferta(p, $event)">
                         {{ 'RESTAURANTES.ANADIR' | translate }}
                     </button>
                 </div>
