@@ -29,13 +29,13 @@
 .btn-nuevo:hover { background: #d88200; }
 
 .success-msg {
-    background: #d4edda; color: #155724;
+    background: var(--success-bg); color: var(--success-text);
     padding: 10px 14px; border-radius: 8px;
     font-size: 0.88rem; margin-bottom: 12px; font-weight: 600;
 }
 
 .error-msg {
-    background: #ffeaea; color: #c0392b;
+    background: var(--error-bg); color: var(--error-text);
     padding: 10px 14px; border-radius: 8px;
     font-size: 0.88rem; margin-bottom: 12px;
 }
@@ -104,7 +104,7 @@
     font-weight: 600;
 }
 
-.badge-categoria { background: #e8f4fd; color: #1a7ab8; }
+.badge-categoria { background: var(--info-bg); color: var(--info-text); }
 .badge-sub { background: var(--gris-claro); color: var(--text-secondary); margin-left: 4px; }
 
 .precio-col { font-weight: 700; color: var(--text-primary); }
@@ -121,7 +121,7 @@
     transition: 0.2s;
 }
 
-.toggle-disponible.activo { background: #d4edda; color: #155724; }
+.toggle-disponible.activo { background: var(--success-bg); color: var(--success-text); }
 
 .acciones-col { display: flex; gap: 6px; }
 
@@ -135,10 +135,10 @@
     transition: 0.2s;
 }
 
-.btn-editar { background: #e8f4fd; color: #1a7ab8; }
-.btn-editar:hover { background: #bee3f8; }
-.btn-borrar { background: #fde8e8; color: #c0392b; }
-.btn-borrar:hover { background: #fcc; }
+.btn-editar { background: var(--info-bg); color: var(--info-text); }
+.btn-editar:hover { background: var(--info-bg); }
+.btn-borrar { background: var(--error-bg); color: var(--error-text); }
+.btn-borrar:hover { background: var(--error-bg); }
 
 /* Formulario panel lateral */
 .formulario-overlay {

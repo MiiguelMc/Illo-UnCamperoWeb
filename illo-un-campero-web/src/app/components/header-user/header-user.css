@@ -247,7 +247,7 @@
     padding: 4px 14px 6px;
   }
   .mob-admin-link { color: var(--color-error-hover) !important; }
-  .mob-admin-link:hover { background: var(--color-error-tint) !important; color: #c0392b !important; }
+  .mob-admin-link:hover { background: var(--color-error-tint) !important; color: var(--error-text) !important; }
   .mob-admin-link.mob-active { background: var(--color-error-tint) !important; }
 
   /* ── Footer ── */

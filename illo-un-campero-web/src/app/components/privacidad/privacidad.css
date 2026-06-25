@@ -13,7 +13,7 @@
 
 h1 {
     font-size: 1.8rem;
-    color: #c0392b;
+    color: var(--error-text);
     margin-bottom: 4px;
 }
 

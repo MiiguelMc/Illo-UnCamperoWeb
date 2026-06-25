@@ -80,7 +80,7 @@ input:focus {
 
 .input-error {
     border-color: #e74c3c !important;
-    background-color: #fff8f8;
+    background-color: var(--error-bg);
 }
 
 .error-text {

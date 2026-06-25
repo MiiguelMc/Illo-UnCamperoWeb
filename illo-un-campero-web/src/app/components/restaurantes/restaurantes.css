@@ -130,7 +130,7 @@
     background: var(--white); border: 1px solid var(--line); padding: 12px 24px; border-radius: 100px;
     font-weight: 700; color: var(--ink); cursor: pointer; transition: 0.2s; white-space: nowrap;
 }
-.chip.active { background: var(--ink); color: white; border-color: var(--ink); }
+.chip.active { background: var(--brand); color: #fff; border-color: var(--brand); }
 .chip:hover { border-color: var(--brand); transform: translateY(-2px); }
 
 /* --- Secciones y Encabezados --- */
@@ -188,7 +188,7 @@
     box-shadow: var(--shadow); border-left: 6px solid var(--brand);
 }
 .price-big { display: block; font-size: 1.8rem; font-weight: 900; margin-bottom: 15px; }
-.btn-anadir { background: var(--ink); color: white; width: 100%; padding: 12px; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; }
+.btn-anadir { background: var(--brand); color: #fff; width: 100%; padding: 12px; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; }
 
 /* --- Reseñas --- */
 .reviews-section { padding: 60px 0; }

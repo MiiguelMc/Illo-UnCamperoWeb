@@ -95,8 +95,8 @@ h1 {
 }
 
 .error-msg {
-    background: #ffeaea;
-    color: #c0392b;
+    background: var(--error-bg);
+    color: var(--error-text);
     padding: 10px 14px;
     border-radius: 8px;
     font-size: 0.85rem;

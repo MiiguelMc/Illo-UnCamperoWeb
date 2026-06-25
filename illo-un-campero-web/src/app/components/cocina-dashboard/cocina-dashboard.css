@@ -60,10 +60,10 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: #e8f5e9;
+  background: var(--success-bg);
   border-radius: 20px;
   font-size: 0.85rem;
-  color: #2e7d32;
+  color: var(--success-text);
 }
 
 .dot-pulse {
@@ -103,9 +103,9 @@
 .error-mensaje {
   text-align: center;
   padding: 2rem;
-  background: #fee;
+  background: var(--error-bg);
   border-radius: 10px;
-  color: #c0392b;
+  color: var(--error-text);
   margin-bottom: 2rem;
 }
 
@@ -190,7 +190,7 @@
 
 /* Colores por columna */
 .pendientes .column-header {
-  background: #fff9e6;
+  background: var(--warning-bg);
 }
 
 .pendientes .badge {
@@ -198,7 +198,7 @@
 }
 
 .cocinando .column-header {
-  background: #e3f2fd;
+  background: var(--info-bg);
 }
 
 .cocinando .badge {
@@ -206,7 +206,7 @@
 }
 
 .reparto .column-header {
-  background: #e8f5e9;
+  background: var(--success-bg);
 }
 
 .reparto .badge {

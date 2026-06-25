@@ -52,8 +52,8 @@
 
 .tiempo-badge {
   padding: 0.35rem 0.75rem;
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: var(--success-bg);
+  color: var(--success-text);
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -61,7 +61,7 @@
 }
 
 .tiempo-badge.urgente {
-  background: #ffebee;
+  background: var(--error-bg);
   color: #c62828;
   animation: pulse-badge 2s infinite;
 }
@@ -140,7 +140,7 @@
   color: #e74c3c;
   margin: 0;
   font-style: italic;
-  background: #fff5f5;
+  background: var(--error-bg);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   display: inline-block;
@@ -148,7 +148,7 @@
 
 /* Notas generales */
 .notas-generales {
-  background: #fff9e6;
+  background: var(--warning-bg);
   padding: 0.75rem;
   border-radius: 6px;
   margin-bottom: 1rem;

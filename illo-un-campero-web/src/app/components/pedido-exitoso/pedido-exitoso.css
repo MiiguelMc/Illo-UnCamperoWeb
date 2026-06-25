@@ -123,7 +123,7 @@
 }
 
 .btn-secundario {
-  background: #ecf0f1;
+  background: var(--gris-claro);
   color: var(--text-primary);
 }
 

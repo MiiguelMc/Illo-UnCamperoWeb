@@ -18,7 +18,7 @@
   transition: color 0.2s;
   font-family: inherit;
 }
-.btn-volver:hover { color: #c0392b; }
+.btn-volver:hover { color: var(--error-text); }
 
 .header-confirmacion h1 { font-size: 1.8rem; color: var(--text-primary); margin: 0; }
 
@@ -114,24 +114,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #d4edda;
+  background: var(--success-bg);
   border: 1px solid #27ae60;
   border-radius: 8px;
   padding: 10px 14px;
 }
-.cupon-tag { font-weight: 700; color: #155724; font-size: 0.9rem; }
+.cupon-tag { font-weight: 700; color: var(--success-text); font-size: 0.9rem; }
 
 .btn-quitar-cupon {
   background: none;
   border: none;
-  color: #155724;
+  color: var(--success-text);
   cursor: pointer;
   font-size: 1rem;
   padding: 0 4px;
   line-height: 1;
   transition: 0.2s;
 }
-.btn-quitar-cupon:hover { color: #c0392b; }
+.btn-quitar-cupon:hover { color: var(--error-text); }
 
 .error-cupon { color: #e74c3c; font-size: 0.82rem; margin-top: 6px; margin-bottom: 0; }
 
@@ -169,12 +169,12 @@
 }
 
 .alert-error {
-  background: #fee;
+  background: var(--error-bg);
   border-left: 4px solid #e74c3c;
   padding: 0.85rem 1rem;
   margin-bottom: 1.25rem;
   border-radius: 4px;
-  color: #c0392b;
+  color: var(--error-text);
   font-size: 0.875rem;
 }
 
@@ -222,7 +222,7 @@
 }
 .metodo-card.seleccionado {
   border-color: #e74c3c;
-  background: #fff8f7;
+  background: var(--error-bg);
   box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.08);
 }
 .metodo-card.deshabilitado { opacity: 0.6; cursor: not-allowed; }
@@ -240,7 +240,7 @@
   transition: background 0.2s, color 0.2s;
 }
 .metodo-card.seleccionado .metodo-icono {
-  background: #fde8e6;
+  background: var(--error-bg);
   color: #e74c3c;
 }
 

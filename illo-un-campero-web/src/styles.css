@@ -34,6 +34,16 @@
   --color-error-hover: #c0392b;
   --color-error-tint: rgba(231, 76, 60, 0.08);
 
+  /* Tintes de estado (cajas de aviso éxito/error/warning/info) */
+  --success-bg: #d4edda;
+  --success-text: #155724;
+  --error-bg: #ffeaea;
+  --error-text: #c0392b;
+  --warning-bg: #fffbea;
+  --warning-text: #7d6608;
+  --info-bg: #e8f4fd;
+  --info-text: #1a7ab8;
+
   /* === Radios === */
   --radius-pill: 50px;
   --radius-modal: 25px;
@@ -90,6 +100,14 @@
   --naranja-ultra-light: rgba(243, 146, 0, 0.15);
   --naranja-glow: rgba(243, 146, 0, 0.35);
   --color-error-tint: rgba(231, 76, 60, 0.15);
+  --success-bg: rgba(39, 174, 96, 0.18);
+  --success-text: #6ee7a8;
+  --error-bg: rgba(231, 76, 60, 0.18);
+  --error-text: #ff8b80;
+  --warning-bg: rgba(246, 200, 0, 0.14);
+  --warning-text: #f5d76e;
+  --info-bg: rgba(52, 152, 219, 0.18);
+  --info-text: #7fc4f0;
   --text-footer: #c9d1d9;
   --text-footer-muted: #8b949e;
   --border-footer: #333;

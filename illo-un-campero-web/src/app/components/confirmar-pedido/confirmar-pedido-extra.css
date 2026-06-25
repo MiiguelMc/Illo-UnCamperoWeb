@@ -34,17 +34,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #d4edda;
+    background: var(--success-bg);
     border: 1px solid #27ae60;
     border-radius: 8px;
     padding: 10px 14px;
 }
 
-.cupon-tag { font-weight: 700; color: #155724; font-size: 0.9rem; }
+.cupon-tag { font-weight: 700; color: var(--success-text); font-size: 0.9rem; }
 
 .btn-quitar-cupon {
     background: none; border: none;
-    color: #155724; cursor: pointer;
+    color: var(--success-text); cursor: pointer;
     font-size: 1rem; padding: 0 4px;
 }
 

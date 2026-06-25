@@ -53,8 +53,8 @@
 .error-box {
     max-width: 700px;
     margin: 0 auto;
-    background: #ffeaea;
-    color: #c0392b;
+    background: var(--error-bg);
+    color: var(--error-text);
     padding: 14px 18px;
     border-radius: 10px;
 }
