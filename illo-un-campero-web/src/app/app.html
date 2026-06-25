@@ -13,5 +13,16 @@
   <router-outlet></router-outlet>
 </main>
 
+@if (despertando()) {
+  <div class="warmup-toast" role="status" aria-live="polite">
+    <span class="warmup-emoji">🍔</span>
+    <div class="warmup-text">
+      <strong>Encendiendo la plancha…</strong>
+      <small>El servidor estaba en reposo. Tarda unos segundos la primera vez.</small>
+    </div>
+    <span class="warmup-spinner" aria-hidden="true"></span>
+  </div>
+}
+
 <app-footer></app-footer>
 <app-cookie-banner></app-cookie-banner>

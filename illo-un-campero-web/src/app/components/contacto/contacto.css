@@ -1,6 +1,6 @@
 .trust-page {
-  background: #f8f9fc;
-  color: #0b1220;
+  background: var(--gris-fondo);
+  color: var(--text-primary);
   min-height: 70vh;
   padding: 24px 20px 72px;
 }
@@ -14,7 +14,7 @@
 .breadcrumb {
   display: flex;
   gap: 8px;
-  color: #667085;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   margin-bottom: 18px;
 }
@@ -54,7 +54,7 @@ h2 {
 .lead,
 .info-block p,
 li {
-  color: #475467;
+  color: var(--text-secondary);
   line-height: 1.7;
 }
 
@@ -67,7 +67,7 @@ li {
 
 article,
 .info-block {
-  background: #fafafa;
+  background: var(--gris-fondo);
   border: 1px solid #ececec;
   border-radius: 14px;
   padding: 22px;

@@ -129,7 +129,7 @@
   cursor: pointer; transition: transform 0.25s, box-shadow 0.25s;
 }
 .cart-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
-.cart-img { height: 16px; filter: brightness(0) invert(1); }
+.cart-img { width: auto; height: 16px; object-fit: contain; filter: brightness(0) invert(1); }
 .cart-amount { font-weight: 800; font-size: 0.85rem; }
 
 .mobile-only { display: none !important; }

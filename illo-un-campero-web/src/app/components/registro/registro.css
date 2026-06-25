@@ -24,14 +24,14 @@
 }
 
 h1 {
-    color: #1a1a1a;
+    color: var(--text-primary);
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 5px;
 }
 
 .header-login p {
-    color: #888;
+    color: var(--text-muted);
     margin-bottom: 24px;
     font-size: 0.875rem;
 }
@@ -56,19 +56,19 @@ label {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
-    color: #333;
+    color: var(--text-primary);
     font-size: 0.82rem;
 }
 
 input {
     width: 100%;
     padding: 11px 14px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 0.9rem;
     font-family: inherit;
-    color: #333;
+    color: var(--text-primary);
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -124,7 +124,7 @@ input:focus {
 
 .footer-text {
     margin-top: 20px;
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.85rem;
 }
 

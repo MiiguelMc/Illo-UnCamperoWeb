@@ -202,7 +202,7 @@
   display: block;
   transition: border-color 0.2s, color 0.2s;
 }
-.btn-seguir:hover { border-color: #aaa; color: #333; }
+.btn-seguir:hover { border-color: #aaa; color: var(--text-primary); }
 
 @media (max-width: 768px) {
   .carrito-contenido { grid-template-columns: 1fr; }

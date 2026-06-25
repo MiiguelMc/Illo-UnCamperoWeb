@@ -256,7 +256,7 @@
 .stat .label {
   display: block;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -267,7 +267,7 @@
 }
 
 .column-content::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--gris-claro);
   border-radius: 10px;
 }
 

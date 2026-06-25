@@ -84,7 +84,7 @@
 .cupon-form input {
   flex: 1;
   padding: 10px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.9rem;
   font-family: inherit;
@@ -92,7 +92,7 @@
   transition: border-color 0.2s;
 }
 .cupon-form input:focus { outline: none; border-color: #f39200; }
-.cupon-form input:disabled { background: #f5f5f5; cursor: not-allowed; }
+.cupon-form input:disabled { background: var(--gris-claro); cursor: not-allowed; }
 
 .btn-cupon {
   padding: 10px 18px;
@@ -136,13 +136,13 @@
 .error-cupon { color: #e74c3c; font-size: 0.82rem; margin-top: 6px; margin-bottom: 0; }
 
 /* Totales */
-.totales { border-top: 1px solid #ddd; padding-top: 12px; }
+.totales { border-top: 1px solid var(--border-color); padding-top: 12px; }
 
 .linea-total {
   display: flex;
   justify-content: space-between;
   font-size: 0.88rem;
-  color: #666;
+  color: var(--text-secondary);
   padding: 3px 0;
 }
 .descuento-linea { color: #27ae60; font-weight: 700; }
@@ -152,11 +152,11 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 10px;
-  border-top: 2px solid #ddd;
+  border-top: 2px solid var(--border-color);
   margin-top: 6px;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #333;
+  color: var(--text-primary);
 }
 .monto-total { color: #e74c3c; font-size: 1.3rem; }
 
@@ -180,12 +180,12 @@
 
 .form-confirmacion { display: flex; flex-direction: column; gap: 1.1rem; }
 .form-group { display: flex; flex-direction: column; }
-.form-group label { font-weight: 600; margin-bottom: 0.4rem; color: #333; font-size: 0.85rem; }
+.form-group label { font-weight: 600; margin-bottom: 0.4rem; color: var(--text-primary); font-size: 0.85rem; }
 
 .form-group input,
 .form-group textarea {
   padding: 0.7rem 0.85rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.9rem;
   font-family: inherit;
@@ -194,7 +194,7 @@
 .form-group input:focus,
 .form-group textarea:focus { outline: none; border-color: #e74c3c; }
 .form-group input:disabled,
-.form-group textarea:disabled { background: #f5f5f5; cursor: not-allowed; color: #999; }
+.form-group textarea:disabled { background: var(--gris-claro); cursor: not-allowed; color: var(--text-muted); }
 .form-group textarea { resize: vertical; min-height: 75px; }
 
 /* ---- Selector de método de pago ---- */
@@ -231,12 +231,12 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: #f4f4f4;
+  background: var(--gris-fondo);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: #555;
+  color: var(--text-secondary);
   transition: background 0.2s, color 0.2s;
 }
 .metodo-card.seleccionado .metodo-icono {
@@ -253,11 +253,11 @@
 .metodo-nombre {
   font-weight: 700;
   font-size: 0.9rem;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 .metodo-desc {
   font-size: 0.78rem;
-  color: #888;
+  color: var(--text-muted);
 }
 
 .metodo-radio {
@@ -283,15 +283,15 @@
   font-size: 0.9rem; font-weight: 700;
   cursor: pointer; transition: 0.2s; font-family: inherit;
 }
-.btn-cancelar { background: #f1f1f1; color: #666; }
-.btn-cancelar:hover:not(:disabled) { background: #e0e0e0; }
+.btn-cancelar { background: var(--gris-claro); color: var(--text-secondary); }
+.btn-cancelar:hover:not(:disabled) { background: var(--gris-claro); }
 .btn-confirmar { background: #e74c3c; color: white; }
 .btn-confirmar:hover:not(:disabled) { background: #c0392b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(231,76,60,0.3); }
 .btn-confirmar:disabled, .btn-cancelar:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* ---- Stripe ---- */
 .stripe-wrapper {
-  background: #fafafa;
+  background: var(--gris-fondo);
   border: 1.5px solid #e0e0e0;
   border-radius: 10px;
   padding: 14px 16px;
@@ -322,7 +322,7 @@
 
 .stripe-test-info {
   font-size: 0.76rem;
-  color: #888;
+  color: var(--text-muted);
   margin: 0;
   font-family: 'Courier New', monospace;
   letter-spacing: 0.02em;

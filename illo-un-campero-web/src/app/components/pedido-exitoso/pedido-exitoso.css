@@ -54,18 +54,18 @@
 
 .success-card h1 {
   font-size: 2rem;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
 .mensaje-principal {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 2rem;
 }
 
 .info-pedido {
-  background: #f8f9fa;
+  background: var(--gris-fondo);
   padding: 1rem;
   border-radius: 10px;
   margin-bottom: 1.5rem;
@@ -73,7 +73,7 @@
 
 .numero-pedido {
   font-size: 1.1rem;
-  color: #333;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -86,7 +86,7 @@
 }
 
 .mensaje-secundario p {
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0.5rem 0;
 }
@@ -124,7 +124,7 @@
 
 .btn-secundario {
   background: #ecf0f1;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .btn-secundario:hover {
@@ -133,18 +133,18 @@
 }
 
 .info-adicional {
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-separator);
   padding-top: 1.5rem;
 }
 
 .info-adicional p {
-  color: #666;
+  color: var(--text-secondary);
   margin: 0.5rem 0;
   font-size: 0.95rem;
 }
 
 .info-adicional strong {
-  color: #333;
+  color: var(--text-primary);
 }
 
 @media (max-width: 600px) {

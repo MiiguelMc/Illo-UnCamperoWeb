@@ -13,7 +13,7 @@
 
 .header-pedidos h1 {
   font-size: 2rem;
-  color: #333;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -68,8 +68,8 @@
   padding: 4rem 2rem;
 }
 
-.sin-pedidos h2 { font-size: 1.5rem; color: #666; margin-bottom: 0.5rem; }
-.sin-pedidos p { color: #999; margin-bottom: 2rem; }
+.sin-pedidos h2 { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+.sin-pedidos p { color: var(--text-muted); margin-bottom: 2rem; }
 
 .btn-pedir {
   padding: 1rem 2rem;
@@ -104,12 +104,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  background: #f8f9fa;
-  border-bottom: 1px solid #eee;
+  background: var(--gris-fondo);
+  border-bottom: 1px solid var(--border-separator);
 }
 
-.info-basica h3 { font-size: 1.2rem; color: #333; margin: 0 0 0.25rem; }
-.fecha { color: #666; font-size: 0.9rem; margin: 0; }
+.info-basica h3 { font-size: 1.2rem; color: var(--text-primary); margin: 0 0 0.25rem; }
+.fecha { color: var(--text-secondary); font-size: 0.9rem; margin: 0; }
 
 .estado-badge {
   padding: 0.5rem 1rem;
@@ -129,8 +129,8 @@
 
 .item { display: flex; align-items: center; gap: 1rem; }
 .item-detalles { flex: 1; }
-.item-detalles .nombre { font-weight: 600; color: #333; margin: 0 0 0.25rem; }
-.item-detalles .cantidad-precio { color: #666; font-size: 0.9rem; margin: 0; }
+.item-detalles .nombre { font-weight: 600; color: var(--text-primary); margin: 0 0 0.25rem; }
+.item-detalles .cantidad-precio { color: var(--text-secondary); font-size: 0.9rem; margin: 0; }
 .item .subtotal { font-weight: bold; color: #e74c3c; margin: 0; }
 
 .pedido-footer {
@@ -138,14 +138,14 @@
   justify-content: space-between;
   align-items: flex-end;
   padding: 1.5rem;
-  background: #f8f9fa;
-  border-top: 1px solid #eee;
+  background: var(--gris-fondo);
+  border-top: 1px solid var(--border-separator);
   gap: 2rem;
 }
 
 .info-entrega { flex: 1; }
-.info-entrega p { margin: 0.25rem 0; font-size: 0.9rem; color: #666; }
-.info-entrega strong { color: #333; }
+.info-entrega p { margin: 0.25rem 0; font-size: 0.9rem; color: var(--text-secondary); }
+.info-entrega strong { color: var(--text-primary); }
 
 .total-y-acciones {
   display: flex;
@@ -154,7 +154,7 @@
   gap: 0.75rem;
 }
 
-.total-pedido { font-size: 1.2rem; margin: 0; color: #333; }
+.total-pedido { font-size: 1.2rem; margin: 0; color: var(--text-primary); }
 .total-pedido .monto { color: #e74c3c; font-weight: bold; font-size: 1.4rem; }
 
 /* ---- BOTONES DE ACCIÓN DEL PEDIDO ---- */
@@ -274,11 +274,11 @@
 .estrella.activa { color: #f39200; }
 .estrella:hover { transform: scale(1.15); }
 
-.modal-puntuacion-texto { color: #666; font-size: 0.9rem; min-height: 1.3rem; margin: 0 0 1rem; }
+.modal-puntuacion-texto { color: var(--text-secondary); font-size: 0.9rem; min-height: 1.3rem; margin: 0 0 1rem; }
 
 .modal-comentario {
   width: 100%;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid var(--border-color);
   border-radius: 10px;
   padding: 0.75rem;
   font-size: 0.95rem;
@@ -297,16 +297,16 @@
 .btn-omitir {
   padding: 10px 20px;
   background: transparent;
-  border: 1.5px solid #ddd;
+  border: 1.5px solid var(--border-color);
   border-radius: 8px;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
   font-family: inherit;
 }
-.btn-omitir:hover:not(:disabled) { border-color: #bbb; color: #333; }
+.btn-omitir:hover:not(:disabled) { border-color: #bbb; color: var(--text-primary); }
 
 .btn-enviar-valoracion {
   padding: 10px 20px;
@@ -332,8 +332,8 @@
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 1rem;
 }
-.modal-exito h3 { color: #1a1a1a; margin: 0 0 0.5rem; }
-.modal-exito p { color: #666; margin: 0; }
+.modal-exito h3 { color: var(--text-primary); margin: 0 0 0.5rem; }
+.modal-exito p { color: var(--text-secondary); margin: 0; }
 
 /* === Responsive móvil fino (iPhone 13 = 390px) === */
 @media (max-width: 480px) {

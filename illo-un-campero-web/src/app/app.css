@@ -1,0 +1,75 @@
+/* Aviso de "cold start" del backend (Render free duerme tras 15 min sin tráfico).
+   Toast no bloqueante: el usuario puede seguir navegando mientras el backend despierta. */
+.warmup-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: calc(100vw - 2rem);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: #1f2937;
+  color: #f9fafb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: warmup-in 0.25s ease-out;
+}
+
+.warmup-emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.warmup-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.warmup-text strong {
+  font-size: 0.95rem;
+}
+
+.warmup-text small {
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+
+.warmup-spinner {
+  flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 2px solid rgba(249, 250, 251, 0.3);
+  border-top-color: #f9fafb;
+  border-radius: 50%;
+  animation: warmup-spin 0.8s linear infinite;
+}
+
+@keyframes warmup-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes warmup-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .warmup-spinner {
+    animation: none;
+  }
+  .warmup-toast {
+    animation: none;
+  }
+}

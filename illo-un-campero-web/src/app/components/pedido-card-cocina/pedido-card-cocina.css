@@ -34,19 +34,19 @@
   align-items: flex-start;
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-separator);
 }
 
 .pedido-numero {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #333;
+  color: var(--text-primary);
   margin: 0 0 0.25rem 0;
 }
 
 .pedido-hora {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -83,12 +83,12 @@
 .cliente-nombre {
   font-size: 0.95rem;
   margin: 0 0 0.25rem 0;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .cliente-direccion {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1.4;
 }
@@ -130,7 +130,7 @@
 .producto-nombre {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
   margin: 0 0 0.25rem 0;
   line-height: 1.3;
 }
@@ -158,13 +158,13 @@
 .notas-generales p {
   margin: 0;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* Footer */
 .card-footer {
   padding-top: 0.75rem;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--border-separator);
   margin-bottom: 1rem;
 }
 
@@ -176,7 +176,7 @@
 
 .total-label {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--text-secondary);
   font-weight: 600;
 }
 

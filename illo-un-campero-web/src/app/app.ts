@@ -9,6 +9,7 @@ import { Footer } from './components/footer/footer';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner';
 import { TranslateService } from '@ngx-translate/core';
 import { SeoService } from './services/seo.service';
+import { WarmupService } from './services/warmup.service';
 
 @Component({
   selector: 'app-root',
@@ -22,9 +23,11 @@ export class AppComponent implements OnInit {
   private tiendaService = inject(TiendaService);
   private translate = inject(TranslateService);
   private seo = inject(SeoService);
+  private warmup = inject(WarmupService);
 
   user$ = this.authService.user$;
   authInitialized = false;
+  despertando = this.warmup.despertando;
 
   constructor() {
     // Marcar como inicializado en cuanto Firebase resuelve el estado de auth (sin esperar al backend)
@@ -35,6 +38,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.seo.init();
+    this.warmup.despertar();
     this.tiendaService.cargarEstado();
     // Inicializar traducción
     this.translate.setDefaultLang('es');

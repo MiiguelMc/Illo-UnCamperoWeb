@@ -106,6 +106,30 @@
   --header-bg-rgb: 18, 18, 18;
 }
 
+/* Defaults de modo oscuro para controles e modales sin estilo propio
+   (p.ej. el buscador de la carta o los popups de SweetAlert2), que si no
+   se quedarían en blanco. La especificidad es baja a propósito: cualquier
+   componente que defina su propio fondo sigue mandando. */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background-color: var(--card-background);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--text-muted);
+}
+[data-theme="dark"] .swal2-popup {
+  background: var(--card-background);
+  color: var(--text-color);
+}
+[data-theme="dark"] .swal2-title,
+[data-theme="dark"] .swal2-html-container {
+  color: var(--text-color);
+}
+
   /* src/styles.css */
 
 html, body {

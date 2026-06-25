@@ -9,6 +9,17 @@
     --radius-lg: 32px;
     --radius-md: 20px;
     --shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+    --line: #e2e8f0;
+}
+
+/* En modo oscuro reasignamos los tokens locales de la landing */
+:host-context([data-theme="dark"]) {
+    --bg-light: #181818;
+    --ink: #ffffff;
+    --muted: #b0b0b0;
+    --white: #1e1e1e;
+    --line: #333;
+    --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
 }
 
 .home {
@@ -115,8 +126,8 @@
 
 /* --- Chips --- */
 .quick-chips { display: flex; gap: 12px; margin-bottom: 40px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
-.chip { 
-    background: white; border: 1px solid #e2e8f0; padding: 12px 24px; border-radius: 100px;
+.chip {
+    background: var(--white); border: 1px solid var(--line); padding: 12px 24px; border-radius: 100px;
     font-weight: 700; color: var(--ink); cursor: pointer; transition: 0.2s; white-space: nowrap;
 }
 .chip.active { background: var(--ink); color: white; border-color: var(--ink); }
@@ -130,7 +141,7 @@
 .section-header h2 { font-size: 2rem; font-weight: 800; margin-top: 5px; }
 
 /* --- Pasos --- */
-.steps-section { background: white; padding: 80px 0; margin: 40px 0; }
+.steps-section { background: var(--white); padding: 80px 0; margin: 40px 0; }
 .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 .step-card { 
     position: relative; padding: 40px; border-radius: var(--radius-md); background: var(--bg-light);
@@ -160,8 +171,8 @@
     display: flex; gap: 20px; overflow-x: auto; padding: 10px 10px 30px; 
     scrollbar-width: none; margin: 0 -10px;
 }
-.pack-card { 
-    background: white; min-width: 300px; padding: 30px; border-radius: var(--radius-md);
+.pack-card {
+    background: var(--white); min-width: 300px; padding: 30px; border-radius: var(--radius-md);
     box-shadow: var(--shadow); cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
     transition: 0.3s; border: 1px solid transparent;
 }
@@ -172,8 +183,8 @@
 .price { font-size: 1.5rem; font-weight: 900; }
 .btn-add-circle { width: 45px; height: 45px; border-radius: 50%; background: var(--brand); color: white; border: none; font-size: 1.5rem; cursor: pointer; }
 
-.oferta-card { 
-    background: #fff; min-width: 280px; padding: 25px; border-radius: var(--radius-md);
+.oferta-card {
+    background: var(--white); min-width: 280px; padding: 25px; border-radius: var(--radius-md);
     box-shadow: var(--shadow); border-left: 6px solid var(--brand);
 }
 .price-big { display: block; font-size: 1.8rem; font-weight: 900; margin-bottom: 15px; }
@@ -182,7 +193,7 @@
 /* --- Reseñas --- */
 .reviews-section { padding: 60px 0; }
 .reviews-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.review-bubble { background: white; padding: 30px; border-radius: 24px; box-shadow: var(--shadow); }
+.review-bubble { background: var(--white); padding: 30px; border-radius: 24px; box-shadow: var(--shadow); }
 .stars { color: #ffb400; margin-bottom: 15px; }
 .review-bubble p { font-style: italic; font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; }
 .user-meta { font-weight: 800; color: var(--brand); }
@@ -191,7 +202,7 @@
 .footer-info { padding: 60px 0 100px; }
 .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 400px; }
 .faq-box h2 { font-weight: 800; margin-bottom: 20px; }
-.faq-item { background: white; margin-bottom: 10px; border-radius: 15px; overflow: hidden; border: 1px solid #e2e8f0; }
+.faq-item { background: var(--white); margin-bottom: 10px; border-radius: 15px; overflow: hidden; border: 1px solid var(--line); }
 .faq-item summary { padding: 20px; font-weight: 700; cursor: pointer; list-style: none; }
 .faq-item .content { padding: 0 20px 20px; color: var(--muted); font-size: 0.9rem; }
 .map-box { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }

@@ -21,19 +21,19 @@
 h1 {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #0d1117;
+    color: var(--text-primary);
     margin-bottom: 16px;
 }
 
 .pedido-mini {
-    background: #f8f9fa;
+    background: var(--gris-fondo);
     border-radius: 10px;
     padding: 12px 16px;
     margin-bottom: 28px;
 }
 
-.pedido-mini p { margin: 0; font-weight: 700; color: #333; font-size: 0.9rem; }
-.items-mini { font-weight: 400 !important; color: #888 !important; font-size: 0.85rem !important; margin-top: 4px !important; }
+.pedido-mini p { margin: 0; font-weight: 700; color: var(--text-primary); font-size: 0.9rem; }
+.items-mini { font-weight: 400 !important; color: var(--text-muted) !important; font-size: 0.85rem !important; margin-top: 4px !important; }
 
 .estrellas {
     display: flex;
@@ -57,7 +57,7 @@ h1 {
 
 .puntuacion-texto {
     font-size: 0.9rem;
-    color: #888;
+    color: var(--text-muted);
     min-height: 22px;
     margin-bottom: 24px;
 }
@@ -73,7 +73,7 @@ h1 {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #888;
+    color: var(--text-muted);
     margin-bottom: 8px;
 }
 
@@ -161,7 +161,7 @@ h1 {
 }
 
 .exito-card h2 { color: #27ae60; font-size: 1.3rem; margin-bottom: 8px; }
-.exito-card p { color: #888; font-size: 0.9rem; }
+.exito-card p { color: var(--text-muted); font-size: 0.9rem; }
 
 /* === Responsive móvil === */
 @media (max-width: 480px) {
