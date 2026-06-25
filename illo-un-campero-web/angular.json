@@ -24,6 +24,7 @@
               "src/robots.txt",
               "src/sitemap.xml",
               "src/site.webmanifest",
+              "src/push-sw.js",
               "src/assets"
             ],
             "styles": [

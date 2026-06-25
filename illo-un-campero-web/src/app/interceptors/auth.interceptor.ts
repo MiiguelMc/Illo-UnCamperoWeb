@@ -1,36 +1,29 @@
-import { inject } from '@angular/core';
 import { HttpInterceptorFn } from '@angular/common/http';
-import { Auth } from '@angular/fire/auth';
 import { from, switchMap } from 'rxjs';
+import { supabase } from '../services/supabase.client';
 import { environment } from '../../environments/environment';
 
 /**
- * Añade el header Authorization a todas las peticiones a nuestra API.
- * Usa authStateReady() para esperar a que Firebase restaure la sesión
- * desde sessionStorage antes de leer auth.currentUser.
- * Sin esto, las peticiones al cargar la página se enviaban sin token (403).
+ * Añade el header Authorization (Bearer access_token de Supabase) a todas
+ * las peticiones a nuestra API. getSession() devuelve la sesión cacheada y
+ * refresca el token si hace falta, así que las peticiones al cargar la página
+ * salen con un token válido.
  */
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.startsWith(environment.apiUrl)) {
     return next(req);
   }
 
-  const auth = inject(Auth);
-
-  return from(auth.authStateReady()).pipe(
-    switchMap(() => {
-      const user = auth.currentUser;
-      if (!user) {
+  return from(supabase.auth.getSession()).pipe(
+    switchMap(({ data }) => {
+      const token = data.session?.access_token;
+      if (!token) {
         return next(req);
       }
-      return from(user.getIdToken()).pipe(
-        switchMap(token => {
-          const authReq = req.clone({
-            setHeaders: { Authorization: `Bearer ${token}` }
-          });
-          return next(authReq);
-        })
-      );
+      const authReq = req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` }
+      });
+      return next(authReq);
     })
   );
 };

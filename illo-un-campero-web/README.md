@@ -3,7 +3,8 @@
 Aplicación web para realizar pedidos online en una hamburguesería malagueña. Desarrollada como parte de un TFG con Angular 20.
 
 ![Angular](https://img.shields.io/badge/Angular-20-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Supabase](https://img.shields.io/badge/Supabase-Auth-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Hosting-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Stripe](https://img.shields.io/badge/Stripe-Pagos-635BFF?style=for-the-badge&logo=stripe&logoColor=white)
 
 ---
@@ -17,9 +18,10 @@ Aplicación web para realizar pedidos online en una hamburguesería malagueña. 
 - Seguimiento de pedidos en tiempo real con estados actualizados
 - Valoración de pedidos una vez entregados
 - Historial de pedidos del usuario
-- Dashboard de cocina con actualizaciones en tiempo real (Firestore)
+- Dashboard de cocina con actualizaciones periódicas (polling al backend)
 - Panel de gestión de productos para administradores (CRUD completo)
-- Autenticación con Firebase Auth y verificación de email
+- Autenticación con Supabase Auth
+- Notificaciones push con Web Push (VAPID)
 - Roles: CLIENTE, ADMIN, COCINA
 - Cupones de descuento con validación en backend
 - Internacionalización ES / EN con ngx-translate
@@ -31,10 +33,10 @@ Aplicación web para realizar pedidos online en una hamburguesería malagueña. 
 | Capa | Tecnología |
 |---|---|
 | Framework | Angular 20 (standalone components + signals) |
-| Base de datos | Firebase Firestore (tiempo real con AngularFire) |
-| Autenticación | Firebase Auth |
+| Datos | API REST del backend (Spring + Supabase Postgres) |
+| Autenticación | Supabase Auth (@supabase/supabase-js) |
 | Pagos | Stripe (confirmCardPayment) |
-| Notificaciones | FCM |
+| Notificaciones | Web Push (VAPID) |
 | i18n | ngx-translate |
 | HTTP | Angular HttpClient con interceptor de autenticación |
 
@@ -98,17 +100,18 @@ La app arranca en `http://localhost:4200`.
 
 ### Variables de entorno
 
-En `src/environments/environment.ts`:
+En producción, `environment.prod.ts` se genera en el build con `set-env.js` a partir de
+estas variables de entorno (en local puedes editar `src/environments/environment.ts`):
 
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080',
-  stripe: {
-    publicKey: 'pk_test_...'
-  }
-};
 ```
+STRIPE_PUBLISHABLE_KEY=pk_test_...
+SUPABASE_URL=https://<ref>.supabase.co
+SUPABASE_ANON_KEY=...
+API_URL=https://illo-uncamperobackend.onrender.com/api   # opcional
+SITE_URL=https://<tu-app>.vercel.app                      # opcional
+```
+
+Ver `MIGRACION-SUPABASE.md` (repo del backend) para el despliegue completo.
 
 ---
 
@@ -136,4 +139,4 @@ export const environment = {
 ng build
 ```
 
-Los artefactos quedan en `dist/`. Desplegado en Firebase Hosting.
+Los artefactos quedan en `dist/illo-un-campero-web/browser`. Desplegado en Vercel (ver `vercel.json`).

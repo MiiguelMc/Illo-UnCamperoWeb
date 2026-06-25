@@ -1,74 +1,82 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, firstValueFrom, of } from 'rxjs';
-import { switchMap, catchError, take } from 'rxjs/operators';
-import {
-  Auth,
-  authState,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  updatePassword,
-  signOut
-} from '@angular/fire/auth';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { BehaviorSubject, Observable, firstValueFrom, of } from 'rxjs';
+import { switchMap, catchError, take, filter } from 'rxjs/operators';
+import { Session } from '@supabase/supabase-js';
+import { supabase } from './supabase.client';
 import { Usuario } from '../../model/usuario.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private auth = inject(Auth);
   private http = inject(HttpClient);
-  private firestore = inject(Firestore);
 
   private API_URL = `${environment.apiUrl}/usuarios`;
 
-  /** Emite una vez en cuanto Firebase Auth conoce el estado (rápido, sin esperar al backend) */
-  readonly authReady$ = authState(this.auth).pipe(take(1));
+  private session$ = new BehaviorSubject<Session | null>(null);
+  private ready$ = new BehaviorSubject<boolean>(false);
 
-  user$ = authState(this.auth).pipe(
-    switchMap(fbUser => {
-      if (!fbUser) return of(null);
-      return this.http.get<Usuario>(`${this.API_URL}/${fbUser.uid}`).pipe(
+  constructor() {
+    // Restaura la sesión guardada y avisa cuando ya se conoce el estado.
+    supabase.auth.getSession().then(({ data }) => {
+      this.session$.next(data.session);
+      this.ready$.next(true);
+    });
+    // Mantiene la sesión sincronizada (login, logout, refresco de token).
+    supabase.auth.onAuthStateChange((_event, session) => {
+      this.session$.next(session);
+    });
+  }
+
+  /** Emite una vez en cuanto se conoce el estado de sesión inicial. */
+  readonly authReady$ = this.ready$.pipe(filter(r => r), take(1));
+
+  user$: Observable<Usuario | null> = this.ready$.pipe(
+    filter(r => r),
+    take(1),
+    switchMap(() => this.session$),
+    switchMap(session => {
+      const user = session?.user;
+      if (!user) return of(null);
+      return this.http.get<Usuario>(`${this.API_URL}/${user.id}`).pipe(
         catchError(() => of({
-          uid: fbUser.uid,
-          nombre: fbUser.displayName || 'Usuario',
-          email: fbUser.email || ''
+          uid: user.id,
+          nombre: (user.user_metadata?.['nombre'] as string) || 'Usuario',
+          email: user.email || ''
         } as Usuario))
       );
     })
   );
 
   async login(email: string, pass: string) {
-    return signInWithEmailAndPassword(this.auth, email, pass);
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+    if (error) throw error;
+    return data;
   }
 
   async register(email: string, pass: string, datosExtra: any) {
-    const credential = await createUserWithEmailAndPassword(this.auth, email, pass);
-    const uid = credential.user.uid;
-
-    // Guardado directo en Firestore — no depende del backend
-    const userRef = doc(this.firestore, `usuarios/${uid}`);
-    await setDoc(userRef, {
-      uid,
+    const { data, error } = await supabase.auth.signUp({
       email,
-      nombre: datosExtra.nombre,
-      apellidos: datosExtra.apellidos,
-      telefono: datosExtra.telefono,
-      rol: 'CLIENTE'
+      password: pass,
+      options: { data: { nombre: datosExtra?.nombre } }
     });
+    if (error) throw error;
 
-    firstValueFrom(
-      this.http.post(`${this.API_URL}/registro`, { uid, email, ...datosExtra })
-    ).catch((err) => {
-      console.error('Error al sincronizar usuario con el backend:', err);
-    });
+    const uid = data.user?.id;
+    if (uid) {
+      // Crea el perfil en el backend (endpoint público). No accede a la BD directamente.
+      firstValueFrom(
+        this.http.post(`${this.API_URL}/registro`, { uid, email, ...datosExtra })
+      ).catch((err) => {
+        console.error('Error al sincronizar usuario con el backend:', err);
+      });
+    }
 
-    return credential;
+    return data;
   }
 
   logout() {
-    return signOut(this.auth);
+    return supabase.auth.signOut();
   }
 
   updateUserData(uid: string, datos: any): Observable<Usuario> {
@@ -76,17 +84,18 @@ export class AuthService {
   }
 
   async updatePassword(newPass: string) {
-    const user = this.auth.currentUser;
-    if (user) return updatePassword(user, newPass);
-    throw new Error('No hay usuario autenticado');
+    const { error } = await supabase.auth.updateUser({ password: newPass });
+    if (error) throw error;
   }
 
   sendPasswordReset(email: string) {
-    return sendPasswordResetEmail(this.auth, email);
+    return supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${environment.siteUrl}/login`
+    });
   }
 
   async eliminarCuenta(): Promise<void> {
     await firstValueFrom(this.http.delete(`${this.API_URL}/cuenta`));
-    await signOut(this.auth);
+    await supabase.auth.signOut();
   }
 }

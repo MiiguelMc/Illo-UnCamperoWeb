@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { PushService } from './services/push.service';
 import { TiendaService } from './services/tienda.service';
 import { Header } from './components/header-login/header';
 import { HeaderUserComponent } from './components/header-user/header-user';
@@ -20,6 +21,7 @@ import { WarmupService } from './services/warmup.service';
 })
 export class AppComponent implements OnInit {
   private authService = inject(AuthService);
+  private pushService = inject(PushService);
   private tiendaService = inject(TiendaService);
   private translate = inject(TranslateService);
   private seo = inject(SeoService);
@@ -28,11 +30,20 @@ export class AppComponent implements OnInit {
   user$ = this.authService.user$;
   authInitialized = false;
   despertando = this.warmup.despertando;
+  private pushActivado = false;
 
   constructor() {
-    // Marcar como inicializado en cuanto Firebase resuelve el estado de auth (sin esperar al backend)
+    // Marcar como inicializado en cuanto se resuelve el estado de auth (sin esperar al backend)
     this.authService.authReady$.subscribe(() => {
       this.authInitialized = true;
+    });
+
+    // Cuando hay un usuario logueado, activa las notificaciones push de este dispositivo (una vez).
+    this.authService.user$.subscribe(user => {
+      if (user && !this.pushActivado) {
+        this.pushActivado = true;
+        this.pushService.enablePush();
+      }
     });
   }
 

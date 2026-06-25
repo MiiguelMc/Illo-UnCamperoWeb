@@ -281,7 +281,7 @@
     "SIN_CUPONES": "No hay cupones creados."
   },
   "COOKIES": {
-    "TEXTO": "Usamos cookies propias y de terceros (Firebase, Stripe) para el funcionamiento de la aplicación. Al continuar, aceptas su uso.",
+    "TEXTO": "Usamos cookies propias y de terceros (Supabase, Stripe) para el funcionamiento de la aplicación. Al continuar, aceptas su uso.",
     "POLITICA": "Política de privacidad",
     "ACEPTAR": "Aceptar y continuar"
   },
@@ -432,7 +432,7 @@
     "S2_L1": "Nombre, dirección de correo electrónico y teléfono al registrarte.",
     "S2_L2": "Dirección de entrega en cada pedido.",
     "S2_L3": "Historial de pedidos y valoraciones realizadas.",
-    "S2_L4": "Token de dispositivo para notificaciones push (FCM).",
+    "S2_L4": "Suscripción del navegador para notificaciones push (Web Push).",
     "S3_T": "3. Finalidad del tratamiento",
     "S3_L1": "Gestionar tu cuenta y pedidos.",
     "S3_L2": "Enviarte confirmaciones de pedido y comunicaciones relacionadas con tu cuenta.",
@@ -441,12 +441,12 @@
     "S4_T": "4. Base legal",
     "S4_P": "El tratamiento se basa en la ejecución del contrato de compra-venta (Art. 6.1.b RGPD) y el consentimiento del usuario para notificaciones y comunicaciones comerciales (Art. 6.1.a RGPD).",
     "S5_T": "5. Servicios de terceros",
-    "S5_L1": "<strong>Firebase (Google LLC):</strong> autenticación, base de datos y notificaciones push. Transferencia de datos a EE.UU. bajo cláusulas contractuales tipo.",
+    "S5_L1": "<strong>Supabase (Supabase Inc.):</strong> autenticación y base de datos.",
     "S5_L2": "<strong>Stripe Inc.:</strong> procesamiento de pagos. Stripe no almacena datos de tarjeta en nuestros servidores.",
-    "S5_L3": "<strong>Render Inc.:</strong> alojamiento del servidor backend.",
+    "S5_L3": "<strong>Render Inc. y Vercel Inc.:</strong> alojamiento del servidor backend y de la web.",
     "S6_T": "6. Cookies",
     "S6_P": "Esta aplicación utiliza:",
-    "S6_L1": "<strong>Cookies de sesión de Firebase:</strong> necesarias para mantener tu sesión iniciada.",
+    "S6_L1": "<strong>Cookies/almacenamiento de sesión de Supabase:</strong> necesarias para mantener tu sesión iniciada.",
     "S6_L2": "<strong>localStorage:</strong> para guardar preferencias de idioma y aceptación de cookies.",
     "S6_P2": "No utilizamos cookies de publicidad ni de seguimiento de terceros.",
     "S7_T": "7. Tus derechos (RGPD)",

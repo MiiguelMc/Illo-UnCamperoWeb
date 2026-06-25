@@ -1,10 +1,8 @@
 name: E2E Playwright
 
+# Ejecución solo manual: el build necesita secrets de Supabase/Stripe y los tests
+# E2E apuntan a la URL de producción. Lánzalo desde la pestaña Actions cuando quieras.
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
   workflow_dispatch:
 
 jobs:
