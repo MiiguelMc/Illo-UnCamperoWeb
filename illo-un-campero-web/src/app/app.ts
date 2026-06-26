@@ -11,6 +11,7 @@ import { CookieBannerComponent } from './components/cookie-banner/cookie-banner'
 import { TranslateService } from '@ngx-translate/core';
 import { SeoService } from './services/seo.service';
 import { WarmupService } from './services/warmup.service';
+import { inject as injectVercelAnalytics } from '@vercel/analytics';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,9 @@ export class AppComponent implements OnInit {
   private pushActivado = false;
 
   constructor() {
+    // Vercel Web Analytics: inyecta el script de seguimiento (solo en el navegador, una vez)
+    injectVercelAnalytics();
+
     // Marcar como inicializado en cuanto se resuelve el estado de auth (sin esperar al backend)
     this.authService.authReady$.subscribe(() => {
       this.authInitialized = true;
