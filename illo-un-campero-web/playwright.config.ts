@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const baseURL = process.env.E2E_BASE_URL || 'https://illo-uncampero.web.app';
+const baseURL = process.env.E2E_BASE_URL || 'https://illouncampero.vercel.app';
 const isCI = !!process.env.CI;
 
 export default defineConfig({

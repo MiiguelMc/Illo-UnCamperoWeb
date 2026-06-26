@@ -43,10 +43,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/restaurantes']);
     } catch (error: any) {
       this.password = '';
-      const code = error?.code || '';
-      if (code === 'auth/user-not-found' || code === 'auth/invalid-email') {
-        this.emailError = 'LOGIN.ERR_NOT_FOUND';
-      } else if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+      // Supabase Auth no distingue "usuario inexistente" de "contraseña incorrecta"
+      // (evita la enumeración de cuentas): ambos llegan como credenciales inválidas.
+      const code = error?.code ?? '';
+      const msg = (error?.message ?? '').toLowerCase();
+      if (code === 'invalid_credentials' || msg.includes('invalid login credentials')) {
         this.passwordError = 'LOGIN.ERR_CREDENCIALES';
       } else {
         this.passwordError = 'LOGIN.ERR_GENERIC';

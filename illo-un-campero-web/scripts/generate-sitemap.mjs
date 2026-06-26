@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
-const siteUrl = 'https://illo-uncampero.web.app';
+const siteUrl = 'https://illouncampero.vercel.app';
 const today = new Date().toISOString().slice(0, 10);
 
 const urls = [

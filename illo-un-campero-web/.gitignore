@@ -42,10 +42,5 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# Firebase
-.firebase
-*-debug.log
-.runtimeconfig.json
-
 # Entornos con credenciales (no subir al repo)
 src/environments/environment.prod.ts

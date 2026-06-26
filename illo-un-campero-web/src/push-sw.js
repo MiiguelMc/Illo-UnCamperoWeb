@@ -1,4 +1,4 @@
-/* Service worker para Web Push (VAPID). Sustituye a Firebase Cloud Messaging. */
+/* Service worker para Web Push (VAPID). */
 
 self.addEventListener('push', (event) => {
   let data = { title: 'Illo Un Campero', body: 'Tienes una novedad en tu pedido.' };

@@ -13,7 +13,6 @@ const ignoredRequestHosts = [
   'google.com',
   'gstatic.com',
   'googleapis.com',
-  'firebaseinstallations.googleapis.com',
   'js.stripe.com',
 ];
 

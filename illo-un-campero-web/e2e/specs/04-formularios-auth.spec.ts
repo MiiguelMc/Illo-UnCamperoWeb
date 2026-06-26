@@ -2,7 +2,7 @@ import { test, expect } from '../fixtures/qa-test';
 import { dismissCookiesIfVisible } from '../support/selectors';
 
 test.describe('Formularios publicos de autenticacion', () => {
-  test('login valida email invalido sin llamar a Firebase', async ({ qaPage }) => {
+  test('login valida email invalido en el cliente', async ({ qaPage }) => {
     await qaPage.goto('/login', { waitUntil: 'domcontentloaded' });
     await dismissCookiesIfVisible(qaPage);
 

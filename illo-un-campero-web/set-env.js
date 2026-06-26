@@ -7,7 +7,7 @@ const supabaseAnonKey = process.env['SUPABASE_ANON_KEY'];
 
 // Permiten sobreescribir las URLs en el deploy (Vercel/Render) sin tocar el codigo.
 const apiUrl = process.env['API_URL'] || 'https://illo-uncamperobackend.onrender.com/api';
-const siteUrl = process.env['SITE_URL'] || 'https://illo-uncampero.web.app';
+const siteUrl = process.env['SITE_URL'] || 'https://illouncampero.vercel.app';
 
 if (!stripeKey) {
   console.error('ERROR: La variable de entorno STRIPE_PUBLISHABLE_KEY no está definida.');

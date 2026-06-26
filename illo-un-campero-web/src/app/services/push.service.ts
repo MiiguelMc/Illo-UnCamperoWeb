@@ -4,7 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 /**
- * Web Push (VAPID), sin Firebase. Registra el service worker, pide permiso,
+ * Web Push (VAPID). Registra el service worker, pide permiso,
  * se suscribe en el navegador y envía la suscripción al backend.
  */
 @Injectable({ providedIn: 'root' })

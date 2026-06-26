@@ -19,7 +19,7 @@ npm run e2e:report
 Por defecto los tests apuntan a produccion:
 
 ```bash
-https://illo-uncampero.web.app
+https://illouncampero.vercel.app
 ```
 
 Para probar local:
